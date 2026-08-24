@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P5 complete; P6–P17 not started.
+Status: P0–P6 complete; P7–P17 not started.
 Authority: `AGENT.md` is the scientific and engineering contract. This plan operationalises it and may not silently weaken it.  
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study.
 
@@ -293,6 +293,8 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 **Stop / fallback:** Simplify atoms/canonicalisation, use embeddings if justified, or prepare a Gate A negative result rather than hiding unstable dimensions.
 
 ### P6 — Plaintext matching, thresholds, and acceptance-region analysis
+
+**Status:** Complete on 2026-08-24 with Gate A failed (`stop-or-reframe`). The preregistered 60-family pilot evaluated 36 train and 12 validation families while leaving 12 test families unevaluated. Weighted controlled-text overlap had validation FRR 0.208, targeted-neighbour FAR 0.750, random FAR 0.030, and same-minus-neighbour 95% family-bootstrap interval `[0.000, 0.063]`. No matcher/representation met all frozen viability bounds; P9/P10 protocol engineering is forbidden absent an explicit scientific reframe. P7 may only perform the bounded image-stage disposition described in D4/P6 documentation.
 
 **Objective:** Demonstrate useful technical separation and quantify the tolerance–guessability trade-off before cryptography.
 

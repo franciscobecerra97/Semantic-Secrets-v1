@@ -1,0 +1,43 @@
+{
+  "audit_id": "controlled-pilot-v1-blind-audit",
+  "method": "label-only deterministic lexical audit independent of matcher/model outputs",
+  "model_outputs_observed": false,
+  "families_checked": 60,
+  "concepts_checked": 120,
+  "prompt_variants_checked": 360,
+  "issues": [],
+  "validation": {
+    "schema_validation": "draft-2020-12",
+    "families": 60,
+    "concepts": 120,
+    "atom_types": [
+      "action",
+      "attribute",
+      "count",
+      "object",
+      "relation",
+      "scene"
+    ],
+    "complexities": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "frequency_bands": [
+      "common_candidate",
+      "mid_candidate",
+      "rare_candidate"
+    ],
+    "near_neighbour_change_counts": {
+      "action": 10,
+      "attribute": 15,
+      "count": 10,
+      "object": 5,
+      "relation": 15,
+      "scene": 5
+    }
+  },
+  "catalog_sha256": "adfd9bf03953353ea2a9f07e5f2d4c2165d0e5ba6637fd1169a267bec37016dd"
+}

@@ -1,6 +1,6 @@
 # Controlled semantic dataset methodology v1
 
-Status: P3 smoke/pilot methodology approved on 2026-08-24. Full acquisition and full-scale generation are not approved.
+Status: P3 methodology and smoke assets were approved on 2026-08-24. P6 froze and audited the 60-family pilot catalog and compact manifests on 2026-08-24. Pilot image/model execution remains unapproved outside a later explicit phase; full acquisition and full-scale generation are not approved.
 
 This directory defines inputs for technical experiments on semantic representations. It does not contain authentication credentials, participant data, or evidence about human memory, usability, or natural secret selection.
 
@@ -26,7 +26,9 @@ It cannot support claims about what people remember, select, prefer, or reproduc
 | `schema/label_manifest.schema.json` | Ground-truth row schema held away from model execution. |
 | `schema/pair_manifest.schema.json` | Same/near/unrelated comparison schema held away from model execution. |
 | `config/design_v1.json` | Smoke/pilot/full scaling and deterministic split/transform settings. |
+| `config/design_p6_v1.json` | Versioned P6 approval for pilot catalog/manifests; leaves the frozen P3 design unchanged. |
 | `concepts/smoke_v1.json` | Twelve hand-audited concept families used only to validate the method. |
+| `concepts/pilot_v1.json` / `pilot_v1.audit.json` | Sixty P6 pilot families and the model-output-independent lexical audit. |
 | `sources_v1.json` | Public-source licence, ethics, identifier, and distribution screen. |
 | `split_manifest.py` | Standard-library manifest generator and validator. |
 | `manifests/smoke_v1.*` | Generated, compact P3 manifests; no images or model representations. |
@@ -75,7 +77,7 @@ Near/unrelated labels, expected atoms, family grouping, and split membership are
 | Stage | Families | Purpose | Approval |
 |---|---:|---|---|
 | Smoke | 12 | Hand-audit ontology, one-atom edits, schema, deterministic generation, split isolation, and pipeline interfaces. | Approved. No model/image execution is implied by P3. |
-| Pilot | 60 planned | Estimate family-level variance, failure rates, clustering, effect sizes, and resource cost; eliminate weak candidates. | Method approved; catalog construction and generation wait for P4/P5 needs. |
+| Pilot | 60 | Estimate family-level variance, failure rates, clustering, effect sizes, and resource cost; eliminate weak candidates. | Catalog/manifests approved and frozen by P6; direct-text P6 run complete. Image execution is not implied. |
 | Full | Not fixed | Confirmatory evidence with a frozen family count derived from pilot uncertainty and resource feasibility. | Forbidden until P6/P7 requests it and a decision record freezes the size. |
 
 The full size is deliberately `null` in `design_v1.json`. Choosing a convenient round number is not acceptable.
@@ -193,4 +195,4 @@ Running `generate` twice must produce byte-identical manifest files and provenan
 
 ## 11. Phase boundary
 
-P3 approves the ontology, smoke catalog, pilot methodology, source screen, and manifest machinery. It does not approve public-corpus acquisition, model selection, image generation, annotation by participants, pilot results, full scale, or any security/usability claim.
+P3 approved the ontology, smoke catalog, pilot methodology, source screen, and manifest machinery. P6 subsequently froze the pilot catalog/manifests and produced direct-text pilot results. Neither phase approves public-corpus acquisition, pilot image generation, annotation by participants, full scale, or any security/usability claim.

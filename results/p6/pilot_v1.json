@@ -1,0 +1,1176 @@
+{
+  "$schema_version": "semantic-secrets-p6-result-v1",
+  "acceptance_region": {
+    "chosen_threshold_partial_information": {
+      "0": {
+        "accepted_fraction": 0.03030303,
+        "boundary": "conditioned on shared extracted atoms in the finite validation dictionary",
+        "candidate_pairs": 132,
+        "families_with_candidates": 12
+      },
+      "1": {
+        "accepted_fraction": 1.0,
+        "boundary": "conditioned on shared extracted atoms in the finite validation dictionary",
+        "candidate_pairs": 2,
+        "families_with_candidates": 2
+      },
+      "2": {
+        "accepted_fraction": null,
+        "boundary": "conditioned on shared extracted atoms in the finite validation dictionary",
+        "candidate_pairs": 0,
+        "families_with_candidates": 0
+      },
+      "3": {
+        "accepted_fraction": null,
+        "boundary": "conditioned on shared extracted atoms in the finite validation dictionary",
+        "candidate_pairs": 0,
+        "families_with_candidates": 0
+      }
+    },
+    "curve": [
+      {
+        "controlled_mixture_acceptance": 1.0,
+        "finite_dictionary_max_accepted": 12,
+        "finite_dictionary_mean_accepted": 12.0,
+        "frr": 0.0,
+        "near_acceptance": 1.0,
+        "random_acceptance": 1.0,
+        "threshold": 0.0
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.025
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.05
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.075
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.1
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.125
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.15
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.175
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.2
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.225
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.25
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.275
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.3
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.325
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.35
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.375
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.4
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.425
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.45
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.475
+      },
+      {
+        "controlled_mixture_acceptance": 0.19090909,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.16666667,
+        "near_acceptance": 0.83333333,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.5
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.525
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.55
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.575
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.6
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.625
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.65
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.675
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.7
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.725
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.75
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.775
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.8
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.825
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.85
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.875
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.9
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.925
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.95
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 0.975
+      },
+      {
+        "controlled_mixture_acceptance": 0.17424242,
+        "finite_dictionary_max_accepted": 2,
+        "finite_dictionary_mean_accepted": 1.0,
+        "frr": 0.20833333,
+        "near_acceptance": 0.75,
+        "random_acceptance": 0.03030303,
+        "threshold": 1.0
+      }
+    ],
+    "distribution_boundary": "controlled/provisional probability mass only; no claim about human secret choice or population guessing"
+  },
+  "boundaries": {
+    "calibration": "not meaningful: matcher scores are not asserted probabilities",
+    "evaluated_families": {
+      "train": 36,
+      "validation": 12
+    },
+    "evaluated_rows": 192,
+    "human_subjects": 0,
+    "image_models_executed": 0,
+    "pilot_test_families_evaluated": 0,
+    "pilot_test_rows_evaluated": 0,
+    "population_guessability": "not estimated"
+  },
+  "config_sha256": "06f970305b662b6813fa8b9ad320d3b879538b756fde453525e845f4961f4438",
+  "determinism": {
+    "analysis_outputs_are_timestamp_free": true,
+    "bootstrap_repetitions": 4000,
+    "bootstrap_seed": 6106,
+    "minilm_two_pass_exact": true
+  },
+  "gate_a": {
+    "outcome": "stop-or-reframe",
+    "pass": false,
+    "predeclared_checks": {
+      "auc_lower": false,
+      "frr_point": true,
+      "frr_upper": false,
+      "gap_lower": false,
+      "near_far_point": false,
+      "near_far_upper": false,
+      "nonempty_rate": false,
+      "random_far_point": true,
+      "random_far_upper": true
+    },
+    "protocol_engineering_allowed": false,
+    "reason": "one or more frozen reliability/near-neighbour bounds failed; P9/P10 protocol engineering remains forbidden"
+  },
+  "matcher_reports": {
+    "cardinality": {
+      "score_summary": {
+        "train": {
+          "near_negative": {
+            "count": 36,
+            "maximum": 5.0,
+            "mean": 2.97222222,
+            "median": 4.0,
+            "minimum": 0.0,
+            "standard_deviation": 1.73182169
+          },
+          "random_negative": {
+            "count": 1260,
+            "maximum": 1.0,
+            "mean": 0.05555556,
+            "median": 0.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.22915238
+          },
+          "same": {
+            "count": 72,
+            "maximum": 6.0,
+            "mean": 3.27777778,
+            "median": 3.0,
+            "minimum": 1.0,
+            "standard_deviation": 1.67182301
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 12,
+            "maximum": 2.0,
+            "mean": 0.83333333,
+            "median": 1.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.71774056
+          },
+          "random_negative": {
+            "count": 132,
+            "maximum": 1.0,
+            "mean": 0.01515152,
+            "median": 0.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.12262078
+          },
+          "same": {
+            "count": 24,
+            "maximum": 2.0,
+            "mean": 0.875,
+            "median": 1.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.74088666
+          }
+        }
+      },
+      "selected_threshold": 3.0,
+      "selection_objective": [
+        0.55555556,
+        0.90277778,
+        0.55555556,
+        -3.0
+      ],
+      "train": {
+        "all_negative_auc": 0.98121356,
+        "frr": 0.34722222,
+        "near_auc": 0.53973765,
+        "near_far": 0.55555556,
+        "random_far": 0.0,
+        "same_minus_near_gap": 0.30555556
+      },
+      "validation": {
+        "all_negative_auc": 0.80121528,
+        "frr": 1.0,
+        "near_auc": 0.51388889,
+        "near_far": 0.0,
+        "random_far": 0.0,
+        "same_minus_near_gap": 0.04166667
+      },
+      "validation_eer_all_negatives": {
+        "eer": 0.20138889,
+        "far": 0.06944444,
+        "frr": 0.33333333,
+        "threshold": 1.0
+      },
+      "validation_eer_near_only": {
+        "eer": 0.5,
+        "far": 0.66666667,
+        "frr": 0.33333333,
+        "threshold": 1.0
+      },
+      "validation_uncertainty": {
+        "all_negative_auc": {
+          "cluster_bootstrap_95pct": [
+            0.67505787,
+            0.92173032
+          ],
+          "point": 0.80121528
+        },
+        "frr": {
+          "cluster_bootstrap_95pct": [
+            1.0,
+            1.0
+          ],
+          "point": 1.0
+        },
+        "near_auc": {
+          "cluster_bootstrap_95pct": [
+            0.5,
+            0.55208333
+          ],
+          "point": 0.51388889
+        },
+        "near_far": {
+          "cluster_bootstrap_95pct": [
+            0.0,
+            0.25
+          ],
+          "point": 0.0
+        },
+        "random_far": {
+          "cluster_bootstrap_95pct": [
+            0.0,
+            0.25
+          ],
+          "point": 0.0
+        },
+        "same_minus_near_gap": {
+          "cluster_bootstrap_95pct": [
+            0.0,
+            0.125
+          ],
+          "point": 0.04166667
+        }
+      }
+    },
+    "jaccard": {
+      "score_summary": {
+        "train": {
+          "near_negative": {
+            "count": 36,
+            "maximum": 1.0,
+            "mean": 0.54761906,
+            "median": 0.66666669,
+            "minimum": 0.0,
+            "standard_deviation": 0.22587698
+          },
+          "random_negative": {
+            "count": 1260,
+            "maximum": 0.5,
+            "mean": 0.00740495,
+            "median": 0.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.03605862
+          },
+          "same": {
+            "count": 72,
+            "maximum": 1.0,
+            "mean": 0.67900133,
+            "median": 0.66666669,
+            "minimum": 0.33333334,
+            "standard_deviation": 0.19785317
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 12,
+            "maximum": 1.0,
+            "mean": 0.77777778,
+            "median": 1.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.41030497
+          },
+          "random_negative": {
+            "count": 132,
+            "maximum": 1.0,
+            "mean": 0.03030303,
+            "median": 0.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.17207286
+          },
+          "same": {
+            "count": 24,
+            "maximum": 1.0,
+            "mean": 0.78472222,
+            "median": 1.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.3822106
+          }
+        }
+      },
+      "selected_threshold": 0.71428573,
+      "selection_objective": [
+        0.58333333,
+        0.83333333,
+        0.25,
+        -0.71428573
+      ],
+      "train": {
+        "all_negative_auc": 0.98932613,
+        "frr": 0.58333333,
+        "near_auc": 0.62885802,
+        "near_far": 0.25,
+        "random_far": 0.0,
+        "same_minus_near_gap": 0.13138227
+      },
+      "validation": {
+        "all_negative_auc": 0.86530671,
+        "frr": 0.29166667,
+        "near_auc": 0.48784722,
+        "near_far": 0.75,
+        "random_far": 0.03030303,
+        "same_minus_near_gap": 0.00694445
+      },
+      "validation_eer_all_negatives": {
+        "eer": 0.13194444,
+        "far": 0.09722222,
+        "frr": 0.16666667,
+        "threshold": 0.33333334
+      },
+      "validation_eer_near_only": {
+        "eer": 0.52083333,
+        "far": 0.75,
+        "frr": 0.29166667,
+        "threshold": 1.0
+      },
+      "validation_uncertainty": {
+        "all_negative_auc": {
+          "cluster_bootstrap_95pct": [
+            0.7441985,
+            0.95298032
+          ],
+          "point": 0.86530671
+        },
+        "frr": {
+          "cluster_bootstrap_95pct": [
+            0.08333333,
+            0.5
+          ],
+          "point": 0.29166667
+        },
+        "near_auc": {
+          "cluster_bootstrap_95pct": [
+            0.42361111,
+            0.5625
+          ],
+          "point": 0.48784722
+        },
+        "near_far": {
+          "cluster_bootstrap_95pct": [
+            0.5,
+            1.0
+          ],
+          "point": 0.75
+        },
+        "random_far": {
+          "cluster_bootstrap_95pct": [
+            0.00757576,
+            0.0530303
+          ],
+          "point": 0.03030303
+        },
+        "same_minus_near_gap": {
+          "cluster_bootstrap_95pct": [
+            -0.05555555,
+            0.09027778
+          ],
+          "point": 0.00694445
+        }
+      }
+    },
+    "minilm_cosine": {
+      "score_summary": {
+        "train": {
+          "near_negative": {
+            "count": 36,
+            "maximum": 0.9936285,
+            "mean": 0.8888183,
+            "median": 0.91217372,
+            "minimum": 0.66092098,
+            "standard_deviation": 0.09441396
+          },
+          "random_negative": {
+            "count": 1260,
+            "maximum": 0.87317425,
+            "mean": 0.17254946,
+            "median": 0.1413291,
+            "minimum": -0.10500841,
+            "standard_deviation": 0.14992968
+          },
+          "same": {
+            "count": 72,
+            "maximum": 0.97288811,
+            "mean": 0.89044886,
+            "median": 0.9116337,
+            "minimum": 0.69678968,
+            "standard_deviation": 0.06434269
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 12,
+            "maximum": 0.99669528,
+            "mean": 0.90767295,
+            "median": 0.92500448,
+            "minimum": 0.57369149,
+            "standard_deviation": 0.11499634
+          },
+          "random_negative": {
+            "count": 132,
+            "maximum": 0.74752957,
+            "mean": 0.17479738,
+            "median": 0.14528278,
+            "minimum": -0.04637078,
+            "standard_deviation": 0.13946044
+          },
+          "same": {
+            "count": 24,
+            "maximum": 0.97106671,
+            "mean": 0.8717999,
+            "median": 0.87871698,
+            "minimum": 0.74778342,
+            "standard_deviation": 0.06775193
+          }
+        }
+      },
+      "selected_threshold": 0.91183913,
+      "selection_objective": [
+        0.5,
+        1.0,
+        0.5,
+        -0.91183913
+      ],
+      "train": {
+        "all_negative_auc": 0.98427855,
+        "frr": 0.5,
+        "near_auc": 0.45717593,
+        "near_far": 0.5,
+        "random_far": 0.0,
+        "same_minus_near_gap": 0.00163056
+      },
+      "validation": {
+        "all_negative_auc": 0.94126157,
+        "frr": 0.625,
+        "near_auc": 0.29513889,
+        "near_far": 0.58333333,
+        "random_far": 0.0,
+        "same_minus_near_gap": -0.03587304
+      },
+      "validation_eer_all_negatives": {
+        "eer": 0.07986111,
+        "far": 0.07638889,
+        "frr": 0.08333333,
+        "threshold": 0.76379776
+      },
+      "validation_eer_near_only": {
+        "eer": 0.58333333,
+        "far": 0.58333333,
+        "frr": 0.58333333,
+        "threshold": 0.90226519
+      },
+      "validation_uncertainty": {
+        "all_negative_auc": {
+          "cluster_bootstrap_95pct": [
+            0.92997685,
+            0.95341435
+          ],
+          "point": 0.94126157
+        },
+        "frr": {
+          "cluster_bootstrap_95pct": [
+            0.45833333,
+            0.79166667
+          ],
+          "point": 0.625
+        },
+        "near_auc": {
+          "cluster_bootstrap_95pct": [
+            0.15277778,
+            0.43402778
+          ],
+          "point": 0.29513889
+        },
+        "near_far": {
+          "cluster_bootstrap_95pct": [
+            0.33333333,
+            0.83333333
+          ],
+          "point": 0.58333333
+        },
+        "random_far": {
+          "cluster_bootstrap_95pct": [
+            0.0,
+            0.25
+          ],
+          "point": 0.0
+        },
+        "same_minus_near_gap": {
+          "cluster_bootstrap_95pct": [
+            -0.07783711,
+            0.02510923
+          ],
+          "point": -0.03587304
+        }
+      }
+    },
+    "weighted_overlap": {
+      "score_summary": {
+        "train": {
+          "near_negative": {
+            "count": 36,
+            "maximum": 1.0,
+            "mean": 0.67659216,
+            "median": 0.81666666,
+            "minimum": 0.0,
+            "standard_deviation": 0.26175152
+          },
+          "random_negative": {
+            "count": 1260,
+            "maximum": 1.0,
+            "mean": 0.01676489,
+            "median": 0.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.07692196
+          },
+          "same": {
+            "count": 72,
+            "maximum": 1.0,
+            "mean": 0.82987495,
+            "median": 0.92003536,
+            "minimum": 0.30743095,
+            "standard_deviation": 0.20555128
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 12,
+            "maximum": 1.0,
+            "mean": 0.79166667,
+            "median": 1.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.39648073
+          },
+          "random_negative": {
+            "count": 132,
+            "maximum": 1.0,
+            "mean": 0.03030303,
+            "median": 0.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.17207286
+          },
+          "same": {
+            "count": 24,
+            "maximum": 1.0,
+            "mean": 0.8125,
+            "median": 1.0,
+            "minimum": 0.0,
+            "standard_deviation": 0.3848348
+          }
+        }
+      },
+      "selected_threshold": 0.84007072,
+      "selection_objective": [
+        0.41666667,
+        0.80634921,
+        0.38968254,
+        -0.84007072
+      ],
+      "train": {
+        "all_negative_auc": 0.98853845,
+        "frr": 0.41666667,
+        "near_auc": 0.69155093,
+        "near_far": 0.38888889,
+        "random_far": 0.00079365,
+        "same_minus_near_gap": 0.15328279
+      },
+      "validation": {
+        "all_negative_auc": 0.86892361,
+        "frr": 0.20833333,
+        "near_auc": 0.51736111,
+        "near_far": 0.75,
+        "random_far": 0.03030303,
+        "same_minus_near_gap": 0.02083333
+      },
+      "validation_eer_all_negatives": {
+        "eer": 0.13194444,
+        "far": 0.09722222,
+        "frr": 0.16666667,
+        "threshold": 0.5
+      },
+      "validation_eer_near_only": {
+        "eer": 0.47916667,
+        "far": 0.75,
+        "frr": 0.20833333,
+        "threshold": 1.0
+      },
+      "validation_uncertainty": {
+        "all_negative_auc": {
+          "cluster_bootstrap_95pct": [
+            0.74667245,
+            0.95645255
+          ],
+          "point": 0.86892361
+        },
+        "frr": {
+          "cluster_bootstrap_95pct": [
+            0.0,
+            0.45833333
+          ],
+          "point": 0.20833333
+        },
+        "near_auc": {
+          "cluster_bootstrap_95pct": [
+            0.5,
+            0.55729167
+          ],
+          "point": 0.51736111
+        },
+        "near_far": {
+          "cluster_bootstrap_95pct": [
+            0.5,
+            1.0
+          ],
+          "point": 0.75
+        },
+        "random_far": {
+          "cluster_bootstrap_95pct": [
+            0.00757576,
+            0.0530303
+          ],
+          "point": 0.03030303
+        },
+        "same_minus_near_gap": {
+          "cluster_bootstrap_95pct": [
+            0.0,
+            0.0625
+          ],
+          "point": 0.02083333
+        }
+      }
+    }
+  },
+  "matrix": {
+    "files": {
+      "cardinality": {
+        "path": "cardinality_v1.npy",
+        "sha256": "61d4a84da588803277d6d055359975fc52a28f71065bdba722173775eab1ce72"
+      },
+      "jaccard": {
+        "path": "jaccard_v1.npy",
+        "sha256": "e20e8a3dd12ae14281a93447a3baeb628607c8df9b5abfc59c3f9f024b52f8b7"
+      },
+      "minilm_cosine": {
+        "path": "minilm_cosine_v1.npy",
+        "sha256": "39ad2a091d08d9522f88c6e810ba6db553ccdc4829605e9324e21407119da55e"
+      },
+      "weighted_overlap": {
+        "path": "weighted_overlap_v1.npy",
+        "sha256": "9aff497270097147dca2fb1ea70339626a2469cefbb9d1c06cf60aed534f1054"
+      }
+    },
+    "pair_rows": 1536,
+    "pair_scores_sha256": "2617d7fbf9341482a5633987b947012352f778469478de35528ee640839eebe2",
+    "representations_sha256": "3e73e0ecea1b04cf92b8c67ce595daa48d05b3527df1bb21aabf926ae0302af9",
+    "rows": 192,
+    "shape": [
+      192,
+      192
+    ]
+  },
+  "primary_subgroups_exploratory": {
+    "changed_atom_type": {
+      "action": {
+        "families": 1,
+        "mean_score": 1.0,
+        "near_far": 1.0
+      },
+      "attribute": {
+        "families": 1,
+        "mean_score": 1.0,
+        "near_far": 1.0
+      },
+      "count": {
+        "families": 2,
+        "mean_score": 0.75,
+        "near_far": 0.5
+      },
+      "object": {
+        "families": 1,
+        "mean_score": 1.0,
+        "near_far": 1.0
+      },
+      "relation": {
+        "families": 5,
+        "mean_score": 1.0,
+        "near_far": 1.0
+      },
+      "scene": {
+        "families": 2,
+        "mean_score": 0.0,
+        "near_far": 0.0
+      }
+    },
+    "complexity": {
+      "1": {
+        "families": 1,
+        "frr": 0.0,
+        "near_far": 1.0,
+        "near_trials": 1,
+        "positive_trials": 2
+      },
+      "2": {
+        "families": 3,
+        "frr": 0.83333333,
+        "near_far": 0.0,
+        "near_trials": 3,
+        "positive_trials": 6
+      },
+      "3": {
+        "families": 4,
+        "frr": 0.0,
+        "near_far": 1.0,
+        "near_trials": 4,
+        "positive_trials": 8
+      },
+      "4": {
+        "families": 3,
+        "frr": 0.0,
+        "near_far": 1.0,
+        "near_trials": 3,
+        "positive_trials": 6
+      },
+      "5": {
+        "families": 1,
+        "frr": 0.0,
+        "near_far": 1.0,
+        "near_trials": 1,
+        "positive_trials": 2
+      }
+    },
+    "frequency_band": {
+      "common_candidate": {
+        "families": 6,
+        "frr": 0.08333333,
+        "near_far": 0.83333333,
+        "near_trials": 6,
+        "positive_trials": 12
+      },
+      "mid_candidate": {
+        "families": 4,
+        "frr": 0.5,
+        "near_far": 0.5,
+        "near_trials": 4,
+        "positive_trials": 8
+      },
+      "rare_candidate": {
+        "families": 2,
+        "frr": 0.0,
+        "near_far": 1.0,
+        "near_trials": 2,
+        "positive_trials": 4
+      }
+    }
+  },
+  "private_computability": {
+    "cardinality": {
+      "candidate": "PSI-cardinality or private threshold intersection",
+      "expected_work": "linear in credential set sizes plus protocol setup",
+      "leakage_boundary": "cardinality leaks if revealed; threshold-only construction preferred"
+    },
+    "jaccard": {
+      "candidate": "private intersection plus public/protected set sizes",
+      "expected_work": "set protocol plus integer threshold comparison",
+      "leakage_boundary": "sizes and exact similarity must not be revealed by default"
+    },
+    "minilm_cosine": {
+      "candidate": "MPC/HE private dot product with protected vectors",
+      "expected_work": "384-dimensional arithmetic plus normalization/threshold machinery",
+      "leakage_boundary": "raw embeddings and exact cosine are linkable/leaky and cannot be stored plaintext"
+    },
+    "selection": "weighted overlap remains the least implausible private primary only if Gate A passes",
+    "weighted_overlap": {
+      "candidate": "private weighted intersection and fixed-point threshold comparison",
+      "expected_work": "linear token processing with extra fixed-point additions/comparison",
+      "leakage_boundary": "weights are frozen research metadata; atoms, overlap, and score remain private"
+    }
+  },
+  "publication_result": false,
+  "representation_quality": {
+    "train": {
+      "nonempty_rate": 1.0,
+      "nonempty_rows": 144,
+      "rows": 144,
+      "warning_counts": {}
+    },
+    "validation": {
+      "nonempty_rate": 0.75,
+      "nonempty_rows": 36,
+      "rows": 48,
+      "warning_counts": {
+        "empty_representation": 12,
+        "no_known_object": 24
+      }
+    }
+  },
+  "resources": {
+    "cryptographic_protocol_cost": "not measured because Gate A failed before protocol engineering",
+    "embedding_array_bytes": 295040,
+    "matrix_bytes": {
+      "cardinality": 147584,
+      "jaccard": 147584,
+      "minilm_cosine": 147584,
+      "weighted_overlap": 147584
+    },
+    "minilm": {
+      "load_seconds": 0.835587,
+      "peak_cuda_allocated_mib": [
+        109.97,
+        109.97
+      ],
+      "two_run_seconds": [
+        0.325049,
+        0.121867
+      ]
+    },
+    "pair_score_bytes": 615627,
+    "representation_bytes": 58726
+  },
+  "run_id": "p6-pilot-v1",
+  "versions": {
+    "canonical_scheme": "canonical-semantics-v1",
+    "catalog_sha256": "adfd9bf03953353ea2a9f07e5f2d4c2165d0e5ba6637fd1169a267bec37016dd",
+    "minilm_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "weights_sha256": "130b2cec205c3f3d67acafa07718688495bb5175df489b6e06a4a2fee162dd17",
+    "weights_version": "oracle-train-idf-v1"
+  }
+}

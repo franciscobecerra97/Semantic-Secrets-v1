@@ -343,3 +343,35 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** Pilot sample size/catalog, stability under seed/style/layout, test performance, threshold/FAR/FRR/EER, acceptance-region mass, empirical weights, general inversion/linkability, private-protocol cost, model drift, and migration/re-enrolment.
 
 **Revisit trigger:** P6 preregistered pilot/negative confirmation. A canonical rule change creates v2; a weight-source change creates a new weights version. Gate A cannot pass on P5 smoke evidence.
+
+## P6-00 / D4 — Select no authentication matcher; Gate A fails and protocol engineering stops
+
+**Decision:** Select no plaintext matcher for an authentication pipeline under the present evidence. Record Gate A outcome `stop-or-reframe`. Preserve weighted overlap as the least-complex conditional private-computation mapping for documentation only; forbid P9/P10 protocol engineering unless an explicit scientific reframe authorises a distinct objective.
+
+**Date:** 2026-08-24
+
+**Status:** Gate A failed; negative pilot result frozen.
+
+**Question:** Does any P5 finalist provide a threshold operating region that simultaneously meets preregistered technical-reliability, targeted-neighbour, random-impostor, uncertainty, completeness, and plausible-private-computation bounds?
+
+**Candidates:** controlled-text cardinality; controlled-text Jaccard; frozen-IDF weighted enrolled overlap; MiniLM cosine; revive a rejected structured-image extractor; choose no matcher; or perform one justified pilot revision.
+
+**Evaluation criteria:** Training-only threshold selection; unchanged validation evaluation; FRR, targeted-neighbour FAR, random FAR, EER, all-negative and near-only AUC, family-cluster uncertainty, same-minus-neighbour gap, non-empty rate, controlled acceptance-region mass, deterministic score export, test sealing, and plausible private computation. All primary bounds were frozen in `p6_pilot_v1.json` before successful model output or score calculation.
+
+**Evidence:** `p6-pilot-v1` used 36 training and 12 validation families from the audited 60-family catalog; 12 test families remained unevaluated. Weighted overlap selected threshold 0.84007072 on training. Validation FRR was 0.208 (95% family-bootstrap `[0.000, 0.458]`), targeted-neighbour FAR 0.750 (`[0.500, 1.000]`), random FAR 0.030 (`[0.008, 0.053]`), all-negative AUC 0.869 (`[0.747, 0.956]`), near-only AUC 0.517 (`[0.500, 0.557]`), and same-minus-neighbour gap 0.021 (`[0.000, 0.063]`). Validation non-empty rate was 0.75. Cardinality, Jaccard, and MiniLM also failed targeted-neighbour separation.
+
+**Selected option:** Choose no authentication matcher and freeze the negative result. Weighted overlap remains only a conditional mapping to private weighted intersection plus threshold comparison; it is not selected for implementation. Existing matrices and curves remain reusable measurement artifacts.
+
+**Rejected alternatives:** Cardinality rejected all validation positives at its training threshold. Jaccard accepted 75% of validation neighbours. MiniLM had FRR 0.625, near FAR 0.583, and negative same-minus-near gap. A parser revision after viewing validation is rejected as post-hoc and would not repair the broad near-only failure. Reviving Florence is rejected by P5. Increasing sample size cannot repair a point estimate showing 75% targeted-neighbour acceptance.
+
+**Reason:** Random negatives were easy, but the security-relevant one-atom neighbours overlapped positives across matcher families. An all-negative AUC dominated by random pairs would conceal this failure. Privacy-preserving computation can reduce representation exposure but cannot create plaintext discriminative information that is absent.
+
+**Security/privacy assumptions:** Raw atoms and embeddings remain readable/linkable and were used only as local plaintext baselines. No cryptographic construction was executed or benchmarked. Controlled attack mixtures and finite dictionaries are not population priors. No participant, public prompt, test-family, or real credential data was used.
+
+**Affected RQs/threats/claims:** RQ1–RQ4/RQ6; A1/A4/A5/A8; E1–E8; D4; Gate A. The current standalone/second-factor authentication hypothesis is unsupported under the frozen representation. P9/P10 are blocked; P7 may only decide whether the cached image stage supports a bounded measurement/reframing contribution.
+
+**Experiments supporting decision:** Deterministic 192×192 cardinality, Jaccard, weighted-overlap, and MiniLM matrices; 1,536 scored pilot pairs; exact two-pass MiniLM embeddings; training-selected thresholds; 4,000 fixed-seed family-cluster bootstraps; subgroup/missingness analysis; threshold/acceptance-region sweep; partial-information finite-dictionary probe; and byte-identical analysis rerun.
+
+**Remaining uncertainty:** General-vocabulary extractors, a scientifically distinct semantic representation, image-path paired behavior, generator/extractor drift, real attacker priors, public-prompt frequency, full held-out performance, population guessing, and private-protocol costs. These uncertainties do not convert the failed P6 candidate into a Gate A survivor.
+
+**Revisit trigger:** An explicit project reframe with a new representation rationale, independent vocabulary source, new version, new preregistration, and new data; or a P7 bounded paired diagnostic demonstrating a distinct measurement contribution. `p6-pilot-v1` itself can never be reclassified as a pass.

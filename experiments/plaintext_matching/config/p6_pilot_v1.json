@@ -1,0 +1,87 @@
+{
+  "$schema_version": "semantic-secrets-p6-config-v1",
+  "run_id": "p6-pilot-v1",
+  "publication_result": false,
+  "frozen_before_model_outputs": true,
+  "dataset": {
+    "stage": "pilot",
+    "catalog_id": "controlled-pilot-v1",
+    "evaluation_splits": ["train", "validation"],
+    "family_counts": {"train": 36, "validation": 12},
+    "roles": ["enrolment", "paraphrase", "near_negative"],
+    "same_trials_per_family": 2,
+    "near_trials_per_family": 1,
+    "random_pairs": "all cross-family enrolment pairs within each evaluated split",
+    "test_policy": "12 pilot test families remain unevaluated and may not affect models, thresholds, weights, or decisions"
+  },
+  "representations": {
+    "primary": "controlled_text_weighted_overlap",
+    "structured_baselines": ["cardinality", "jaccard"],
+    "dense_text_baseline": "minilm_cosine",
+    "image_baseline_policy": "carry P5 SigLIP smoke evidence as context only; P7 owns pilot image execution"
+  },
+  "canonicalisation": {
+    "scheme_version": "canonical-semantics-v1",
+    "minimum_confidence": 0.25,
+    "object_lexicon_fit_split": "train"
+  },
+  "weighting": {
+    "weights_version": "oracle-train-idf-v1",
+    "source_phase": "P5",
+    "expected_sha256": "130b2cec205c3f3d67acafa07718688495bb5175df489b6e06a4a2fee162dd17",
+    "unknown_atom_weight": 1.0,
+    "refit_on_pilot": false
+  },
+  "minilm": {
+    "backend_id": "b_minilm_text",
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "dtype": "float32",
+    "device": "cuda",
+    "batch_size": 32,
+    "repeat_count": 2,
+    "local_files_only": true,
+    "cache_dir": "../../artifacts/downloads/hf-p5/hub"
+  },
+  "threshold_selection": {
+    "fit_split": "train",
+    "evaluation_split": "validation",
+    "accept_rule": "score >= threshold",
+    "candidate_rule": "all unique training scores plus the next representable value above the maximum",
+    "objective": "lexicographically minimise maximum(FRR, near-FAR, random-FAR), total error, accepted-negative mass; then prefer the strictest threshold",
+    "test_tuning": false
+  },
+  "viability": {
+    "intended_use": "technical second-factor candidate; not standalone authentication evidence",
+    "validation_frr_point_max": 0.25,
+    "validation_frr_cluster_95_upper_max": 0.45,
+    "validation_near_far_point_max": 0.10,
+    "validation_near_far_cluster_95_upper_max": 0.25,
+    "validation_random_far_point_max": 0.05,
+    "validation_random_far_cluster_95_upper_max": 0.25,
+    "validation_all_negative_auc_cluster_95_lower_min": 0.75,
+    "validation_same_minus_near_gap_cluster_95_lower_min": 0.10,
+    "validation_nonempty_representation_rate_min": 0.90,
+    "gate_rule": "all bounds must pass for the frozen primary matcher; oracle diagnostics and exploratory baselines cannot pass Gate A"
+  },
+  "uncertainty": {
+    "grouping_unit": "family_id",
+    "bootstrap_seed": 6106,
+    "bootstrap_repetitions": 4000,
+    "interval": "percentile 95% family-cluster bootstrap",
+    "zero_event_guard": "upper bound is at least 3 divided by independent validation families",
+    "multiplicity": "primary matcher only; baseline/subgroup intervals exploratory with no confirmatory claims"
+  },
+  "acceptance_region": {
+    "threshold_grid_points": 41,
+    "finite_dictionary": "within-split enrolment concepts plus each target's one-atom neighbour",
+    "controlled_mixture": {"random": 0.8, "targeted_near": 0.2},
+    "partial_information_k": [0, 1, 2, 3],
+    "boundary": "controlled/provisional probability mass only; no claim about human secret choice or population guessing"
+  },
+  "decision": {
+    "gate": "A",
+    "outcomes": ["pass", "one-justified-pilot-revision", "stop-or-reframe"],
+    "protocol_engineering_on_failure": "forbidden"
+  }
+}

@@ -448,12 +448,14 @@ def _output_payloads(stage_name: str, manifests: dict[str, Any]) -> dict[str, by
     }
 
 
-def load_stage(stage_name: str) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
-    design = read_json(DESIGN_PATH)
+def load_stage(
+    stage_name: str, design_path: Path = DESIGN_PATH
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
+    design = read_json(design_path)
     _require(stage_name in design["stages"], f"Unknown stage: {stage_name}")
     stage = design["stages"][stage_name]
     _require(stage["approved"] is True, f"Stage is not approved: {stage_name}")
-    config_dir = DESIGN_PATH.parent
+    config_dir = design_path.parent
     ontology = read_json((config_dir / design["ontology"]).resolve())
     catalog_path = stage["catalog"]
     _require(catalog_path is not None, f"No catalog for stage: {stage_name}")
@@ -461,8 +463,10 @@ def load_stage(stage_name: str) -> tuple[dict[str, Any], dict[str, Any], dict[st
     return design, stage, ontology, catalog
 
 
-def generate(stage_name: str, output_dir: Path = OUTPUT_ROOT) -> dict[str, Any]:
-    design, stage, ontology, catalog = load_stage(stage_name)
+def generate(
+    stage_name: str, output_dir: Path = OUTPUT_ROOT, design_path: Path = DESIGN_PATH
+) -> dict[str, Any]:
+    design, stage, ontology, catalog = load_stage(stage_name, design_path)
     validation = validate_catalog(catalog, ontology, stage["family_count"])
     manifests = build_manifests(stage_name, design, ontology, catalog)
     payloads = _output_payloads(stage_name, manifests)
@@ -513,8 +517,10 @@ def _read_jsonl(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
-def validate_outputs(stage_name: str, output_dir: Path = OUTPUT_ROOT) -> dict[str, Any]:
-    design, stage, ontology, catalog = load_stage(stage_name)
+def validate_outputs(
+    stage_name: str, output_dir: Path = OUTPUT_ROOT, design_path: Path = DESIGN_PATH
+) -> dict[str, Any]:
+    design, stage, ontology, catalog = load_stage(stage_name, design_path)
     catalog_report = validate_catalog(catalog, ontology, stage["family_count"])
     expected = build_manifests(stage_name, design, ontology, catalog)
     expected_payloads = _output_payloads(stage_name, expected)
@@ -544,7 +550,12 @@ def validate_outputs(stage_name: str, output_dir: Path = OUTPUT_ROOT) -> dict[st
         _require(set(row) == LABEL_FIELDS, f"Label schema fields changed: {row['row_id']}")
     for row in pairs:
         _require(set(row) == PAIR_FIELDS, f"Pair schema fields changed: {row['pair_id']}")
-    _validate_with_jsonschema(inputs[0], ROOT / "schema" / "input_manifest.schema.json")
+    input_schema = (
+        "input_manifest_p6.schema.json"
+        if design["design_id"] == "controlled-design-p6-v1"
+        else "input_manifest.schema.json"
+    )
+    _validate_with_jsonschema(inputs[0], ROOT / "schema" / input_schema)
     _validate_with_jsonschema(labels[0], ROOT / "schema" / "label_manifest.schema.json")
     _validate_with_jsonschema(pairs[0], ROOT / "schema" / "pair_manifest.schema.json")
 
@@ -577,12 +588,12 @@ def validate_outputs(stage_name: str, output_dir: Path = OUTPUT_ROOT) -> dict[st
     }
 
 
-def deterministic_recreation_check(stage_name: str) -> None:
+def deterministic_recreation_check(stage_name: str, design_path: Path = DESIGN_PATH) -> None:
     with tempfile.TemporaryDirectory(prefix="semantic-secrets-manifest-a-") as first_dir, tempfile.TemporaryDirectory(prefix="semantic-secrets-manifest-b-") as second_dir:
         first = Path(first_dir)
         second = Path(second_dir)
-        generate(stage_name, first)
-        generate(stage_name, second)
+        generate(stage_name, first, design_path)
+        generate(stage_name, second, design_path)
         first_files = {path.name: path.read_bytes() for path in first.iterdir()}
         second_files = {path.name: path.read_bytes() for path in second.iterdir()}
         _require(first_files == second_files, "Manifest recreation is not byte-identical")
@@ -595,13 +606,14 @@ def main() -> int:
         child = subparsers.add_parser(command)
         child.add_argument("--stage", choices=("smoke", "pilot", "full"), required=True)
         child.add_argument("--output-dir", type=Path, default=OUTPUT_ROOT)
+        child.add_argument("--design", type=Path, default=DESIGN_PATH)
     args = parser.parse_args()
 
     if args.command == "generate":
-        report = generate(args.stage, args.output_dir)
+        report = generate(args.stage, args.output_dir, args.design)
     else:
-        report = validate_outputs(args.stage, args.output_dir)
-        deterministic_recreation_check(args.stage)
+        report = validate_outputs(args.stage, args.output_dir, args.design)
+        deterministic_recreation_check(args.stage, args.design)
         report["byte_identical_recreation"] = True
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://semantic-secrets.invalid/schema/input-manifest-p6-v1.json",
+  "title": "P6 label-free image-path pilot input row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["row_id", "stage", "pathway", "core_prompt", "render_prompt", "prompt_variant", "generator_seed", "style_id", "layout_id", "generator_slot", "extractor_slot", "text_input_id", "design_version"],
+  "properties": {
+    "row_id": {"type": "string", "pattern": "^r_[0-9a-f]{24}$"},
+    "stage": {"const": "pilot"},
+    "pathway": {"const": "image"},
+    "core_prompt": {"type": "string"},
+    "render_prompt": {"type": "string"},
+    "prompt_variant": {"enum": ["canonical", "paraphrase_1", "paraphrase_2"]},
+    "generator_seed": {"type": "integer", "minimum": 0},
+    "style_id": {"type": "string"},
+    "layout_id": {"type": "string"},
+    "generator_slot": {"type": "string"},
+    "extractor_slot": {"type": "string"},
+    "text_input_id": {"type": "string", "pattern": "^t_[0-9a-f]{24}$"},
+    "design_version": {"const": "controlled-design-p6-v1"}
+  }
+}

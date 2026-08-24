@@ -6,6 +6,7 @@ from .canonicalize import (
     CanonicalizationError,
     canonicalize_extraction,
     canonicalize_label_atoms,
+    normalise_token,
 )
 from .representations import (
     StructuredSet,
@@ -24,4 +25,5 @@ __all__ = [
     "canonicalize_label_atoms",
     "extract_controlled_text",
     "fit_idf_weights",
+    "normalise_token",
 ]

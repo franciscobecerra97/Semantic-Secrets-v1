@@ -4,7 +4,7 @@ Research project for a prospective PoPETs/PETS 2027 paper on privacy-preserving 
 
 ## Current state
 
-P0–P5 are complete. The repository now contains a frozen semantic canonicaliser, structured/weighted/dense representations, and a bounded 27-row train/validation smoke comparison. Controlled weighted direct-text semantics is the primary P6 hypothesis; SigLIP, MiniLM, and unweighted structured text remain baselines. Florence structured fusion was rejected, and no real representation has uncertainty-supported near-neighbour separation, so Gate A remains closed. No authentication implementation, downloaded public dataset, held-out test evaluation, protocol implementation, publication experiment result, or human-subject evidence has been produced.
+P0–P6 are complete. The repository now contains a frozen semantic canonicaliser, a 60-family audited pilot catalog, reusable plaintext similarity matrices, and a preregistered train/validation threshold and acceptance-region analysis. Gate A failed: weighted controlled-text overlap accepted 75% of targeted validation neighbours at its training-selected threshold, and no structured or dense matcher achieved useful targeted-neighbour separation. The result is `stop-or-reframe`; P9/P10 protocol engineering is forbidden absent an explicit scientific reframe. Twelve pilot test families remain unevaluated. No authentication implementation, downloaded public dataset, held-out test evaluation, protocol implementation, publication experiment result, or human-subject evidence has been produced.
 
 Read these files before beginning work:
 
@@ -15,6 +15,7 @@ Read these files before beginning work:
 5. `experiments/datasets/README.md` — approved P3 smoke/pilot methodology and data restrictions.
 6. `docs/model_screening.md` — P4 hardware, model/licence screen, smoke observations, and D1/D2 handoff.
 7. `docs/representation_screening.md` — P5 canonicalisation, representation comparison, negative uncertainty result, and P6 boundary.
+8. `docs/plaintext_matching.md` — P6 pilot thresholds, acceptance-region evidence, failed Gate A disposition, and D4 boundary.
 
 `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or verified project bibliography. Verified references belong in `paper/references.bib`.
 

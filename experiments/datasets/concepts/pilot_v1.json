@@ -1,0 +1,4253 @@
+{
+  "$schema_version": "semantic-secrets-concept-catalog-v1",
+  "catalog_id": "controlled-pilot-v1",
+  "ontology_id": "controlled-ontology-v1",
+  "audit_status": "blind-audit-complete",
+  "families": [
+    {
+      "family_id": "f001",
+      "complexity_level": 1,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c001a",
+        "prompts": {
+          "canonical": "A single scooter on a plain neutral background.",
+          "paraphrase_1": "One scooter shown alone against a neutral background.",
+          "paraphrase_2": "A neutral scene containing exactly one scooter and nothing else prominent."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "scooter",
+            "value": "scooter"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c001b",
+          "prompts": {
+            "canonical": "A single moped on a plain neutral background.",
+            "paraphrase_1": "One moped shown alone against a neutral background.",
+            "paraphrase_2": "A neutral scene containing exactly one moped and nothing else prominent."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "moped",
+              "value": "moped"
+            }
+          ],
+          "change": {
+            "atom_type": "object",
+            "from_signature": "object|id=scooter|value=scooter",
+            "to_signature": "object|id=moped|value=moped"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f001 with one object replacement."
+    },
+    {
+      "family_id": "f002",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c002a",
+        "prompts": {
+          "canonical": "A rabbit wearing a black hat.",
+          "paraphrase_1": "A black hat is wrapped around a rabbit.",
+          "paraphrase_2": "One rabbit with a clearly visible black hat."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "rabbit",
+            "value": "rabbit"
+          },
+          {
+            "type": "attribute",
+            "subject": "rabbit",
+            "subtype": "colour",
+            "value": "black"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c002b",
+          "prompts": {
+            "canonical": "A rabbit wearing a white hat.",
+            "paraphrase_1": "A white hat is wrapped around a rabbit.",
+            "paraphrase_2": "One rabbit with a clearly visible white hat."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "rabbit",
+              "value": "rabbit"
+            },
+            {
+              "type": "attribute",
+              "subject": "rabbit",
+              "subtype": "colour",
+              "value": "white"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=rabbit|value=black|subtype=colour",
+            "to_signature": "attribute|subject=rabbit|value=white|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f002 with one attribute replacement."
+    },
+    {
+      "family_id": "f003",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c003a",
+        "prompts": {
+          "canonical": "Exactly two rabbits together on a plain background.",
+          "paraphrase_1": "A plain scene showing a pair of rabbits together.",
+          "paraphrase_2": "Two rabbits, and not any additional rabbits, grouped together."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "rabbit",
+            "value": "rabbit"
+          },
+          {
+            "type": "count",
+            "subject": "rabbit",
+            "value": "2"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c003b",
+          "prompts": {
+            "canonical": "Exactly three rabbits together on a plain background.",
+            "paraphrase_1": "A plain scene showing a group of three rabbits together.",
+            "paraphrase_2": "Three rabbits, and not any additional rabbits, grouped together."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "rabbit",
+              "value": "rabbit"
+            },
+            {
+              "type": "count",
+              "subject": "rabbit",
+              "value": "3"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=rabbit|value=2",
+            "to_signature": "count|subject=rabbit|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f003 with one count replacement."
+    },
+    {
+      "family_id": "f004",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c004a",
+        "prompts": {
+          "canonical": "A fox catching a flying ball.",
+          "paraphrase_1": "A ball is in the air as a fox catches it.",
+          "paraphrase_2": "One fox in the act of catching one ball."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "fox",
+            "value": "fox"
+          },
+          {
+            "type": "object",
+            "id": "ball",
+            "value": "ball"
+          },
+          {
+            "type": "action",
+            "subject": "fox",
+            "value": "catch",
+            "object": "ball"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c004b",
+          "prompts": {
+            "canonical": "A fox carrying a ball.",
+            "paraphrase_1": "A fox moves while carrying one ball.",
+            "paraphrase_2": "One fox in the act of carrying one ball."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "fox",
+              "value": "fox"
+            },
+            {
+              "type": "object",
+              "id": "ball",
+              "value": "ball"
+            },
+            {
+              "type": "action",
+              "subject": "fox",
+              "value": "carry",
+              "object": "ball"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=fox|value=catch|object=ball",
+            "to_signature": "action|subject=fox|value=carry|object=ball"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f004 with one action replacement."
+    },
+    {
+      "family_id": "f005",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c005a",
+        "prompts": {
+          "canonical": "A lamp positioned to the left of a chair.",
+          "paraphrase_1": "A chair with a lamp clearly placed on its left side.",
+          "paraphrase_2": "The lamp is left of the chair, with both fully visible."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "lamp",
+            "value": "lamp"
+          },
+          {
+            "type": "object",
+            "id": "chair",
+            "value": "chair"
+          },
+          {
+            "type": "relation",
+            "subject": "lamp",
+            "value": "left_of",
+            "object": "chair"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c005b",
+          "prompts": {
+            "canonical": "A lamp positioned to the right of a chair.",
+            "paraphrase_1": "A chair with a lamp clearly placed on its right side.",
+            "paraphrase_2": "The lamp is right of the chair, with both fully visible."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "lamp",
+              "value": "lamp"
+            },
+            {
+              "type": "object",
+              "id": "chair",
+              "value": "chair"
+            },
+            {
+              "type": "relation",
+              "subject": "lamp",
+              "value": "right_of",
+              "object": "chair"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=lamp|value=left_of|object=chair",
+            "to_signature": "relation|subject=lamp|value=right_of|object=chair"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f005 with one relation replacement."
+    },
+    {
+      "family_id": "f006",
+      "complexity_level": 2,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c006a",
+        "prompts": {
+          "canonical": "A canoe at sea in a coastal sunrise scene.",
+          "paraphrase_1": "Sunrise over the coast with one canoe on the water.",
+          "paraphrase_2": "One canoe offshore as the coastal sun rises."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "canoe",
+            "value": "canoe"
+          },
+          {
+            "type": "scene",
+            "value": "coastal_sunrise"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c006b",
+          "prompts": {
+            "canonical": "A canoe at sea in a coastal night scene.",
+            "paraphrase_1": "Night over the coast with one canoe on the water.",
+            "paraphrase_2": "One canoe offshore along the coast at night."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "canoe",
+              "value": "canoe"
+            },
+            {
+              "type": "scene",
+              "value": "coastal_night"
+            }
+          ],
+          "change": {
+            "atom_type": "scene",
+            "from_signature": "scene|value=coastal_sunrise",
+            "to_signature": "scene|value=coastal_night"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f006 with one scene replacement."
+    },
+    {
+      "family_id": "f007",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c007a",
+        "prompts": {
+          "canonical": "A lizard wearing a red hat inside an aquarium.",
+          "paraphrase_1": "Inside an aquarium, an lizard has a red hat around it.",
+          "paraphrase_2": "A red-hat-wearing lizard shown in an aquarium scene."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "lizard",
+            "value": "lizard"
+          },
+          {
+            "type": "object",
+            "id": "hat",
+            "value": "hat"
+          },
+          {
+            "type": "attribute",
+            "subject": "hat",
+            "subtype": "colour",
+            "value": "red"
+          },
+          {
+            "type": "scene",
+            "value": "aquarium"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c007b",
+          "prompts": {
+            "canonical": "A lizard wearing a blue hat inside an aquarium.",
+            "paraphrase_1": "Inside an aquarium, an lizard has a blue hat around it.",
+            "paraphrase_2": "A blue-hat-wearing lizard shown in an aquarium scene."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "lizard",
+              "value": "lizard"
+            },
+            {
+              "type": "object",
+              "id": "hat",
+              "value": "hat"
+            },
+            {
+              "type": "attribute",
+              "subject": "hat",
+              "subtype": "colour",
+              "value": "blue"
+            },
+            {
+              "type": "scene",
+              "value": "aquarium"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=hat|value=red|subtype=colour",
+            "to_signature": "attribute|subject=hat|value=blue|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f007 with one attribute replacement."
+    },
+    {
+      "family_id": "f008",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c008a",
+        "prompts": {
+          "canonical": "In a forest, a deer stands between a tower and a barrel.",
+          "paraphrase_1": "A deer in a forest with a tower on one side and a barrel on the other.",
+          "paraphrase_2": "The forest deer is positioned between one tower and one barrel."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "deer",
+            "value": "deer"
+          },
+          {
+            "type": "object",
+            "id": "tower",
+            "value": "tower"
+          },
+          {
+            "type": "object",
+            "id": "barrel",
+            "value": "barrel"
+          },
+          {
+            "type": "relation",
+            "subject": "deer",
+            "value": "between",
+            "object": "tower",
+            "object2": "barrel"
+          },
+          {
+            "type": "scene",
+            "value": "forest"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c008b",
+          "prompts": {
+            "canonical": "In a forest, a deer stands beside a tower, with a barrel also visible.",
+            "paraphrase_1": "A deer beside a tower in a forest while a barrel remains visible.",
+            "paraphrase_2": "The forest deer is positioned beside one tower, and one barrel is present."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "deer",
+              "value": "deer"
+            },
+            {
+              "type": "object",
+              "id": "tower",
+              "value": "tower"
+            },
+            {
+              "type": "object",
+              "id": "barrel",
+              "value": "barrel"
+            },
+            {
+              "type": "relation",
+              "subject": "deer",
+              "value": "beside",
+              "object": "tower"
+            },
+            {
+              "type": "scene",
+              "value": "forest"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=deer|value=between|object=tower|object2=barrel",
+            "to_signature": "relation|subject=deer|value=beside|object=tower"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f008 with one relation replacement."
+    },
+    {
+      "family_id": "f009",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c009a",
+        "prompts": {
+          "canonical": "Exactly two painters carrying a basket in a warehouse.",
+          "paraphrase_1": "In a warehouse, a pair of painters carry one basket.",
+          "paraphrase_2": "Two painters, and no additional painters, carry a basket inside a warehouse."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "painter",
+            "value": "painter"
+          },
+          {
+            "type": "object",
+            "id": "basket",
+            "value": "basket"
+          },
+          {
+            "type": "count",
+            "subject": "painter",
+            "value": "2"
+          },
+          {
+            "type": "action",
+            "subject": "painter",
+            "value": "carry",
+            "object": "basket"
+          },
+          {
+            "type": "scene",
+            "value": "warehouse"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c009b",
+          "prompts": {
+            "canonical": "Exactly three painters carrying a basket in a warehouse.",
+            "paraphrase_1": "In a warehouse, three painters carry one basket.",
+            "paraphrase_2": "Three painters, and no additional painters, carry a basket inside a warehouse."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "painter",
+              "value": "painter"
+            },
+            {
+              "type": "object",
+              "id": "basket",
+              "value": "basket"
+            },
+            {
+              "type": "count",
+              "subject": "painter",
+              "value": "3"
+            },
+            {
+              "type": "action",
+              "subject": "painter",
+              "value": "carry",
+              "object": "basket"
+            },
+            {
+              "type": "scene",
+              "value": "warehouse"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=painter|value=2",
+            "to_signature": "count|subject=painter|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f009 with one count replacement."
+    },
+    {
+      "family_id": "f010",
+      "complexity_level": 5,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c010a",
+        "prompts": {
+          "canonical": "A clown juggling exactly three red apples in a kitchen.",
+          "paraphrase_1": "In a kitchen, one clown juggles three red apples.",
+          "paraphrase_2": "A kitchen scene with a clown in the act of juggling exactly three red apples."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "clown",
+            "value": "clown"
+          },
+          {
+            "type": "object",
+            "id": "apple",
+            "value": "apple"
+          },
+          {
+            "type": "count",
+            "subject": "apple",
+            "value": "3"
+          },
+          {
+            "type": "attribute",
+            "subject": "apple",
+            "subtype": "colour",
+            "value": "red"
+          },
+          {
+            "type": "action",
+            "subject": "clown",
+            "value": "juggle",
+            "object": "apple"
+          },
+          {
+            "type": "scene",
+            "value": "kitchen"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c010b",
+          "prompts": {
+            "canonical": "A clown holding exactly three red apples in a kitchen.",
+            "paraphrase_1": "In a kitchen, one clown holds three red apples.",
+            "paraphrase_2": "A kitchen scene with a clown in the act of holding exactly three red apples."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "clown",
+              "value": "clown"
+            },
+            {
+              "type": "object",
+              "id": "apple",
+              "value": "apple"
+            },
+            {
+              "type": "count",
+              "subject": "apple",
+              "value": "3"
+            },
+            {
+              "type": "attribute",
+              "subject": "apple",
+              "subtype": "colour",
+              "value": "red"
+            },
+            {
+              "type": "action",
+              "subject": "clown",
+              "value": "hold",
+              "object": "apple"
+            },
+            {
+              "type": "scene",
+              "value": "kitchen"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=clown|value=juggle|object=apple",
+            "to_signature": "action|subject=clown|value=hold|object=apple"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f010 with one action replacement."
+    },
+    {
+      "family_id": "f011",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c011a",
+        "prompts": {
+          "canonical": "A metal kettle beside a chair in a library.",
+          "paraphrase_1": "Inside a library, a kettle made of metal sits beside one chair.",
+          "paraphrase_2": "A library scene showing one metal kettle next to a chair."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "kettle",
+            "value": "kettle"
+          },
+          {
+            "type": "object",
+            "id": "chair",
+            "value": "chair"
+          },
+          {
+            "type": "attribute",
+            "subject": "kettle",
+            "subtype": "material",
+            "value": "metal"
+          },
+          {
+            "type": "relation",
+            "subject": "kettle",
+            "value": "beside",
+            "object": "chair"
+          },
+          {
+            "type": "scene",
+            "value": "library"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c011b",
+          "prompts": {
+            "canonical": "A wooden kettle beside a chair in a library.",
+            "paraphrase_1": "Inside a library, a kettle made of wooden sits beside one chair.",
+            "paraphrase_2": "A library scene showing one wooden kettle next to a chair."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "kettle",
+              "value": "kettle"
+            },
+            {
+              "type": "object",
+              "id": "chair",
+              "value": "chair"
+            },
+            {
+              "type": "attribute",
+              "subject": "kettle",
+              "subtype": "material",
+              "value": "wooden"
+            },
+            {
+              "type": "relation",
+              "subject": "kettle",
+              "value": "beside",
+              "object": "chair"
+            },
+            {
+              "type": "scene",
+              "value": "library"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=kettle|value=metal|subtype=material",
+            "to_signature": "attribute|subject=kettle|value=wooden|subtype=material"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f011 with one attribute replacement."
+    },
+    {
+      "family_id": "f012",
+      "complexity_level": 5,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c012a",
+        "prompts": {
+          "canonical": "A brown eagle above a lantern, watching the lantern in a lunar scene.",
+          "paraphrase_1": "In a lunar scene, a brown eagle watches a lantern from above it.",
+          "paraphrase_2": "A brown eagle positioned over a lantern while watching it, with a lunar setting."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "eagle",
+            "value": "eagle"
+          },
+          {
+            "type": "object",
+            "id": "lantern",
+            "value": "lantern"
+          },
+          {
+            "type": "attribute",
+            "subject": "eagle",
+            "subtype": "colour",
+            "value": "brown"
+          },
+          {
+            "type": "relation",
+            "subject": "eagle",
+            "value": "above",
+            "object": "lantern"
+          },
+          {
+            "type": "action",
+            "subject": "eagle",
+            "value": "watch",
+            "object": "lantern"
+          },
+          {
+            "type": "scene",
+            "value": "lunar"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c012b",
+          "prompts": {
+            "canonical": "A brown eagle below a lantern, watching the lantern in a lunar scene.",
+            "paraphrase_1": "In a lunar scene, a brown eagle watches a lantern from below it.",
+            "paraphrase_2": "A brown eagle positioned under a lantern while watching it, with a lunar setting."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "eagle",
+              "value": "eagle"
+            },
+            {
+              "type": "object",
+              "id": "lantern",
+              "value": "lantern"
+            },
+            {
+              "type": "attribute",
+              "subject": "eagle",
+              "subtype": "colour",
+              "value": "brown"
+            },
+            {
+              "type": "relation",
+              "subject": "eagle",
+              "value": "below",
+              "object": "lantern"
+            },
+            {
+              "type": "action",
+              "subject": "eagle",
+              "value": "watch",
+              "object": "lantern"
+            },
+            {
+              "type": "scene",
+              "value": "lunar"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=eagle|value=above|object=lantern",
+            "to_signature": "relation|subject=eagle|value=below|object=lantern"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 1; transformed audited template f012 with one relation replacement."
+    },
+    {
+      "family_id": "f013",
+      "complexity_level": 1,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c013a",
+        "prompts": {
+          "canonical": "A single tricycle on a plain neutral background.",
+          "paraphrase_1": "One tricycle shown alone against a neutral background.",
+          "paraphrase_2": "A neutral scene containing exactly one tricycle and nothing else prominent."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "tricycle",
+            "value": "tricycle"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c013b",
+          "prompts": {
+            "canonical": "A single car on a plain neutral background.",
+            "paraphrase_1": "One car shown alone against a neutral background.",
+            "paraphrase_2": "A neutral scene containing exactly one car and nothing else prominent."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "car",
+              "value": "car"
+            }
+          ],
+          "change": {
+            "atom_type": "object",
+            "from_signature": "object|id=tricycle|value=tricycle",
+            "to_signature": "object|id=car|value=car"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f001 with one object replacement."
+    },
+    {
+      "family_id": "f014",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c014a",
+        "prompts": {
+          "canonical": "A goat wearing a green ribbon.",
+          "paraphrase_1": "A green ribbon is wrapped around a goat.",
+          "paraphrase_2": "One goat with a clearly visible green ribbon."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "goat",
+            "value": "goat"
+          },
+          {
+            "type": "attribute",
+            "subject": "goat",
+            "subtype": "colour",
+            "value": "green"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c014b",
+          "prompts": {
+            "canonical": "A goat wearing a yellow ribbon.",
+            "paraphrase_1": "A yellow ribbon is wrapped around a goat.",
+            "paraphrase_2": "One goat with a clearly visible yellow ribbon."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "goat",
+              "value": "goat"
+            },
+            {
+              "type": "attribute",
+              "subject": "goat",
+              "subtype": "colour",
+              "value": "yellow"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=goat|value=green|subtype=colour",
+            "to_signature": "attribute|subject=goat|value=yellow|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f002 with one attribute replacement."
+    },
+    {
+      "family_id": "f015",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c015a",
+        "prompts": {
+          "canonical": "Exactly two goats together on a plain background.",
+          "paraphrase_1": "A plain scene showing a pair of goats together.",
+          "paraphrase_2": "Two goats, and not any additional goats, grouped together."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "goat",
+            "value": "goat"
+          },
+          {
+            "type": "count",
+            "subject": "goat",
+            "value": "2"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c015b",
+          "prompts": {
+            "canonical": "Exactly three goats together on a plain background.",
+            "paraphrase_1": "A plain scene showing a group of three goats together.",
+            "paraphrase_2": "Three goats, and not any additional goats, grouped together."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "goat",
+              "value": "goat"
+            },
+            {
+              "type": "count",
+              "subject": "goat",
+              "value": "3"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=goat|value=2",
+            "to_signature": "count|subject=goat|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f003 with one count replacement."
+    },
+    {
+      "family_id": "f016",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c016a",
+        "prompts": {
+          "canonical": "A seal catching a flying ring.",
+          "paraphrase_1": "A ring is in the air as a seal catches it.",
+          "paraphrase_2": "One seal in the act of catching one ring."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "seal",
+            "value": "seal"
+          },
+          {
+            "type": "object",
+            "id": "ring",
+            "value": "ring"
+          },
+          {
+            "type": "action",
+            "subject": "seal",
+            "value": "catch",
+            "object": "ring"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c016b",
+          "prompts": {
+            "canonical": "A seal carrying a ring.",
+            "paraphrase_1": "A seal moves while carrying one ring.",
+            "paraphrase_2": "One seal in the act of carrying one ring."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "seal",
+              "value": "seal"
+            },
+            {
+              "type": "object",
+              "id": "ring",
+              "value": "ring"
+            },
+            {
+              "type": "action",
+              "subject": "seal",
+              "value": "carry",
+              "object": "ring"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=seal|value=catch|object=ring",
+            "to_signature": "action|subject=seal|value=carry|object=ring"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f004 with one action replacement."
+    },
+    {
+      "family_id": "f017",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c017a",
+        "prompts": {
+          "canonical": "A vase positioned to the left of a box.",
+          "paraphrase_1": "A box with a vase clearly placed on its left side.",
+          "paraphrase_2": "The vase is left of the box, with both fully visible."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "vase",
+            "value": "vase"
+          },
+          {
+            "type": "object",
+            "id": "box",
+            "value": "box"
+          },
+          {
+            "type": "relation",
+            "subject": "vase",
+            "value": "left_of",
+            "object": "box"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c017b",
+          "prompts": {
+            "canonical": "A vase positioned to the right of a box.",
+            "paraphrase_1": "A box with a vase clearly placed on its right side.",
+            "paraphrase_2": "The vase is right of the box, with both fully visible."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "vase",
+              "value": "vase"
+            },
+            {
+              "type": "object",
+              "id": "box",
+              "value": "box"
+            },
+            {
+              "type": "relation",
+              "subject": "vase",
+              "value": "right_of",
+              "object": "box"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=vase|value=left_of|object=box",
+            "to_signature": "relation|subject=vase|value=right_of|object=box"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f005 with one relation replacement."
+    },
+    {
+      "family_id": "f018",
+      "complexity_level": 2,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c018a",
+        "prompts": {
+          "canonical": "A kayak at sea in a coastal sunrise scene.",
+          "paraphrase_1": "Sunrise over the coast with one kayak on the water.",
+          "paraphrase_2": "One kayak offshore as the coastal sun rises."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "kayak",
+            "value": "kayak"
+          },
+          {
+            "type": "scene",
+            "value": "coastal_sunrise"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c018b",
+          "prompts": {
+            "canonical": "A kayak at sea in a coastal night scene.",
+            "paraphrase_1": "Night over the coast with one kayak on the water.",
+            "paraphrase_2": "One kayak offshore along the coast at night."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "kayak",
+              "value": "kayak"
+            },
+            {
+              "type": "scene",
+              "value": "coastal_night"
+            }
+          ],
+          "change": {
+            "atom_type": "scene",
+            "from_signature": "scene|value=coastal_sunrise",
+            "to_signature": "scene|value=coastal_night"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f006 with one scene replacement."
+    },
+    {
+      "family_id": "f019",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c019a",
+        "prompts": {
+          "canonical": "A gecko wearing a blue ribbon inside an aquarium.",
+          "paraphrase_1": "Inside an aquarium, an gecko has a blue ribbon around it.",
+          "paraphrase_2": "A blue-ribbon-wearing gecko shown in an aquarium scene."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "gecko",
+            "value": "gecko"
+          },
+          {
+            "type": "object",
+            "id": "ribbon",
+            "value": "ribbon"
+          },
+          {
+            "type": "attribute",
+            "subject": "ribbon",
+            "subtype": "colour",
+            "value": "blue"
+          },
+          {
+            "type": "scene",
+            "value": "aquarium"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c019b",
+          "prompts": {
+            "canonical": "A gecko wearing a red ribbon inside an aquarium.",
+            "paraphrase_1": "Inside an aquarium, an gecko has a red ribbon around it.",
+            "paraphrase_2": "A red-ribbon-wearing gecko shown in an aquarium scene."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "gecko",
+              "value": "gecko"
+            },
+            {
+              "type": "object",
+              "id": "ribbon",
+              "value": "ribbon"
+            },
+            {
+              "type": "attribute",
+              "subject": "ribbon",
+              "subtype": "colour",
+              "value": "red"
+            },
+            {
+              "type": "scene",
+              "value": "aquarium"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=ribbon|value=blue|subtype=colour",
+            "to_signature": "attribute|subject=ribbon|value=red|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f007 with one attribute replacement."
+    },
+    {
+      "family_id": "f020",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c020a",
+        "prompts": {
+          "canonical": "In a forest, a wolf stands between a pole and a bench.",
+          "paraphrase_1": "A wolf in a forest with a pole on one side and a bench on the other.",
+          "paraphrase_2": "The forest wolf is positioned between one pole and one bench."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "wolf",
+            "value": "wolf"
+          },
+          {
+            "type": "object",
+            "id": "pole",
+            "value": "pole"
+          },
+          {
+            "type": "object",
+            "id": "bench",
+            "value": "bench"
+          },
+          {
+            "type": "relation",
+            "subject": "wolf",
+            "value": "between",
+            "object": "pole",
+            "object2": "bench"
+          },
+          {
+            "type": "scene",
+            "value": "forest"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c020b",
+          "prompts": {
+            "canonical": "In a forest, a wolf stands beside a pole, with a bench also visible.",
+            "paraphrase_1": "A wolf beside a pole in a forest while a bench remains visible.",
+            "paraphrase_2": "The forest wolf is positioned beside one pole, and one bench is present."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "wolf",
+              "value": "wolf"
+            },
+            {
+              "type": "object",
+              "id": "pole",
+              "value": "pole"
+            },
+            {
+              "type": "object",
+              "id": "bench",
+              "value": "bench"
+            },
+            {
+              "type": "relation",
+              "subject": "wolf",
+              "value": "beside",
+              "object": "pole"
+            },
+            {
+              "type": "scene",
+              "value": "forest"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=wolf|value=between|object=pole|object2=bench",
+            "to_signature": "relation|subject=wolf|value=beside|object=pole"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f008 with one relation replacement."
+    },
+    {
+      "family_id": "f021",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c021a",
+        "prompts": {
+          "canonical": "Exactly two farmers carrying a suitcase in a warehouse.",
+          "paraphrase_1": "In a warehouse, a pair of farmers carry one suitcase.",
+          "paraphrase_2": "Two farmers, and no additional farmers, carry a suitcase inside a warehouse."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "farmer",
+            "value": "farmer"
+          },
+          {
+            "type": "object",
+            "id": "suitcase",
+            "value": "suitcase"
+          },
+          {
+            "type": "count",
+            "subject": "farmer",
+            "value": "2"
+          },
+          {
+            "type": "action",
+            "subject": "farmer",
+            "value": "carry",
+            "object": "suitcase"
+          },
+          {
+            "type": "scene",
+            "value": "warehouse"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c021b",
+          "prompts": {
+            "canonical": "Exactly three farmers carrying a suitcase in a warehouse.",
+            "paraphrase_1": "In a warehouse, three farmers carry one suitcase.",
+            "paraphrase_2": "Three farmers, and no additional farmers, carry a suitcase inside a warehouse."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "farmer",
+              "value": "farmer"
+            },
+            {
+              "type": "object",
+              "id": "suitcase",
+              "value": "suitcase"
+            },
+            {
+              "type": "count",
+              "subject": "farmer",
+              "value": "3"
+            },
+            {
+              "type": "action",
+              "subject": "farmer",
+              "value": "carry",
+              "object": "suitcase"
+            },
+            {
+              "type": "scene",
+              "value": "warehouse"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=farmer|value=2",
+            "to_signature": "count|subject=farmer|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f009 with one count replacement."
+    },
+    {
+      "family_id": "f022",
+      "complexity_level": 5,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c022a",
+        "prompts": {
+          "canonical": "An artist juggling exactly three yellow balls in a kitchen.",
+          "paraphrase_1": "In a kitchen, one artist juggles three yellow balls.",
+          "paraphrase_2": "A kitchen scene with a artist in the act of juggling exactly three yellow balls."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "artist",
+            "value": "artist"
+          },
+          {
+            "type": "object",
+            "id": "ball",
+            "value": "ball"
+          },
+          {
+            "type": "count",
+            "subject": "ball",
+            "value": "3"
+          },
+          {
+            "type": "attribute",
+            "subject": "ball",
+            "subtype": "colour",
+            "value": "yellow"
+          },
+          {
+            "type": "action",
+            "subject": "artist",
+            "value": "juggle",
+            "object": "ball"
+          },
+          {
+            "type": "scene",
+            "value": "kitchen"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c022b",
+          "prompts": {
+            "canonical": "An artist holding exactly three yellow balls in a kitchen.",
+            "paraphrase_1": "In a kitchen, one artist holds three yellow balls.",
+            "paraphrase_2": "A kitchen scene with a artist in the act of holding exactly three yellow balls."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "artist",
+              "value": "artist"
+            },
+            {
+              "type": "object",
+              "id": "ball",
+              "value": "ball"
+            },
+            {
+              "type": "count",
+              "subject": "ball",
+              "value": "3"
+            },
+            {
+              "type": "attribute",
+              "subject": "ball",
+              "subtype": "colour",
+              "value": "yellow"
+            },
+            {
+              "type": "action",
+              "subject": "artist",
+              "value": "hold",
+              "object": "ball"
+            },
+            {
+              "type": "scene",
+              "value": "kitchen"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=artist|value=juggle|object=ball",
+            "to_signature": "action|subject=artist|value=hold|object=ball"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f010 with one action replacement."
+    },
+    {
+      "family_id": "f023",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c023a",
+        "prompts": {
+          "canonical": "A paper jar beside a box in a library.",
+          "paraphrase_1": "Inside a library, a jar made of paper sits beside one box.",
+          "paraphrase_2": "A library scene showing one paper jar next to a box."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "jar",
+            "value": "jar"
+          },
+          {
+            "type": "object",
+            "id": "box",
+            "value": "box"
+          },
+          {
+            "type": "attribute",
+            "subject": "jar",
+            "subtype": "material",
+            "value": "paper"
+          },
+          {
+            "type": "relation",
+            "subject": "jar",
+            "value": "beside",
+            "object": "box"
+          },
+          {
+            "type": "scene",
+            "value": "library"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c023b",
+          "prompts": {
+            "canonical": "A wood jar beside a box in a library.",
+            "paraphrase_1": "Inside a library, a jar made of wood sits beside one box.",
+            "paraphrase_2": "A library scene showing one wood jar next to a box."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "jar",
+              "value": "jar"
+            },
+            {
+              "type": "object",
+              "id": "box",
+              "value": "box"
+            },
+            {
+              "type": "attribute",
+              "subject": "jar",
+              "subtype": "material",
+              "value": "wood"
+            },
+            {
+              "type": "relation",
+              "subject": "jar",
+              "value": "beside",
+              "object": "box"
+            },
+            {
+              "type": "scene",
+              "value": "library"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=jar|value=paper|subtype=material",
+            "to_signature": "attribute|subject=jar|value=wood|subtype=material"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f011 with one attribute replacement."
+    },
+    {
+      "family_id": "f024",
+      "complexity_level": 5,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c024a",
+        "prompts": {
+          "canonical": "A green parrot above a mirror, watching the mirror in a lunar scene.",
+          "paraphrase_1": "In a lunar scene, a green parrot watches a mirror from above it.",
+          "paraphrase_2": "A green parrot positioned over a mirror while watching it, with a lunar setting."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "parrot",
+            "value": "parrot"
+          },
+          {
+            "type": "object",
+            "id": "mirror",
+            "value": "mirror"
+          },
+          {
+            "type": "attribute",
+            "subject": "parrot",
+            "subtype": "colour",
+            "value": "green"
+          },
+          {
+            "type": "relation",
+            "subject": "parrot",
+            "value": "above",
+            "object": "mirror"
+          },
+          {
+            "type": "action",
+            "subject": "parrot",
+            "value": "watch",
+            "object": "mirror"
+          },
+          {
+            "type": "scene",
+            "value": "lunar"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c024b",
+          "prompts": {
+            "canonical": "A green parrot below a mirror, watching the mirror in a lunar scene.",
+            "paraphrase_1": "In a lunar scene, a green parrot watches a mirror from below it.",
+            "paraphrase_2": "A green parrot positioned under a mirror while watching it, with a lunar setting."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "parrot",
+              "value": "parrot"
+            },
+            {
+              "type": "object",
+              "id": "mirror",
+              "value": "mirror"
+            },
+            {
+              "type": "attribute",
+              "subject": "parrot",
+              "subtype": "colour",
+              "value": "green"
+            },
+            {
+              "type": "relation",
+              "subject": "parrot",
+              "value": "below",
+              "object": "mirror"
+            },
+            {
+              "type": "action",
+              "subject": "parrot",
+              "value": "watch",
+              "object": "mirror"
+            },
+            {
+              "type": "scene",
+              "value": "lunar"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=parrot|value=above|object=mirror",
+            "to_signature": "relation|subject=parrot|value=below|object=mirror"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 2; transformed audited template f012 with one relation replacement."
+    },
+    {
+      "family_id": "f025",
+      "complexity_level": 1,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c025a",
+        "prompts": {
+          "canonical": "A single wagon on a plain neutral background.",
+          "paraphrase_1": "One wagon shown alone against a neutral background.",
+          "paraphrase_2": "A neutral scene containing exactly one wagon and nothing else prominent."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "wagon",
+            "value": "wagon"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c025b",
+          "prompts": {
+            "canonical": "A single tractor on a plain neutral background.",
+            "paraphrase_1": "One tractor shown alone against a neutral background.",
+            "paraphrase_2": "A neutral scene containing exactly one tractor and nothing else prominent."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "tractor",
+              "value": "tractor"
+            }
+          ],
+          "change": {
+            "atom_type": "object",
+            "from_signature": "object|id=wagon|value=wagon",
+            "to_signature": "object|id=tractor|value=tractor"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f001 with one object replacement."
+    },
+    {
+      "family_id": "f026",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c026a",
+        "prompts": {
+          "canonical": "A panda wearing a purple blanket.",
+          "paraphrase_1": "A purple blanket is wrapped around a panda.",
+          "paraphrase_2": "One panda with a clearly visible purple blanket."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "panda",
+            "value": "panda"
+          },
+          {
+            "type": "attribute",
+            "subject": "panda",
+            "subtype": "colour",
+            "value": "purple"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c026b",
+          "prompts": {
+            "canonical": "A panda wearing a orange blanket.",
+            "paraphrase_1": "An orange blanket is wrapped around a panda.",
+            "paraphrase_2": "One panda with a clearly visible orange blanket."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "panda",
+              "value": "panda"
+            },
+            {
+              "type": "attribute",
+              "subject": "panda",
+              "subtype": "colour",
+              "value": "orange"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=panda|value=purple|subtype=colour",
+            "to_signature": "attribute|subject=panda|value=orange|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f002 with one attribute replacement."
+    },
+    {
+      "family_id": "f027",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c027a",
+        "prompts": {
+          "canonical": "Exactly two pandas together on a plain background.",
+          "paraphrase_1": "A plain scene showing a pair of pandas together.",
+          "paraphrase_2": "Two pandas, and not any additional pandas, grouped together."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "panda",
+            "value": "panda"
+          },
+          {
+            "type": "count",
+            "subject": "panda",
+            "value": "2"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c027b",
+          "prompts": {
+            "canonical": "Exactly three pandas together on a plain background.",
+            "paraphrase_1": "A plain scene showing a group of three pandas together.",
+            "paraphrase_2": "Three pandas, and not any additional pandas, grouped together."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "panda",
+              "value": "panda"
+            },
+            {
+              "type": "count",
+              "subject": "panda",
+              "value": "3"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=panda|value=2",
+            "to_signature": "count|subject=panda|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f003 with one count replacement."
+    },
+    {
+      "family_id": "f028",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c028a",
+        "prompts": {
+          "canonical": "An otter catching a flying rope.",
+          "paraphrase_1": "A rope is in the air as a otter catches it.",
+          "paraphrase_2": "One otter in the act of catching one rope."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "otter",
+            "value": "otter"
+          },
+          {
+            "type": "object",
+            "id": "rope",
+            "value": "rope"
+          },
+          {
+            "type": "action",
+            "subject": "otter",
+            "value": "catch",
+            "object": "rope"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c028b",
+          "prompts": {
+            "canonical": "An otter carrying a rope.",
+            "paraphrase_1": "An otter moves while carrying one rope.",
+            "paraphrase_2": "One otter in the act of carrying one rope."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "otter",
+              "value": "otter"
+            },
+            {
+              "type": "object",
+              "id": "rope",
+              "value": "rope"
+            },
+            {
+              "type": "action",
+              "subject": "otter",
+              "value": "carry",
+              "object": "rope"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=otter|value=catch|object=rope",
+            "to_signature": "action|subject=otter|value=carry|object=rope"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f004 with one action replacement."
+    },
+    {
+      "family_id": "f029",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c029a",
+        "prompts": {
+          "canonical": "A bottle positioned to the left of a clock.",
+          "paraphrase_1": "A clock with a bottle clearly placed on its left side.",
+          "paraphrase_2": "The bottle is left of the clock, with both fully visible."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "bottle",
+            "value": "bottle"
+          },
+          {
+            "type": "object",
+            "id": "clock",
+            "value": "clock"
+          },
+          {
+            "type": "relation",
+            "subject": "bottle",
+            "value": "left_of",
+            "object": "clock"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c029b",
+          "prompts": {
+            "canonical": "A bottle positioned to the right of a clock.",
+            "paraphrase_1": "A clock with a bottle clearly placed on its right side.",
+            "paraphrase_2": "The bottle is right of the clock, with both fully visible."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "bottle",
+              "value": "bottle"
+            },
+            {
+              "type": "object",
+              "id": "clock",
+              "value": "clock"
+            },
+            {
+              "type": "relation",
+              "subject": "bottle",
+              "value": "right_of",
+              "object": "clock"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=bottle|value=left_of|object=clock",
+            "to_signature": "relation|subject=bottle|value=right_of|object=clock"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f005 with one relation replacement."
+    },
+    {
+      "family_id": "f030",
+      "complexity_level": 2,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c030a",
+        "prompts": {
+          "canonical": "A raft at sea in a coastal sunrise scene.",
+          "paraphrase_1": "Sunrise over the coast with one raft on the water.",
+          "paraphrase_2": "One raft offshore as the coastal sun rises."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "raft",
+            "value": "raft"
+          },
+          {
+            "type": "scene",
+            "value": "coastal_sunrise"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c030b",
+          "prompts": {
+            "canonical": "A raft at sea in a coastal night scene.",
+            "paraphrase_1": "Night over the coast with one raft on the water.",
+            "paraphrase_2": "One raft offshore along the coast at night."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "raft",
+              "value": "raft"
+            },
+            {
+              "type": "scene",
+              "value": "coastal_night"
+            }
+          ],
+          "change": {
+            "atom_type": "scene",
+            "from_signature": "scene|value=coastal_sunrise",
+            "to_signature": "scene|value=coastal_night"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f006 with one scene replacement."
+    },
+    {
+      "family_id": "f031",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c031a",
+        "prompts": {
+          "canonical": "An iguana wearing a white blanket inside an aquarium.",
+          "paraphrase_1": "Inside an aquarium, an iguana has a white blanket around it.",
+          "paraphrase_2": "A white-blanket-wearing iguana shown in an aquarium scene."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "iguana",
+            "value": "iguana"
+          },
+          {
+            "type": "object",
+            "id": "blanket",
+            "value": "blanket"
+          },
+          {
+            "type": "attribute",
+            "subject": "blanket",
+            "subtype": "colour",
+            "value": "white"
+          },
+          {
+            "type": "scene",
+            "value": "aquarium"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c031b",
+          "prompts": {
+            "canonical": "An iguana wearing a gray blanket inside an aquarium.",
+            "paraphrase_1": "Inside an aquarium, an iguana has a gray blanket around it.",
+            "paraphrase_2": "A gray-blanket-wearing iguana shown in an aquarium scene."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "iguana",
+              "value": "iguana"
+            },
+            {
+              "type": "object",
+              "id": "blanket",
+              "value": "blanket"
+            },
+            {
+              "type": "attribute",
+              "subject": "blanket",
+              "subtype": "colour",
+              "value": "gray"
+            },
+            {
+              "type": "scene",
+              "value": "aquarium"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=blanket|value=white|subtype=colour",
+            "to_signature": "attribute|subject=blanket|value=gray|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f007 with one attribute replacement."
+    },
+    {
+      "family_id": "f032",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c032a",
+        "prompts": {
+          "canonical": "In a forest, a badger stands between a cactus and a crate.",
+          "paraphrase_1": "A badger in a forest with a cactus on one side and a crate on the other.",
+          "paraphrase_2": "The forest badger is positioned between one cactus and one crate."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "badger",
+            "value": "badger"
+          },
+          {
+            "type": "object",
+            "id": "cactus",
+            "value": "cactus"
+          },
+          {
+            "type": "object",
+            "id": "crate",
+            "value": "crate"
+          },
+          {
+            "type": "relation",
+            "subject": "badger",
+            "value": "between",
+            "object": "cactus",
+            "object2": "crate"
+          },
+          {
+            "type": "scene",
+            "value": "forest"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c032b",
+          "prompts": {
+            "canonical": "In a forest, a badger stands beside a cactus, with a crate also visible.",
+            "paraphrase_1": "A badger beside a cactus in a forest while a crate remains visible.",
+            "paraphrase_2": "The forest badger is positioned beside one cactus, and one crate is present."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "badger",
+              "value": "badger"
+            },
+            {
+              "type": "object",
+              "id": "cactus",
+              "value": "cactus"
+            },
+            {
+              "type": "object",
+              "id": "crate",
+              "value": "crate"
+            },
+            {
+              "type": "relation",
+              "subject": "badger",
+              "value": "beside",
+              "object": "cactus"
+            },
+            {
+              "type": "scene",
+              "value": "forest"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=badger|value=between|object=cactus|object2=crate",
+            "to_signature": "relation|subject=badger|value=beside|object=cactus"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f008 with one relation replacement."
+    },
+    {
+      "family_id": "f033",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c033a",
+        "prompts": {
+          "canonical": "Exactly two doctors carrying a crate in a warehouse.",
+          "paraphrase_1": "In a warehouse, a pair of doctors carry one crate.",
+          "paraphrase_2": "Two doctors, and no additional doctors, carry a crate inside a warehouse."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "doctor",
+            "value": "doctor"
+          },
+          {
+            "type": "object",
+            "id": "crate",
+            "value": "crate"
+          },
+          {
+            "type": "count",
+            "subject": "doctor",
+            "value": "2"
+          },
+          {
+            "type": "action",
+            "subject": "doctor",
+            "value": "carry",
+            "object": "crate"
+          },
+          {
+            "type": "scene",
+            "value": "warehouse"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c033b",
+          "prompts": {
+            "canonical": "Exactly three doctors carrying a crate in a warehouse.",
+            "paraphrase_1": "In a warehouse, three doctors carry one crate.",
+            "paraphrase_2": "Three doctors, and no additional doctors, carry a crate inside a warehouse."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "doctor",
+              "value": "doctor"
+            },
+            {
+              "type": "object",
+              "id": "crate",
+              "value": "crate"
+            },
+            {
+              "type": "count",
+              "subject": "doctor",
+              "value": "3"
+            },
+            {
+              "type": "action",
+              "subject": "doctor",
+              "value": "carry",
+              "object": "crate"
+            },
+            {
+              "type": "scene",
+              "value": "warehouse"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=doctor|value=2",
+            "to_signature": "count|subject=doctor|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f009 with one count replacement."
+    },
+    {
+      "family_id": "f034",
+      "complexity_level": 5,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c034a",
+        "prompts": {
+          "canonical": "A child juggling exactly three orange plates in a kitchen.",
+          "paraphrase_1": "In a kitchen, one child juggles three orange plates.",
+          "paraphrase_2": "A kitchen scene with a child in the act of juggling exactly three orange plates."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "child",
+            "value": "child"
+          },
+          {
+            "type": "object",
+            "id": "plate",
+            "value": "plate"
+          },
+          {
+            "type": "count",
+            "subject": "plate",
+            "value": "3"
+          },
+          {
+            "type": "attribute",
+            "subject": "plate",
+            "subtype": "colour",
+            "value": "orange"
+          },
+          {
+            "type": "action",
+            "subject": "child",
+            "value": "juggle",
+            "object": "plate"
+          },
+          {
+            "type": "scene",
+            "value": "kitchen"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c034b",
+          "prompts": {
+            "canonical": "A child holding exactly three orange plates in a kitchen.",
+            "paraphrase_1": "In a kitchen, one child holds three orange plates.",
+            "paraphrase_2": "A kitchen scene with a child in the act of holding exactly three orange plates."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "child",
+              "value": "child"
+            },
+            {
+              "type": "object",
+              "id": "plate",
+              "value": "plate"
+            },
+            {
+              "type": "count",
+              "subject": "plate",
+              "value": "3"
+            },
+            {
+              "type": "attribute",
+              "subject": "plate",
+              "subtype": "colour",
+              "value": "orange"
+            },
+            {
+              "type": "action",
+              "subject": "child",
+              "value": "hold",
+              "object": "plate"
+            },
+            {
+              "type": "scene",
+              "value": "kitchen"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=child|value=juggle|object=plate",
+            "to_signature": "action|subject=child|value=hold|object=plate"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f010 with one action replacement."
+    },
+    {
+      "family_id": "f035",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c035a",
+        "prompts": {
+          "canonical": "A wooden pitcher beside a clock in a library.",
+          "paraphrase_1": "Inside a library, a pitcher made of wooden sits beside one clock.",
+          "paraphrase_2": "A library scene showing one wooden pitcher next to a clock."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "pitcher",
+            "value": "pitcher"
+          },
+          {
+            "type": "object",
+            "id": "clock",
+            "value": "clock"
+          },
+          {
+            "type": "attribute",
+            "subject": "pitcher",
+            "subtype": "material",
+            "value": "wooden"
+          },
+          {
+            "type": "relation",
+            "subject": "pitcher",
+            "value": "beside",
+            "object": "clock"
+          },
+          {
+            "type": "scene",
+            "value": "library"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c035b",
+          "prompts": {
+            "canonical": "A paper pitcher beside a clock in a library.",
+            "paraphrase_1": "Inside a library, a pitcher made of paper sits beside one clock.",
+            "paraphrase_2": "A library scene showing one paper pitcher next to a clock."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "pitcher",
+              "value": "pitcher"
+            },
+            {
+              "type": "object",
+              "id": "clock",
+              "value": "clock"
+            },
+            {
+              "type": "attribute",
+              "subject": "pitcher",
+              "subtype": "material",
+              "value": "paper"
+            },
+            {
+              "type": "relation",
+              "subject": "pitcher",
+              "value": "beside",
+              "object": "clock"
+            },
+            {
+              "type": "scene",
+              "value": "library"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=pitcher|value=wooden|subtype=material",
+            "to_signature": "attribute|subject=pitcher|value=paper|subtype=material"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f011 with one attribute replacement."
+    },
+    {
+      "family_id": "f036",
+      "complexity_level": 5,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c036a",
+        "prompts": {
+          "canonical": "A yellow raven above a window, watching the window in a lunar scene.",
+          "paraphrase_1": "In a lunar scene, a yellow raven watches a window from above it.",
+          "paraphrase_2": "A yellow raven positioned over a window while watching it, with a lunar setting."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "raven",
+            "value": "raven"
+          },
+          {
+            "type": "object",
+            "id": "window",
+            "value": "window"
+          },
+          {
+            "type": "attribute",
+            "subject": "raven",
+            "subtype": "colour",
+            "value": "yellow"
+          },
+          {
+            "type": "relation",
+            "subject": "raven",
+            "value": "above",
+            "object": "window"
+          },
+          {
+            "type": "action",
+            "subject": "raven",
+            "value": "watch",
+            "object": "window"
+          },
+          {
+            "type": "scene",
+            "value": "lunar"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c036b",
+          "prompts": {
+            "canonical": "A yellow raven below a window, watching the window in a lunar scene.",
+            "paraphrase_1": "In a lunar scene, a yellow raven watches a window from below it.",
+            "paraphrase_2": "A yellow raven positioned under a window while watching it, with a lunar setting."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "raven",
+              "value": "raven"
+            },
+            {
+              "type": "object",
+              "id": "window",
+              "value": "window"
+            },
+            {
+              "type": "attribute",
+              "subject": "raven",
+              "subtype": "colour",
+              "value": "yellow"
+            },
+            {
+              "type": "relation",
+              "subject": "raven",
+              "value": "below",
+              "object": "window"
+            },
+            {
+              "type": "action",
+              "subject": "raven",
+              "value": "watch",
+              "object": "window"
+            },
+            {
+              "type": "scene",
+              "value": "lunar"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=raven|value=above|object=window",
+            "to_signature": "relation|subject=raven|value=below|object=window"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 3; transformed audited template f012 with one relation replacement."
+    },
+    {
+      "family_id": "f037",
+      "complexity_level": 1,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c037a",
+        "prompts": {
+          "canonical": "A single skateboard on a plain neutral background.",
+          "paraphrase_1": "One skateboard shown alone against a neutral background.",
+          "paraphrase_2": "A neutral scene containing exactly one skateboard and nothing else prominent."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "skateboard",
+            "value": "skateboard"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c037b",
+          "prompts": {
+            "canonical": "A single canoe on a plain neutral background.",
+            "paraphrase_1": "One canoe shown alone against a neutral background.",
+            "paraphrase_2": "A neutral scene containing exactly one canoe and nothing else prominent."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "canoe",
+              "value": "canoe"
+            }
+          ],
+          "change": {
+            "atom_type": "object",
+            "from_signature": "object|id=skateboard|value=skateboard",
+            "to_signature": "object|id=canoe|value=canoe"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f001 with one object replacement."
+    },
+    {
+      "family_id": "f038",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c038a",
+        "prompts": {
+          "canonical": "A tiger wearing a brown cape.",
+          "paraphrase_1": "A brown cape is wrapped around a tiger.",
+          "paraphrase_2": "One tiger with a clearly visible brown cape."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "tiger",
+            "value": "tiger"
+          },
+          {
+            "type": "attribute",
+            "subject": "tiger",
+            "subtype": "colour",
+            "value": "brown"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c038b",
+          "prompts": {
+            "canonical": "A tiger wearing a gray cape.",
+            "paraphrase_1": "A gray cape is wrapped around a tiger.",
+            "paraphrase_2": "One tiger with a clearly visible gray cape."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "tiger",
+              "value": "tiger"
+            },
+            {
+              "type": "attribute",
+              "subject": "tiger",
+              "subtype": "colour",
+              "value": "gray"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=tiger|value=brown|subtype=colour",
+            "to_signature": "attribute|subject=tiger|value=gray|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f002 with one attribute replacement."
+    },
+    {
+      "family_id": "f039",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c039a",
+        "prompts": {
+          "canonical": "Exactly two tigers together on a plain background.",
+          "paraphrase_1": "A plain scene showing a pair of tigers together.",
+          "paraphrase_2": "Two tigers, and not any additional tigers, grouped together."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "tiger",
+            "value": "tiger"
+          },
+          {
+            "type": "count",
+            "subject": "tiger",
+            "value": "2"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c039b",
+          "prompts": {
+            "canonical": "Exactly three tigers together on a plain background.",
+            "paraphrase_1": "A plain scene showing a group of three tigers together.",
+            "paraphrase_2": "Three tigers, and not any additional tigers, grouped together."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "tiger",
+              "value": "tiger"
+            },
+            {
+              "type": "count",
+              "subject": "tiger",
+              "value": "3"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=tiger|value=2",
+            "to_signature": "count|subject=tiger|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f003 with one count replacement."
+    },
+    {
+      "family_id": "f040",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c040a",
+        "prompts": {
+          "canonical": "A monkey catching a flying stick.",
+          "paraphrase_1": "A stick is in the air as a monkey catches it.",
+          "paraphrase_2": "One monkey in the act of catching one stick."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "monkey",
+            "value": "monkey"
+          },
+          {
+            "type": "object",
+            "id": "stick",
+            "value": "stick"
+          },
+          {
+            "type": "action",
+            "subject": "monkey",
+            "value": "catch",
+            "object": "stick"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c040b",
+          "prompts": {
+            "canonical": "A monkey carrying a stick.",
+            "paraphrase_1": "A monkey moves while carrying one stick.",
+            "paraphrase_2": "One monkey in the act of carrying one stick."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "monkey",
+              "value": "monkey"
+            },
+            {
+              "type": "object",
+              "id": "stick",
+              "value": "stick"
+            },
+            {
+              "type": "action",
+              "subject": "monkey",
+              "value": "carry",
+              "object": "stick"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=monkey|value=catch|object=stick",
+            "to_signature": "action|subject=monkey|value=carry|object=stick"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f004 with one action replacement."
+    },
+    {
+      "family_id": "f041",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c041a",
+        "prompts": {
+          "canonical": "A basket positioned to the left of a lantern.",
+          "paraphrase_1": "A lantern with a basket clearly placed on its left side.",
+          "paraphrase_2": "The basket is left of the lantern, with both fully visible."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "basket",
+            "value": "basket"
+          },
+          {
+            "type": "object",
+            "id": "lantern",
+            "value": "lantern"
+          },
+          {
+            "type": "relation",
+            "subject": "basket",
+            "value": "left_of",
+            "object": "lantern"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c041b",
+          "prompts": {
+            "canonical": "A basket positioned to the right of a lantern.",
+            "paraphrase_1": "A lantern with a basket clearly placed on its right side.",
+            "paraphrase_2": "The basket is right of the lantern, with both fully visible."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "basket",
+              "value": "basket"
+            },
+            {
+              "type": "object",
+              "id": "lantern",
+              "value": "lantern"
+            },
+            {
+              "type": "relation",
+              "subject": "basket",
+              "value": "right_of",
+              "object": "lantern"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=basket|value=left_of|object=lantern",
+            "to_signature": "relation|subject=basket|value=right_of|object=lantern"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f005 with one relation replacement."
+    },
+    {
+      "family_id": "f042",
+      "complexity_level": 2,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c042a",
+        "prompts": {
+          "canonical": "A ship at sea in a coastal sunrise scene.",
+          "paraphrase_1": "Sunrise over the coast with one ship on the water.",
+          "paraphrase_2": "One ship offshore as the coastal sun rises."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "ship",
+            "value": "ship"
+          },
+          {
+            "type": "scene",
+            "value": "coastal_sunrise"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c042b",
+          "prompts": {
+            "canonical": "A ship at sea in a coastal night scene.",
+            "paraphrase_1": "Night over the coast with one ship on the water.",
+            "paraphrase_2": "One ship offshore along the coast at night."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "ship",
+              "value": "ship"
+            },
+            {
+              "type": "scene",
+              "value": "coastal_night"
+            }
+          ],
+          "change": {
+            "atom_type": "scene",
+            "from_signature": "scene|value=coastal_sunrise",
+            "to_signature": "scene|value=coastal_night"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f006 with one scene replacement."
+    },
+    {
+      "family_id": "f043",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c043a",
+        "prompts": {
+          "canonical": "A salamander wearing a purple cape inside an aquarium.",
+          "paraphrase_1": "Inside an aquarium, an salamander has a purple cape around it.",
+          "paraphrase_2": "A purple-cape-wearing salamander shown in an aquarium scene."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "salamander",
+            "value": "salamander"
+          },
+          {
+            "type": "object",
+            "id": "cape",
+            "value": "cape"
+          },
+          {
+            "type": "attribute",
+            "subject": "cape",
+            "subtype": "colour",
+            "value": "purple"
+          },
+          {
+            "type": "scene",
+            "value": "aquarium"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c043b",
+          "prompts": {
+            "canonical": "A salamander wearing a orange cape inside an aquarium.",
+            "paraphrase_1": "Inside an aquarium, an salamander has a orange cape around it.",
+            "paraphrase_2": "An orange-cape-wearing salamander shown in an aquarium scene."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "salamander",
+              "value": "salamander"
+            },
+            {
+              "type": "object",
+              "id": "cape",
+              "value": "cape"
+            },
+            {
+              "type": "attribute",
+              "subject": "cape",
+              "subtype": "colour",
+              "value": "orange"
+            },
+            {
+              "type": "scene",
+              "value": "aquarium"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=cape|value=purple|subtype=colour",
+            "to_signature": "attribute|subject=cape|value=orange|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f007 with one attribute replacement."
+    },
+    {
+      "family_id": "f044",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c044a",
+        "prompts": {
+          "canonical": "In a forest, a raccoon stands between a statue and a rock.",
+          "paraphrase_1": "A raccoon in a forest with a statue on one side and a rock on the other.",
+          "paraphrase_2": "The forest raccoon is positioned between one statue and one rock."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "raccoon",
+            "value": "raccoon"
+          },
+          {
+            "type": "object",
+            "id": "statue",
+            "value": "statue"
+          },
+          {
+            "type": "object",
+            "id": "rock",
+            "value": "rock"
+          },
+          {
+            "type": "relation",
+            "subject": "raccoon",
+            "value": "between",
+            "object": "statue",
+            "object2": "rock"
+          },
+          {
+            "type": "scene",
+            "value": "forest"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c044b",
+          "prompts": {
+            "canonical": "In a forest, a raccoon stands beside a statue, with a rock also visible.",
+            "paraphrase_1": "A raccoon beside a statue in a forest while a rock remains visible.",
+            "paraphrase_2": "The forest raccoon is positioned beside one statue, and one rock is present."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "raccoon",
+              "value": "raccoon"
+            },
+            {
+              "type": "object",
+              "id": "statue",
+              "value": "statue"
+            },
+            {
+              "type": "object",
+              "id": "rock",
+              "value": "rock"
+            },
+            {
+              "type": "relation",
+              "subject": "raccoon",
+              "value": "beside",
+              "object": "statue"
+            },
+            {
+              "type": "scene",
+              "value": "forest"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=raccoon|value=between|object=statue|object2=rock",
+            "to_signature": "relation|subject=raccoon|value=beside|object=statue"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f008 with one relation replacement."
+    },
+    {
+      "family_id": "f045",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c045a",
+        "prompts": {
+          "canonical": "Exactly two pilots carrying a chest in a warehouse.",
+          "paraphrase_1": "In a warehouse, a pair of pilots carry one chest.",
+          "paraphrase_2": "Two pilots, and no additional pilots, carry a chest inside a warehouse."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "pilot",
+            "value": "pilot"
+          },
+          {
+            "type": "object",
+            "id": "chest",
+            "value": "chest"
+          },
+          {
+            "type": "count",
+            "subject": "pilot",
+            "value": "2"
+          },
+          {
+            "type": "action",
+            "subject": "pilot",
+            "value": "carry",
+            "object": "chest"
+          },
+          {
+            "type": "scene",
+            "value": "warehouse"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c045b",
+          "prompts": {
+            "canonical": "Exactly three pilots carrying a chest in a warehouse.",
+            "paraphrase_1": "In a warehouse, three pilots carry one chest.",
+            "paraphrase_2": "Three pilots, and no additional pilots, carry a chest inside a warehouse."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "pilot",
+              "value": "pilot"
+            },
+            {
+              "type": "object",
+              "id": "chest",
+              "value": "chest"
+            },
+            {
+              "type": "count",
+              "subject": "pilot",
+              "value": "3"
+            },
+            {
+              "type": "action",
+              "subject": "pilot",
+              "value": "carry",
+              "object": "chest"
+            },
+            {
+              "type": "scene",
+              "value": "warehouse"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=pilot|value=2",
+            "to_signature": "count|subject=pilot|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f009 with one count replacement."
+    },
+    {
+      "family_id": "f046",
+      "complexity_level": 5,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c046a",
+        "prompts": {
+          "canonical": "A person juggling exactly three white bottles in a kitchen.",
+          "paraphrase_1": "In a kitchen, one person juggles three white bottles.",
+          "paraphrase_2": "A kitchen scene with a person in the act of juggling exactly three white bottles."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "person",
+            "value": "person"
+          },
+          {
+            "type": "object",
+            "id": "bottle",
+            "value": "bottle"
+          },
+          {
+            "type": "count",
+            "subject": "bottle",
+            "value": "3"
+          },
+          {
+            "type": "attribute",
+            "subject": "bottle",
+            "subtype": "colour",
+            "value": "white"
+          },
+          {
+            "type": "action",
+            "subject": "person",
+            "value": "juggle",
+            "object": "bottle"
+          },
+          {
+            "type": "scene",
+            "value": "kitchen"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c046b",
+          "prompts": {
+            "canonical": "A person holding exactly three white bottles in a kitchen.",
+            "paraphrase_1": "In a kitchen, one person holds three white bottles.",
+            "paraphrase_2": "A kitchen scene with a person in the act of holding exactly three white bottles."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "person",
+              "value": "person"
+            },
+            {
+              "type": "object",
+              "id": "bottle",
+              "value": "bottle"
+            },
+            {
+              "type": "count",
+              "subject": "bottle",
+              "value": "3"
+            },
+            {
+              "type": "attribute",
+              "subject": "bottle",
+              "subtype": "colour",
+              "value": "white"
+            },
+            {
+              "type": "action",
+              "subject": "person",
+              "value": "hold",
+              "object": "bottle"
+            },
+            {
+              "type": "scene",
+              "value": "kitchen"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=person|value=juggle|object=bottle",
+            "to_signature": "action|subject=person|value=hold|object=bottle"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f010 with one action replacement."
+    },
+    {
+      "family_id": "f047",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c047a",
+        "prompts": {
+          "canonical": "A wood cup beside a lantern in a library.",
+          "paraphrase_1": "Inside a library, a cup made of wood sits beside one lantern.",
+          "paraphrase_2": "A library scene showing one wood cup next to a lantern."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "cup",
+            "value": "cup"
+          },
+          {
+            "type": "object",
+            "id": "lantern",
+            "value": "lantern"
+          },
+          {
+            "type": "attribute",
+            "subject": "cup",
+            "subtype": "material",
+            "value": "wood"
+          },
+          {
+            "type": "relation",
+            "subject": "cup",
+            "value": "beside",
+            "object": "lantern"
+          },
+          {
+            "type": "scene",
+            "value": "library"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c047b",
+          "prompts": {
+            "canonical": "A metal cup beside a lantern in a library.",
+            "paraphrase_1": "Inside a library, a cup made of metal sits beside one lantern.",
+            "paraphrase_2": "A library scene showing one metal cup next to a lantern."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "cup",
+              "value": "cup"
+            },
+            {
+              "type": "object",
+              "id": "lantern",
+              "value": "lantern"
+            },
+            {
+              "type": "attribute",
+              "subject": "cup",
+              "subtype": "material",
+              "value": "metal"
+            },
+            {
+              "type": "relation",
+              "subject": "cup",
+              "value": "beside",
+              "object": "lantern"
+            },
+            {
+              "type": "scene",
+              "value": "library"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=cup|value=wood|subtype=material",
+            "to_signature": "attribute|subject=cup|value=metal|subtype=material"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f011 with one attribute replacement."
+    },
+    {
+      "family_id": "f048",
+      "complexity_level": 5,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c048a",
+        "prompts": {
+          "canonical": "A gray falcon above a bell, watching the bell in a lunar scene.",
+          "paraphrase_1": "In a lunar scene, a gray falcon watches a bell from above it.",
+          "paraphrase_2": "A gray falcon positioned over a bell while watching it, with a lunar setting."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "falcon",
+            "value": "falcon"
+          },
+          {
+            "type": "object",
+            "id": "bell",
+            "value": "bell"
+          },
+          {
+            "type": "attribute",
+            "subject": "falcon",
+            "subtype": "colour",
+            "value": "gray"
+          },
+          {
+            "type": "relation",
+            "subject": "falcon",
+            "value": "above",
+            "object": "bell"
+          },
+          {
+            "type": "action",
+            "subject": "falcon",
+            "value": "watch",
+            "object": "bell"
+          },
+          {
+            "type": "scene",
+            "value": "lunar"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c048b",
+          "prompts": {
+            "canonical": "A gray falcon below a bell, watching the bell in a lunar scene.",
+            "paraphrase_1": "In a lunar scene, a gray falcon watches a bell from below it.",
+            "paraphrase_2": "A gray falcon positioned under a bell while watching it, with a lunar setting."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "falcon",
+              "value": "falcon"
+            },
+            {
+              "type": "object",
+              "id": "bell",
+              "value": "bell"
+            },
+            {
+              "type": "attribute",
+              "subject": "falcon",
+              "subtype": "colour",
+              "value": "gray"
+            },
+            {
+              "type": "relation",
+              "subject": "falcon",
+              "value": "below",
+              "object": "bell"
+            },
+            {
+              "type": "action",
+              "subject": "falcon",
+              "value": "watch",
+              "object": "bell"
+            },
+            {
+              "type": "scene",
+              "value": "lunar"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=falcon|value=above|object=bell",
+            "to_signature": "relation|subject=falcon|value=below|object=bell"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 4; transformed audited template f012 with one relation replacement."
+    },
+    {
+      "family_id": "f049",
+      "complexity_level": 1,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c049a",
+        "prompts": {
+          "canonical": "A single wheelbarrow on a plain neutral background.",
+          "paraphrase_1": "One wheelbarrow shown alone against a neutral background.",
+          "paraphrase_2": "A neutral scene containing exactly one wheelbarrow and nothing else prominent."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "wheelbarrow",
+            "value": "wheelbarrow"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c049b",
+          "prompts": {
+            "canonical": "A single sled on a plain neutral background.",
+            "paraphrase_1": "One sled shown alone against a neutral background.",
+            "paraphrase_2": "A neutral scene containing exactly one sled and nothing else prominent."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "sled",
+              "value": "sled"
+            }
+          ],
+          "change": {
+            "atom_type": "object",
+            "from_signature": "object|id=wheelbarrow|value=wheelbarrow",
+            "to_signature": "object|id=sled|value=sled"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f001 with one object replacement."
+    },
+    {
+      "family_id": "f050",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c050a",
+        "prompts": {
+          "canonical": "A horse wearing a yellow vest.",
+          "paraphrase_1": "A yellow vest is wrapped around a horse.",
+          "paraphrase_2": "One horse with a clearly visible yellow vest."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "horse",
+            "value": "horse"
+          },
+          {
+            "type": "attribute",
+            "subject": "horse",
+            "subtype": "colour",
+            "value": "yellow"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c050b",
+          "prompts": {
+            "canonical": "A horse wearing a red vest.",
+            "paraphrase_1": "A red vest is wrapped around a horse.",
+            "paraphrase_2": "One horse with a clearly visible red vest."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "horse",
+              "value": "horse"
+            },
+            {
+              "type": "attribute",
+              "subject": "horse",
+              "subtype": "colour",
+              "value": "red"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=horse|value=yellow|subtype=colour",
+            "to_signature": "attribute|subject=horse|value=red|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f002 with one attribute replacement."
+    },
+    {
+      "family_id": "f051",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c051a",
+        "prompts": {
+          "canonical": "Exactly two horses together on a plain background.",
+          "paraphrase_1": "A plain scene showing a pair of horses together.",
+          "paraphrase_2": "Two horses, and not any additional horses, grouped together."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "horse",
+            "value": "horse"
+          },
+          {
+            "type": "count",
+            "subject": "horse",
+            "value": "2"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c051b",
+          "prompts": {
+            "canonical": "Exactly three horses together on a plain background.",
+            "paraphrase_1": "A plain scene showing a group of three horses together.",
+            "paraphrase_2": "Three horses, and not any additional horses, grouped together."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "horse",
+              "value": "horse"
+            },
+            {
+              "type": "count",
+              "subject": "horse",
+              "value": "3"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=horse|value=2",
+            "to_signature": "count|subject=horse|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f003 with one count replacement."
+    },
+    {
+      "family_id": "f052",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c052a",
+        "prompts": {
+          "canonical": "A bear catching a flying disk.",
+          "paraphrase_1": "A disk is in the air as a bear catches it.",
+          "paraphrase_2": "One bear in the act of catching one disk."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "bear",
+            "value": "bear"
+          },
+          {
+            "type": "object",
+            "id": "disk",
+            "value": "disk"
+          },
+          {
+            "type": "action",
+            "subject": "bear",
+            "value": "catch",
+            "object": "disk"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c052b",
+          "prompts": {
+            "canonical": "A bear carrying a disk.",
+            "paraphrase_1": "A bear moves while carrying one disk.",
+            "paraphrase_2": "One bear in the act of carrying one disk."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "bear",
+              "value": "bear"
+            },
+            {
+              "type": "object",
+              "id": "disk",
+              "value": "disk"
+            },
+            {
+              "type": "action",
+              "subject": "bear",
+              "value": "carry",
+              "object": "disk"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=bear|value=catch|object=disk",
+            "to_signature": "action|subject=bear|value=carry|object=disk"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f004 with one action replacement."
+    },
+    {
+      "family_id": "f053",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c053a",
+        "prompts": {
+          "canonical": "A helmet positioned to the left of a bench.",
+          "paraphrase_1": "A bench with a helmet clearly placed on its left side.",
+          "paraphrase_2": "The helmet is left of the bench, with both fully visible."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "helmet",
+            "value": "helmet"
+          },
+          {
+            "type": "object",
+            "id": "bench",
+            "value": "bench"
+          },
+          {
+            "type": "relation",
+            "subject": "helmet",
+            "value": "left_of",
+            "object": "bench"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c053b",
+          "prompts": {
+            "canonical": "A helmet positioned to the right of a bench.",
+            "paraphrase_1": "A bench with a helmet clearly placed on its right side.",
+            "paraphrase_2": "The helmet is right of the bench, with both fully visible."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "helmet",
+              "value": "helmet"
+            },
+            {
+              "type": "object",
+              "id": "bench",
+              "value": "bench"
+            },
+            {
+              "type": "relation",
+              "subject": "helmet",
+              "value": "right_of",
+              "object": "bench"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=helmet|value=left_of|object=bench",
+            "to_signature": "relation|subject=helmet|value=right_of|object=bench"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f005 with one relation replacement."
+    },
+    {
+      "family_id": "f054",
+      "complexity_level": 2,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c054a",
+        "prompts": {
+          "canonical": "A yacht at sea in a coastal sunrise scene.",
+          "paraphrase_1": "Sunrise over the coast with one yacht on the water.",
+          "paraphrase_2": "One yacht offshore as the coastal sun rises."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "yacht",
+            "value": "yacht"
+          },
+          {
+            "type": "scene",
+            "value": "coastal_sunrise"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c054b",
+          "prompts": {
+            "canonical": "A yacht at sea in a coastal night scene.",
+            "paraphrase_1": "Night over the coast with one yacht on the water.",
+            "paraphrase_2": "One yacht offshore along the coast at night."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "yacht",
+              "value": "yacht"
+            },
+            {
+              "type": "scene",
+              "value": "coastal_night"
+            }
+          ],
+          "change": {
+            "atom_type": "scene",
+            "from_signature": "scene|value=coastal_sunrise",
+            "to_signature": "scene|value=coastal_night"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f006 with one scene replacement."
+    },
+    {
+      "family_id": "f055",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c055a",
+        "prompts": {
+          "canonical": "A frog wearing a black vest inside an aquarium.",
+          "paraphrase_1": "Inside an aquarium, an frog has a black vest around it.",
+          "paraphrase_2": "A black-vest-wearing frog shown in an aquarium scene."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "frog",
+            "value": "frog"
+          },
+          {
+            "type": "object",
+            "id": "vest",
+            "value": "vest"
+          },
+          {
+            "type": "attribute",
+            "subject": "vest",
+            "subtype": "colour",
+            "value": "black"
+          },
+          {
+            "type": "scene",
+            "value": "aquarium"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c055b",
+          "prompts": {
+            "canonical": "A frog wearing a white vest inside an aquarium.",
+            "paraphrase_1": "Inside an aquarium, an frog has a white vest around it.",
+            "paraphrase_2": "A white-vest-wearing frog shown in an aquarium scene."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "frog",
+              "value": "frog"
+            },
+            {
+              "type": "object",
+              "id": "vest",
+              "value": "vest"
+            },
+            {
+              "type": "attribute",
+              "subject": "vest",
+              "subtype": "colour",
+              "value": "white"
+            },
+            {
+              "type": "scene",
+              "value": "aquarium"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=vest|value=black|subtype=colour",
+            "to_signature": "attribute|subject=vest|value=white|subtype=colour"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f007 with one attribute replacement."
+    },
+    {
+      "family_id": "f056",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c056a",
+        "prompts": {
+          "canonical": "In a forest, a boar stands between a fountain and a log.",
+          "paraphrase_1": "A boar in a forest with a fountain on one side and a log on the other.",
+          "paraphrase_2": "The forest boar is positioned between one fountain and one log."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "boar",
+            "value": "boar"
+          },
+          {
+            "type": "object",
+            "id": "fountain",
+            "value": "fountain"
+          },
+          {
+            "type": "object",
+            "id": "log",
+            "value": "log"
+          },
+          {
+            "type": "relation",
+            "subject": "boar",
+            "value": "between",
+            "object": "fountain",
+            "object2": "log"
+          },
+          {
+            "type": "scene",
+            "value": "forest"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c056b",
+          "prompts": {
+            "canonical": "In a forest, a boar stands beside a fountain, with a log also visible.",
+            "paraphrase_1": "A boar beside a fountain in a forest while a log remains visible.",
+            "paraphrase_2": "The forest boar is positioned beside one fountain, and one log is present."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "boar",
+              "value": "boar"
+            },
+            {
+              "type": "object",
+              "id": "fountain",
+              "value": "fountain"
+            },
+            {
+              "type": "object",
+              "id": "log",
+              "value": "log"
+            },
+            {
+              "type": "relation",
+              "subject": "boar",
+              "value": "beside",
+              "object": "fountain"
+            },
+            {
+              "type": "scene",
+              "value": "forest"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=boar|value=between|object=fountain|object2=log",
+            "to_signature": "relation|subject=boar|value=beside|object=fountain"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f008 with one relation replacement."
+    },
+    {
+      "family_id": "f057",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c057a",
+        "prompts": {
+          "canonical": "Exactly two dancers carrying a bucket in a warehouse.",
+          "paraphrase_1": "In a warehouse, a pair of dancers carry one bucket.",
+          "paraphrase_2": "Two dancers, and no additional dancers, carry a bucket inside a warehouse."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "dancer",
+            "value": "dancer"
+          },
+          {
+            "type": "object",
+            "id": "bucket",
+            "value": "bucket"
+          },
+          {
+            "type": "count",
+            "subject": "dancer",
+            "value": "2"
+          },
+          {
+            "type": "action",
+            "subject": "dancer",
+            "value": "carry",
+            "object": "bucket"
+          },
+          {
+            "type": "scene",
+            "value": "warehouse"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c057b",
+          "prompts": {
+            "canonical": "Exactly three dancers carrying a bucket in a warehouse.",
+            "paraphrase_1": "In a warehouse, three dancers carry one bucket.",
+            "paraphrase_2": "Three dancers, and no additional dancers, carry a bucket inside a warehouse."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "dancer",
+              "value": "dancer"
+            },
+            {
+              "type": "object",
+              "id": "bucket",
+              "value": "bucket"
+            },
+            {
+              "type": "count",
+              "subject": "dancer",
+              "value": "3"
+            },
+            {
+              "type": "action",
+              "subject": "dancer",
+              "value": "carry",
+              "object": "bucket"
+            },
+            {
+              "type": "scene",
+              "value": "warehouse"
+            }
+          ],
+          "change": {
+            "atom_type": "count",
+            "from_signature": "count|subject=dancer|value=2",
+            "to_signature": "count|subject=dancer|value=3"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f009 with one count replacement."
+    },
+    {
+      "family_id": "f058",
+      "complexity_level": 5,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c058a",
+        "prompts": {
+          "canonical": "A robot juggling exactly three green peaches in a kitchen.",
+          "paraphrase_1": "In a kitchen, one robot juggles three green peaches.",
+          "paraphrase_2": "A kitchen scene with a robot in the act of juggling exactly three green peaches."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "robot",
+            "value": "robot"
+          },
+          {
+            "type": "object",
+            "id": "peach",
+            "value": "peach"
+          },
+          {
+            "type": "count",
+            "subject": "peach",
+            "value": "3"
+          },
+          {
+            "type": "attribute",
+            "subject": "peach",
+            "subtype": "colour",
+            "value": "green"
+          },
+          {
+            "type": "action",
+            "subject": "robot",
+            "value": "juggle",
+            "object": "peach"
+          },
+          {
+            "type": "scene",
+            "value": "kitchen"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c058b",
+          "prompts": {
+            "canonical": "A robot holding exactly three green peaches in a kitchen.",
+            "paraphrase_1": "In a kitchen, one robot holds three green peaches.",
+            "paraphrase_2": "A kitchen scene with a robot in the act of holding exactly three green peaches."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "robot",
+              "value": "robot"
+            },
+            {
+              "type": "object",
+              "id": "peach",
+              "value": "peach"
+            },
+            {
+              "type": "count",
+              "subject": "peach",
+              "value": "3"
+            },
+            {
+              "type": "attribute",
+              "subject": "peach",
+              "subtype": "colour",
+              "value": "green"
+            },
+            {
+              "type": "action",
+              "subject": "robot",
+              "value": "hold",
+              "object": "peach"
+            },
+            {
+              "type": "scene",
+              "value": "kitchen"
+            }
+          ],
+          "change": {
+            "atom_type": "action",
+            "from_signature": "action|subject=robot|value=juggle|object=peach",
+            "to_signature": "action|subject=robot|value=hold|object=peach"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f010 with one action replacement."
+    },
+    {
+      "family_id": "f059",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c059a",
+        "prompts": {
+          "canonical": "A glass bowl beside a bench in a library.",
+          "paraphrase_1": "Inside a library, a bowl made of glass sits beside one bench.",
+          "paraphrase_2": "A library scene showing one glass bowl next to a bench."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "bowl",
+            "value": "bowl"
+          },
+          {
+            "type": "object",
+            "id": "bench",
+            "value": "bench"
+          },
+          {
+            "type": "attribute",
+            "subject": "bowl",
+            "subtype": "material",
+            "value": "glass"
+          },
+          {
+            "type": "relation",
+            "subject": "bowl",
+            "value": "beside",
+            "object": "bench"
+          },
+          {
+            "type": "scene",
+            "value": "library"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c059b",
+          "prompts": {
+            "canonical": "A paper bowl beside a bench in a library.",
+            "paraphrase_1": "Inside a library, a bowl made of paper sits beside one bench.",
+            "paraphrase_2": "A library scene showing one paper bowl next to a bench."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "bowl",
+              "value": "bowl"
+            },
+            {
+              "type": "object",
+              "id": "bench",
+              "value": "bench"
+            },
+            {
+              "type": "attribute",
+              "subject": "bowl",
+              "subtype": "material",
+              "value": "paper"
+            },
+            {
+              "type": "relation",
+              "subject": "bowl",
+              "value": "beside",
+              "object": "bench"
+            },
+            {
+              "type": "scene",
+              "value": "library"
+            }
+          ],
+          "change": {
+            "atom_type": "attribute",
+            "from_signature": "attribute|subject=bowl|value=glass|subtype=material",
+            "to_signature": "attribute|subject=bowl|value=paper|subtype=material"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f011 with one attribute replacement."
+    },
+    {
+      "family_id": "f060",
+      "complexity_level": 5,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c060a",
+        "prompts": {
+          "canonical": "A black goose above a sign, watching the sign in a lunar scene.",
+          "paraphrase_1": "In a lunar scene, a black goose watches a sign from above it.",
+          "paraphrase_2": "A black goose positioned over a sign while watching it, with a lunar setting."
+        },
+        "atoms": [
+          {
+            "type": "object",
+            "id": "goose",
+            "value": "goose"
+          },
+          {
+            "type": "object",
+            "id": "sign",
+            "value": "sign"
+          },
+          {
+            "type": "attribute",
+            "subject": "goose",
+            "subtype": "colour",
+            "value": "black"
+          },
+          {
+            "type": "relation",
+            "subject": "goose",
+            "value": "above",
+            "object": "sign"
+          },
+          {
+            "type": "action",
+            "subject": "goose",
+            "value": "watch",
+            "object": "sign"
+          },
+          {
+            "type": "scene",
+            "value": "lunar"
+          }
+        ]
+      },
+      "near_neighbours": [
+        {
+          "concept_id": "c060b",
+          "prompts": {
+            "canonical": "A black goose below a sign, watching the sign in a lunar scene.",
+            "paraphrase_1": "In a lunar scene, a black goose watches a sign from below it.",
+            "paraphrase_2": "A black goose positioned under a sign while watching it, with a lunar setting."
+          },
+          "atoms": [
+            {
+              "type": "object",
+              "id": "goose",
+              "value": "goose"
+            },
+            {
+              "type": "object",
+              "id": "sign",
+              "value": "sign"
+            },
+            {
+              "type": "attribute",
+              "subject": "goose",
+              "subtype": "colour",
+              "value": "black"
+            },
+            {
+              "type": "relation",
+              "subject": "goose",
+              "value": "below",
+              "object": "sign"
+            },
+            {
+              "type": "action",
+              "subject": "goose",
+              "value": "watch",
+              "object": "sign"
+            },
+            {
+              "type": "scene",
+              "value": "lunar"
+            }
+          ],
+          "change": {
+            "atom_type": "relation",
+            "from_signature": "relation|subject=goose|value=above|object=sign",
+            "to_signature": "relation|subject=goose|value=below|object=sign"
+          }
+        }
+      ],
+      "audit_notes": "Pilot authoring cycle 5; transformed audited template f012 with one relation replacement."
+    }
+  ]
+}
