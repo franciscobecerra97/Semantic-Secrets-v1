@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0 complete; P1–P17 not started.  
+Status: P0–P1 complete; P2–P17 not started.
 Authority: `AGENT.md` is the scientific and engineering contract. This plan operationalises it and may not silently weaken it.  
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study.
 
@@ -128,6 +128,8 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 **Stop / fallback:** If the contract conflicts internally, preserve files, record the conflict, and request direction instead of silently resolving it.
 
 ### P1 — PETS scope, novelty, and focused related-work validation
+
+**Status:** Complete on 2026-08-24. Early novelty decision: continue to P2 only with the narrowed privacy/measurement boundary recorded in `DECISIONS.md`.
 
 **Objective:** Verify whether the proposed contribution is novel and PETS-relevant before engineering investment.
 
