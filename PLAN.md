@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P1 complete; P2–P17 not started.
+Status: P0–P2 complete; P3–P17 not started.
 Authority: `AGENT.md` is the scientific and engineering contract. This plan operationalises it and may not silently weaken it.  
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study.
 
@@ -15,7 +15,7 @@ When asked to “Execute Pn” or “Continue with Pn”:
 5. Save configurations, provenance, raw observations, and negative results. Never substitute invented values or citations.
 6. Run the listed validation and evaluate the acceptance criteria.
 7. Update the phase status and persistent decision record; record a stop/reframe outcome as faithfully as a positive result.
-8. Report changes, evidence, failed checks, unresolved uncertainty, and the next permitted phase. Do not commit or push unless explicitly requested.
+8. Report changes, evidence, failed checks, unresolved uncertainty, and the next permitted phase. Per the user's standing instruction of 2026-08-24, commit and push each completed `Px` phase as its own checkpoint; never commit a partial/failed phase or force-push.
 
 Phase status values are `not started`, `in progress`, `blocked by gate`, `complete`, or `stopped/reframed`. A phase is complete only when its outputs, validation, and acceptance criteria are satisfied.
 
@@ -161,6 +161,8 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 **Stop / fallback:** Narrow to an empirically testable limitation or protocol gap; if none is novel/PETS-relevant, stop the submission path and preserve the review.
 
 ### P2 — Threat model, privacy goals, and formal research definitions
+
+**Status:** Complete on 2026-08-24. Threat-model version v1 is frozen for pilot design; protocol and deployment architecture remain unselected until D6/D7.
 
 **Objective:** Make claims and experiments falsifiable under precise adversaries and compromise states.
 
