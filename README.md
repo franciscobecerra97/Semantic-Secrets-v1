@@ -4,7 +4,7 @@ Research project for a prospective PoPETs/PETS 2027 paper on privacy-preserving 
 
 ## Current state
 
-P0–P3 are complete. The repository contains a verified research plan, threat-model v1, and a controlled semantic-corpus methodology with deterministic smoke manifests. No authentication implementation, selected model pipeline, downloaded public dataset, generated image, protocol implementation, experiment result, or human-subject evidence has been produced yet.
+P0–P4 are complete. The repository contains a verified research plan, threat-model v1, a controlled semantic-corpus methodology with deterministic smoke manifests, and a bounded model/backend feasibility screen. SD-Turbo is only a provisional generator pending a CUDA/renderability check; Florence-2, SigLIP, MiniLM, and a controlled parser advance to P5, while SmolVLM failed the strict structured-output screen. No authentication implementation, downloaded public dataset, generated corpus image, selected primary extractor, protocol implementation, publication experiment result, or human-subject evidence has been produced.
 
 Read these files before beginning work:
 
@@ -13,6 +13,7 @@ Read these files before beginning work:
 3. `paper/draft.tex` — research-direction manuscript; hypotheses are not results.
 4. `docs/security_model.md` — frozen P2 definitions, compromise states, and claim boundaries.
 5. `experiments/datasets/README.md` — approved P3 smoke/pilot methodology and data restrictions.
+6. `docs/model_screening.md` — P4 hardware, model/licence screen, smoke observations, and D1/D2 handoff.
 
 `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or verified project bibliography. Verified references belong in `paper/references.bib`.
 

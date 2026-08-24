@@ -183,3 +183,67 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** Exact future snapshots/hashes, filter performance, prompt language/content mix, source removals/terms, empirical coverage, and whether DiffusionDB materially changes attack ordering.
 
 **Revisit trigger:** P8 attack pilot, a changed official source card/licence, a removal notice, filter failure, a distinct documented need for another distribution, or inability to strip identifiers at the parser boundary.
+
+## P4-01 / D1 — Provisional local generator shortlist
+
+**Decision:** Provisionally select SD-Turbo as the primary generator hypothesis, retain SDXL base 1.0 as the sole stronger-hardware alternative, and preserve the direct-text/no-image path. Production generator acquisition remains conditional.
+
+**Date:** 2026-08-24
+
+**Status:** Selected provisionally; generator quality and local CUDA feasibility are not established.
+
+**Question:** Which smallest generator shortlist is reproducible, licensable for the research, scientifically useful, and plausibly executable on the documented local hardware?
+
+**Candidates:** SD-Turbo; SDXL base 1.0; unrestricted additional generator finalists; no-image/direct-text; or stop the image path.
+
+**Evaluation criteria:** Official availability and licence; immutable revision/acquisition identity; deterministic controls; expected weight, VRAM, RAM, latency, and storage cost; controlled-atom renderability; stable local execution; one primary plus at most one distinct alternative; no full-corpus spend before feasibility.
+
+**Evidence:** `docs/model_screening.md`; `experiments/model_screening/model_manifest.json`; `p4-screen-v1`; official SD-Turbo and SDXL model cards/licences. The machine has a 4 GiB NVIDIA T600 but PyTorch 2.13.0 is CPU-only. A pinned tiny Diffusers fixture reproduced the same RGB hash under a fixed seed and differed under a second seed, validating only the interface/configuration plumbing.
+
+**Selected option:** SD-Turbo is the provisional primary because its 512 px, one-to-four-step distilled configuration is the least implausible production generator for the target. SDXL base is retained only as a quality/model-drift comparison on documented stronger hardware. The no-image path remains mandatory for P7.
+
+**Rejected alternatives:** Expanding the shortlist is rejected because it adds acquisition and tuning cost without a distinct scientific role. SDXL base is rejected as the default local generator because its roughly 6.94 GB standalone checkpoint and expected runtime exceed the present 4 GiB/CPU-only configuration. Stopping the image path is premature until a repaired CUDA environment and controlled renderability screen provide direct evidence.
+
+**Reason:** P4 is a feasibility gate, not a model leaderboard. Downloading production generator weights before the platform can exercise CUDA would not cheaply resolve fit or semantic quality. The conditional selection preserves one credible small candidate and one scientifically useful SDXL-class comparison without committing corpus compute.
+
+**Security/privacy assumptions:** All generation remains local in the strongest architecture. Model, prompt, seed, scheduler, and preprocessing identities are public; prompts and outputs are not sent to a cloud service. Model acquisition is not secret processing. Licence/AUP compliance remains mandatory.
+
+**Affected RQs/threats/claims:** RQ1/RQ5/RQ6; E1–E4/E14/E16; D1/D5; A5/A7 where model availability or compromise affects recreation; no security or authentication claim is supported by the fixture.
+
+**Experiments supporting decision:** `p4-screen-v1` generator interface/determinism fixture only. No SD-Turbo or SDXL weights were acquired and no semantic coverage was measured.
+
+**Remaining uncertainty:** CUDA installation compatibility, actual VRAM/RAM/latency, deterministic behaviour on GPU, licence changes, atom renderability, generator failures, output drift, and whether the image stage adds technical value.
+
+**Revisit trigger:** Before any P3 corpus generation, repair and freeze the CUDA environment, acquire SD-Turbo at the pinned revision, record file hashes, and run a fixed-seed resource/renderability smoke test. Reject or resize/offload it if the target fails; stop/reframe the image path if no local candidate meets the frozen criterion. SDXL runs require separately documented stronger hardware.
+
+## P4-02 / D2 — Extractor and semantic-baseline shortlist
+
+**Decision:** Advance Florence-2-base, SigLIP base 224, all-MiniLM-L6-v2, and controlled parser v1 as four scientifically distinct P5 hypotheses/baselines. Reject SmolVLM-256M-Instruct as a strict structured extractor under schema/config v1. Do not select a primary extractor until P5.
+
+**Date:** 2026-08-24
+
+**Status:** Selected shortlist; primary extractor open.
+
+**Question:** Which small set covers structured image semantics, dense image semantics, dense direct-text semantics, and transparent structured direct-text semantics without carrying candidates that already show gross schema, coverage, or runtime failure?
+
+**Candidates:** Florence-2 detector/caption/geometry; SmolVLM constrained JSON; SigLIP dense image embeddings; MiniLM dense text embeddings; controlled lexicon parser; additional unbounded VLM/captioning families; or exact infeasibility/reframe of structured image extraction.
+
+**Evaluation criteria:** Exact revision/licence/acquisition identity; fixed-input repeatability; strict schema validity; simple object/attribute/count/relation probe coverage; latency and peak process RSS; scientific distinctness; versionable local execution; compatibility with P5 canonicalisation and later private-matching analysis.
+
+**Evidence:** `results/p4/screen_v1.json` and `docs/model_screening.md`. SmolVLM produced byte-identical but invalid outputs in all 6/6 attempts, covered 0.20 of expected lexical probes, required approximately 28.7–31.4 seconds per CPU fixture, and peaked around 3.7 GiB process RSS. SigLIP exactly repeated its `3 × 768` embedding hash, selected the matching label for 3/3 procedural fixtures, and used about 0.41–0.61 seconds per three-image batch after load. MiniLM exactly repeated finite `36 × 384` embeddings in 0.05–0.07 seconds. The controlled parser exactly repeated 36 schema-valid outputs twice; its vocabulary is intentionally constrained. Every acquired artifact file hash is stored in the run.
+
+**Selected option:** Retain Florence-2 as the one structured image-family hypothesis because its task-specific detection, dense-caption, grounding, and geometry outputs differ materially from unconstrained JSON generation; it must still be acquired and screened in P5. Retain SigLIP and MiniLM as mandatory dense baselines and parser v1 as a transparent structured text lower bound.
+
+**Rejected alternatives:** SmolVLM is rejected under config/schema v1 with `QF-SCHEMA`, `QF-COVERAGE`, and `QF-LATENCY`; deterministic repetition of the same malformed template is not semantic viability. More VLMs are rejected from the P4 shortlist because they do not add a necessary family before Florence is tested. Treating the controlled parser as the only text representation is rejected because its ontology-tuned vocabulary overstates open-ended coverage.
+
+**Reason:** The shortlist spans four materially different approaches while preserving mandatory image/text dense baselines. It records the structured-VLM negative result instead of repairing JSON after generation or changing the schema post hoc. A task-specific detector/geometry path remains worth one bounded paired test; no evidence yet supports a primary representation.
+
+**Security/privacy assumptions:** All extraction occurs locally; raw images, prompts, atoms, embeddings, and scores remain client-side in the strongest target. Dense representations may create inversion/linkability surfaces and receive no privacy presumption. Executable remote model code must be reviewed and revision-pinned before Florence runs.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ4/RQ5/RQ6; E1–E6/E10/E14/E16; D2/D3; A1/A3/A5/A7/A8; Gate A remains unopened.
+
+**Experiments supporting decision:** `p4-screen-v1`, two fixed repeats over three procedural image fixtures and 36 controlled text inputs. These are engineering observations, not publication accuracy, security, or reliability results.
+
+**Remaining uncertainty:** Florence schema/atom coverage and remote-code requirements; behaviour on generated and natural images; atom-level error; positive/negative separation; calibration; drift; canonicalisation; embedding inversion/linkability; GPU performance; and compatibility/cost of private evaluation.
+
+**Revisit trigger:** P5 paired outputs and uncertainty estimates. If Florence fails the frozen schema/coverage criteria, narrow the ontology or record exact infeasibility and reframe the structured-image path; do not silently replace it with a cloud dependency. Any new family must have a documented scientific role and pass the same fixed screen.

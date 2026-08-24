@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P3 complete; P4–P17 not started.
+Status: P0–P4 complete; P5–P17 not started.
 Authority: `AGENT.md` is the scientific and engineering contract. This plan operationalises it and may not silently weaken it.  
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study.
 
@@ -227,6 +227,8 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 **Stop / fallback:** Narrow the ontology or use synthetic controlled distributions if public data is unsuitable; narrow attacker-distribution claims accordingly.
 
 ### P4 — AI/model candidate screening and selection
+
+**Status:** Complete on 2026-08-24. D1 provisionally selects SD-Turbo subject to a CUDA feasibility/renderability screen, retains SDXL base as the sole stronger-hardware alternative, and preserves the no-image path. D2 retains Florence-2, SigLIP, MiniLM, and the controlled parser for P5; SmolVLM is rejected under structured schema v1. A primary extractor waits for P5.
 
 **Objective:** Select reproducible, locally feasible generator/extractor candidates with the cheapest discriminating evidence.
 

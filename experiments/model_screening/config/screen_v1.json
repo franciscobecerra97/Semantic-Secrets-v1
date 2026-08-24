@@ -1,0 +1,41 @@
+{
+  "$schema_version": "semantic-secrets-model-screen-v1",
+  "screen_id": "p4-screen-v1",
+  "repeat_count": 2,
+  "device_policy": "cpu-current-environment",
+  "structured_schema": "../../../prototype/semantic_secrets/backends/structured_schema_v1.json",
+  "generator_fixture": {
+    "model_id": "hf-internal-testing/tiny-stable-diffusion-torch",
+    "revision": "a88cdfbd91f96ec7f61eb7484b652ff0f4ee701d",
+    "prompt": "a red square to the left of a blue circle",
+    "seed": 1101,
+    "different_seed": 2202,
+    "width": 64,
+    "height": 64,
+    "inference_steps": 2,
+    "guidance_scale": 0.0,
+    "interpretation": "interface/determinism fixture only; not a D1 quality candidate"
+  },
+  "structured_vlm": {
+    "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+    "max_new_tokens": 256,
+    "do_sample": false,
+    "fixtures": ["left_right", "count_above", "inside"]
+  },
+  "dense_image": {
+    "model_id": "google/siglip-base-patch16-224",
+    "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+    "fixtures": ["left_right", "count_above", "inside"]
+  },
+  "dense_text": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "manifest": "../../datasets/manifests/smoke_v1.text_inputs.jsonl"
+  },
+  "structured_text": {
+    "backend_id": "controlled-lexicon-parser-v1",
+    "manifest": "../../datasets/manifests/smoke_v1.text_inputs.jsonl",
+    "interpretation": "deterministic lower-bound fixture; ontology/parser selection waits for P5"
+  }
+}
