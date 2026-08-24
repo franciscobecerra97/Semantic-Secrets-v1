@@ -4,13 +4,15 @@ Research project for a prospective PoPETs/PETS 2027 paper on privacy-preserving 
 
 ## Current state
 
-The project is initialized for research planning only. No authentication implementation, model pipeline, dataset, protocol, experiment, or result has been produced yet.
+P0–P3 are complete. The repository contains a verified research plan, threat-model v1, and a controlled semantic-corpus methodology with deterministic smoke manifests. No authentication implementation, selected model pipeline, downloaded public dataset, generated image, protocol implementation, experiment result, or human-subject evidence has been produced yet.
 
 Read these files before beginning work:
 
 1. `AGENT.md` — persistent scientific and engineering contract.
 2. `PLAN.md` — phased execution plan and decision gates.
 3. `paper/draft.tex` — research-direction manuscript; hypotheses are not results.
+4. `docs/security_model.md` — frozen P2 definitions, compromise states, and claim boundaries.
+5. `experiments/datasets/README.md` — approved P3 smoke/pilot methodology and data restrictions.
 
 `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or verified project bibliography. Verified references belong in `paper/references.bib`.
 
@@ -18,7 +20,7 @@ Read these files before beginning work:
 
 - `paper/` — manuscript, verified bibliography, and final figures.
 - `prototype/` — future modular client/server/semantic/cryptographic implementation.
-- `experiments/` — future configs, runners, datasets, attacks, and analysis.
+- `experiments/` — controlled dataset specifications/manifests plus future runners, attacks, and analysis.
 - `tests/` — future unit, integration, security-regression, and smoke tests.
 - `results/` — future immutable run outputs and compact reproducibility evidence.
 - `artifacts/` — future artifact-evaluation instructions and release scripts.
@@ -28,4 +30,3 @@ Large models, raw datasets, generated images, secrets, caches, and recomputable 
 ## Working rule
 
 Execute one numbered phase from `PLAN.md` at a time. Do not pass a decision gate without its recorded evidence and acceptance criteria, and do not claim human memorability or usability: this project has no human-subject study.
-

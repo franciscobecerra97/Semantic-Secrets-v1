@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P2 complete; P3–P17 not started.
+Status: P0–P3 complete; P4–P17 not started.
 Authority: `AGENT.md` is the scientific and engineering contract. This plan operationalises it and may not silently weaken it.  
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study.
 
@@ -194,6 +194,8 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 **Stop / fallback:** If no plausible architecture offers a meaningful benefit under a realistic attacker, reframe to a limitation/measurement question before P3.
 
 ### P3 — Dataset and controlled semantic-concept methodology
+
+**Status:** Complete on 2026-08-24. Smoke/pilot methodology is approved; no public corpus, model output, or image was acquired/generated, and full-scale acquisition remains forbidden until P6/P7 justifies it from pilot uncertainty.
 
 **Objective:** Build a reproducible, ethically suitable input methodology that separates technical behaviour from human claims.
 

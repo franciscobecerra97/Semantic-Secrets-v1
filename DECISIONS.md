@@ -119,3 +119,67 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** Semantic representation/matcher, attacker distributions, leakage of concrete primitives and implementations, active-security support, realistic trust/deployment cost, threshold and rate-limit values, and whether any candidate improves meaningfully on plaintext/hash-bound baselines.
 
 **Revisit trigger:** A pilot requires an undefined success condition; P9 identifies a candidate whose view cannot be expressed by v1; new closest work changes the relevant attacker; a protocol proof requires a different corruption model; or an ethics/data review changes allowed inputs. Semantic changes create v2 rather than silently rewriting v1.
+
+## P3-01 — Approve controlled smoke/pilot methodology; forbid full scale
+
+**Decision:** Approve controlled ontology/design v1, the 12-family smoke catalog, deterministic family-grouped splits, label-separated manifests, and a planned 60-family pilot. Keep pilot execution and every full-scale acquisition/generation step unapproved.
+
+**Date:** 2026-08-24
+
+**Status:** Selected.
+
+**Question:** Does the proposed data methodology cover the semantic and attacker factors required by P2 without creating human-behaviour claims, cross-split leakage, or unjustified compute?
+
+**Candidates:** Full Cartesian factorial generation; fractional one-factor-at-a-time controlled design; unstructured public prompts as the main evaluation set; or stop because a controlled non-human methodology is impossible.
+
+**Evaluation criteria:** Coverage of objects/attributes/counts/actions/relations/scenes, complexity and planned frequency strata; targeted one-atom and unrelated negatives; paired text-only path; deterministic recreation; family-level split isolation; ground-truth separation from execution inputs; ethics/provenance; uncertainty-driven full sizing; compatibility with E1–E8/E12–E14/E16.
+
+**Evidence:** `experiments/datasets/README.md`, `ontology_v1.json`, `config/design_v1.json`, `concepts/smoke_v1.json`, schemas, manifests, `power_and_uncertainty.md`, generator validation, and four passing unit tests. The smoke design has 12 families/24 concepts, covers all six atom types and complexity levels 1–5, and replaces exactly one atom in each targeted neighbour.
+
+**Selected option:** Fractional controlled design. For each family, change one technical factor from enrolment at a time and generate canonical near-neighbour/unrelated comparisons. Use 12 families only for smoke validation and plan 60 families for variance/resource estimation; derive full `n` from pilot cluster-level uncertainty and preregistered precision.
+
+**Rejected alternatives:** A full Cartesian product adds compute and interaction cells before their need is established. Public prompts lack controlled semantic ground truth and do not represent authentication choices. Stopping is not required because the smoke method passes its analytical and deterministic checks.
+
+**Reason:** Family-grouped fractional trials preserve causal interpretability for seed/paraphrase/style/layout/model effects, support the mandatory text-only pairing, and prevent repeated images from masquerading as independent secrets. Label-separated inputs prevent pair/ground-truth metadata from influencing model execution.
+
+**Security/privacy assumptions:** Controlled prompts are synthetic research inputs, not secrets. Frequency labels are design strata until P8 derives a separate training-only empirical measure. Public algorithms and labels may be released after licence review, but labels remain sealed during candidate/test evaluation.
+
+**Affected RQs/threats/claims:** RQ1–RQ3/RQ6; A1/A4/A5/A8; G1/G9; E1–E8/E12–E14/E16; Gates A/B.
+
+**Experiments supporting decision:** No AI/model experiment. Manifest generation produced 84 image-path inputs, 36 deduplicated text inputs, 84 labels, and 84 same/near/unrelated pairs. Outputs recreated byte-identically; schema/manual invariants, joins, quotas, atom edits, and split isolation passed.
+
+**Remaining uncertainty:** Real generator/extractor failures, variance and clustering, frequency-band evidence, smallest technically meaningful image-versus-text effect, model licences/costs, pilot authoring workload, and full sample size.
+
+**Revisit trigger:** P4 model constraints invalidate prompt controls; blind audit finds ambiguous concepts; pilot variance/coverage requires interaction cells or narrower ontology; or P6/P7 freezes a justified full design. Changes create a new catalog/design version.
+
+## P3-02 — Public prompt source screen and acquisition boundary
+
+**Decision:** Conditionally approve DiffusionDB metadata for a later, text-only A4 frequency ordering; approve PartiPrompts only for technical coverage; defer Pick-a-Pic v2; acquire none in P3.
+
+**Date:** 2026-08-24
+
+**Status:** Selected for planning; D8 attack-distribution selection remains open until P8.
+
+**Question:** Which public prompt sources can add distinct evidence under documented licence, ethics, identifier, and distribution limits?
+
+**Candidates:** DiffusionDB metadata; PartiPrompts; Pick-a-Pic v2; uncontrolled scraping; controlled synthetic distribution only.
+
+**Evaluation criteria:** Authoritative source/card, current licence and revision pinning, minimisable identifiers, harmful-content handling, reproducibility, relation to A4, distinct role, and no claim that text-to-image prompts are authentication choices.
+
+**Evidence:** `experiments/datasets/sources_v1.json`, `data_statement.md`, and `acquisition_plan.md`; official source repositories/cards checked on 2026-08-24. DiffusionDB exposes a metadata-only path and declares CC0, but contains contributor-linked fields to discard. PartiPrompts is an Apache-2.0 curated benchmark. The official live Pick-a-Pic v2 card/licence could not be fully retrieved and mirror-visible user-level fields are unnecessary.
+
+**Selected option:** Plan a minimal, pinned DiffusionDB metadata pipeline only when P8 authorises it; use PartiPrompts separately for coverage if P4/P5 needs it; do not acquire Pick-a-Pic or scrape other services.
+
+**Rejected alternatives:** Pick-a-Pic is deferred until its exact live revision/licence/removal terms and a distinct need are verified. Uncontrolled scraping lacks a bounded ethical/licence/reproducibility story. Synthetic-only remains the fallback if public acquisition fails closed.
+
+**Reason:** DiffusionDB can order a clearly qualified empirical attacker without images or identity fields. PartiPrompts answers a different technical-coverage question. Neither can establish authentication-secret selection, and adding a user-level preference dataset without a distinct role would increase privacy burden without necessary evidence.
+
+**Security/privacy assumptions:** Drop rather than rehash usernames/user IDs, timestamps, image IDs, session/ranking linkage, and URLs. Filter harmful/sensitive content before downstream models. Do not identify or target contributors. Release aggregates by default and recheck terms/removals before final runs.
+
+**Affected RQs/threats/claims:** RQ3; A4/A5; G1/G2; D8; E8/E12/E13.
+
+**Experiments supporting decision:** None; no public data was downloaded. This is a source/ethics/licence screen.
+
+**Remaining uncertainty:** Exact future snapshots/hashes, filter performance, prompt language/content mix, source removals/terms, empirical coverage, and whether DiffusionDB materially changes attack ordering.
+
+**Revisit trigger:** P8 attack pilot, a changed official source card/licence, a removal notice, filter failure, a distinct documented need for another distribution, or inability to strip identifiers at the parser boundary.

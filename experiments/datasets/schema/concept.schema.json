@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://semantic-secrets.invalid/schema/concept-v1.json",
+  "title": "Semantic Secrets controlled concept catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema_version", "catalog_id", "ontology_id", "audit_status", "families"],
+  "properties": {
+    "$schema_version": {"const": "semantic-secrets-concept-catalog-v1"},
+    "catalog_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
+    "ontology_id": {"const": "controlled-ontology-v1"},
+    "audit_status": {"enum": ["draft", "author-pass-complete", "blind-audit-complete"]},
+    "families": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/family"}
+    }
+  },
+  "$defs": {
+    "atom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "value"],
+      "properties": {
+        "type": {"enum": ["object", "attribute", "count", "action", "relation", "scene"]},
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "subject": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "object": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "object2": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "subtype": {"enum": ["colour", "material", "size", "pattern"]},
+        "value": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_]*$"}
+      }
+    },
+    "concept": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["concept_id", "prompts", "atoms"],
+      "properties": {
+        "concept_id": {"type": "string", "pattern": "^c[0-9]{3}[a-z]$"},
+        "change": {"$ref": "#/$defs/change"},
+        "prompts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["canonical", "paraphrase_1", "paraphrase_2"],
+          "properties": {
+            "canonical": {"type": "string", "minLength": 8},
+            "paraphrase_1": {"type": "string", "minLength": 8},
+            "paraphrase_2": {"type": "string", "minLength": 8}
+          }
+        },
+        "atoms": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/atom"}}
+      }
+    },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["atom_type", "from_signature", "to_signature"],
+      "properties": {
+        "atom_type": {"enum": ["object", "attribute", "count", "action", "relation", "scene"]},
+        "from_signature": {"type": "string"},
+        "to_signature": {"type": "string"}
+      }
+    },
+    "neighbour": {
+      "allOf": [
+        {"$ref": "#/$defs/concept"},
+        {
+          "type": "object",
+          "required": ["change"],
+          "properties": {
+            "change": {"$ref": "#/$defs/change"}
+          }
+        }
+      ]
+    },
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family_id", "complexity_level", "frequency_band", "base", "near_neighbours", "audit_notes"],
+      "properties": {
+        "family_id": {"type": "string", "pattern": "^f[0-9]{3}$"},
+        "complexity_level": {"type": "integer", "minimum": 1, "maximum": 5},
+        "frequency_band": {"enum": ["common_candidate", "mid_candidate", "rare_candidate"]},
+        "base": {"$ref": "#/$defs/concept"},
+        "near_neighbours": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/neighbour"}},
+        "audit_notes": {"type": "string", "minLength": 8}
+      }
+    }
+  }
+}

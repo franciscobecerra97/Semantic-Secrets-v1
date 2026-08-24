@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://semantic-secrets.invalid/schema/pair-manifest-v1.json",
+  "title": "Controlled comparison pair row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pair_id", "anchor_row_id", "candidate_row_id", "split", "relationship", "family_id", "candidate_family_id", "changed_atom_type"],
+  "properties": {
+    "pair_id": {"type": "string", "pattern": "^p_[0-9a-f]{24}$"},
+    "anchor_row_id": {"type": "string", "pattern": "^r_[0-9a-f]{24}$"},
+    "candidate_row_id": {"type": "string", "pattern": "^r_[0-9a-f]{24}$"},
+    "split": {"enum": ["train", "validation", "test"]},
+    "relationship": {"enum": ["same", "near_negative", "unrelated"]},
+    "family_id": {"type": "string", "pattern": "^f[0-9]{3}$"},
+    "candidate_family_id": {"type": "string", "pattern": "^f[0-9]{3}$"},
+    "changed_atom_type": {"type": ["string", "null"]}
+  }
+}

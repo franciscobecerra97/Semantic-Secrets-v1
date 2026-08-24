@@ -1,0 +1,84 @@
+{
+  "$schema_version": "semantic-secrets-manifest-provenance-v1",
+  "catalog_id": "controlled-smoke-v1",
+  "catalog_sha256": "c0b86c9113fa9fcda97d33bececf89365091a29d6c124538db13ee87b8213810",
+  "counts": {
+    "families": 12,
+    "families_by_split": {
+      "test": 3,
+      "train": 6,
+      "validation": 3
+    },
+    "image_inputs": 84,
+    "labels": 84,
+    "pairs": 84,
+    "pairs_by_relationship": {
+      "near_negative": 12,
+      "same": 60,
+      "unrelated": 12
+    },
+    "text_inputs": 36
+  },
+  "design_id": "controlled-design-v1",
+  "design_sha256": "8b2739c96018b7f8e54c1258c193a31ee576582b07e160f8404b90c1bd8b79a4",
+  "images_or_models_executed": false,
+  "network_access": false,
+  "ontology_id": "controlled-ontology-v1",
+  "ontology_sha256": "9863478b6d265863917b759ad85b8946d80655a08cf4c93f0a3ac84f2c81a1ae",
+  "output_sha256": {
+    "smoke_v1.inputs.jsonl": "185df99d51c3cd855c5b4e6c551d470691d961b17217a2201aae0f86aa1023f7",
+    "smoke_v1.labels.jsonl": "a21d13652d9c3d9d1637faf2a48904c968f69c709d11e00aef2d7e818572f3b4",
+    "smoke_v1.pairs.jsonl": "1f5cb4d0e58db52f4e3504c9aef6a545d5d7ec3b0e271b41b10bd2344f092df7",
+    "smoke_v1.text_inputs.jsonl": "000b5c06a32095b48560a3eb99dd1e326782899c1f52a375e3456d6ab9e4751a"
+  },
+  "split_algorithm": "sha256-order-quota-v1",
+  "split_assignments": {
+    "f001": "train",
+    "f002": "validation",
+    "f003": "test",
+    "f004": "test",
+    "f005": "test",
+    "f006": "train",
+    "f007": "train",
+    "f008": "train",
+    "f009": "validation",
+    "f010": "train",
+    "f011": "train",
+    "f012": "validation"
+  },
+  "split_seed": "semantic-secrets-smoke-split-v1",
+  "stage": "smoke",
+  "validation": {
+    "atom_types": [
+      "action",
+      "attribute",
+      "count",
+      "object",
+      "relation",
+      "scene"
+    ],
+    "complexities": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "concepts": 24,
+    "families": 12,
+    "frequency_bands": [
+      "common_candidate",
+      "mid_candidate",
+      "rare_candidate"
+    ],
+    "near_neighbour_change_counts": {
+      "action": 2,
+      "attribute": 3,
+      "count": 2,
+      "object": 1,
+      "relation": 3,
+      "scene": 1
+    },
+    "schema_validation": "manual-fallback"
+  }
+}

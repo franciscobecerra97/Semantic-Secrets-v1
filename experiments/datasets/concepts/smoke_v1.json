@@ -1,0 +1,464 @@
+{
+  "$schema_version": "semantic-secrets-concept-catalog-v1",
+  "catalog_id": "controlled-smoke-v1",
+  "ontology_id": "controlled-ontology-v1",
+  "audit_status": "blind-audit-complete",
+  "families": [
+    {
+      "family_id": "f001",
+      "complexity_level": 1,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c001a",
+        "prompts": {
+          "canonical": "A single bicycle on a plain neutral background.",
+          "paraphrase_1": "One bicycle shown alone against a neutral background.",
+          "paraphrase_2": "A neutral scene containing exactly one bicycle and nothing else prominent."
+        },
+        "atoms": [{"type": "object", "id": "bicycle", "value": "bicycle"}]
+      },
+      "near_neighbours": [{
+        "concept_id": "c001b",
+        "prompts": {
+          "canonical": "A single motorcycle on a plain neutral background.",
+          "paraphrase_1": "One motorcycle shown alone against a neutral background.",
+          "paraphrase_2": "A neutral scene containing exactly one motorcycle and nothing else prominent."
+        },
+        "atoms": [{"type": "object", "id": "motorcycle", "value": "motorcycle"}],
+        "change": {
+          "atom_type": "object",
+          "from_signature": "object|id=bicycle|value=bicycle",
+          "to_signature": "object|id=motorcycle|value=motorcycle"
+        }
+      }],
+      "audit_notes": "Object-identity replacement; no attribute or scene cue."
+    },
+    {
+      "family_id": "f002",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c002a",
+        "prompts": {
+          "canonical": "A cat wearing a red scarf.",
+          "paraphrase_1": "A red scarf is wrapped around a cat.",
+          "paraphrase_2": "One cat with a clearly visible red scarf."
+        },
+        "atoms": [
+          {"type": "object", "id": "cat", "value": "cat"},
+          {"type": "attribute", "subject": "cat", "subtype": "colour", "value": "red"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c002b",
+        "prompts": {
+          "canonical": "A cat wearing a blue scarf.",
+          "paraphrase_1": "A blue scarf is wrapped around a cat.",
+          "paraphrase_2": "One cat with a clearly visible blue scarf."
+        },
+        "atoms": [
+          {"type": "object", "id": "cat", "value": "cat"},
+          {"type": "attribute", "subject": "cat", "subtype": "colour", "value": "blue"}
+        ],
+        "change": {
+          "atom_type": "attribute",
+          "from_signature": "attribute|subject=cat|value=red|subtype=colour",
+          "to_signature": "attribute|subject=cat|value=blue|subtype=colour"
+        }
+      }],
+      "audit_notes": "Colour-only replacement with identical object identity."
+    },
+    {
+      "family_id": "f003",
+      "complexity_level": 2,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c003a",
+        "prompts": {
+          "canonical": "Exactly two cats together on a plain background.",
+          "paraphrase_1": "A plain scene showing a pair of cats together.",
+          "paraphrase_2": "Two cats, and not any additional cats, grouped together."
+        },
+        "atoms": [
+          {"type": "object", "id": "cat", "value": "cat"},
+          {"type": "count", "subject": "cat", "value": "2"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c003b",
+        "prompts": {
+          "canonical": "Exactly three cats together on a plain background.",
+          "paraphrase_1": "A plain scene showing a group of three cats together.",
+          "paraphrase_2": "Three cats, and not any additional cats, grouped together."
+        },
+        "atoms": [
+          {"type": "object", "id": "cat", "value": "cat"},
+          {"type": "count", "subject": "cat", "value": "3"}
+        ],
+        "change": {
+          "atom_type": "count",
+          "from_signature": "count|subject=cat|value=2",
+          "to_signature": "count|subject=cat|value=3"
+        }
+      }],
+      "audit_notes": "Explicit small-count replacement with no other objects."
+    },
+    {
+      "family_id": "f004",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c004a",
+        "prompts": {
+          "canonical": "A dog catching a flying frisbee.",
+          "paraphrase_1": "A frisbee is in the air as a dog catches it.",
+          "paraphrase_2": "One dog in the act of catching one frisbee."
+        },
+        "atoms": [
+          {"type": "object", "id": "dog", "value": "dog"},
+          {"type": "object", "id": "frisbee", "value": "frisbee"},
+          {"type": "action", "subject": "dog", "value": "catch", "object": "frisbee"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c004b",
+        "prompts": {
+          "canonical": "A dog carrying a frisbee.",
+          "paraphrase_1": "A dog moves while carrying one frisbee.",
+          "paraphrase_2": "One dog in the act of carrying one frisbee."
+        },
+        "atoms": [
+          {"type": "object", "id": "dog", "value": "dog"},
+          {"type": "object", "id": "frisbee", "value": "frisbee"},
+          {"type": "action", "subject": "dog", "value": "carry", "object": "frisbee"}
+        ],
+        "change": {
+          "atom_type": "action",
+          "from_signature": "action|subject=dog|value=catch|object=frisbee",
+          "to_signature": "action|subject=dog|value=carry|object=frisbee"
+        }
+      }],
+      "audit_notes": "Action-only replacement; the same dog and frisbee remain."
+    },
+    {
+      "family_id": "f005",
+      "complexity_level": 3,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c005a",
+        "prompts": {
+          "canonical": "A cup positioned to the left of a book.",
+          "paraphrase_1": "A book with a cup clearly placed on its left side.",
+          "paraphrase_2": "The cup is left of the book, with both fully visible."
+        },
+        "atoms": [
+          {"type": "object", "id": "cup", "value": "cup"},
+          {"type": "object", "id": "book", "value": "book"},
+          {"type": "relation", "subject": "cup", "value": "left_of", "object": "book"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c005b",
+        "prompts": {
+          "canonical": "A cup positioned to the right of a book.",
+          "paraphrase_1": "A book with a cup clearly placed on its right side.",
+          "paraphrase_2": "The cup is right of the book, with both fully visible."
+        },
+        "atoms": [
+          {"type": "object", "id": "cup", "value": "cup"},
+          {"type": "object", "id": "book", "value": "book"},
+          {"type": "relation", "subject": "cup", "value": "right_of", "object": "book"}
+        ],
+        "change": {
+          "atom_type": "relation",
+          "from_signature": "relation|subject=cup|value=left_of|object=book",
+          "to_signature": "relation|subject=cup|value=right_of|object=book"
+        }
+      }],
+      "audit_notes": "Directional relation replacement; prompts preserve subject direction."
+    },
+    {
+      "family_id": "f006",
+      "complexity_level": 2,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c006a",
+        "prompts": {
+          "canonical": "A sailboat at sea in a coastal sunrise scene.",
+          "paraphrase_1": "Sunrise over the coast with one sailboat on the water.",
+          "paraphrase_2": "One sailboat offshore as the coastal sun rises."
+        },
+        "atoms": [
+          {"type": "object", "id": "sailboat", "value": "sailboat"},
+          {"type": "scene", "value": "coastal_sunrise"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c006b",
+        "prompts": {
+          "canonical": "A sailboat at sea in a coastal night scene.",
+          "paraphrase_1": "Night over the coast with one sailboat on the water.",
+          "paraphrase_2": "One sailboat offshore along the coast at night."
+        },
+        "atoms": [
+          {"type": "object", "id": "sailboat", "value": "sailboat"},
+          {"type": "scene", "value": "coastal_night"}
+        ],
+        "change": {
+          "atom_type": "scene",
+          "from_signature": "scene|value=coastal_sunrise",
+          "to_signature": "scene|value=coastal_night"
+        }
+      }],
+      "audit_notes": "Scene/time replacement with sailboat identity fixed."
+    },
+    {
+      "family_id": "f007",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c007a",
+        "prompts": {
+          "canonical": "An axolotl wearing a yellow scarf inside an aquarium.",
+          "paraphrase_1": "Inside an aquarium, an axolotl has a yellow scarf around it.",
+          "paraphrase_2": "A yellow-scarfed axolotl shown in an aquarium scene."
+        },
+        "atoms": [
+          {"type": "object", "id": "axolotl", "value": "axolotl"},
+          {"type": "object", "id": "scarf", "value": "scarf"},
+          {"type": "attribute", "subject": "scarf", "subtype": "colour", "value": "yellow"},
+          {"type": "scene", "value": "aquarium"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c007b",
+        "prompts": {
+          "canonical": "An axolotl wearing a green scarf inside an aquarium.",
+          "paraphrase_1": "Inside an aquarium, an axolotl has a green scarf around it.",
+          "paraphrase_2": "A green-scarfed axolotl shown in an aquarium scene."
+        },
+        "atoms": [
+          {"type": "object", "id": "axolotl", "value": "axolotl"},
+          {"type": "object", "id": "scarf", "value": "scarf"},
+          {"type": "attribute", "subject": "scarf", "subtype": "colour", "value": "green"},
+          {"type": "scene", "value": "aquarium"}
+        ],
+        "change": {
+          "atom_type": "attribute",
+          "from_signature": "attribute|subject=scarf|value=yellow|subtype=colour",
+          "to_signature": "attribute|subject=scarf|value=green|subtype=colour"
+        }
+      }],
+      "audit_notes": "Rare-object stratum with a colour-only scarf change."
+    },
+    {
+      "family_id": "f008",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c008a",
+        "prompts": {
+          "canonical": "In a forest, a fox stands between a tree and a boulder.",
+          "paraphrase_1": "A fox in a forest with a tree on one side and a boulder on the other.",
+          "paraphrase_2": "The forest fox is positioned between one tree and one boulder."
+        },
+        "atoms": [
+          {"type": "object", "id": "fox", "value": "fox"},
+          {"type": "object", "id": "tree", "value": "tree"},
+          {"type": "object", "id": "boulder", "value": "boulder"},
+          {"type": "relation", "subject": "fox", "value": "between", "object": "tree", "object2": "boulder"},
+          {"type": "scene", "value": "forest"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c008b",
+        "prompts": {
+          "canonical": "In a forest, a fox stands beside a tree, with a boulder also visible.",
+          "paraphrase_1": "A fox beside a tree in a forest while a boulder remains visible.",
+          "paraphrase_2": "The forest fox is positioned beside one tree, and one boulder is present."
+        },
+        "atoms": [
+          {"type": "object", "id": "fox", "value": "fox"},
+          {"type": "object", "id": "tree", "value": "tree"},
+          {"type": "object", "id": "boulder", "value": "boulder"},
+          {"type": "relation", "subject": "fox", "value": "beside", "object": "tree"},
+          {"type": "scene", "value": "forest"}
+        ],
+        "change": {
+          "atom_type": "relation",
+          "from_signature": "relation|subject=fox|value=between|object=tree|object2=boulder",
+          "to_signature": "relation|subject=fox|value=beside|object=tree"
+        }
+      }],
+      "audit_notes": "One relation atom changes; all three objects and forest scene remain explicit."
+    },
+    {
+      "family_id": "f009",
+      "complexity_level": 4,
+      "frequency_band": "mid_candidate",
+      "base": {
+        "concept_id": "c009a",
+        "prompts": {
+          "canonical": "Exactly two robots carrying a box in a warehouse.",
+          "paraphrase_1": "In a warehouse, a pair of robots carry one box.",
+          "paraphrase_2": "Two robots, and no additional robots, carry a box inside a warehouse."
+        },
+        "atoms": [
+          {"type": "object", "id": "robot", "value": "robot"},
+          {"type": "object", "id": "box", "value": "box"},
+          {"type": "count", "subject": "robot", "value": "2"},
+          {"type": "action", "subject": "robot", "value": "carry", "object": "box"},
+          {"type": "scene", "value": "warehouse"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c009b",
+        "prompts": {
+          "canonical": "Exactly three robots carrying a box in a warehouse.",
+          "paraphrase_1": "In a warehouse, three robots carry one box.",
+          "paraphrase_2": "Three robots, and no additional robots, carry a box inside a warehouse."
+        },
+        "atoms": [
+          {"type": "object", "id": "robot", "value": "robot"},
+          {"type": "object", "id": "box", "value": "box"},
+          {"type": "count", "subject": "robot", "value": "3"},
+          {"type": "action", "subject": "robot", "value": "carry", "object": "box"},
+          {"type": "scene", "value": "warehouse"}
+        ],
+        "change": {
+          "atom_type": "count",
+          "from_signature": "count|subject=robot|value=2",
+          "to_signature": "count|subject=robot|value=3"
+        }
+      }],
+      "audit_notes": "Count-only replacement in a multi-type concept."
+    },
+    {
+      "family_id": "f010",
+      "complexity_level": 5,
+      "frequency_band": "common_candidate",
+      "base": {
+        "concept_id": "c010a",
+        "prompts": {
+          "canonical": "A chef juggling exactly three bright oranges in a kitchen.",
+          "paraphrase_1": "In a kitchen, one chef juggles three brightly coloured oranges.",
+          "paraphrase_2": "A kitchen scene with a chef in the act of juggling exactly three bright oranges."
+        },
+        "atoms": [
+          {"type": "object", "id": "chef", "value": "chef"},
+          {"type": "object", "id": "orange", "value": "orange"},
+          {"type": "count", "subject": "orange", "value": "3"},
+          {"type": "attribute", "subject": "orange", "subtype": "colour", "value": "bright"},
+          {"type": "action", "subject": "chef", "value": "juggle", "object": "orange"},
+          {"type": "scene", "value": "kitchen"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c010b",
+        "prompts": {
+          "canonical": "A chef holding exactly three bright oranges in a kitchen.",
+          "paraphrase_1": "In a kitchen, one chef holds three brightly coloured oranges.",
+          "paraphrase_2": "A kitchen scene with a chef in the act of holding exactly three bright oranges."
+        },
+        "atoms": [
+          {"type": "object", "id": "chef", "value": "chef"},
+          {"type": "object", "id": "orange", "value": "orange"},
+          {"type": "count", "subject": "orange", "value": "3"},
+          {"type": "attribute", "subject": "orange", "subtype": "colour", "value": "bright"},
+          {"type": "action", "subject": "chef", "value": "hold", "object": "orange"},
+          {"type": "scene", "value": "kitchen"}
+        ],
+        "change": {
+          "atom_type": "action",
+          "from_signature": "action|subject=chef|value=juggle|object=orange",
+          "to_signature": "action|subject=chef|value=hold|object=orange"
+        }
+      }],
+      "audit_notes": "High-complexity action replacement with count, attribute, objects, and scene fixed."
+    },
+    {
+      "family_id": "f011",
+      "complexity_level": 4,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c011a",
+        "prompts": {
+          "canonical": "A glass teapot beside a book in a library.",
+          "paraphrase_1": "Inside a library, a teapot made of glass sits beside one book.",
+          "paraphrase_2": "A library scene showing one glass teapot next to a book."
+        },
+        "atoms": [
+          {"type": "object", "id": "teapot", "value": "teapot"},
+          {"type": "object", "id": "book", "value": "book"},
+          {"type": "attribute", "subject": "teapot", "subtype": "material", "value": "glass"},
+          {"type": "relation", "subject": "teapot", "value": "beside", "object": "book"},
+          {"type": "scene", "value": "library"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c011b",
+        "prompts": {
+          "canonical": "A ceramic teapot beside a book in a library.",
+          "paraphrase_1": "Inside a library, a teapot made of ceramic sits beside one book.",
+          "paraphrase_2": "A library scene showing one ceramic teapot next to a book."
+        },
+        "atoms": [
+          {"type": "object", "id": "teapot", "value": "teapot"},
+          {"type": "object", "id": "book", "value": "book"},
+          {"type": "attribute", "subject": "teapot", "subtype": "material", "value": "ceramic"},
+          {"type": "relation", "subject": "teapot", "value": "beside", "object": "book"},
+          {"type": "scene", "value": "library"}
+        ],
+        "change": {
+          "atom_type": "attribute",
+          "from_signature": "attribute|subject=teapot|value=glass|subtype=material",
+          "to_signature": "attribute|subject=teapot|value=ceramic|subtype=material"
+        }
+      }],
+      "audit_notes": "Material-only replacement with relation and library context fixed."
+    },
+    {
+      "family_id": "f012",
+      "complexity_level": 5,
+      "frequency_band": "rare_candidate",
+      "base": {
+        "concept_id": "c012a",
+        "prompts": {
+          "canonical": "A white owl above a clock, watching the clock in a lunar scene.",
+          "paraphrase_1": "In a lunar scene, a white owl watches a clock from above it.",
+          "paraphrase_2": "A white owl positioned over a clock while watching it, with a lunar setting."
+        },
+        "atoms": [
+          {"type": "object", "id": "owl", "value": "owl"},
+          {"type": "object", "id": "clock", "value": "clock"},
+          {"type": "attribute", "subject": "owl", "subtype": "colour", "value": "white"},
+          {"type": "relation", "subject": "owl", "value": "above", "object": "clock"},
+          {"type": "action", "subject": "owl", "value": "watch", "object": "clock"},
+          {"type": "scene", "value": "lunar"}
+        ]
+      },
+      "near_neighbours": [{
+        "concept_id": "c012b",
+        "prompts": {
+          "canonical": "A white owl below a clock, watching the clock in a lunar scene.",
+          "paraphrase_1": "In a lunar scene, a white owl watches a clock from below it.",
+          "paraphrase_2": "A white owl positioned under a clock while watching it, with a lunar setting."
+        },
+        "atoms": [
+          {"type": "object", "id": "owl", "value": "owl"},
+          {"type": "object", "id": "clock", "value": "clock"},
+          {"type": "attribute", "subject": "owl", "subtype": "colour", "value": "white"},
+          {"type": "relation", "subject": "owl", "value": "below", "object": "clock"},
+          {"type": "action", "subject": "owl", "value": "watch", "object": "clock"},
+          {"type": "scene", "value": "lunar"}
+        ],
+        "change": {
+          "atom_type": "relation",
+          "from_signature": "relation|subject=owl|value=above|object=clock",
+          "to_signature": "relation|subject=owl|value=below|object=clock"
+        }
+      }],
+      "audit_notes": "High-complexity directional replacement; action, attribute, objects, and scene fixed."
+    }
+  ]
+}

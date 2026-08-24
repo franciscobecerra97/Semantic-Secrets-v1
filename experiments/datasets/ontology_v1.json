@@ -1,0 +1,85 @@
+{
+  "$schema_version": "semantic-secrets-ontology-v1",
+  "ontology_id": "controlled-ontology-v1",
+  "language": "en",
+  "normalisation": {
+    "unicode": "NFKC",
+    "case": "lowercase canonical atom values",
+    "whitespace": "collapse internal whitespace and trim",
+    "value_separator": "underscore",
+    "ordering": "sort atom signatures lexicographically for hashing only"
+  },
+  "atom_types": {
+    "object": {
+      "required_fields": ["type", "id", "value"],
+      "description": "Concrete depicted entity; id is local to a concept and value is the canonical class."
+    },
+    "attribute": {
+      "required_fields": ["type", "subject", "value"],
+      "subtypes": ["colour", "material", "size", "pattern"],
+      "description": "Property attached to an existing object id."
+    },
+    "count": {
+      "required_fields": ["type", "subject", "value"],
+      "allowed_values": ["1", "2", "3", "4"],
+      "description": "Explicit small count for an object class."
+    },
+    "action": {
+      "required_fields": ["type", "subject", "value"],
+      "allowed_values": ["carry", "catch", "hold", "juggle", "read", "ride", "sleep", "watch"],
+      "optional_fields": ["object"],
+      "description": "Canonical verb with existing subject and optional existing object id."
+    },
+    "relation": {
+      "required_fields": ["type", "subject", "value", "object"],
+      "allowed_values": ["above", "behind", "below", "beside", "between", "in_front_of", "inside", "left_of", "on", "right_of", "under"],
+      "description": "Directed or explicitly symmetric spatial relation between existing object ids; between may use object2."
+    },
+    "scene": {
+      "required_fields": ["type", "value"],
+      "allowed_values": ["aquarium", "coastal_night", "coastal_sunrise", "desert", "forest", "kitchen", "library", "living_room", "lunar", "warehouse"],
+      "description": "Coarse environment/time concept independent from object identities."
+    }
+  },
+  "frequency_bands": {
+    "values": ["common_candidate", "mid_candidate", "rare_candidate"],
+    "smoke_assignment": "researcher design balance only",
+    "pilot_assignment": "retain design label for stratification; compute separate empirical band from frozen training-only public corpus if P8 approves acquisition",
+    "prohibition": "do not call these population frequencies or use validation/test prompts to set boundaries"
+  },
+  "complexity_levels": {
+    "1": "one object atom and no relational structure",
+    "2": "object plus one attribute, count, or scene atom",
+    "3": "at least two objects plus one action or relation",
+    "4": "at least four atoms spanning at least three atom types",
+    "5": "at least six atoms spanning at least four atom types with action or relation structure"
+  },
+  "styles": {
+    "literal": "clear literal depiction, no text, no watermark",
+    "watercolor": "watercolor illustration, no text, no watermark",
+    "paper_cut": "paper-cut illustration, no text, no watermark"
+  },
+  "layouts": {
+    "default": "balanced composition while preserving all stated spatial relations",
+    "wide": "wide composition while preserving all stated spatial relations",
+    "portrait": "portrait composition while preserving all stated spatial relations"
+  },
+  "near_neighbour_rule": {
+    "operation": "replace exactly one atom signature with another atom of the same type",
+    "unchanged": "all other atom signatures and referential links",
+    "label_storage": "labels manifest only",
+    "forbidden": ["retroactive change after observing model output", "implicit second semantic change in prompt", "cross-split pairing"]
+  },
+  "excluded_content": [
+    "sexual content involving minors or ambiguous age",
+    "explicit sexual content",
+    "graphic violence or facilitation of violence",
+    "targeted hate or dehumanisation",
+    "self-harm encouragement",
+    "personal identifiers or credential material",
+    "identity documents",
+    "non-consensual intimate imagery",
+    "instructions for wrongdoing",
+    "named living-artist imitation"
+  ]
+}
