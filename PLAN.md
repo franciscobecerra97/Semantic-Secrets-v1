@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P4 complete; P5–P17 not started.
+Status: P0–P5 complete; P6–P17 not started.
 Authority: `AGENT.md` is the scientific and engineering contract. This plan operationalises it and may not silently weaken it.  
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study.
 
@@ -260,6 +260,8 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 **Stop / fallback:** Use a smaller local model/narrower schema, or stop/reposition the affected image/structured path rather than moving to an undisclosed cloud dependency.
 
 ### P5 — Semantic representation and canonicalisation comparison
+
+**Status:** Complete on 2026-08-24 with a negative uncertainty outcome. `canonical-semantics-v1` and training-only `oracle-train-idf-v1` are frozen. Controlled weighted direct-text semantics is the primary P6 hypothesis; unweighted text, MiniLM, and SigLIP remain baselines. Florence structured fusion is rejected. No real representation has uncertainty-supported near-neighbour separation at smoke scale, so Gate A remains closed and P6 must be a preregistered pilot/negative confirmation.
 
 **Objective:** Determine which representation/canonicalisation offers the best stability, separability, interpretability, privacy compatibility, portability, and cost.
 

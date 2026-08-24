@@ -1,0 +1,24 @@
+{
+  "$schema_version": "canonical-semantics-config-v1",
+  "scheme_version": "canonical-semantics-v1",
+  "source_schema_version": "structured-extraction-v1",
+  "unicode": "NFKC",
+  "case": "Unicode casefold",
+  "separator": "underscore",
+  "minimum_confidence": 0.25,
+  "deduplication": "set after canonical atom construction",
+  "ordering": "lexicographic UTF-8 code-point order",
+  "plural_policy": "irregular map then conservative English suffix rules",
+  "relation_policy": {
+    "below": "swap endpoints and use above",
+    "right_of": "swap endpoints and use left_of",
+    "behind": "swap endpoints and use in_front_of",
+    "under": "swap endpoints and use on",
+    "beside": "sort endpoints because symmetric"
+  },
+  "low_confidence": "drop atom and add typed warning",
+  "duplicates": "collapse identical atom signatures",
+  "unsupported": "raise CanonicalizationError for unknown structural atom types; retain extractor warnings",
+  "missing_output": "empty atom tuple plus empty_representation warning",
+  "version_mismatch": "fail closed; no implicit migration"
+}

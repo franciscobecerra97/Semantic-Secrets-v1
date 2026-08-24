@@ -1,0 +1,1854 @@
+{
+  "$schema_version": "semantic-secrets-p5-result-v1",
+  "artifacts": {
+    "embedding_metadata_sha256": "243293050df09298b4b1e3e171f0cab829c4adb26e9795d8bb27eafdab677f58",
+    "florence_raw_sha256": "28e19c94aa66295f3d0aa566aac5356bca08ef5e3a8d61097de7d21fe8a4f4e5",
+    "generation_manifest_sha256": "27d6c3bc9122763bc44367e04fbfa09eee1d57ab9978c4601830d2657dd16299",
+    "minilm_array_sha256": "6c7b70ac6b4a45e79f99e288d516a9814e2baab1f527baa124038c4379b414f5",
+    "siglip_array_sha256": "6ae8e755cae62f858ba35e9b0c6b090176fae97e788576d9732fa171e50ca766",
+    "structured_sha256": "a402d3568a2e0ac9a187b5d08b9f677321c37f40461178b5c2884d5f05707ca7"
+  },
+  "atom_metrics": {
+    "controlled_text": {
+      "by_atom_type": {
+        "action": {
+          "fn": 6,
+          "fp": 0,
+          "recall": 0.333333,
+          "tp": 3
+        },
+        "attribute": {
+          "fn": 11,
+          "fp": 3,
+          "recall": 0.266667,
+          "tp": 4
+        },
+        "count": {
+          "fn": 3,
+          "fp": 4,
+          "recall": 0.5,
+          "tp": 3
+        },
+        "object": {
+          "fn": 15,
+          "fp": 3,
+          "recall": 0.6875,
+          "tp": 33
+        },
+        "relation": {
+          "fn": 7,
+          "fp": 7,
+          "recall": 0.222222,
+          "tp": 2
+        },
+        "scene": {
+          "fn": 1,
+          "fp": 0,
+          "recall": 0.952381,
+          "tp": 20
+        }
+      },
+      "empty_rows": 0,
+      "macro_f1": 0.638181,
+      "macro_precision": 0.78642,
+      "macro_recall": 0.625926,
+      "row_count": 27
+    },
+    "florence": {
+      "by_atom_type": {
+        "action": {
+          "fn": 9,
+          "fp": 2,
+          "recall": 0.0,
+          "tp": 0
+        },
+        "attribute": {
+          "fn": 14,
+          "fp": 15,
+          "recall": 0.066667,
+          "tp": 1
+        },
+        "count": {
+          "fn": 6,
+          "fp": 28,
+          "recall": 0.0,
+          "tp": 0
+        },
+        "object": {
+          "fn": 11,
+          "fp": 46,
+          "recall": 0.770833,
+          "tp": 37
+        },
+        "relation": {
+          "fn": 9,
+          "fp": 81,
+          "recall": 0.0,
+          "tp": 0
+        },
+        "scene": {
+          "fn": 7,
+          "fp": 0,
+          "recall": 0.666667,
+          "tp": 14
+        }
+      },
+      "empty_rows": 0,
+      "macro_f1": 0.374508,
+      "macro_precision": 0.334556,
+      "macro_recall": 0.532716,
+      "row_count": 27
+    }
+  },
+  "atom_metrics_by_split": {
+    "train": {
+      "controlled_text": {
+        "by_atom_type": {
+          "action": {
+            "fn": 0,
+            "fp": 0,
+            "recall": 1.0,
+            "tp": 3
+          },
+          "attribute": {
+            "fn": 5,
+            "fp": 0,
+            "recall": 0.444444,
+            "tp": 4
+          },
+          "count": {
+            "fn": 0,
+            "fp": 4,
+            "recall": 1.0,
+            "tp": 3
+          },
+          "object": {
+            "fn": 0,
+            "fp": 0,
+            "recall": 1.0,
+            "tp": 33
+          },
+          "relation": {
+            "fn": 4,
+            "fp": 7,
+            "recall": 0.333333,
+            "tp": 2
+          },
+          "scene": {
+            "fn": 1,
+            "fp": 0,
+            "recall": 0.933333,
+            "tp": 14
+          }
+        },
+        "empty_rows": 0,
+        "macro_f1": 0.854097,
+        "macro_precision": 0.846296,
+        "macro_recall": 0.877778,
+        "row_count": 18
+      },
+      "florence": {
+        "by_atom_type": {
+          "action": {
+            "fn": 3,
+            "fp": 2,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "attribute": {
+            "fn": 8,
+            "fp": 8,
+            "recall": 0.111111,
+            "tp": 1
+          },
+          "count": {
+            "fn": 3,
+            "fp": 20,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "object": {
+            "fn": 7,
+            "fp": 41,
+            "recall": 0.787879,
+            "tp": 26
+          },
+          "relation": {
+            "fn": 6,
+            "fp": 69,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "scene": {
+            "fn": 4,
+            "fp": 0,
+            "recall": 0.733333,
+            "tp": 11
+          }
+        },
+        "empty_rows": 0,
+        "macro_f1": 0.39392,
+        "macro_precision": 0.336093,
+        "macro_recall": 0.602778,
+        "row_count": 18
+      }
+    },
+    "validation": {
+      "controlled_text": {
+        "by_atom_type": {
+          "action": {
+            "fn": 6,
+            "fp": 0,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "attribute": {
+            "fn": 6,
+            "fp": 3,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "count": {
+            "fn": 3,
+            "fp": 0,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "object": {
+            "fn": 15,
+            "fp": 3,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "relation": {
+            "fn": 3,
+            "fp": 0,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "scene": {
+            "fn": 0,
+            "fp": 0,
+            "recall": 1.0,
+            "tp": 6
+          }
+        },
+        "empty_rows": 0,
+        "macro_f1": 0.206349,
+        "macro_precision": 0.666667,
+        "macro_recall": 0.122222,
+        "row_count": 9
+      },
+      "florence": {
+        "by_atom_type": {
+          "action": {
+            "fn": 6,
+            "fp": 0,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "attribute": {
+            "fn": 6,
+            "fp": 7,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "count": {
+            "fn": 3,
+            "fp": 8,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "object": {
+            "fn": 4,
+            "fp": 5,
+            "recall": 0.733333,
+            "tp": 11
+          },
+          "relation": {
+            "fn": 3,
+            "fp": 12,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "scene": {
+            "fn": 3,
+            "fp": 0,
+            "recall": 0.5,
+            "tp": 3
+          }
+        },
+        "empty_rows": 0,
+        "macro_f1": 0.335684,
+        "macro_precision": 0.331481,
+        "macro_recall": 0.392593,
+        "row_count": 9
+      }
+    }
+  },
+  "boundaries": {
+    "model_drift": "not measured: one generator and one extractor revision in P5",
+    "pilot_catalog_status": "not authored; P3 planned 60 families",
+    "roles": [
+      "enrolment",
+      "paraphrase",
+      "near_negative"
+    ],
+    "selected_families": 9,
+    "selected_rows": 27,
+    "splits": [
+      "train",
+      "validation"
+    ],
+    "test_rows_evaluated": 0
+  },
+  "config_sha256": "3da5912f2d83aff97e178791d2c69c8c0508a796ce7ba8ef27dd54f12457c4f2",
+  "determinism": {
+    "controlled_text_equal": true,
+    "florence_repeat_samples": [
+      {
+        "fixed_input_equal": true,
+        "row_id": "r_84274e8b87c9c10b98e5f1d5"
+      },
+      {
+        "fixed_input_equal": true,
+        "row_id": "r_7f7b75a79cf77581cf9f997c"
+      }
+    ],
+    "generator_fixed_seed_equal": true,
+    "minilm_fixed_input_equal": true,
+    "siglip_fixed_input_equal": true
+  },
+  "leakage_probes": {
+    "minilm": {
+      "dictionary_self_retrieval_top1": 27,
+      "dictionary_size": 27,
+      "enrolment_count": 9,
+      "enrolment_to_paraphrase_family_link_top1": 9,
+      "interpretation": "cheap known-candidate/linkability probe; not a general inversion attack"
+    },
+    "siglip": {
+      "dictionary_self_retrieval_top1": 27,
+      "dictionary_size": 27,
+      "enrolment_count": 9,
+      "enrolment_to_paraphrase_family_link_top1": 9,
+      "interpretation": "cheap known-candidate/linkability probe; not a general inversion attack"
+    },
+    "structured": {
+      "direct_atom_disclosure": true,
+      "interpretation": "structured atoms are readable and exact sets are stable identifiers unless protected",
+      "raw_set_cross_service_linkable_without_domain_protection": true
+    },
+    "warning": "raw embeddings are not private; these cheap probes do not establish resistance to general inversion"
+  },
+  "pair_count": 27,
+  "pairs": [
+    {
+      "anchor_row_id": "r_84274e8b87c9c10b98e5f1d5",
+      "candidate_row_id": "r_eda0d23fac893aa5d8ff758c",
+      "changed_atom_type": "object",
+      "family_id": "f001",
+      "relationship": "near_negative",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_84274e8b87c9c10b98e5f1d5",
+      "candidate_row_id": "r_ed2cb08d440a38b6e4be487a",
+      "changed_atom_type": null,
+      "family_id": "f001",
+      "relationship": "same",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_84274e8b87c9c10b98e5f1d5",
+      "candidate_row_id": "r_a8201202f291d3509eaac832",
+      "changed_atom_type": null,
+      "family_id": "f001",
+      "relationship": "unrelated",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_7f7b75a79cf77581cf9f997c",
+      "candidate_row_id": "r_972c179bc9981669ab14f77d",
+      "changed_atom_type": "attribute",
+      "family_id": "f002",
+      "relationship": "near_negative",
+      "split": "validation"
+    },
+    {
+      "anchor_row_id": "r_7f7b75a79cf77581cf9f997c",
+      "candidate_row_id": "r_dfbbab0032702ae8ed1bf666",
+      "changed_atom_type": null,
+      "family_id": "f002",
+      "relationship": "same",
+      "split": "validation"
+    },
+    {
+      "anchor_row_id": "r_7f7b75a79cf77581cf9f997c",
+      "candidate_row_id": "r_c36925252ab8834fc2dea964",
+      "changed_atom_type": null,
+      "family_id": "f002",
+      "relationship": "unrelated",
+      "split": "validation"
+    },
+    {
+      "anchor_row_id": "r_a8201202f291d3509eaac832",
+      "candidate_row_id": "r_81f1ff499df29b8c9a326777",
+      "changed_atom_type": "scene",
+      "family_id": "f006",
+      "relationship": "near_negative",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_a8201202f291d3509eaac832",
+      "candidate_row_id": "r_0139eb934a9de6eac048af2a",
+      "changed_atom_type": null,
+      "family_id": "f006",
+      "relationship": "same",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_a8201202f291d3509eaac832",
+      "candidate_row_id": "r_22b3206156195006ad748583",
+      "changed_atom_type": null,
+      "family_id": "f006",
+      "relationship": "unrelated",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_22b3206156195006ad748583",
+      "candidate_row_id": "r_664b4ab6867cbfe0542aeea4",
+      "changed_atom_type": "attribute",
+      "family_id": "f007",
+      "relationship": "near_negative",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_22b3206156195006ad748583",
+      "candidate_row_id": "r_737b96c8e97f77f36ccfa438",
+      "changed_atom_type": null,
+      "family_id": "f007",
+      "relationship": "same",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_22b3206156195006ad748583",
+      "candidate_row_id": "r_47ad809350adf6edc70d3555",
+      "changed_atom_type": null,
+      "family_id": "f007",
+      "relationship": "unrelated",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_47ad809350adf6edc70d3555",
+      "candidate_row_id": "r_067e22384fb9d3bcacf4501b",
+      "changed_atom_type": "relation",
+      "family_id": "f008",
+      "relationship": "near_negative",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_47ad809350adf6edc70d3555",
+      "candidate_row_id": "r_71f3a8bdb37ac08388774f9c",
+      "changed_atom_type": null,
+      "family_id": "f008",
+      "relationship": "same",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_47ad809350adf6edc70d3555",
+      "candidate_row_id": "r_bcb4aed82820fff1df3287f5",
+      "changed_atom_type": null,
+      "family_id": "f008",
+      "relationship": "unrelated",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_c36925252ab8834fc2dea964",
+      "candidate_row_id": "r_08a78e7ea458ceac65cd4562",
+      "changed_atom_type": "count",
+      "family_id": "f009",
+      "relationship": "near_negative",
+      "split": "validation"
+    },
+    {
+      "anchor_row_id": "r_c36925252ab8834fc2dea964",
+      "candidate_row_id": "r_79548998961137d62fdb080c",
+      "changed_atom_type": null,
+      "family_id": "f009",
+      "relationship": "same",
+      "split": "validation"
+    },
+    {
+      "anchor_row_id": "r_c36925252ab8834fc2dea964",
+      "candidate_row_id": "r_a63524728fe67e7067d526c7",
+      "changed_atom_type": null,
+      "family_id": "f009",
+      "relationship": "unrelated",
+      "split": "validation"
+    },
+    {
+      "anchor_row_id": "r_bcb4aed82820fff1df3287f5",
+      "candidate_row_id": "r_58b10b9ef27825863ba630cd",
+      "changed_atom_type": "action",
+      "family_id": "f010",
+      "relationship": "near_negative",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_bcb4aed82820fff1df3287f5",
+      "candidate_row_id": "r_e07ba9e6e1030528c2a8e3fc",
+      "changed_atom_type": null,
+      "family_id": "f010",
+      "relationship": "same",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_bcb4aed82820fff1df3287f5",
+      "candidate_row_id": "r_77dc4566524f4277cd4a96ba",
+      "changed_atom_type": null,
+      "family_id": "f010",
+      "relationship": "unrelated",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_77dc4566524f4277cd4a96ba",
+      "candidate_row_id": "r_80869a6d5df3b382248aa15d",
+      "changed_atom_type": "attribute",
+      "family_id": "f011",
+      "relationship": "near_negative",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_77dc4566524f4277cd4a96ba",
+      "candidate_row_id": "r_2528d28c32429d9b18c8367d",
+      "changed_atom_type": null,
+      "family_id": "f011",
+      "relationship": "same",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_77dc4566524f4277cd4a96ba",
+      "candidate_row_id": "r_84274e8b87c9c10b98e5f1d5",
+      "changed_atom_type": null,
+      "family_id": "f011",
+      "relationship": "unrelated",
+      "split": "train"
+    },
+    {
+      "anchor_row_id": "r_a63524728fe67e7067d526c7",
+      "candidate_row_id": "r_29b0da6b492ef05a420a395f",
+      "changed_atom_type": "relation",
+      "family_id": "f012",
+      "relationship": "near_negative",
+      "split": "validation"
+    },
+    {
+      "anchor_row_id": "r_a63524728fe67e7067d526c7",
+      "candidate_row_id": "r_8bd03e4c886e83dc101dc549",
+      "changed_atom_type": null,
+      "family_id": "f012",
+      "relationship": "same",
+      "split": "validation"
+    },
+    {
+      "anchor_row_id": "r_a63524728fe67e7067d526c7",
+      "candidate_row_id": "r_7f7b75a79cf77581cf9f997c",
+      "changed_atom_type": null,
+      "family_id": "f012",
+      "relationship": "unrelated",
+      "split": "validation"
+    }
+  ],
+  "private_matching_compatibility": {
+    "dense_embedding": "requires approximate dot-product comparison with MPC/HE or related machinery; raw cosine is only a baseline",
+    "plaintext_storage": "rejected as privacy-preserving for all representation families",
+    "structured_set": "plausible PSI/PSI-cardinality/private threshold path; exact protocol and leakage wait for D6/P9",
+    "weighted_structured_set": "requires private weighted intersection/threshold and public or protected frozen weights; greater complexity"
+  },
+  "publication_result": false,
+  "qualitative_failures": {
+    "all_real_representations": [
+      "QF-NEAR-UNCERTAINTY"
+    ],
+    "controlled_text_structured": [
+      "QF-COVERAGE",
+      "QF-TRAIN-LEXICON-OOV"
+    ],
+    "florence_structured": [
+      "QF-COVERAGE",
+      "QF-MISSING-ATOM",
+      "QF-HALLUCINATION"
+    ],
+    "generator": [
+      "QF-NUMERIC-FP16",
+      "QF-HARDWARE-OVERSUBSCRIPTION"
+    ]
+  },
+  "representations": {
+    "controlled_text_structured": {
+      "advance_to_p6_by_smoke_rule": false,
+      "by_relationship": {
+        "near_negative": {
+          "count": 9,
+          "maximum": 1.0,
+          "mean": 0.607407,
+          "median": 0.666667,
+          "minimum": 0.0
+        },
+        "same": {
+          "count": 9,
+          "maximum": 1.0,
+          "mean": 0.714286,
+          "median": 0.666667,
+          "minimum": 0.333333
+        },
+        "unrelated": {
+          "count": 9,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        }
+      },
+      "by_split": {
+        "train": {
+          "near_negative": {
+            "count": 6,
+            "maximum": 0.8,
+            "mean": 0.522222,
+            "median": 0.666667,
+            "minimum": 0.0
+          },
+          "same": {
+            "count": 6,
+            "maximum": 0.833333,
+            "mean": 0.571429,
+            "median": 0.583333,
+            "minimum": 0.333333
+          },
+          "unrelated": {
+            "count": 6,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 3,
+            "maximum": 1.0,
+            "mean": 0.777778,
+            "median": 1.0,
+            "minimum": 0.333333
+          },
+          "same": {
+            "count": 3,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0
+          },
+          "unrelated": {
+            "count": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        }
+      },
+      "near_sensitivity_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "maximum": 0.666667,
+          "mean": 0.666667,
+          "median": 0.666667,
+          "minimum": 0.666667
+        },
+        "attribute": {
+          "count": 3,
+          "maximum": 0.8,
+          "mean": 0.6,
+          "median": 0.666667,
+          "minimum": 0.333333
+        },
+        "count": {
+          "count": 1,
+          "maximum": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "minimum": 1.0
+        },
+        "object": {
+          "count": 1,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        },
+        "relation": {
+          "count": 2,
+          "maximum": 1.0,
+          "mean": 0.833333,
+          "median": 0.833333,
+          "minimum": 0.666667
+        },
+        "scene": {
+          "count": 1,
+          "maximum": 0.333333,
+          "mean": 0.333333,
+          "median": 0.333333,
+          "minimum": 0.333333
+        }
+      },
+      "paired_gap_same_minus_near": {
+        "bootstrap_95pct": [
+          -0.068254,
+          0.296296
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.106878
+      },
+      "paired_gap_same_minus_unrelated": {
+        "bootstrap_95pct": [
+          0.550265,
+          0.87037
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.714286
+      },
+      "uncertainty_supports_positive_separation": false
+    },
+    "controlled_text_weighted": {
+      "advance_to_p6_by_smoke_rule": true,
+      "by_relationship": {
+        "near_negative": {
+          "count": 9,
+          "maximum": 1.0,
+          "mean": 0.718628,
+          "median": 0.8,
+          "minimum": 0.0
+        },
+        "same": {
+          "count": 9,
+          "maximum": 1.0,
+          "mean": 0.877802,
+          "median": 1.0,
+          "minimum": 0.5
+        },
+        "unrelated": {
+          "count": 9,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        }
+      },
+      "by_split": {
+        "train": {
+          "near_negative": {
+            "count": 6,
+            "maximum": 0.90011,
+            "mean": 0.62918,
+            "median": 0.787486,
+            "minimum": 0.0
+          },
+          "same": {
+            "count": 6,
+            "maximum": 1.0,
+            "mean": 0.816703,
+            "median": 0.90011,
+            "minimum": 0.5
+          },
+          "unrelated": {
+            "count": 6,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 3,
+            "maximum": 1.0,
+            "mean": 0.897523,
+            "median": 1.0,
+            "minimum": 0.692569
+          },
+          "same": {
+            "count": 3,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0
+          },
+          "unrelated": {
+            "count": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        }
+      },
+      "near_sensitivity_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "maximum": 0.8,
+          "mean": 0.8,
+          "median": 0.8,
+          "minimum": 0.8
+        },
+        "attribute": {
+          "count": 3,
+          "maximum": 0.8,
+          "mean": 0.755847,
+          "median": 0.774972,
+          "minimum": 0.692569
+        },
+        "count": {
+          "count": 1,
+          "maximum": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "minimum": 1.0
+        },
+        "object": {
+          "count": 1,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        },
+        "relation": {
+          "count": 2,
+          "maximum": 1.0,
+          "mean": 0.950055,
+          "median": 0.950055,
+          "minimum": 0.90011
+        },
+        "scene": {
+          "count": 1,
+          "maximum": 0.5,
+          "mean": 0.5,
+          "median": 0.5,
+          "minimum": 0.5
+        }
+      },
+      "paired_gap_same_minus_near": {
+        "bootstrap_95pct": [
+          -0.016636,
+          0.391682
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.159174
+      },
+      "paired_gap_same_minus_unrelated": {
+        "bootstrap_95pct": [
+          0.744469,
+          0.988901
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.877802
+      },
+      "uncertainty_supports_positive_separation": false
+    },
+    "florence_structured": {
+      "advance_to_p6_by_smoke_rule": true,
+      "by_relationship": {
+        "near_negative": {
+          "count": 9,
+          "maximum": 0.6,
+          "mean": 0.346523,
+          "median": 0.3,
+          "minimum": 0.0
+        },
+        "same": {
+          "count": 9,
+          "maximum": 0.666667,
+          "mean": 0.377398,
+          "median": 0.333333,
+          "minimum": 0.166667
+        },
+        "unrelated": {
+          "count": 9,
+          "maximum": 0.083333,
+          "mean": 0.009259,
+          "median": 0.0,
+          "minimum": 0.0
+        }
+      },
+      "by_split": {
+        "train": {
+          "near_negative": {
+            "count": 6,
+            "maximum": 0.571429,
+            "mean": 0.272165,
+            "median": 0.233333,
+            "minimum": 0.0
+          },
+          "same": {
+            "count": 6,
+            "maximum": 0.666667,
+            "mean": 0.387037,
+            "median": 0.366667,
+            "minimum": 0.2
+          },
+          "unrelated": {
+            "count": 6,
+            "maximum": 0.083333,
+            "mean": 0.013889,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 3,
+            "maximum": 0.6,
+            "mean": 0.495238,
+            "median": 0.6,
+            "minimum": 0.285714
+          },
+          "same": {
+            "count": 3,
+            "maximum": 0.6,
+            "mean": 0.35812,
+            "median": 0.307692,
+            "minimum": 0.166667
+          },
+          "unrelated": {
+            "count": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        }
+      },
+      "near_sensitivity_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "maximum": 0.140351,
+          "mean": 0.140351,
+          "median": 0.140351,
+          "minimum": 0.140351
+        },
+        "attribute": {
+          "count": 3,
+          "maximum": 0.6,
+          "mean": 0.355556,
+          "median": 0.3,
+          "minimum": 0.166667
+        },
+        "count": {
+          "count": 1,
+          "maximum": 0.285714,
+          "mean": 0.285714,
+          "median": 0.285714,
+          "minimum": 0.285714
+        },
+        "object": {
+          "count": 1,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        },
+        "relation": {
+          "count": 2,
+          "maximum": 0.6,
+          "mean": 0.585714,
+          "median": 0.585714,
+          "minimum": 0.571429
+        },
+        "scene": {
+          "count": 1,
+          "maximum": 0.454545,
+          "mean": 0.454545,
+          "median": 0.454545,
+          "minimum": 0.454545
+        }
+      },
+      "paired_gap_same_minus_near": {
+        "bootstrap_95pct": [
+          -0.114322,
+          0.185816
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.030875
+      },
+      "paired_gap_same_minus_unrelated": {
+        "bootstrap_95pct": [
+          0.266762,
+          0.483951
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.368139
+      },
+      "uncertainty_supports_positive_separation": false
+    },
+    "florence_weighted": {
+      "advance_to_p6_by_smoke_rule": true,
+      "by_relationship": {
+        "near_negative": {
+          "count": 9,
+          "maximum": 0.885822,
+          "mean": 0.489584,
+          "median": 0.56419,
+          "minimum": 0.0
+        },
+        "same": {
+          "count": 9,
+          "maximum": 1.0,
+          "mean": 0.626694,
+          "median": 0.771645,
+          "minimum": 0.25
+        },
+        "unrelated": {
+          "count": 9,
+          "maximum": 0.214436,
+          "mean": 0.023826,
+          "median": 0.0,
+          "minimum": 0.0
+        }
+      },
+      "by_split": {
+        "train": {
+          "near_negative": {
+            "count": 6,
+            "maximum": 0.885822,
+            "mean": 0.418882,
+            "median": 0.410702,
+            "minimum": 0.0
+          },
+          "same": {
+            "count": 6,
+            "maximum": 1.0,
+            "mean": 0.707882,
+            "median": 0.790634,
+            "minimum": 0.318487
+          },
+          "unrelated": {
+            "count": 6,
+            "maximum": 0.214436,
+            "mean": 0.035739,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 3,
+            "maximum": 0.809624,
+            "mean": 0.630986,
+            "median": 0.75,
+            "minimum": 0.333333
+          },
+          "same": {
+            "count": 3,
+            "maximum": 0.809624,
+            "mean": 0.464319,
+            "median": 0.333333,
+            "minimum": 0.25
+          },
+          "unrelated": {
+            "count": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        }
+      },
+      "near_sensitivity_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "maximum": 0.21088,
+          "mean": 0.21088,
+          "median": 0.21088,
+          "minimum": 0.21088
+        },
+        "attribute": {
+          "count": 3,
+          "maximum": 0.809624,
+          "mean": 0.543676,
+          "median": 0.56419,
+          "minimum": 0.257215
+        },
+        "count": {
+          "count": 1,
+          "maximum": 0.333333,
+          "mean": 0.333333,
+          "median": 0.333333,
+          "minimum": 0.333333
+        },
+        "object": {
+          "count": 1,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        },
+        "relation": {
+          "count": 2,
+          "maximum": 0.885822,
+          "mean": 0.817911,
+          "median": 0.817911,
+          "minimum": 0.75
+        },
+        "scene": {
+          "count": 1,
+          "maximum": 0.595188,
+          "mean": 0.595188,
+          "median": 0.595188,
+          "minimum": 0.595188
+        }
+      },
+      "paired_gap_same_minus_near": {
+        "bootstrap_95pct": [
+          -0.108454,
+          0.416492
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.137111
+      },
+      "paired_gap_same_minus_unrelated": {
+        "bootstrap_95pct": [
+          0.425753,
+          0.770989
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.602868
+      },
+      "uncertainty_supports_positive_separation": false
+    },
+    "minilm_text": {
+      "advance_to_p6_by_smoke_rule": true,
+      "by_relationship": {
+        "near_negative": {
+          "count": 9,
+          "maximum": 0.994804,
+          "mean": 0.884339,
+          "median": 0.921854,
+          "minimum": 0.778903
+        },
+        "same": {
+          "count": 9,
+          "maximum": 0.972253,
+          "mean": 0.923649,
+          "median": 0.925226,
+          "minimum": 0.837281
+        },
+        "unrelated": {
+          "count": 9,
+          "maximum": 0.304427,
+          "mean": 0.112997,
+          "median": 0.103121,
+          "minimum": -0.066099
+        }
+      },
+      "by_split": {
+        "train": {
+          "near_negative": {
+            "count": 6,
+            "maximum": 0.946278,
+            "mean": 0.876327,
+            "median": 0.894679,
+            "minimum": 0.778903
+          },
+          "same": {
+            "count": 6,
+            "maximum": 0.951712,
+            "mean": 0.913015,
+            "median": 0.917637,
+            "minimum": 0.837281
+          },
+          "unrelated": {
+            "count": 6,
+            "maximum": 0.304427,
+            "mean": 0.153092,
+            "median": 0.166233,
+            "minimum": 0.013105
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 3,
+            "maximum": 0.994804,
+            "mean": 0.900364,
+            "median": 0.921854,
+            "minimum": 0.784433
+          },
+          "same": {
+            "count": 3,
+            "maximum": 0.972253,
+            "mean": 0.944917,
+            "median": 0.944537,
+            "minimum": 0.917961
+          },
+          "unrelated": {
+            "count": 3,
+            "maximum": 0.103121,
+            "mean": 0.032808,
+            "median": 0.061402,
+            "minimum": -0.066099
+          }
+        }
+      },
+      "near_sensitivity_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "maximum": 0.800428,
+          "mean": 0.800428,
+          "median": 0.800428,
+          "minimum": 0.800428
+        },
+        "attribute": {
+          "count": 3,
+          "maximum": 0.946278,
+          "mean": 0.888324,
+          "median": 0.934261,
+          "minimum": 0.784433
+        },
+        "count": {
+          "count": 1,
+          "maximum": 0.921854,
+          "mean": 0.921854,
+          "median": 0.921854,
+          "minimum": 0.921854
+        },
+        "object": {
+          "count": 1,
+          "maximum": 0.778903,
+          "mean": 0.778903,
+          "median": 0.778903,
+          "minimum": 0.778903
+        },
+        "relation": {
+          "count": 2,
+          "maximum": 0.994804,
+          "mean": 0.968901,
+          "median": 0.968901,
+          "minimum": 0.942997
+        },
+        "scene": {
+          "count": 1,
+          "maximum": 0.855096,
+          "mean": 0.855096,
+          "median": 0.855096,
+          "minimum": 0.855096
+        }
+      },
+      "paired_gap_same_minus_near": {
+        "bootstrap_95pct": [
+          -0.001898,
+          0.084323
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.039309
+      },
+      "paired_gap_same_minus_unrelated": {
+        "bootstrap_95pct": [
+          0.723861,
+          0.884799
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.810651
+      },
+      "uncertainty_supports_positive_separation": false
+    },
+    "oracle_structured": {
+      "advance_to_p6_by_smoke_rule": true,
+      "by_relationship": {
+        "near_negative": {
+          "count": 9,
+          "maximum": 0.714286,
+          "mean": 0.521693,
+          "median": 0.666667,
+          "minimum": 0.0
+        },
+        "same": {
+          "count": 9,
+          "maximum": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "minimum": 1.0
+        },
+        "unrelated": {
+          "count": 9,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        }
+      },
+      "by_split": {
+        "train": {
+          "near_negative": {
+            "count": 6,
+            "maximum": 0.714286,
+            "mean": 0.496825,
+            "median": 0.633333,
+            "minimum": 0.0
+          },
+          "same": {
+            "count": 6,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0
+          },
+          "unrelated": {
+            "count": 6,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 3,
+            "maximum": 0.714286,
+            "mean": 0.571429,
+            "median": 0.666667,
+            "minimum": 0.333333
+          },
+          "same": {
+            "count": 3,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0
+          },
+          "unrelated": {
+            "count": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        }
+      },
+      "near_sensitivity_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "maximum": 0.714286,
+          "mean": 0.714286,
+          "median": 0.714286,
+          "minimum": 0.714286
+        },
+        "attribute": {
+          "count": 3,
+          "maximum": 0.666667,
+          "mean": 0.533333,
+          "median": 0.6,
+          "minimum": 0.333333
+        },
+        "count": {
+          "count": 1,
+          "maximum": 0.666667,
+          "mean": 0.666667,
+          "median": 0.666667,
+          "minimum": 0.666667
+        },
+        "object": {
+          "count": 1,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        },
+        "relation": {
+          "count": 2,
+          "maximum": 0.714286,
+          "mean": 0.690476,
+          "median": 0.690476,
+          "minimum": 0.666667
+        },
+        "scene": {
+          "count": 1,
+          "maximum": 0.333333,
+          "mean": 0.333333,
+          "median": 0.333333,
+          "minimum": 0.333333
+        }
+      },
+      "paired_gap_same_minus_near": {
+        "bootstrap_95pct": [
+          0.343915,
+          0.631746
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.478307
+      },
+      "paired_gap_same_minus_unrelated": {
+        "bootstrap_95pct": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 1.0
+      },
+      "uncertainty_supports_positive_separation": true
+    },
+    "oracle_weighted": {
+      "advance_to_p6_by_smoke_rule": true,
+      "by_relationship": {
+        "near_negative": {
+          "count": 9,
+          "maximum": 0.833333,
+          "mean": 0.646296,
+          "median": 0.8,
+          "minimum": 0.0
+        },
+        "same": {
+          "count": 9,
+          "maximum": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "minimum": 1.0
+        },
+        "unrelated": {
+          "count": 9,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        }
+      },
+      "by_split": {
+        "train": {
+          "near_negative": {
+            "count": 6,
+            "maximum": 0.833333,
+            "mean": 0.613889,
+            "median": 0.775,
+            "minimum": 0.0
+          },
+          "same": {
+            "count": 6,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0
+          },
+          "unrelated": {
+            "count": 6,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 3,
+            "maximum": 0.833333,
+            "mean": 0.711111,
+            "median": 0.8,
+            "minimum": 0.5
+          },
+          "same": {
+            "count": 3,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0
+          },
+          "unrelated": {
+            "count": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0
+          }
+        }
+      },
+      "near_sensitivity_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "maximum": 0.833333,
+          "mean": 0.833333,
+          "median": 0.833333,
+          "minimum": 0.833333
+        },
+        "attribute": {
+          "count": 3,
+          "maximum": 0.8,
+          "mean": 0.683333,
+          "median": 0.75,
+          "minimum": 0.5
+        },
+        "count": {
+          "count": 1,
+          "maximum": 0.8,
+          "mean": 0.8,
+          "median": 0.8,
+          "minimum": 0.8
+        },
+        "object": {
+          "count": 1,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0
+        },
+        "relation": {
+          "count": 2,
+          "maximum": 0.833333,
+          "mean": 0.816667,
+          "median": 0.816667,
+          "minimum": 0.8
+        },
+        "scene": {
+          "count": 1,
+          "maximum": 0.5,
+          "mean": 0.5,
+          "median": 0.5,
+          "minimum": 0.5
+        }
+      },
+      "paired_gap_same_minus_near": {
+        "bootstrap_95pct": [
+          0.211111,
+          0.538889
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.353704
+      },
+      "paired_gap_same_minus_unrelated": {
+        "bootstrap_95pct": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 1.0
+      },
+      "uncertainty_supports_positive_separation": true
+    },
+    "siglip_image": {
+      "advance_to_p6_by_smoke_rule": true,
+      "by_relationship": {
+        "near_negative": {
+          "count": 9,
+          "maximum": 0.981307,
+          "mean": 0.897471,
+          "median": 0.919242,
+          "minimum": 0.70235
+        },
+        "same": {
+          "count": 9,
+          "maximum": 0.9698,
+          "mean": 0.932114,
+          "median": 0.935991,
+          "minimum": 0.865583
+        },
+        "unrelated": {
+          "count": 9,
+          "maximum": 0.665936,
+          "mean": 0.589189,
+          "median": 0.587502,
+          "minimum": 0.492729
+        }
+      },
+      "by_split": {
+        "train": {
+          "near_negative": {
+            "count": 6,
+            "maximum": 0.981307,
+            "mean": 0.882001,
+            "median": 0.907183,
+            "minimum": 0.70235
+          },
+          "same": {
+            "count": 6,
+            "maximum": 0.9698,
+            "mean": 0.935169,
+            "median": 0.928355,
+            "minimum": 0.89787
+          },
+          "unrelated": {
+            "count": 6,
+            "maximum": 0.665936,
+            "mean": 0.614257,
+            "median": 0.602468,
+            "minimum": 0.577927
+          }
+        },
+        "validation": {
+          "near_negative": {
+            "count": 3,
+            "maximum": 0.964802,
+            "mean": 0.928411,
+            "median": 0.925601,
+            "minimum": 0.894831
+          },
+          "same": {
+            "count": 3,
+            "maximum": 0.96624,
+            "mean": 0.926005,
+            "median": 0.946193,
+            "minimum": 0.865583
+          },
+          "unrelated": {
+            "count": 3,
+            "maximum": 0.629258,
+            "mean": 0.539054,
+            "median": 0.495175,
+            "minimum": 0.492729
+          }
+        }
+      },
+      "near_sensitivity_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "maximum": 0.919242,
+          "mean": 0.919242,
+          "median": 0.919242,
+          "minimum": 0.919242
+        },
+        "attribute": {
+          "count": 3,
+          "maximum": 0.931546,
+          "mean": 0.907167,
+          "median": 0.895125,
+          "minimum": 0.894831
+        },
+        "count": {
+          "count": 1,
+          "maximum": 0.925601,
+          "mean": 0.925601,
+          "median": 0.925601,
+          "minimum": 0.925601
+        },
+        "object": {
+          "count": 1,
+          "maximum": 0.70235,
+          "mean": 0.70235,
+          "median": 0.70235,
+          "minimum": 0.70235
+        },
+        "relation": {
+          "count": 2,
+          "maximum": 0.981307,
+          "mean": 0.973054,
+          "median": 0.973054,
+          "minimum": 0.964802
+        },
+        "scene": {
+          "count": 1,
+          "maximum": 0.862438,
+          "mean": 0.862438,
+          "median": 0.862438,
+          "minimum": 0.862438
+        }
+      },
+      "paired_gap_same_minus_near": {
+        "bootstrap_95pct": [
+          -0.017166,
+          0.090543
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.034643
+      },
+      "paired_gap_same_minus_unrelated": {
+        "bootstrap_95pct": [
+          0.296187,
+          0.393719
+        ],
+        "bootstrap_repetitions": 2000,
+        "family_count": 9,
+        "mean_paired_gap": 0.342925
+      },
+      "uncertainty_supports_positive_separation": false
+    }
+  },
+  "resources": {
+    "florence": {
+      "peak_cuda_allocated_mib": 1210.65,
+      "task_latency_seconds": {
+        "<MORE_DETAILED_CAPTION>": [
+          7.379293,
+          10.627781,
+          6.774363,
+          8.836382,
+          7.871736,
+          8.712607,
+          10.571728,
+          6.292661,
+          10.425566,
+          10.242163,
+          10.326501,
+          5.404229,
+          7.087486,
+          7.201943,
+          7.643243,
+          7.458355,
+          7.340192,
+          9.914545,
+          7.412617,
+          10.085174,
+          8.94597,
+          6.760682,
+          9.134798,
+          5.719049,
+          7.213411,
+          8.30184,
+          7.517029
+        ],
+        "<OD>": [
+          1.917531,
+          0.766383,
+          2.795786,
+          0.772146,
+          9.907511,
+          1.109699,
+          0.762594,
+          3.342705,
+          0.754894,
+          0.764586,
+          0.89304,
+          1.206516,
+          5.043087,
+          0.902554,
+          4.053837,
+          2.318638,
+          1.555645,
+          0.736434,
+          0.93489,
+          1.101622,
+          1.689817,
+          7.142533,
+          4.206619,
+          0.924474,
+          4.571608,
+          1.132643,
+          1.0838
+        ]
+      }
+    },
+    "generator": {
+      "latency_seconds": [
+        26.350485,
+        26.077576,
+        25.734256,
+        25.683047,
+        26.350131,
+        25.795122,
+        25.65568,
+        25.702651,
+        25.853586,
+        25.866898,
+        26.467689,
+        26.015554,
+        26.218685,
+        25.97787,
+        25.806967,
+        25.779751,
+        25.727386,
+        25.725995,
+        25.722116,
+        25.837786,
+        25.713399,
+        25.600206,
+        25.85693,
+        25.657681,
+        25.739483,
+        25.969098,
+        25.684185
+      ],
+      "measured_rows": 27,
+      "peak_cuda_allocated_mib": [
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78,
+        5716.78
+      ],
+      "png_bytes": 11877601
+    },
+    "minilm": {
+      "peak_cuda_allocated_mib": [
+        101.27,
+        101.27
+      ],
+      "run_seconds": [
+        0.179569,
+        0.103586
+      ],
+      "shape": [
+        27,
+        384
+      ]
+    },
+    "minilm_array_bytes": 41600,
+    "siglip": {
+      "peak_cuda_allocated_mib": [
+        829.97,
+        829.97
+      ],
+      "run_seconds": [
+        1.152585,
+        0.988164
+      ],
+      "shape": [
+        27,
+        768
+      ]
+    },
+    "siglip_array_bytes": 83072,
+    "structured_result_bytes": 15816
+  },
+  "run_kind": "bounded engineering smoke; not pilot or publication result",
+  "screen_id": "p5-smoke-v1",
+  "versions": {
+    "canonical_scheme": "canonical-semantics-v1",
+    "structured_schema": "structured-extraction-v1",
+    "weights_fit_split": "train",
+    "weights_sha256": "130b2cec205c3f3d67acafa07718688495bb5175df489b6e06a4a2fee162dd17",
+    "weights_training_documents": 6,
+    "weights_version": "oracle-train-idf-v1"
+  }
+}

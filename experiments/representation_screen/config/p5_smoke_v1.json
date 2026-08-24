@@ -1,0 +1,84 @@
+{
+  "$schema_version": "semantic-secrets-p5-screen-config-v1",
+  "screen_id": "p5-smoke-v1",
+  "publication_result": false,
+  "dataset_stage": "smoke",
+  "selection": {
+    "splits": ["train", "validation"],
+    "roles": ["enrolment", "paraphrase", "near_negative"],
+    "test_policy": "test families and labels remain sealed",
+    "unrelated_pairing": "cyclic next-family enrolment within split"
+  },
+  "generator": {
+    "backend_id": "g_sd_turbo_fp32_wddm_v1",
+    "model_id": "stabilityai/sd-turbo",
+    "revision": "b261bac6fd2cf515557d5d0707481eafa0485ec2",
+    "variant": "fp16",
+    "load_dtype": "float32",
+    "device": "cuda",
+    "width": 512,
+    "height": 512,
+    "inference_steps": 1,
+    "guidance_scale": 0.0,
+    "safety_boundary": "controlled project-authored benign prompts only; no public service",
+    "repeat_rule": "repeat lexicographically first enrolment row once"
+  },
+  "florence": {
+    "backend_id": "e_florence2_base_eager_nocache_v1",
+    "model_id": "microsoft/Florence-2-base",
+    "revision": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+    "trust_remote_code": true,
+    "code_review_boundary": "pinned repository Python files hashed; no edits; network disabled during execution",
+    "dtype": "float32",
+    "device": "cuda",
+    "attention": "eager",
+    "use_cache": false,
+    "do_sample": false,
+    "num_beams": 3,
+    "tasks": {
+      "<OD>": 128,
+      "<MORE_DETAILED_CAPTION>": 128
+    },
+    "repeat_rule": "repeat lexicographically first enrolment row in each evaluated split"
+  },
+  "siglip": {
+    "backend_id": "b_siglip_base_224",
+    "model_id": "google/siglip-base-patch16-224",
+    "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+    "dtype": "float32",
+    "device": "cuda",
+    "batch_size": 6,
+    "repeat_count": 2
+  },
+  "minilm": {
+    "backend_id": "b_minilm_text",
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "dtype": "float32",
+    "device": "cuda",
+    "batch_size": 18,
+    "repeat_count": 2
+  },
+  "canonicalisation": {
+    "scheme_version": "canonical-semantics-v1",
+    "config": "../../../prototype/semantic_secrets/semantics/canonical_scheme_v1.json",
+    "minimum_confidence": 0.25
+  },
+  "weighting": {
+    "weights_version": "oracle-train-idf-v1",
+    "fit_split": "train",
+    "source": "oracle canonical atoms only",
+    "validation_or_test_labels_used": false
+  },
+  "analysis": {
+    "pair_types": ["same", "near_negative", "unrelated"],
+    "structured_diagnostic": "jaccard",
+    "weighted_diagnostic": "enrolled-weight overlap",
+    "dense_diagnostic": "cosine",
+    "bootstrap_seed": 5105,
+    "bootstrap_repetitions": 2000,
+    "advance_rule": "fixed-repeat deterministic and median(same) strictly exceeds both median(near_negative) and median(unrelated); no threshold selected",
+    "leakage_probes": ["dictionary self-retrieval", "same-family linkage", "direct atom disclosure"],
+    "model_drift": "not measured: one generator and one extractor revision in P5"
+  }
+}

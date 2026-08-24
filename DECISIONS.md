@@ -247,3 +247,99 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** Florence schema/atom coverage and remote-code requirements; behaviour on generated and natural images; atom-level error; positive/negative separation; calibration; drift; canonicalisation; embedding inversion/linkability; GPU performance; and compatibility/cost of private evaluation.
 
 **Revisit trigger:** P5 paired outputs and uncertainty estimates. If Florence fails the frozen schema/coverage criteria, narrow the ontology or record exact infeasibility and reframe the structured-image path; do not silently replace it with a cloud dependency. Any new family must have a documented scientific role and pass the same fixed screen.
+
+## P5-00 / D1 update — SD-Turbo is numerically feasible only through float32 oversubscription
+
+**Decision:** Retain SD-Turbo only as the measured image-path backend for bounded experiments; freeze the P5 configuration as float32 CUDA with WDDM oversubscription and do not approve pilot/full generation from this result.
+
+**Date:** 2026-08-24
+
+**Status:** Selected conditionally for bounded image-path evidence; not approved as a scalable local generator.
+
+**Question:** Did the P4 provisional SD-Turbo candidate pass the required local CUDA/resource/renderability check?
+
+**Candidates:** fp16 CUDA on PyTorch 2.13/CUDA 13.0; fp16 CUDA on PyTorch 2.12.1/CUDA 12.6; float32 CUDA using the pinned fp16 files upcast at load; undisclosed cloud generation; or stop the image path.
+
+**Evaluation criteria:** Finite latent and non-degenerate pixels, exact fixed-seed repetition, immutable model/config identity, documented memory/latency, no cloud secret processing, and bounded cost before pilot scale.
+
+**Evidence:** `p5-smoke-v1`, `results/p5/generation_manifest_smoke_v1.json`, and `docs/representation_screening.md`. Both official CUDA builds executed the fp16 path but produced all-NaN UNet latents and black images. Float32 produced 27 non-degenerate images and an identical fixed-seed repeat, with median 25.80 seconds/image and 5,716.78 MiB peak allocation on a physical 4,096 MiB T600 through WDDM oversubscription.
+
+**Selected option:** Use float32 only for the bounded P5 image screen. Keep the exact one-step, guidance-zero, 512×512, explicit-seed configuration and pinned revision. Treat `QF-NUMERIC-FP16` and `QF-HARDWARE-OVERSUBSCRIPTION` as unresolved scalability failures.
+
+**Rejected alternatives:** fp16 is rejected on this machine because both justified runtime variants produced non-finite latents. A cloud fallback is rejected because it changes the privacy/deployment boundary. Pilot/full generation is not approved because physical VRAM is exceeded and the image stage has not shown a technical benefit.
+
+**Reason:** The float32 path was sufficient to obtain the cheapest image representation evidence, but resource feasibility is marginal and dependent on Windows memory virtualization. It cannot support a scalable-local claim.
+
+**Security/privacy assumptions:** Generation is local over project-authored benign prompts. Model acquisition is public. No prompt or image is sent to a service. Raw images remain in an ignored cache.
+
+**Affected RQs/threats/claims:** RQ1/RQ5/RQ6; E1–E4/E14/E16; D1/D5; local deployment/resource claim only.
+
+**Experiments supporting decision:** One production fixed-seed contract image under each attempted dtype/runtime plus the frozen 27-row P5 generation screen and one repeat.
+
+**Remaining uncertainty:** Linux/non-WDDM behavior, other supported GPUs, SDXL comparison, larger-run failure rate, model drift, semantic renderability by atom type, and image-stage necessity.
+
+**Revisit trigger:** P7 paired image/text evidence shows a credible technical benefit, new documented hardware is available, or a distinct generator backend can meet the same frozen local criterion. Any change creates a new backend/config ID.
+
+## P5-01 / D2 — Reject Florence structured fusion; use direct text as the primary extractor hypothesis
+
+**Decision:** Reject Florence-2-base caption/detection/geometry fusion as the structured primary under config v1. Use the controlled direct-text parser as the primary P6 extractor hypothesis, keep SigLIP as the mandatory image baseline, and keep MiniLM as the mandatory dense text baseline.
+
+**Date:** 2026-08-24
+
+**Status:** Selected for P6 hypothesis testing; no extractor is Gate A viable.
+
+**Question:** Which P4 extractor survivors provide sufficiently faithful, deterministic, distinct outputs to enter P6?
+
+**Candidates:** Florence structured fusion; controlled direct-text structured extraction; SigLIP dense image; MiniLM dense text; revive SmolVLM; add another unbounded VLM; or record structured-image infeasibility.
+
+**Evaluation criteria:** Fixed-input repeatability; object/attribute/action/count/relation/scene fidelity; same/near/unrelated diagnostic separation with family uncertainty; versioning; latency/memory; leakage; private-comparison plausibility; and distinct scientific role.
+
+**Evidence:** `p5-smoke-v1` over 27 train/validation rows. Florence repeated 2/2 samples but had macro precision 0.335, recall 0.533, F1 0.375, zero expected action/count/relation recall, 46 extra objects, 28 extra counts, and 81 extra relations. Its validation same median Jaccard (0.308) was below its near median (0.600). Controlled text F1 was 0.638 but retained train-lexicon OOV and weak relation/action coverage. SigLIP and MiniLM repeated exactly and distinguished unrelated pairs, but near-gap intervals crossed zero.
+
+**Selected option:** Controlled text parser v1 is the primary extractor hypothesis because it is deterministic, transparent, schema-native, and compatible with a structured private-threshold path. SigLIP and MiniLM remain mandatory dense baselines. Florence raw outputs remain versioned as a negative result; the image path has no structured primary.
+
+**Rejected alternatives:** Florence is rejected for `QF-COVERAGE`, `QF-MISSING-ATOM`, and `QF-HALLUCINATION`. SmolVLM remains rejected from P4. Adding another VLM before Gate A is rejected because no distinct role justifies the compute. The controlled parser is not declared reliable; training-only vocabulary prevents validation/test leakage but creates `QF-TRAIN-LEXICON-OOV`.
+
+**Reason:** Determinism alone is insufficient when a backend repeats missing or hallucinated semantics. The direct-text path offers the clearest interpretable hypothesis for one bounded P6 test, while dense baselines preserve a check against parser limitations.
+
+**Security/privacy assumptions:** Extraction remains local. Raw atoms and embeddings are not private and are directly readable/linkable without a protocol. No cloud fallback is allowed. Florence remote code was pinned/hashed, run unedited with eager attention and cache disabled, and is not needed for the primary path.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ4/RQ5/RQ6; E1–E6/E10/E14/E16; D2/D3/D5; Gate A remains closed.
+
+**Experiments supporting decision:** P5 two-task Florence outputs on all 27 rows, two Florence repeat samples, two full SigLIP/MiniLM embedding passes, deterministic parser execution, atom-level comparison, and family bootstrap diagnostics.
+
+**Remaining uncertainty:** Pilot-scale OOV/fidelity, morphology/alias robustness, prompt paraphrase variation, near-neighbour discrimination, natural/generated image drift, dense inversion, and whether any image representation helps after controlling information.
+
+**Revisit trigger:** A preregistered P6 pilot shows the parser cannot support a viable operating region; P7 supplies evidence that an image-specific structured extractor is necessary; or a new family has a distinct role and passes the identical frozen screen.
+
+## P5-02 / D3 — Freeze canonical semantics v1 and choose weighted structured text as a conditional primary
+
+**Decision:** Freeze `canonical-semantics-v1` and training-only `oracle-train-idf-v1`. Advance controlled weighted direct-text semantics as the primary P6 representation hypothesis, with unweighted structured text, MiniLM, and SigLIP as baselines. Do not claim positive separation or pass Gate A.
+
+**Date:** 2026-08-24
+
+**Status:** Selected conditionally; negative uncertainty outcome.
+
+**Question:** Which representation/canonicalisation should P6 test for a non-degenerate operating region and plausible private evaluation?
+
+**Candidates:** unweighted structured set; training-IDF weighted structured set; Florence-derived structured variants; SigLIP image embedding; MiniLM text embedding; oracle diagnostics; or no viable representation.
+
+**Evaluation criteria:** Deterministic/versioned canonicalisation; same/near/unrelated diagnostic scores and family uncertainty; atom fidelity; interpretability; training-only weight provenance; storage/runtime; inversion/linkability surface; migration behavior; and private-matching compatibility.
+
+**Evidence:** Controlled weighted text medians were 1.00 same, 0.80 near, and 0.00 unrelated, with same-minus-near bootstrap 95% interval `[-0.0166, 0.3917]`. Unweighted same/near medians were both 0.67. MiniLM medians were 0.935/0.922/0.104 and SigLIP 0.935/0.916/0.588; both near intervals crossed zero. Only oracle diagnostics had intervals strictly above zero. All raw families were trivially candidate-retrievable/linkable in cheap probes.
+
+**Selected option:** Weighted structured direct-text semantics is the conditional primary because it gives the largest interpretable real near-neighbour median gap and has a plausible structured private-threshold path. Its weights are smoothed IDF fitted only to six training-family enrolment oracle documents. The unweighted set provides interpretability sensitivity; MiniLM and SigLIP remain dense baselines.
+
+**Rejected alternatives:** Oracle sets are diagnostics, not extractors. Florence structured variants inherit extractor failure. Dense vectors are not selected as primary because their near gaps are smaller, raw vectors are linkable/candidate-retrievable, and private approximate dot product is more complex. No-representation/stop is not final because smoke uncertainty permits one properly sized pilot, but it remains a valid Gate A outcome.
+
+**Reason:** The phase acceptance permits an evidenced failure. P5 establishes deterministic machinery and a falsifiable ranking of hypotheses, but does not provide sufficient uncertainty evidence for viability. Selecting a conditional primary keeps P6 bounded and prevents post-pilot representation switching.
+
+**Security/privacy assumptions:** Raw structured atoms disclose semantics; raw embeddings are not private. PSI/PSI-cardinality/private weighted threshold and MPC/HE cosine are compatibility hypotheses only. Plaintext storage is rejected. Version mismatch fails closed and migration remains unresolved.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ4/RQ6; A1/A3/A5/A7/A8; E1–E6/E10/E14/E16; D3/D4; Gate A.
+
+**Experiments supporting decision:** `p5-smoke-v1`, 27 diagnostic pairs, 2,000 fixed-seed family bootstraps, split/changed-atom sensitivity, atom metrics, repeatability, resource/storage accounting, and cheap leakage probes.
+
+**Remaining uncertainty:** Pilot sample size/catalog, stability under seed/style/layout, test performance, threshold/FAR/FRR/EER, acceptance-region mass, empirical weights, general inversion/linkability, private-protocol cost, model drift, and migration/re-enrolment.
+
+**Revisit trigger:** P6 preregistered pilot/negative confirmation. A canonical rule change creates v2; a weight-source change creates a new weights version. Gate A cannot pass on P5 smoke evidence.

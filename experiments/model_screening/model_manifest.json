@@ -16,6 +16,7 @@
       "deterministic_controls": ["explicit torch.Generator seed", "fixed scheduler/config", "fixed steps", "guidance_scale=0", "fixed 512x512", "pinned libraries"],
       "expected_resources": "fp16 CUDA path with CPU/sequential offload may fit 4 GiB VRAM but is not yet measured; CPU fallback is expected to be impractical for the corpus",
       "p4_status": "provisional-primary-pending-cuda-microbenchmark",
+      "p5_status": "bounded-smoke-completed-float32-only-with-wddm-oversubscription",
       "reason": "512-pixel distilled one-to-four-step model is the least implausible local generator on the documented 4 GiB GPU; quality/prompt alignment must pass P5 smoke evidence"
     },
     {
@@ -46,6 +47,7 @@
       "deterministic_controls": ["do_sample=false", "fixed beam count", "fixed task prompts", "fixed post-processing", "pinned remote code revision"],
       "expected_resources": "official card provides CPU float32 path; expected feasible in 31.7 GiB RAM; actual P4 weights not acquired",
       "p4_status": "shortlisted-structured-family",
+      "p5_status": "rejected-as-structured-primary-under-p5-config-v1",
       "reason": "distinct object/dense-caption/grounding outputs with geometry; actions/relations require deterministic fusion or parsing"
     },
     {
@@ -76,6 +78,7 @@
       "deterministic_controls": ["model.eval", "torch.no_grad", "fixed processor", "fixed 224x224 preprocessing", "pinned libraries"],
       "expected_resources": "CPU feasible; 813 MB weight file; 4 GiB GPU likely feasible after CUDA environment is repaired",
       "p4_status": "retained-mandatory-dense-image-baseline",
+      "p5_status": "retained-dense-image-baseline-for-p6",
       "reason": "exactly repeated 3x768 embeddings and selected the matching label for all three procedural fixtures; standard dense baseline remains scientifically distinct from structured atoms"
     },
     {
@@ -91,6 +94,7 @@
       "deterministic_controls": ["model.eval", "torch.no_grad", "fixed tokenization/truncation", "mean pooling", "L2 normalization"],
       "expected_resources": "CPU feasible",
       "p4_status": "retained-mandatory-dense-text-baseline",
+      "p5_status": "retained-dense-text-baseline-for-p6",
       "reason": "exactly repeated finite 36x384 embeddings on the P3 text manifest; paired text-only dense baseline for RQ6 does not provide structured semantics"
     },
     {
@@ -106,6 +110,7 @@
       "deterministic_controls": ["versioned lexicon", "fixed parsing rules", "strict schema validation"],
       "expected_resources": "negligible CPU/RAM",
       "p4_status": "retained-structured-text-lower-bound",
+      "p5_status": "primary-p6-extractor-hypothesis-with-training-only-lexicon",
       "reason": "exactly repeated and schema-valid for all 36 controlled smoke texts in both runs; vocabulary overfit risk means it cannot be the sole text baseline"
     },
     {

@@ -1,0 +1,171 @@
+{
+  "$schema_version": "semantic-secrets-p5-embedding-metadata-v1",
+  "minilm": {
+    "array_file_sha256": "6c7b70ac6b4a45e79f99e288d516a9814e2baab1f527baa124038c4379b414f5",
+    "artifact": {
+      "artifact_tree_sha256": "519954597750afc0525099fc66839a750b69ec4879cefd47b44b36728255ccb3",
+      "files": [
+        {
+          "bytes": 612,
+          "path": "config.json",
+          "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+        },
+        {
+          "bytes": 90868376,
+          "path": "model.safetensors",
+          "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+        },
+        {
+          "bytes": 112,
+          "path": "special_tokens_map.json",
+          "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+        },
+        {
+          "bytes": 466247,
+          "path": "tokenizer.json",
+          "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+        },
+        {
+          "bytes": 350,
+          "path": "tokenizer_config.json",
+          "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b"
+        },
+        {
+          "bytes": 231508,
+          "path": "vocab.txt",
+          "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+        }
+      ],
+      "hashed_bytes": 91567205,
+      "hashed_file_count": 6,
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+    },
+    "backend": {
+      "backend_id": "b_minilm_text",
+      "batch_size": 18,
+      "device": "cuda",
+      "dtype": "float32",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "repeat_count": 2,
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+    },
+    "embedding_sha256": "ea059034c95e0ae138276bfed61eb2f6927bef4a1160ba0145d925d3cb57976c",
+    "fixed_input_equal": true,
+    "load_seconds": 4.084501,
+    "peak_cuda_allocated_mib": [
+      101.27,
+      101.27
+    ],
+    "run_seconds": [
+      0.179569,
+      0.103586
+    ],
+    "shape": [
+      27,
+      384
+    ]
+  },
+  "publication_result": false,
+  "row_ids": [
+    "r_84274e8b87c9c10b98e5f1d5",
+    "r_ed2cb08d440a38b6e4be487a",
+    "r_eda0d23fac893aa5d8ff758c",
+    "r_7f7b75a79cf77581cf9f997c",
+    "r_dfbbab0032702ae8ed1bf666",
+    "r_972c179bc9981669ab14f77d",
+    "r_a8201202f291d3509eaac832",
+    "r_0139eb934a9de6eac048af2a",
+    "r_81f1ff499df29b8c9a326777",
+    "r_22b3206156195006ad748583",
+    "r_737b96c8e97f77f36ccfa438",
+    "r_664b4ab6867cbfe0542aeea4",
+    "r_47ad809350adf6edc70d3555",
+    "r_71f3a8bdb37ac08388774f9c",
+    "r_067e22384fb9d3bcacf4501b",
+    "r_c36925252ab8834fc2dea964",
+    "r_79548998961137d62fdb080c",
+    "r_08a78e7ea458ceac65cd4562",
+    "r_bcb4aed82820fff1df3287f5",
+    "r_e07ba9e6e1030528c2a8e3fc",
+    "r_58b10b9ef27825863ba630cd",
+    "r_77dc4566524f4277cd4a96ba",
+    "r_2528d28c32429d9b18c8367d",
+    "r_80869a6d5df3b382248aa15d",
+    "r_a63524728fe67e7067d526c7",
+    "r_8bd03e4c886e83dc101dc549",
+    "r_29b0da6b492ef05a420a395f"
+  ],
+  "screen_id": "p5-smoke-v1",
+  "siglip": {
+    "array_file_sha256": "6ae8e755cae62f858ba35e9b0c6b090176fae97e788576d9732fa171e50ca766",
+    "artifact": {
+      "artifact_tree_sha256": "92079363cb7f2d1b62aa64b851ed573081862e8a8b56bd9544eec0ac5b33450e",
+      "files": [
+        {
+          "bytes": 432,
+          "path": "config.json",
+          "sha256": "cd85b3d28829722820bcb89a2cfbb4160e55fd359249a3044da724166a8d9688"
+        },
+        {
+          "bytes": 812672320,
+          "path": "model.safetensors",
+          "sha256": "2c63cb7d1f2e95ba501893cbb8faeb4ea9a3af295498d35097126228659c2af8"
+        },
+        {
+          "bytes": 368,
+          "path": "preprocessor_config.json",
+          "sha256": "d11ccb80f15d358a11bdb070e92e2d889005874b7db15823d5f10d9b2533b14a"
+        },
+        {
+          "bytes": 409,
+          "path": "special_tokens_map.json",
+          "sha256": "2b6a1ff67a27e0df9ac0c7d93250fc0d87431c7b366b3d5669217104f9088a26"
+        },
+        {
+          "bytes": 798330,
+          "path": "spiece.model",
+          "sha256": "1e5036bed065526c3c212dfbe288752391797c4bb1a284aa18c9a0b23fcaf8ec"
+        },
+        {
+          "bytes": 2399357,
+          "path": "tokenizer.json",
+          "sha256": "c6e405cb7c670d56636a9402c81023a55bc6c3c53d89cf02b92f5c5005bfe920"
+        },
+        {
+          "bytes": 711,
+          "path": "tokenizer_config.json",
+          "sha256": "d6423dae508cc3a129d22ea443841c111832a1a73125b8f25ea8736951698bcb"
+        }
+      ],
+      "hashed_bytes": 815871927,
+      "hashed_file_count": 7,
+      "model_id": "google/siglip-base-patch16-224",
+      "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed"
+    },
+    "backend": {
+      "backend_id": "b_siglip_base_224",
+      "batch_size": 6,
+      "device": "cuda",
+      "dtype": "float32",
+      "model_id": "google/siglip-base-patch16-224",
+      "repeat_count": 2,
+      "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed"
+    },
+    "embedding_sha256": "6e2a692bc2563806603e88f692cee51d82eebaf3a0bffe312a3a722928816c39",
+    "fixed_input_equal": true,
+    "load_seconds": 50.995969,
+    "peak_cuda_allocated_mib": [
+      829.97,
+      829.97
+    ],
+    "run_seconds": [
+      1.152585,
+      0.988164
+    ],
+    "shape": [
+      27,
+      768
+    ]
+  }
+}
