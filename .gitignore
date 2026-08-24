@@ -1,0 +1,62 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Large models and downloaded data (keep manifests/acquisition scripts tracked)
+models/
+weights/
+artifacts/downloads/
+experiments/datasets/raw/
+experiments/datasets/cache/
+experiments/cache/
+generated_images/
+*.ckpt
+*.safetensors
+*.pt
+*.pth
+*.onnx
+
+# Large/recomputable intermediates (do not ignore final compact evidence)
+results/**/cache/
+results/**/intermediate/
+results/**/scratch/
+*.tmp
+
+# LaTeX build products; source, final PDFs, figures, and verified BibTeX remain trackable
+paper/*.aux
+paper/*.bbl
+paper/*.bcf
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.run.xml
+paper/*.synctex.gz
+paper/*.toc
+
