@@ -14,7 +14,7 @@
 \begin{document}
 
 \begin{abstract}
-This planning manuscript defines a revised research direction; it does not report a completed system or v2 experiment. We ask whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and privately verified under a system-derived policy. The prompt is a reconstruction interface rather than the secret, and generated pixels are transient observations rather than entropy. The intended contributions combine technical reconstruction stability, mandatory-versus-tolerant semantic policy, acceptance-region attacks under finite budgets, and construction-specific private and unlinkable verification. A complete review of 2026 Visual Semantic Authentication (VSA) makes clear that image-independent semantic authentication, canonical visual tokens, object/attribute/count/quadrant rules, and flexible quantity policies are prior art. The prospective privacy contribution must therefore be established relative to VSA, fuzzy/private matching, protected templates, and established cryptographic primitives. Frozen negative P6/P7 evidence from the earlier v1 pipeline is retained only as formative motivation. The next phase is novelty refresh and preregistration, not implementation.
+This planning manuscript defines a revised research direction; it does not report a completed system or v2 experiment. We ask whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and privately verified under a system-derived policy. The prompt is a reconstruction interface rather than the secret, and generated pixels are transient observations rather than entropy. A focused P8 primary-source review found that generative graphical authentication, flexible semantic policy, fuzzy/private matching, protected templates, AI-assisted guessing, and adaptive verifier attacks are all prior art. Gate V2-N therefore passed only after narrowing the remaining question to the combined technical reconstruction, system-derived-policy ablation, finite-budget acceptance-region measurement, and construction-specific private/domain-separated verification. C5 was folded into C3/C4. P8 froze the graph, reference functionality, data isolation, model limits, attacks, uncertainty, and numeric gates before any v2 output. Frozen negative P6/P7 evidence from the earlier v1 pipeline remains formative motivation only. P9 is the next permitted experiment.
 \end{abstract}
 
 \maketitle
@@ -53,12 +53,12 @@ where $V$ contains entities, $E_S$ typed actions/relations, $A$ attributes, and 
 \end{equation}
 where $M$ contains mandatory security anchors and $T$ contains secondary facts with bounded tolerance. The primary non-human study will not ask users to nominate $M$ or $T$. Selection must be frozen from independent semantic rationale, training-only statistics, extractor reliability, attacker-frequency evidence, and protocol compatibility.
 
-A candidate reference functionality has the form
+A P8-frozen reference functionality has the form
 \begin{equation}
   \mathsf{Accept}_{\mathrm{ref}}=\mathsf{MandatoryOK}(M,M')
   \land [\mathsf{TolSim}(T,T')\geq\tau],
 \end{equation}
-but the exact graph, operators, missing-value rules, and threshold remain to be preregistered. The notation and policy split are not claimed as standalone novelty.
+The exact closed vocabulary, canonical graph correspondence, policy eligibility and ranking, tolerant weighted-F1 semantics, malformed/version behavior, threshold grid and development-only selector are specified in \texttt{docs/formal\_specification\_v2.md}. The notation and policy split are not claimed as standalone novelty.
 
 \section{Acceptance-region security}
 
@@ -99,7 +99,7 @@ A later protocol should reproduce the frozen plaintext decision while revealing 
   \item containment under named database, server, key/share, collusion, and total-compromise states.
 \end{itemize}
 
-Established fuzzy extractors~\cite{Dodis2008FuzzyExtractors}, OPRFs~\cite{Davidson2023OPRF}, OPAQUE~\cite{Bourdrez2025OPAQUE}, PSI~\cite{Pinkas2015Phasing}, fuzzy PSI/private biometric matching~\cite{Uzun2021FLPSI}, and homomorphic vector matching~\cite{Martin2025HyDia} are candidate foundations, not novel primitives. Raw learned representations are not automatically private; embedding leakage is an explicit concern~\cite{Song2020EmbeddingLeakage}. Protected-template unlinkability and irreversibility must be attacked rather than inferred from an encoding~\cite{GomezBarrero2016Unlinkable}.
+Established fuzzy extractors~\cite{Dodis2008FuzzyExtractors}, fuzzy aPAKE~\cite{Erwig2020FuzzyAPAKE}, OPRFs~\cite{Davidson2023OPRF}, OPAQUE~\cite{Bourdrez2025OPAQUE}, exact PSI~\cite{Freedman2004PrivateMatching,Pinkas2015Phasing}, fuzzy PSI/private biometric matching~\cite{Uzun2021FLPSI,Blass2026FuzzyPSI}, committed PSI~\cite{Goel2026PICS}, private fuzzy-record computation~\cite{Han2025FuzzyRecords}, private graph operations~\cite{Li2020PrivateGraph}, and homomorphic vector matching~\cite{Martin2025HyDia} are candidate foundations, not novel primitives. Raw learned representations are not automatically private; embedding leakage is an explicit concern~\cite{Song2020EmbeddingLeakage}. Protected-template unlinkability and irreversibility must be attacked rather than inferred from an encoding~\cite{GomezBarrero2016Unlinkable}.
 
 Semantic correctness and cryptographic privacy are independent. FAR/FRR do not prove privacy; private computation does not repair an easily guessed acceptance region.
 
@@ -111,7 +111,7 @@ These features remove image-independent visual-semantic authentication, VLM extr
 
 VSA calls its hash binding server-opaque and explicitly weaker than strict zero knowledge. It acknowledges small semantic inputs and fast SHA-256 offline guessing, recommending Argon2id with a user-specific salt. Its COCO-based positive FRR samples are automatically selected from cached detections rather than independently re-inferred. It reports no human study and leaves Semantic Relationship Logic to future work. It does not target private/unlinkable verification.
 
-SemanticLock uses semantically linked image tokens and story structure for graphical authentication~\cite{Olade2023SemanticLock}, further preventing broad ``first semantic graphical password'' language. The remaining hypothesis is the evaluated combination of independent generative reconstruction, typed visual-semantic graphs, system-derived mandatory/tolerant policy, acceptance-region attacks, and private/domain-separated verification. P8 must test whether broader prior work already subsumes that combination.
+SemanticLock uses semantically linked image tokens and story structure for graphical authentication~\cite{Olade2023SemanticLock}. PassStyles~\cite{Matsuzaki2025PassStyles} and Omokage~\cite{Matsuzaki2026Omokage} use StyleGAN-generated changing face candidates and recognition criteria, preventing broad ``first semantic'', ``first generative'', or ``first changing-image'' authentication language. Adaptive score-guided verifier search is likewise established~\cite{MartinezDiaz2011HillClimbing}. The P8 review found no verified source combining free-language independent text-to-image reconstruction and fresh typed extraction with a system-derived policy, finite-budget semantic attacks, and construction-specific private/domain-separated verification. Gate V2-N passed for that scoped question only; this is not an exhaustive absence or first claim.
 
 \section{Research questions}
 
@@ -130,7 +130,7 @@ SemanticLock uses semantically linked image tokens and story structure for graph
 
 The execution order is deliberately staged.
 
-\paragraph{Novelty and preregistration.} P8 completes a primary-source novelty refresh and freezes graph tasks, controlled concepts, splits, capability screening, policy derivation, attack budgets, and gate thresholds. It performs no expensive experiment.
+\paragraph{Novelty and preregistration.} P8 completed a focused primary-source novelty refresh and froze graph tasks, controlled concepts, splits, capability screening, policy derivation, attack budgets, uncertainty, and numeric gate thresholds. It performed no model acquisition, dataset acquisition, v2 inference, sealed-v1 access, or cryptographic implementation.
 
 \paragraph{Representation before authentication.} P9A screens a small preregistered set of extractors on images with known object, attribute, count, action, relation, and context ground truth. P9B then measures independent generative reconstruction across paraphrases, seeds, layouts, justified styles, and selected version drift. Direct text is an ablation, not the target credential path.
 
@@ -152,13 +152,13 @@ These are immutable formative negative results, not v2 measurements. They motiva
 
 \section{Expected contributions and limitations}
 
-If all gates pass, C1 would establish technical generative reconstruction behaviour; C2 would establish the measured value of a system-derived typed policy; C3 would characterise the accepted region under realistic finite-budget attackers; and C4 would establish construction-specific private and unlinkable verification. C3/C4 are expected to carry the principal privacy contribution. C5, adaptive semantic verification-oracle leakage, remains optional and will be folded into C3/C4 unless P8 identifies a distinct result.
+If all gates pass, C1 would establish technical behaviour of the scoped free-language generative reconstruction path; C2 would establish only the measured incremental value of the frozen system-derived typed policy; C3 would characterise the accepted region under finite-budget attackers; and C4 would establish construction-specific private and unlinkable verification. C3/C4 carry the prospective principal contribution. P8 rejected C5 as standalone and retained adaptive semantic verification-oracle leakage as mandatory evidence inside C3/C4.
 
 Major unresolved risks are that independent visual extraction is not stable, $M/T$ adds no value over VSA-style policy, the semantic region is cheaply reachable, the privacy construction is an obvious application of known primitives, policy metadata recreates an offline oracle, or the required trust/cost is impractical. The controlled methodology cannot establish human memorability or usability. A future participant study would require separate ethics, design, and evidence.
 
 \section{Conclusion}
 
-This blueprint treats visual generation as a testable reconstruction layer, not a source of magical entropy, and treats privacy as a construction-specific property, not a consequence of hashing semantics. The next permitted work is P8 novelty, formalisation, and preregistration. No v2 model, dataset, experiment, or cryptographic prototype is yet authorised.
+This blueprint treats visual generation as a testable reconstruction layer, not a source of magical entropy, and treats privacy as a construction-specific property, not a consequence of hashing semantics. P8 passed Gate V2-N with narrowed claims and a frozen preregistration. The next permitted work is P9 representation capability and independent reconstruction; no v2 model output, dataset result, authentication result, or cryptographic prototype yet exists.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

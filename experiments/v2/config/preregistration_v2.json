@@ -1,0 +1,168 @@
+{
+  "$schema_version": "semantic-secrets-preregistration-v2.0.0",
+  "preregistration_id": "p8-freeze-v2-2026-08-25",
+  "publication_result": false,
+  "execution_boundary": {
+    "p8_actions": ["primary-source review", "formalisation", "preregistration"],
+    "forbidden_in_p8": ["model acquisition", "dataset acquisition", "image generation", "v2 inference", "authentication experiment", "cryptographic implementation", "v1 sealed-test access"]
+  },
+  "versions": {
+    "graph": "semantic-graph-v2.0.0",
+    "graph_config": "semantic_graph_v2.json",
+    "policy": "semantic-policy-v2.0.0",
+    "reference_function": "accept-ref-v2.0.0",
+    "dataset_design": "visual-semantic-reconstruction-v2.0.0"
+  },
+  "data": {
+    "family_count": 72,
+    "hard_negative_cluster_count": 24,
+    "cluster_size": 3,
+    "split_seed": 82025,
+    "splits": {"development": 36, "validation": 18, "sealed_test": 18},
+    "smoke_development_families": 12,
+    "images_per_family": 6,
+    "generation_roles": ["enrolment", "lexical_paraphrase", "compositional_paraphrase", "layout_preserving", "style_preserving", "seed_only"],
+    "styles": ["photographic", "watercolor"],
+    "capability_images": {"development": 64, "validation": 32},
+    "test_policy": "sealed test inaccessible in P9-P11; no v1 family may be inspected or reused"
+  },
+  "generator_screen": {
+    "maximum_candidates": 2,
+    "primary": {
+      "model_id": "stabilityai/sd-turbo",
+      "revision": "b261bac6fd2cf515557d5d0707481eafa0485ec2",
+      "width": 512,
+      "height": 512,
+      "steps": 1,
+      "guidance_scale": 0.0
+    },
+    "drift_slot": {
+      "model_id": "stabilityai/sdxl-turbo",
+      "revision": "71153311d3dbb46851df1931d3ca6e939de83304",
+      "activation": "only if it runs on documented local research hardware within resource limits; report separately; never replace the primary because of authentication outcomes"
+    },
+    "hard_limits": {
+      "local_only": true,
+      "maximum_system_ram_gib": 24,
+      "maximum_median_seconds_per_image": 120,
+      "oom_is_failure": true,
+      "maximum_generation_failure_rate": 0.05
+    }
+  },
+  "extractor_screen": {
+    "maximum_candidates": 2,
+    "candidates": [
+      {
+        "model_id": "vikhyatk/moondream2",
+        "revision": "9a7d4024050840e001defacec2b00727e89149e6",
+        "release_tag": "2025-06-21",
+        "family": "grounded_small_vlm",
+        "remote_code_rule": "hash and review every pinned remote-code file before offline execution"
+      },
+      {
+        "model_id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+        "revision": "c0a7af506d0f71a771f24216ade491dec52ff6c5",
+        "family": "constrained_structured_vlm"
+      }
+    ],
+    "decode": {"sampling": false, "temperature": 0.0, "maximum_new_tokens": 384},
+    "hard_limits": {
+      "local_only": true,
+      "maximum_system_ram_gib": 24,
+      "maximum_median_seconds_per_image": 120,
+      "oom_is_failure": true,
+      "maximum_failure_rate": 0.05,
+      "no_finetuning": true,
+      "no_authentication_outcome_selection": true
+    },
+    "advance": {
+      "schema_valid_rate_min": 0.98,
+      "failure_rate_max": 0.05,
+      "macro_atom_f1_min": 0.70,
+      "macro_atom_f1_bootstrap_lower_min": 0.65,
+      "critical_type_f1_min": 0.60,
+      "critical_type_f1_bootstrap_lower_min": 0.45,
+      "deterministic_canonical_equality_min": 0.95
+    }
+  },
+  "matcher": {
+    "tau_grid": [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90],
+    "selection": "minimise max(FRR,targeted_near_FAR), then random_FAR, then FRR, then choose largest threshold",
+    "baselines": ["B0-dense", "B1-global", "B2-vsa-policy", "B3-vsa-full-security-comparator", "direct-text-ablation"],
+    "proposed": "P1-mt"
+  },
+  "policy": {
+    "type_recall_point_min": 0.60,
+    "type_recall_bootstrap_lower_min": 0.45,
+    "frequency_signature": "typed content with canonical instance IDs removed",
+    "frequency_smoothing": "(n_signature + 1) / (development_family_count + 2)",
+    "information": "clip(-log2(frequency), 1, 8)",
+    "priority": "information * capability_validation_type_recall",
+    "mandatory_min": 2,
+    "mandatory_max": 3,
+    "selection": "enumerate feasible subsets; maximise cardinality up to 3, then summed priority, then lexicographically least sorted atom list",
+    "mandatory_constraints": ["at_least_one_entity_or_count", "at_least_one_action_or_relation_when_eligible", "no_inverse_duplicate", "skip_entity_atom_when_another_selected_attribute_unary_or_binary_atom_references_same_node", "count_atoms_are_not_treated_as_implied"],
+    "tie_break": "canonical atom string",
+    "insufficient_mandatory_atoms": "enrolment_ineligible",
+    "tolerant_set": "all remaining eligible atoms",
+    "user_editing": false
+  },
+  "uncertainty": {
+    "rate_interval": "two-sided Wilson 95%",
+    "bootstrap_unit": "hard-negative concept-family cluster",
+    "bootstrap_repetitions": 5000,
+    "bootstrap_seed": 8202501,
+    "confidence_level": 0.95
+  },
+  "gate_v2_a": {
+    "valid_nonempty_family_bootstrap_lower_min": 0.90,
+    "valid_nonempty_wilson_interval": "report descriptively",
+    "same_vs_near_auc_bootstrap_lower_min": 0.65,
+    "same_minus_near_median_gap_bootstrap_lower_min": 0.05,
+    "same_vs_unrelated_auc_bootstrap_lower_min": 0.80,
+    "minimum_primary_stratum_same_vs_near_auc": 0.55
+  },
+  "gate_v2_b": {
+    "validation_frr_max": 0.25,
+    "validation_targeted_near_far_max": 0.25,
+    "validation_random_far_max": 0.05,
+    "eligible_enrolment_rate_min": 0.80,
+    "minimax_absolute_improvement_min": 0.10,
+    "paired_bootstrap_improvement_lower_strictly_above": 0.0
+  },
+  "attacks": {
+    "online_budgets": [1, 5, 10, 20],
+    "offline_plaintext_budgets": [1, 10, 100, 1000, 10000],
+    "duplicate_rule": "duplicates consume compute but not an additional verifier query; both raw and unique counts reported",
+    "knowledge": {
+      "K0": "uniform schema-valid candidates and unrelated development-family candidates; no target facts",
+      "K1": "smoothed development-only atom/structure frequencies and frequency-ranked candidates; no target facts",
+      "K2": "one uniformly selected enrolled mandatory atom plus public scene stratum; all other target facts hidden",
+      "K3": "one-edit hard neighbour and public matcher, without plaintext enrolled graph unless a named offline view grants it"
+    },
+    "strategies": ["uniform", "frequency_ranked", "local_semantic_mutation", "qwen_assisted", "adaptive_accept_reject"],
+    "qwen_assisted": {
+      "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "fb163acb387a011a0cd205b259aa1b253299a05d",
+      "license": "Apache-2.0",
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "seed_schedule": "attack-id/account-id/budget-derived and committed before execution",
+      "input": "public schema plus only the K-level information granted to the strategy"
+    },
+    "adaptive_feedback": "one context-bound Accept/Reject bit only; no score, count, anchor, failure reason, timing, or length side channel"
+  },
+  "gate_v2_c": {
+    "standalone": {"K0_K1_success_at_10_point_max": 0.01, "K0_K1_success_at_10_upper_max": 0.07, "K2_success_at_10_point_max": 0.10, "K2_success_at_10_upper_max": 0.25, "K3_success_at_10_point_max": 0.25, "K3_success_at_10_upper_max": 0.45, "K1_success_at_10000_point_max": 0.25, "K1_success_at_10000_upper_max": 0.45},
+    "restricted_or_second_factor": {"K0_K1_success_at_10_point_max": 0.10, "K0_K1_success_at_10_upper_max": 0.25, "K2_success_at_10_point_max": 0.25, "K2_success_at_10_upper_max": 0.45},
+    "otherwise": "stop constructive cryptographic path unless a separately recorded measurement-only privacy question is justified"
+  },
+  "cache": {
+    "hash": "SHA-256",
+    "content_addressed": true,
+    "overwrite": false,
+    "exact_version_match_required": true,
+    "record_failures_and_exclusions": true,
+    "large_artifacts_in_git": false
+  }
+}

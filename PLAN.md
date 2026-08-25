@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P7 are complete historical v1 evidence; the v2 contract migration is complete; P8 is next and unexecuted. P9–P20 are blocked by their gates.
+Status: P0–P7 are complete historical v1 evidence; P8 completed Gate V2-N constructively with narrowed claims on 2026-08-25. P9 is next; P10–P20 remain blocked by their gates.
 Authority: `AGENT.md` is the active v2 scientific and engineering contract. This plan operationalises it and may not silently weaken it.
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
 
@@ -361,7 +361,7 @@ Active v2 decisions are phase-gated:
 
 ### P8 — v2 novelty, formalisation, and preregistration design
 
-**Status:** Next permitted phase; not started.
+**Status:** Complete on 2026-08-25. The focused primary-source review found all component mechanisms in prior art and therefore narrowed C1–C4, folded C5 into C3/C4, and prohibited primitive/"first" claims. The exact combined reconstruction/attack/private-verification question remained distinguishable in the verified corpus, so Gate V2-N **passes with narrowing**. The typed graph, reference predicate, controlled-data design, screening limits, baselines, uncertainty, attack budgets and V2-A/V2-B/V2-C thresholds are frozen in `docs/formal_specification_v2.md` and `experiments/v2/config/preregistration_v2.json`. No model, dataset, v2 output, cryptographic implementation, or sealed v1 family was accessed.
 
 **Objective:** Establish a defensible v2 gap and freeze the research design before any expensive implementation or experiment.
 
@@ -394,7 +394,7 @@ Active v2 decisions are phase-gated:
 
 ### P9 — Canonical visual-semantic credential derivation
 
-**Status:** Not started; blocked on constructive Gate V2-N.
+**Status:** Next permitted phase; Gate V2-N passed with narrowing on 2026-08-25. No P9 execution has started.
 
 **Objective:** Determine whether the image-derived representation required by C1 is technically viable before authentication-policy optimisation.
 
@@ -669,7 +669,7 @@ Active v2 decisions are phase-gated:
 ## v2 gate order and anti-bypass rule
 
 ```text
-Gate V2-N — Novelty viability
+Gate V2-N — Novelty viability (passed with narrowing, P8)
         ↓
 Gate V2-A — Visual-semantic reconstruction viability
         ↓

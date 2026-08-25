@@ -465,3 +465,37 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Next permitted action:** Execute P8 only after explicit user instruction. P8 is literature, formalisation, and preregistration; it may not run the expensive v2 experiment.
 
 **Revisit trigger:** Gate V2-N finds the C1–C4 combination substantially subsumed, or a later preregistered gate requires a narrower positioning. Any revision must append a new decision rather than rewrite this record.
+
+## P8-00 — Gate V2-N passes with narrowed claims and frozen P9–P11 design
+
+**Decision:** Pass Gate V2-N with mandatory narrowing. Authorise P9 only under the frozen v2 formal specification and preregistration. C5 is folded into C3/C4 and is not a standalone contribution.
+
+**Date:** 2026-08-25
+
+**Status:** P8 complete and frozen; no v2 model, dataset, generation, inference, authentication experiment, cryptographic implementation, or sealed-v1 access occurred.
+
+**Question:** After verified broader prior art is included, does a defensible combined v2 research gap remain, and can the technical design be frozen before expensive outputs?
+
+**Candidates:** stop because individual mechanisms are prior art; proceed with the broad original C1–C5 language; or proceed only with a narrowed combined empirical/systems question and preregistered stop rules.
+
+**Evaluation criteria:** Primary/authoritative-source traceability across every P8 literature family; no unsupported first/primitive claims; an exact typed graph and plaintext decision; new split isolation; few fixed model candidates; no outcome-driven search; fixed baselines, attacks, budgets, uncertainty, thresholds, cache/version rules, and gates; no expensive P8 execution.
+
+**Evidence:** The focused review added PassStyles and Omokage for generative graphical authentication; fuzzy aPAKE; foundational, fuzzy, circuit, committed and input-consistent private matching; private fuzzy-record and graph computation; and biometric hill-climbing/oracle attacks. VSA remains the closest semantic-policy baseline. `docs/p8_novelty_review_v2.md` records the comparison; `docs/related_work.csv`, `paper/references.bib`, and `docs/novelty_matrix_v2.csv` provide traceability and claim dispositions.
+
+**Selected option:** Proceed with narrowing. C1 concerns only the technical behavior of free-language reconstruction through independent local text-to-image generation and fresh typed extraction. C2 is an incremental systems-component ablation, not standalone novelty. C3 is a system-specific finite-budget acceptance-region characterization. C4 is a construction-specific composition/privacy evaluation, never primitive novelty. Adaptive Accept/Reject leakage remains mandatory under C3/C4 but C5 is rejected as standalone.
+
+**Frozen design:** `semantic-graph-v2.0.0`, `semantic-policy-v2.0.0`, and `accept-ref-v2.0.0`; a closed 24-entity typed vocabulary; exact graph canonicalisation/correspondence; deterministic training-only mandatory-anchor derivation; weighted-F1 tolerant predicate; dense/global/VSA/proposed baselines; 72 new cluster-split concept families plus a separate 96-image capability set; independent six-image generation roles; two extractor candidates and at most two generator slots; family-cluster uncertainty; online budgets 1/5/10/20 and offline plaintext budgets 1/10/100/1000/10000; K0–K3 and fixed AI/adaptive strategies; numeric Gates V2-A/V2-B/V2-C; immutable content-addressed caches. Full details are in `docs/formal_specification_v2.md` and `experiments/v2/config/preregistration_v2.json`.
+
+**Rejected alternatives:** Stopping solely because components are known is rejected because the focused verified corpus did not contain the complete scoped composition and its proposed empirical questions. Broad C1–C5 language is rejected because generative authentication, semantic policies, private fuzzy matching, input consistency, AI guessing, and adaptive verifier attacks are established. Treating the focused search as proof of global firstness is rejected. Selecting or replacing models after authentication outcomes is rejected.
+
+**Reason:** A useful research gap can be a carefully evaluated composition and measurement question even when every component is known, but only if the contribution wording and gates make that boundary explicit. The cheapest remaining falsifier is now P9: determine whether the required image-derived typed representation works at all.
+
+**Security/privacy assumptions:** Algorithms, schemas, policy rules, thresholds, model identities and attack code are public. Pixels and prompts provide no entropy. No human-choice distribution is inferred. Cryptography cannot repair a cheaply reachable semantic acceptance region. Normal target leakage is a context-bound bit plus enumerated metadata, and all compromise claims remain construction-specific and unachieved.
+
+**Affected RQs/threats/claims:** RQ1–RQ6; C1–C4 narrowed; C5 folded; A1–A8; V2-G1–V2-G10; Gates V2-N through V2-C. Gate V2-N authorises only P9. P10 requires V2-A, P11 requires V2-B, and protocol work remains blocked on V2-C.
+
+**Experiments supporting decision:** None. P8 is literature, formalisation, and preregistration only. JSON/CSV/BibTeX/LaTeX and repository audits validate the artifacts, not the research hypotheses.
+
+**Remaining uncertainty:** Whether either frozen extractor meets capability bounds; whether independent generations preserve graph facts; whether M/T beats VSA/global baselines; whether the accepted region survives K0–K3 budgets; whether any private construction preserves the predicate with acceptable leakage/cost; and whether later literature subsumes the remaining combination.
+
+**Revisit trigger:** A new primary source substantially combining the remaining properties; Gate V2-A/B/C failure; or an outcome-independent design flaw discovered before the affected held-out output. Revisions require a new version and appended decision.

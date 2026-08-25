@@ -105,9 +105,9 @@ Keep `P`, `I`, plaintext `S`, and raw embeddings local. For each candidate const
 
 Cryptography can hide a comparison without making a small semantic space strong. Semantic correctness and cryptographic privacy are separate gates.
 
-### C5 — Adaptive verification-oracle leakage (optional)
+### C5 — Adaptive verification-oracle leakage (folded into C3/C4)
 
-Retain this as a standalone contribution only if P8 shows that adaptive query leakage is technically distinct from ordinary online guessing and from standard private-matching security. Otherwise it remains an evaluation dimension under C3/C4.
+P8 found established adaptive verifier/hill-climbing and active-security prior art and no separately defensible mechanism claim. C5 is therefore folded into C3/C4. Adaptive one-bit query attacks remain mandatory evidence, but are not a standalone contribution. Reopening C5 requires a new distinct estimand and novelty review.
 
 ## 5. Relationship to 2026 VSA
 
@@ -117,7 +117,9 @@ Therefore the following are prior art, not project novelty: visual-semantic auth
 
 VSA calls its construction server-opaque and explicitly distinguishes it from strict zero knowledge. It acknowledges that its small semantic space permits fast offline guessing with general-purpose SHA-256 and recommends Argon2id plus a user-specific salt. Its COCO evaluation reports FAR/FRR, but positive FRR samples are automatically selected from cached detections rather than independently re-inferred; it reports no human study and leaves semantic relationships to future work. It does not target private/unlinkable verification.
 
-The maintained comparison is `docs/vsa_2026_comparison.md`.
+Generative graphical authentication is also prior art: PassStyles and Omokage use StyleGAN-generated changing face candidates and visual recognition criteria. They differ from free-language reconstruction into independent text-to-image scenes, but block broad generative/changing-image authentication claims.
+
+The maintained comparison is `docs/vsa_2026_comparison.md`; the broader P8 closure is `docs/p8_novelty_review_v2.md`.
 
 ## 6. Required novelty discipline
 
@@ -165,6 +167,7 @@ Normal verification should reveal no more than an authorised, context-bound `Acc
 ## 9. Data and evaluation rules
 
 - P8 is novelty refresh, formalisation, and preregistration only. It may not execute the expensive v2 experiment.
+- P8 completed on 2026-08-25. `docs/formal_specification_v2.md` and `experiments/v2/config/preregistration_v2.json` are binding for P9–P11; outcome-affecting changes require a new version before held-out outputs are viewed.
 - New v2 evidence requires new version identifiers, data, splits, configs, and gates. Do not reuse v1 thresholds as v2 evidence.
 - Keep a sealed held-out test partition. Fit vocabulary, policy rules, weights, thresholds, attacker orderings, and all selection decisions on permitted development data only.
 - Use independent generations for enrolment and authentication trials. A cached sample selected because it already satisfies a policy is not a positive reconstruction trial.
@@ -207,4 +210,4 @@ Those results motivate, but do not validate or invalidate, v2. The v2 image path
 
 ## 13. Immediate execution boundary
 
-The next executable phase is **P8 — v2 novelty refresh, formalisation, and preregistration**. Do not start P9 or any expensive experiment until P8 is complete and Gate V2-N has a recorded constructive outcome.
+The next executable phase is **P9 — canonical visual-semantic credential derivation**. Gate V2-N passed with narrowing on 2026-08-25. P9 must follow the frozen capability/reconstruction design; do not start P10 unless Gate V2-A passes, and do not start cryptographic implementation before the later semantic-security gates.

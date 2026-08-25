@@ -1,6 +1,6 @@
 # Security and privacy model v2
 
-Status: planning contract. No candidate construction has been selected or proved.
+Status: P8 plaintext functionality frozen; no candidate cryptographic construction has been selected or proved.
 
 `docs/security_model.md` remains the frozen v1 model. This document governs only the new reconstructable private visual-semantics direction.
 
@@ -23,7 +23,7 @@ The plaintext reference decision is:
 Accept_ref(S,M,T,S',M',T'; θ) ∈ {0,1}.
 ```
 
-Its complete semantics—including missing anchors, duplicates, graph isomorphism/canonical order, count operators, tolerance, malformed inputs, version mismatch, and boundary equality—must be fixed in P8. A private construction is functionally correct only if it returns the same decision except with a stated failure probability.
+Its complete P8 semantics—including missing anchors, duplicates, graph correspondence/canonical order, count buckets, tolerance, malformed inputs, version mismatch, and boundary equality—are frozen in `docs/formal_specification_v2.md`. A private construction is functionally correct only if it returns the same decision except with a stated failure probability.
 
 The semantic acceptance region is:
 

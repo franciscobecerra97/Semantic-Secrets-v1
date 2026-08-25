@@ -1,6 +1,6 @@
 # Research direction v2
 
-Status: selected documentation-level direction on 2026-08-25; no v2 experiment has run.
+Status: Gate V2-N passed with narrowing on 2026-08-25; no v2 experiment has run.
 
 ## Thesis
 
@@ -35,7 +35,7 @@ Passing one does not imply the other.
 - **C2:** a frozen system-derived mandatory/tolerant policy over typed semantic graphs, evaluated only as part of the combined system.
 - **C3:** acceptance-region security measured as success within attacker budgets under K0–K3 and AI/adaptive strategies.
 - **C4:** construction-specific private and unlinkable verification, including database, transcript, policy, compromise, and offline-validation views.
-- **C5 (optional):** adaptive verification-oracle leakage, retained separately only if P8 establishes distinct novelty and evidence.
+- **C5:** not retained separately after P8. Adaptive verification-oracle leakage is a required attack/privacy dimension under C3/C4.
 
 ## Why this is a new version
 
@@ -57,7 +57,7 @@ independent generative reconstruction
 + private, policy-hiding, domain-separated verification
 ```
 
-P8 must test this combination against visual/graphical authentication, VSA, semantic/story authentication, fuzzy extractors, fuzzy/private set or graph matching, private biometrics, protected templates, PAKE/OPRF, and adaptive-oracle literature. If the combination is already substantially covered, the thesis must narrow before implementation.
+P8 tested this combination against visual/graphical authentication, VSA, semantic/story authentication, generative graphical authentication, fuzzy extractors and PAKE, exact/fuzzy/circuit/committed PSI, private fuzzy records and graph/vector/biometric matching, protected templates, OPRF/OPAQUE, AI guessing, and adaptive-oracle attacks. All component mechanisms are prior art. The remaining combined empirical/systems question was not found in the focused verified corpus, so Gate V2-N passed with narrowed claims. This is not an exhaustive absence or “first” claim.
 
 ## Evidence boundaries
 
@@ -70,4 +70,4 @@ P8 must test this combination against visual/graphical authentication, VSA, sema
 
 ## Decision sequence
 
-P8 performs only novelty refresh, formalisation, baseline definition, and preregistration. Gates V2-N, V2-A, V2-B, V2-C, V2-D, V2-E, and V2-F then prevent later cost from laundering an earlier scientific failure. The valid terminal outcomes include a narrowed factor, a policy-constrained credential, a negative/measurement paper, or stopping the project.
+P8 completed only novelty refresh, formalisation, baseline definition, and preregistration. `docs/p8_novelty_review_v2.md`, `docs/formal_specification_v2.md`, and `experiments/v2/config/preregistration_v2.json` are the freeze. Gates V2-A, V2-B, V2-C, V2-D, V2-E, and V2-F prevent later cost from laundering an earlier scientific failure. The valid terminal outcomes include a narrowed factor, a policy-constrained credential, a negative/measurement paper, or stopping the project.

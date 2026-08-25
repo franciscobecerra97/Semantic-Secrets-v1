@@ -10,7 +10,7 @@ The natural-language prompt is a reconstruction interface, not the secret. Gener
 
 ## Current status
 
-The v2 research-contract migration is complete; no v2 experiment or implementation has run. The next permitted phase is **P8 — v2 novelty, formalisation, and preregistration design**. P9 and all expensive/model/cryptographic work remain blocked until their preceding gates pass.
+P8 is complete. Its focused primary-source review passed Gate V2-N with narrowed claims, froze the formal graph/policy/reference functionality and preregistered P9–P11. No v2 experiment or implementation has run. The next permitted phase is **P9 — canonical visual-semantic credential derivation**; P10 and all cryptographic work remain blocked until their preceding gates pass.
 
 P0–P7 remain frozen evidence for `visual-semantic-pipeline-v1`:
 
@@ -27,7 +27,9 @@ Those findings remain valid and have not been retuned. The v2 image hypothesis i
 4. `docs/research_direction_v2.md` — concise v2 thesis and evidence boundary.
 5. `docs/vsa_2026_comparison.md` — complete closest-work comparison.
 6. `docs/security_model_v2.md` and `docs/threat_claim_matrix_v2.csv` — active v2 security contract.
-7. `paper/draft.tex` — planning manuscript; hypotheses are not results.
+7. `docs/p8_novelty_review_v2.md` and `docs/formal_specification_v2.md` — Gate V2-N outcome and P9–P11 freeze.
+8. `experiments/v2/config/preregistration_v2.json` — machine-readable candidates, limits, budgets, and gates.
+9. `paper/draft.tex` — planning manuscript; hypotheses are not results.
 
 `docs/security_model.md` remains the frozen v1 model. `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or evidence bibliography.
 

@@ -1,0 +1,36 @@
+{
+  "$schema_version": "semantic-graph-v2.0.0",
+  "maximum_nodes": 8,
+  "entity_categories": ["person", "cat", "dog", "bird", "horse", "bicycle", "motorcycle", "car", "bus", "train", "boat", "airplane", "chair", "bench", "table", "sofa", "bottle", "cup", "book", "laptop", "backpack", "umbrella", "tree", "flower"],
+  "attributes": {
+    "colour": ["red", "orange", "yellow", "green", "blue", "purple", "black", "white", "brown", "gray"],
+    "size": ["small", "medium", "large"]
+  },
+  "unary_actions": ["standing", "sitting", "running", "flying", "sleeping"],
+  "binary_actions": ["holding", "riding", "eating"],
+  "spatial_relations": ["left_of", "right_of", "above", "below", "in_front_of", "behind", "next_to", "on", "under", "inside"],
+  "inverse_normalisation": {
+    "right_of": {"canonical": "left_of", "swap_nodes": true},
+    "below": {"canonical": "above", "swap_nodes": true},
+    "behind": {"canonical": "in_front_of", "swap_nodes": true}
+  },
+  "scenes": ["indoor", "outdoor", "road", "park", "beach", "kitchen", "office", "bedroom"],
+  "count_buckets": ["1", "2", "3", "4", "5_plus"],
+  "atom_forms": ["entity(node,category)", "attribute(node,colour|size,value)", "unary(node,action)", "binary(source,action|relation,target)", "count(category,bucket)", "scene(value)"],
+  "node_boxes": {
+    "credential_atom": false,
+    "format": ["x_min", "y_min", "x_max", "y_max"],
+    "range": [0.0, 1.0],
+    "positive_area_required": true,
+    "vsa_quadrant_boundary": 0.5,
+    "boundary_equality": "right_or_bottom"
+  },
+  "canonicalisation": {
+    "unicode": "NFKC",
+    "labels": "lowercase ASCII closed-vocabulary tokens",
+    "node_order": "lexicographically least complete serialisation over permutations within equal-category groups",
+    "duplicate_atoms": "collapse exact duplicates",
+    "conflicts": "malformed_fail_closed"
+  },
+  "malformed_conditions": ["unknown_label", "self_edge", "contradictory_single_value_attribute", "duplicate_node_id", "invalid_arity", "more_than_eight_nodes", "count_entity_contradiction", "invalid_box", "unsupported_version"]
+}

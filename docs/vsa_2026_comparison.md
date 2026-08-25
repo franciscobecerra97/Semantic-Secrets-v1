@@ -69,7 +69,7 @@ The paper also reports no empirical user study. It treats image availability as 
 | Database compromise | Not a protected-record construction | Paper argues hashes hide names but acknowledges offline trials; exact compromise game absent | Candidate-testing throughput and residual disclosure required for each stolen view |
 | Server/key compromise | Not formalised | Server compromise discussed qualitatively; no separate key/service/collusion matrix | Database, AS, PS/share, sub-threshold, collusion, and total compromise separated |
 | Policy hiding | No | Not established; operator/quantity structure visible | Explicit target where feasible; leakage must be measured |
-| Adaptive-query leakage | Not evaluated | Not evaluated | Explicit attack dimension; C5 only if distinct |
+| Adaptive-query leakage | Not evaluated | Not evaluated | Required C3/C4 attack dimension; P8 rejected standalone C5 |
 | Attacker model | COCO/nonmatching-image frequency plus qualitative attacks | Same plus qualitative hash/server claims | K0–K3, online/offline, passive/malicious, compromise and adaptive views |
 | Random vs. targeted negatives | Mainly COCO distribution; policies include common/rare facts; no target-conditioned semantic-neighbour suite | Same | Random, frequency, targeted near, and full budgeted strategies separated |
 | AI-assisted attacks | VLM adversarial manipulation mentioned as future robustness work | Same | LLM/VLM/generator-assisted candidate ordering under fixed budgets |
@@ -94,7 +94,7 @@ The defensible hypothesis is not one semantic mechanism. It is whether the follo
 4. full acceptance-region and budgeted AI-assisted attack measurement;
 5. private predicate evaluation with policy privacy, offline-validation resistance under declared views, and domain-separated unlinkability.
 
-P8 must verify this gap against broader primary literature. Until Gate V2-N passes, this is a research hypothesis rather than a novelty claim.
+P8 verified this gap against a focused broader primary-source corpus. Gate V2-N passed with narrowing because every component is prior art but the complete scoped empirical/systems combination was not found. This remains a prospective hypothesis, not a global “first” claim; see `docs/p8_novelty_review_v2.md`.
 
 ## Bibliographic identity
 
