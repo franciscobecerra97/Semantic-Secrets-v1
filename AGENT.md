@@ -1,4 +1,4 @@
-# AGENT.md — Semantic Secrets research contract (v3 extraction reframe)
+# AGENT.md — Semantic Secrets research contract (v3.1 extraction freeze)
 
 ## 1. Authority and status
 
@@ -173,7 +173,7 @@ Normal verification should reveal no more than an authorised, context-bound `Acc
 - P8 is novelty refresh, formalisation, and preregistration only. It may not execute the expensive v2 experiment.
 - P8 completed on 2026-08-25. `docs/formal_specification_v2.md` and `experiments/v2/config/preregistration_v2.json` remain the binding historical freeze for the failed P9-v2 path; they may not be edited after its output.
 - P9-v2 completed negatively and is immutable. Its monolithic VLM-to-credential-JSON path failed schema validity; it did not measure full semantic capability and is not a universal extractor-impossibility result.
-- P9-v3A completed on 2026-08-25 as architecture and preregistration only. `docs/formal_specification_v3.md`, `docs/p9_v3_reframe.md`, and `experiments/v3/config/*.json` bind future P9-v3B. No v3 model, image, inference, policy, authentication, or cryptographic experiment has run.
+- P9-v3A completed on 2026-08-25 as architecture and preregistration only. Its v3.0.0 files remain the immutable initial freeze. P9-v3A.1 then completed a prospective pre-execution suitability audit before any v3 output. Future P9-v3B is bound by the v3.1 addendum and `*_v3_1.json` configs; no v3 model, weight, capability image, inference, policy, authentication, or cryptographic experiment has run.
 - P9-v3B requires explicit authorisation and new `cap-v3-*` data. P9-v3C requires constructive Gate V3-A1 and a separate preregistration/data freeze. P10 requires constructive Gate V3-A2.
 - New v2 evidence requires new version identifiers, data, splits, configs, and gates. Do not reuse v1 thresholds as v2 evidence.
 - Keep a sealed held-out test partition. Fit vocabulary, policy rules, weights, thresholds, attacker orderings, and all selection decisions on permitted development data only.
@@ -187,7 +187,7 @@ Normal verification should reveal no more than an authorised, context-bound `Acc
 
 - **V2-N — Novelty/formalisation:** C1–C4 remain jointly distinguishable from verified prior work; definitions, baselines, and preregistration are frozen.
 - **V2-A — Failed historical extractor gate:** the frozen P9-v2 monolithic representation path failed and can never be relabelled as a pass.
-- **V3-A1 — Modular extraction viability:** compiler invariants pass exactly and at least one frozen observation pipeline yields an independently evidenced `L_cred` containing entity plus at least two additional types, including a structural type.
+- **V3-A1 — Modular extraction viability:** compiler invariants pass exactly and at least one frozen observation pipeline yields an independently evidenced, support-complete `L_cred` containing entity plus at least two additional types, including a structural type. Installed GPU capacity is not a gate; measured complete-pipeline consumption remains capped at 24 GiB VRAM and 32 GiB RSS.
 - **V3-A2 — Independent reconstruction viability:** using only V3-A1-eligible types on separate data, independent-image reconstruction meets preregistered enrolment, FRR/FAR, separation, and policy-improvement bounds.
 - **V2-B — Policy value:** system-derived `M/T` materially improves the security–reconstruction trade-off over VSA-style and non-policy baselines without post-hoc tuning.
 - **V2-C — Acceptance-region viability:** budgeted K0–K3 and AI/adaptive success supports the selected positioning.
@@ -200,7 +200,7 @@ An expensive later phase cannot bypass an earlier failed gate. Valid outcomes in
 ## 11. Engineering and reproducibility contract
 
 - Follow the budget sequence: primary literature/analysis → deterministic smoke test → small preregistered pilot → eliminate weak candidates → full experiment only after its gate.
-- Do not benchmark many generators or VLMs. The v3 shortlist is capped at the two pipelines frozen in `visual_observation_v3.json`; models emit evidence, not final credential JSON. Never search until a favourable result appears.
+- Do not benchmark many generators or VLMs. The executable v3.1 shortlist is exactly the two pipelines frozen in `visual_observation_v3_1.json`; v3.0.0 remains historical. Models emit evidence, not final credential JSON. Never search until a favourable result appears.
 - Cache generated images and canonical graphs, reuse valid version-matched outputs, and create new-version manifests instead of overwriting evidence.
 - Prefer mature cryptographic libraries and implement only the small set of candidates surviving theoretical elimination; do not build every possible protocol.
 - Keep observation, deterministic compilation, policy derivation, plaintext decision, protocol, attack, and analysis modules separable.
@@ -219,4 +219,4 @@ Those results motivate, but do not validate or invalidate, the active hypothesis
 
 ## 13. Immediate execution boundary
 
-P9-v3A completed on 2026-08-25. It froze the modular observation/compiler architecture, `L_visual`/`L_cred` rule, two candidate pipelines, new two-stratum data design, compiler/perception separation, and Gates V3-A1/V3-A2. It ran no model or experiment and did not alter P9-v2. The next permitted phase is P9-v3B only after explicit user instruction. P9-v3C is blocked on constructive V3-A1; P10 and every cryptographic phase are blocked on constructive V3-A2. See `docs/p9_v3_reframe.md` and decision `P9-v3A-00`.
+P9-v3A.1 completed on 2026-08-25 as a pre-execution audit. It corrected the machine-capacity wording without changing the 24 GiB measured-VRAM limit, replaced historical v3.0 SGTR with EGTR in a new v3.1 freeze, declared support opportunities and primary gate types, and recorded the missing guaranteed second human annotator as an execution blocker. It ran no model, downloaded no weight, and created no capability image or validation output. P9-v3B requires both explicit user instruction and a completed two-human annotation-resource record before image creation. P9-v3C is blocked on constructive V3-A1; P10 and every cryptographic phase are blocked on constructive V3-A2. See `docs/p9_v3_preexecution_audit.md`, `docs/formal_specification_v3_1.md`, and decision `P9-v3A.1-00`.

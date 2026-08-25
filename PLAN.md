@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; P9-v3A completed the modular extraction reframe and preregistration on 2026-08-25 without running a model or experiment. P9-v3B awaits explicit authorisation. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
+Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; P9-v3A froze v3.0.0; and P9-v3A.1 completed a prospective v3.1.0 pipeline/resource/support audit on 2026-08-25 without weights, images, or inference. P9-v3B awaits explicit authorisation and a confirmed two-human annotation resource. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
 Authority: `AGENT.md` is the active scientific and engineering contract. This plan operationalises it and may not silently weaken it.
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
 
@@ -88,6 +88,7 @@ Active v2 decisions are phase-gated:
 | V2-DN combined novelty and scope | P8 | Verified primary literature and formal comparison | C1–C4 remain jointly defensible or are narrowed before implementation |
 | V2-D1 failed monolithic capability | P9-v2 | Immutable formal capability fixture | Gate V2-A failed; no reinterpretation or rerun |
 | V3-D1 modular extraction architecture | P9-v3A | Primary literature plus formal/preregistered design | Freeze model-evidence/compiler separation, two candidates, data, metrics, and gates |
+| V3-D1.1 pre-execution suitability | P9-v3A.1 | Bounded primary-artifact and support-feasibility audit | Freeze v3.1 hardware semantics, EGTR comparator, support opportunities, and annotation prerequisite before output |
 | V3-D2 modular component capability | P9-v3B | New controlled/naturalistic capability data | One whole pipeline passes V3-A1; no cross-pipeline type union |
 | V3-D3 independent reconstruction | P9-v3C | Separate preregistered reconstruction data | Frozen eligible language and M/T interface pass V3-A2 |
 | V2-D2 policy and baselines | P10 | Training-only derivation and new pilot against B0/B1/B2 | Proposed policy passes V2-B without held-out tuning after V3-A2 |
@@ -456,19 +457,44 @@ Active v2 decisions are phase-gated:
 
 **Stop / fallback:** If the design cannot separate perception from compilation or cannot be licensed/reproduced, stop rather than run a vague model search.
 
+### P9-v3A.1 — Pre-execution pipeline and resource suitability audit
+
+**Status:** Complete on 2026-08-25. Prospective amendment only; no model weights, capability images, perception inference, validation output, P9-v3B, P9-v3C, or P10 work occurred.
+
+**Objective:** Correct the resource wording, choose one artifact-suitable graph-native comparator, and ensure the planned support/annotation design is executable before any v3 output.
+
+**Tasks completed:**
+
+1. Separated installed GPU capacity from measured complete-pipeline VRAM consumption while preserving the 24 GiB numeric gate.
+2. Compared only SGTR, EGTR, and ROBIN/Synthetic Visual Genome from primary papers and official repositories; selected EGTR before output.
+3. Preserved Grounding DINO + SigLIP2 and explicitly classified pair-crop relation scoring as an experimental hypothesis.
+4. Defined positive/applicable-negative opportunities, five primary gate types, exploratory `not_gate_evaluable` handling, and feasible family concentration.
+5. Preserved two-human model-blind annotation and recorded the unconfirmed second annotator as a blocker with an external-human replacement protocol.
+6. Created v3.1 configs/addendum without modifying the meaning of v3.0.0.
+
+**Outputs:** `docs/p9_v3_preexecution_audit.md`; `docs/formal_specification_v3_1.md`; `experiments/v3/config/preregistration_v3_1.json`; `experiments/v3/config/visual_observation_v3_1.json`; v3.1 config tests; governance, literature, bibliography, and manuscript amendments.
+
+**Validation:** Primary-source traceability; exactly two final pipelines; support arithmetic; unchanged 320-case compiler floor and Gate language requirement; JSON/CSV/BibTeX/LaTeX checks; P9-v2 protection; no weights/images/outputs.
+
+**Decision / gate:** No empirical gate passed. The executable shortlist is exactly `v3.1-gdino-siglip2` and `v3.1-egtr-siglip2`.
+
+**Dependencies:** Immutable P9-v3A commit `8e44caa`.
+
+**Stop / fallback:** Do not create images until the annotation blocker is resolved. Do not restore SGTR, add another pipeline, or change hardware for semantic outcomes after validation.
+
 ### P9-v3B — Modular component capability and `L_cred` eligibility
 
-**Status:** Not started; requires explicit user authorisation.
+**Status:** Not started; requires explicit user authorisation and resolution of the v3.1 two-human annotation-resource blocker.
 
 **Objective:** Test perception and compiler capability on new controlled and naturalistic data before any reconstruction/authentication study.
 
-**Tasks:** Author the frozen `cap-v3-*` dataset and labels; implement/test the compiler; acquire only the two frozen pipelines after licence/hash checks; run bounded smoke; freeze development thresholds; execute validation and repeat; compute per-type/stratum metrics, uncertainty, resources, and exact compiler checks.
+**Tasks:** After the annotation-resource record exists, author the frozen `cap-v3-*` dataset and labels; implement/test the compiler; acquire only the two v3.1 pipelines after licence/hash checks; run bounded smoke; freeze development thresholds; execute validation and repeat; compute per-type/stratum support, metrics, uncertainty, measured resources, and exact compiler checks.
 
 **Outputs:** immutable manifests, observations, compiler cases/results, aggregate report, eligible `L_cred` per complete pipeline, and Gate V3-A1 decision.
 
-**Decision / gate:** **Gate V3-A1 — Modular extraction viability.** Pass only under the complete conjunction in `experiments/v3/config/preregistration_v3.json`. Do not union eligible types across pipelines.
+**Decision / gate:** **Gate V3-A1 — Modular extraction viability.** Pass only under the complete conjunction formed by historical `preregistration_v3.json` plus prospective `preregistration_v3_1.json`. Do not union eligible types across pipelines. Installed GPU capacity is irrelevant; measured pipeline consumption is gated.
 
-**Dependencies:** Complete P9-v3A and explicit instruction.
+**Dependencies:** Complete P9-v3A.1, explicit instruction, and a confirmed two-independent-human annotation record before image creation.
 
 **Stop / fallback:** If no pipeline passes, stop the visual constructive path or preregister a genuinely new reframe. Do not execute P9-v3C.
 

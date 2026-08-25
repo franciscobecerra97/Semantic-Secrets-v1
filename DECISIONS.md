@@ -563,3 +563,35 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** Whether checkpoint terms permit SGTR acquisition; whether either complete pipeline meets object/type/stratum thresholds; whether action or interaction types qualify; naturalistic annotation reliability; actual GPU cost; reconstruction stability; M/T value; acceptance-region security; and private-protocol feasibility.
 
 **Revisit trigger:** A primary source invalidates a component rationale; a licence blocks a frozen pipeline; an outcome-independent design flaw is found before validation; Gate V3-A1 or V3-A2 fails; or new work subsumes C1–C4. Changes require an appended decision and new version, never a rewrite of P9-v2 or this record.
+
+## P9-v3A.1-00 — Pre-execution pipeline and resource suitability audit
+
+**Decision:** Freeze prospective v3.1.0 before any v3 output. Correct GPU-machine semantics, replace SGTR with EGTR as the only graph-native alternative to Grounding DINO + SigLIP2, predeclare support opportunities and primary gate types, and block image creation until two independent human annotators are confirmed.
+
+**Date:** 2026-08-25
+
+**Status:** Selected and preregistered prospectively. P9-v3B remains unexecuted and unauthorised.
+
+**Question:** Does the v3.0.0 design contain outcome-independent resource, artifact, support, or annotation defects that should be corrected before any model/image output exists?
+
+**Candidates:** Keep the v3.0 wording and SGTR; replace SGTR with EGTR; use newer ROBIN/Synthetic Visual Genome; weaken the support gate after data; or make a prospective versioned amendment with no empirical execution.
+
+**Evaluation criteria:** Primary paper and official artifact availability; exact code revision and checkpoint identity; licence clarity; reproducible local inference; bounded tensor/graph output; relation vocabulary overlap; adaptation complexity; compute; naturalistic T2I suitability; support arithmetic over 60 validation images/12 families; annotation independence; no outcome-based model or hardware selection.
+
+**Evidence:** SGTR CVPR 2022 and official repository commit `03bdd6554f12d521807cf95fe6a7daa7d3bb01dc`; EGTR CVPR 2024 and official repository commit `7f87450f32758ed8583948847a8186f2ee8b21e3`; ROBIN/Synthetic Visual Genome CVPR 2025 and official repository commit `29146b9d81333e0af039c617b22ccf618031c07c`; static review of released checkpoint links, licences, dependency files, evaluation commands, tensor interfaces, and the v3.0 semantic plan. No checkpoint or project image was acquired and no inference occurred.
+
+**Selected option:** Create `semantic-secrets-preregistration-v3.1.0` and `visual-observation-v3.1.0`. Preserve Pipeline A as the compositional hypothesis. Select EGTR(VG) + SigLIP2 as Pipeline B. Preserve the measured 24 GiB VRAM/32 GiB RSS limits while allowing any documented dedicated GPU capacity. Guarantee support for entity, colour, count, binary interaction, and geometry relation; classify the remaining five types as exploratory and `not_gate_evaluable` under their frozen 30/30 support. Require two independent model-blind human annotators before image creation.
+
+**Rejected alternatives:** SGTR is superseded because EGTR has a newer graph-native design, clearer single-GPU evaluation path, official released checkpoint, one Apache-2.0 repository licence, and directly adaptable object/relation/connectivity tensors; SGTR's thin older artifact and README/licence presentation conflict increase reproducibility risk. ROBIN is rejected because its autoregressive graph text/JSON and semantic label mapping reintroduce structured-generation risk and additional region-model complexity. Post-output support expansion, cross-pipeline union, model-assisted ground truth, a fabricated second annotator, and validation-driven hardware selection are forbidden.
+
+**Reason:** Installed memory and measured allocation are different variables. The former should not exclude an A100; the latter remains a reproducibility and deployability gate. Likewise, 60 positive and 60 negative opportunities are feasible for a limited predeclared primary set but not for all ten types without artificial density. EGTR best preserves the intended learned-observation/deterministic-compiler boundary among the audited graph-native artifacts.
+
+**Security/privacy assumptions:** No security, privacy, reconstruction, or authentication evidence is added. Model and label selection remain public and pre-output. Prompts, images, observations, and graphs remain local sensitive data. A larger GPU does not authorize more pipeline memory or a semantic-accuracy-driven environment change.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ6 and Gate V3-A1 methodology only. C1-C4 remain conditional and unsupported. P9-v3C remains blocked on constructive V3-A1; P10 remains blocked on constructive V3-A2.
+
+**Experiments supporting decision:** None. This was literature/artifact inspection, formal arithmetic, configuration, and document validation only.
+
+**Remaining uncertainty:** EGTR checkpoint bytes/hash and extracted label metadata cannot be recorded until authorised acquisition; actual resource use and semantic accuracy are unmeasured; a second independent annotator is not yet guaranteed; primary-type feasibility still requires successful authored scenes under the frozen manifest.
+
+**Revisit trigger:** Before output, official EGTR checkpoint/licence/artifact metadata fails closed or a documented implementation requirement proves incompatibility. After validation begins, no candidate, support, hardware-for-accuracy, or threshold change is permitted; a genuinely new question requires a new version and decision.

@@ -1,0 +1,132 @@
+{
+  "$schema_version": "semantic-secrets-preregistration-v3.1.0",
+  "preregistration_id": "p9-v3a1-preexecution-amendment-2026-08-25",
+  "phase": "P9-v3A.1",
+  "status": "prospective suitability amendment before any v3 experimental output",
+  "amends": {
+    "base_schema": "semantic-secrets-preregistration-v3.0.0",
+    "base_file": "preregistration_v3.json",
+    "base_commit": "8e44caa71ae724e032822b40a1af4e4dc8190d31",
+    "rule": "all base fields remain binding unless explicitly superseded here"
+  },
+  "historical_versions": {
+    "v3.0.0": "initial P9-v3A freeze",
+    "v3.1.0": "pre-execution suitability amendment before any model or image output"
+  },
+  "publication_result": false,
+  "output_state_at_freeze": {
+    "model_inference": false,
+    "model_weights_downloaded": false,
+    "capability_images_created": false,
+    "validation_output_exists": false,
+    "p9_v3c_started": false,
+    "p10_started": false
+  },
+  "versions": {
+    "observation": "visual-observation-v3.1.0",
+    "observation_config": "visual_observation_v3_1.json",
+    "compiler": "semantic-compiler-v3.0.0",
+    "compiler_result": "semantic-compiler-result-v3.0.0",
+    "visual_language": "L_visual-v3.1.0",
+    "credential_language": "L_cred-v3.1.0-data-derived-by-supported-type",
+    "dataset_design": "p9-v3-capability-data-v3.1.0"
+  },
+  "execution_boundary": {
+    "next_phase": "P9-v3B",
+    "authorized_by_this_amendment": false,
+    "additional_blocker": "two independent human annotators must be named and confirmed before capability-image creation",
+    "forbidden_now": ["model download", "model weight acquisition", "capability image creation or generation", "perception inference", "validation inspection", "P9-v3B", "P9-v3C", "P10", "cryptographic implementation"]
+  },
+  "candidate_shortlist": {
+    "maximum_pipelines": 2,
+    "pipelines": ["v3.1-gdino-siglip2", "v3.1-egtr-siglip2"],
+    "selection_basis": "primary papers and official artifact suitability before output only",
+    "pipeline_a_rule": "preserved without model shopping; pair-crop action and interaction classification is an experimental compositional hypothesis whose failure is valid",
+    "pipeline_b_change": "EGTR replaces SGTR prospectively for clearer released artifacts, one-GPU evaluation, newer graph-native design, and bounded tensor outputs",
+    "replacement_after_validation": false,
+    "cross_pipeline_type_union": false,
+    "fine_tuning": false,
+    "authentication_outcome_selection": false
+  },
+  "compute": {
+    "full_inference_machine": "any documented dedicated research GPU; installed device capacity is not a gate and no secret-bearing cloud service is allowed",
+    "required_environment_record": ["GPU model", "installed GPU memory", "driver", "CUDA or ROCm", "framework versions", "environment lock hash", "CPU", "system RAM", "operating system"],
+    "hardware_selection_timing": "before validation output and independent of semantic accuracy outcomes",
+    "larger_machine_does_not_raise_limits": true,
+    "gpu_capacity_is_gate": false,
+    "pipeline_peak_vram_gib_max": 24,
+    "pipeline_peak_rss_gib_max": 32,
+    "median_seconds_per_image_max": 30,
+    "p95_seconds_per_image_max": 60,
+    "measurement_protocol": {
+      "scope": "complete pipeline including model components, adapters, and compiler for one image",
+      "warmup_images": 2,
+      "reset_peak_allocator_before_measurement": true,
+      "device_synchronize_before_and_after": true,
+      "report_framework_peak_allocated_and_reserved": true,
+      "gate_value": "maximum measured allocated VRAM across development, validation, and repeat runs"
+    }
+  },
+  "dataset_support": {
+    "validation_images_per_stratum": 60,
+    "validation_families_per_stratum": 12,
+    "images_per_family": 5,
+    "opportunity_definition": {
+      "positive": "one predeclared visible reference atom in its image/entity/pair/category/scene scope",
+      "applicable_negative": "one predeclared false closed-label alternative in the same scope; unqueried absent vocabulary labels do not count"
+    },
+    "minimum_positive_opportunities_per_type_per_stratum": 60,
+    "minimum_applicable_negative_opportunities_per_type_per_stratum": 60,
+    "insufficient_support_status": "not_gate_evaluable",
+    "insufficient_support_effect": "neither pass nor failure of unrelated types; type cannot enter L_cred",
+    "support_freeze_timing": "family assignments and opportunity counts fixed before image creation; no expansion after any model output",
+    "primary_gate_types": ["entity", "colour", "count", "binary_interaction", "geometry_relation"],
+    "primary_gate_requirement_unchanged": {
+      "required_types": ["entity"],
+      "minimum_additional_types": 2,
+      "minimum_structural_types_from": ["count", "geometry_relation", "unary_action", "binary_interaction"],
+      "minimum_structural_type_count": 1
+    },
+    "validation_plan_each_stratum": {
+      "entity": {"role": "primary", "positive": 120, "negative": 120, "families": "F01-F12", "per_contributing_image": {"positive": 2, "negative": 2}, "gate_evaluable": true},
+      "colour": {"role": "primary", "positive": 60, "negative": 60, "families": "F01-F12", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": true},
+      "size": {"role": "exploratory", "positive": 30, "negative": 30, "families": "F01-F06", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": false},
+      "material": {"role": "exploratory", "positive": 30, "negative": 30, "families": "F07-F12", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": false},
+      "pattern": {"role": "exploratory", "positive": 30, "negative": 30, "families": "F01-F06", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": false},
+      "count": {"role": "primary_structural", "positive": 60, "negative": 60, "families": "F01-F12", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": true},
+      "unary_action": {"role": "exploratory", "positive": 30, "negative": 30, "families": "F07-F12", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": false},
+      "binary_interaction": {"role": "primary_structural", "positive": 60, "negative": 60, "families": "F01-F12", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": true},
+      "geometry_relation": {"role": "primary_structural", "positive": 60, "negative": 60, "families": "F01-F12", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": true},
+      "scene": {"role": "exploratory", "positive": 30, "negative": 30, "families": "F01-F06", "per_contributing_image": {"positive": 1, "negative": 1}, "gate_evaluable": false}
+    },
+    "development_layout": "mirror validation opportunity layout for development-only threshold fitting; development observations never contribute validation support",
+    "naturalistic_density_bound": "two to four visible entities per image; two entity positives and at most four additional primary facts may share those entities"
+  },
+  "annotation": {
+    "status": "unresolved execution blocker",
+    "reason": "two independent project researchers are not evidenced as guaranteed",
+    "required_before": "any capability-image creation",
+    "replacement_protocol": "one project researcher plus one qualified independent external human annotator",
+    "independent_model_blind": true,
+    "model_assisted_ground_truth": false,
+    "same_person_second_pass_counts_as_independent": false,
+    "required_record": ["annotator roles", "availability confirmation", "rubric version", "independence statement", "randomized image-ID procedure", "conflict/provenance statement", "adjudication procedure"],
+    "adjudication": "documented human consensus against the frozen visibility rubric before inference; retain raw annotations and report agreement"
+  },
+  "gate_v3_a1": {
+    "compiler_invariants": "unchanged v3.0 requirement: all 320 or more cases pass exactly",
+    "pipeline_failure_rate_point_max": 0.05,
+    "pipeline_failure_rate_wilson_upper_max": 0.10,
+    "canonical_observation_equality_point_min": 0.95,
+    "canonical_observation_equality_wilson_lower_min": 0.90,
+    "canonical_graph_equality_point_min": 0.95,
+    "canonical_graph_equality_wilson_lower_min": 0.90,
+    "resource_limits": "measured consumption limits in compute; installed GPU capacity excluded",
+    "type_support_conjunctive": true,
+    "type_metric_thresholds": "unchanged from preregistration_v3.json",
+    "minimum_eligible_language": {"required_types": ["entity"], "minimum_additional_types": 2, "minimum_structural_types_from": ["count", "geometry_relation", "unary_action", "binary_interaction"], "minimum_structural_type_count": 1},
+    "pass_rule": "at least one complete frozen pipeline passes all compiler, operational, repeatability, measured-resource, support, per-type, per-stratum, and language checks",
+    "cross_pipeline_union": false
+  },
+  "inherited_unchanged": ["architecture", "dataset total/strata/family split", "compiler_tests", "perception metric thresholds", "uncertainty", "repeatability", "future Gate V3-A2", "policy boundary", "cache", "preserved claims"]
+}

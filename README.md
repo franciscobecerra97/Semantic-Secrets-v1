@@ -12,7 +12,7 @@ The natural-language prompt is a reconstruction interface, not the secret. Gener
 
 P8 passed Gate V2-N with narrowed claims. P9-v2 then completed negatively: neither frozen monolithic VLM-to-credential-JSON extractor survived the 98% schema-validity requirement, P9B was not executed, and Gate V2-A failed. That result is immutable and does not establish universal extractor impossibility.
 
-P9-v3A has now completed the explicit scientific reframe. Models will emit bounded visual observations; a deterministic compiler will emit a canonical credential graph or typed failure. The phase froze two modular pipelines, a new two-stratum dataset design, compiler and perception tests, `L_visual`/`L_cred` eligibility, and Gates V3-A1/V3-A2. It ran no model or experiment. P9-v3B awaits explicit authorisation; P9-v3C is blocked on V3-A1; P10 and cryptography are blocked on V3-A2.
+P9-v3A froze the explicit modular reframe as v3.0.0. P9-v3A.1 has now prospectively frozen v3.1.0: any documented dedicated GPU may be used while measured pipeline VRAM remains capped at 24 GiB; EGTR replaces SGTR as the graph-native comparator; support is defined by predeclared opportunities with five primary gate types; and the unavailable guaranteed second human annotator is an execution blocker. No v3 weight, capability image, inference, or validation output exists. P9-v3B awaits explicit authorisation and resolution of the annotation blocker; P9-v3C is blocked on V3-A1; P10 and cryptography are blocked on V3-A2.
 
 P0–P7 remain frozen evidence for `visual-semantic-pipeline-v1`:
 
@@ -31,10 +31,11 @@ Those findings remain valid and have not been retuned. The v2 image hypothesis i
 6. `docs/security_model_v2.md` and `docs/threat_claim_matrix_v2.csv` — active v2 security contract.
 7. `docs/p8_novelty_review_v2.md` and `docs/formal_specification_v2.md` — Gate V2-N outcome and P9–P11 freeze.
 8. `docs/p9_capability_screen_v2.md` — P9A negative evidence, logical-futility boundary, and failed Gate V2-A decision.
-9. `docs/p9_v3_reframe.md` and `docs/formal_specification_v3.md` — modular architecture, evidence boundary, compiler, languages, data, metrics, and gates.
-10. `experiments/v3/config/preregistration_v3.json` and `visual_observation_v3.json` — machine-readable future-experiment freeze.
-11. `experiments/v2/config/preregistration_v2.json` — immutable historical v2 freeze and failed path.
-12. `paper/draft.tex` — planning manuscript with the bounded P9-v2 result and no false v3 findings.
+9. `docs/p9_v3_reframe.md` and `docs/formal_specification_v3.md` — immutable v3.0.0 architecture freeze.
+10. `docs/p9_v3_preexecution_audit.md` and `docs/formal_specification_v3_1.md` — binding prospective v3.1.0 suitability amendment.
+11. `experiments/v3/config/preregistration_v3_1.json` and `visual_observation_v3_1.json` — machine-readable future-experiment amendment; the un-suffixed configs preserve v3.0.0.
+12. `experiments/v2/config/preregistration_v2.json` — immutable historical v2 freeze and failed path.
+13. `paper/draft.tex` — planning manuscript with the bounded P9-v2 result and no false v3 findings.
 
 `docs/security_model.md` remains the frozen v1 model. `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or evidence bibliography.
 

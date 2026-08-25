@@ -1,0 +1,87 @@
+{
+  "$schema_version": "visual-observation-v3.1.0",
+  "amends": {
+    "base_schema": "visual-observation-v3.0.0",
+    "base_file": "visual_observation_v3.json",
+    "base_commit": "8e44caa71ae724e032822b40a1af4e4dc8190d31",
+    "rule": "observation records, compiler, labels, bounds, confidence, canonicalisation, and typed failures remain unchanged unless overridden here"
+  },
+  "observation_language": "L_visual-v3.1.0",
+  "credential_language_rule": "only support-complete types independently eligible in both strata may enter L_cred-v3.1.0; exploratory 30/30 types are not gate-evaluable",
+  "compiler": {
+    "compiler_id": "semantic-compiler-v3.0.0",
+    "result_schema": "semantic-compiler-result-v3.0.0",
+    "changed_from_base": false
+  },
+  "shared_gate_entity_label_intersection": ["person", "cat", "dog", "bird", "horse", "car", "bus", "train", "boat", "chair", "bench", "table", "bottle", "cup", "book", "laptop", "umbrella", "tree", "flower", "hat", "phone", "plate", "bed", "desk", "door"],
+  "pipelines": [
+    {
+      "pipeline_id": "v3.1-gdino-siglip2",
+      "inherits_pipeline": "v3-gdino-siglip2",
+      "scientific_role": "compositional baseline: open-set entity localization followed by experimental closed-label crop, ordered-pair-crop, and global scoring",
+      "hypothesis_boundary": "SigLIP2 pair-crop action/interaction classification is an experimental compositional hypothesis, not an established relation detector; failure is valid",
+      "adapter": {
+        "detection_query": "shared_gate_entity_label_intersection joined by period-space in config order",
+        "entity_threshold": "one global detector threshold fitted on development only, then frozen",
+        "single_crop": "tight detection box plus 10 percent width/height padding, clipped",
+        "pair_crop": "ordered union crop plus 10 percent padding, two-pixel red source border and two-pixel blue target border",
+        "attribute_template": "a photo of a {attribute_value} {entity_category}",
+        "unary_template": "a photo of a {entity_category} {unary_action}",
+        "binary_template": "a photo of the red-box {source_category} {binary_interaction} the blue-box {target_category}",
+        "scene_template": "a photo taken in a {scene}",
+        "score_rule": "complete closed label set per task; one threshold and minimum top-two margin fitted on development only"
+      },
+      "components": [
+        {"component_id": "grounding-dino-tiny", "model_id": "IDEA-Research/grounding-dino-tiny", "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71", "checkpoint_identity": "Hugging Face repository snapshot at exact revision", "license": "Apache-2.0", "output": "category, normalized box, detector confidence"},
+        {"component_id": "siglip2-base-384", "model_id": "google/siglip2-base-patch16-384", "revision": "f775b65a79762255128c981547af89addcfe0f88", "checkpoint_identity": "Hugging Face repository snapshot at exact revision", "license": "Apache-2.0", "output": "closed-label similarity scores for crop attributes/actions, ordered pair-crop interactions, and global scene"}
+      ],
+      "acquisition_hash_rule": "before extraction or inference, record each downloaded file name, byte count, source URL/etag if present, and SHA-256; any later mismatch fails closed",
+      "label_intersection": {"entities": "shared_gate_entity_label_intersection", "attributes_actions_interactions_scenes": "exact L_visual-v3.1.0 labels scored as complete closed task sets"},
+      "threshold_fit": "development only; freeze before validation",
+      "resource_envelope": {"peak_vram_gib_max": 24, "peak_rss_gib_max": 32, "median_seconds_per_image_max": 30, "p95_seconds_per_image_max": 60},
+      "failure_behavior": "missing/incompatible licence, revision, hash, required component, unsupported label, OOM, or malformed bounded observation becomes a typed pipeline failure; no candidate substitution or output repair"
+    },
+    {
+      "pipeline_id": "v3.1-egtr-siglip2",
+      "scientific_role": "graph-native comparator: EGTR(VG) object/relation tensors plus independent SigLIP2 attributes and scenes",
+      "adapter": {
+        "input": "local RGB image under the official EGTR evaluation transform; no Visual Genome evaluation image is a project datum",
+        "tensor_inputs": ["logits", "pred_boxes", "pred_rel", "pred_connectivity"],
+        "entity_rule": "softmax object logits; retain exact shared entity-label intersection above one global development-fitted threshold; convert normalized cxcywh to clipped xyxy",
+        "relation_rule": "for retained ordered object-query pairs, multiply or jointly threshold component-local relation and connectivity scores using one predicate threshold and one connectivity threshold fitted on development only",
+        "label_normalisation": "lowercase and replace spaces/hyphens with underscores; exact intersection only; no aliases or semantic nearest-neighbour mapping",
+        "entity_label_intersection": "shared_gate_entity_label_intersection",
+        "predicate_label_intersection": ["holding", "riding", "eating", "wearing", "carrying", "looking_at", "using"],
+        "excluded_project_predicate": {"touching": "not in the frozen exact VG50 intersection"},
+        "inverse_rule": "unchanged compiler inverse-normalisation after exact intersection",
+        "siglip_single_crop": "tight EGTR entity box plus 10 percent padding, clipped",
+        "attribute_template": "a photo of a {attribute_value} {entity_category}",
+        "scene_template": "a photo taken in a {scene}",
+        "siglip_score_rule": "complete closed label set per task; one threshold and top-two margin fitted on development only",
+        "serialization_boundary": "adapter emits bounded observation records only; deterministic compiler exclusively owns IDs, counts, geometry, graph invariants, and credential serialization"
+      },
+      "components": [
+        {
+          "component_id": "egtr-vg",
+          "repository": "naver-ai/egtr",
+          "revision": "7f87450f32758ed8583948847a8186f2ee8b21e3",
+          "checkpoint_identity": "egtr_vg.tar.gz from official Google Drive file 18phcRxbrEI7HqIuM2OLAPuwAF5k3pUC2",
+          "checkpoint_url": "https://drive.google.com/file/d/18phcRxbrEI7HqIuM2OLAPuwAF5k3pUC2/view?usp=drive_link",
+          "license": "Apache-2.0 official repository; checkpoint provenance and absence of incompatible separate terms must be recorded before acquisition",
+          "environment": {"docker_base": "nvcr.io/nvidia/pytorch:21.11-py3", "torch": "1.12.1+cu113", "torchvision": "0.13.1+cu113", "transformers": "4.18.0", "pytorch_lightning": "1.6.4", "timm": "0.5.4", "official_evaluation_hardware": "one NVIDIA V100 GPU"},
+          "vocabulary": "Visual Genome 150 object classes and 50 predicate classes from checkpoint artifact metadata",
+          "output": "object logits, normalized boxes, relation logits, and connectivity scores"
+        },
+        {"component_id": "siglip2-base-384", "model_id": "google/siglip2-base-patch16-384", "revision": "f775b65a79762255128c981547af89addcfe0f88", "checkpoint_identity": "Hugging Face repository snapshot at exact revision", "license": "Apache-2.0", "output": "closed-label crop attributes and global scene scores"}
+      ],
+      "acquisition_hash_rule": "before extraction or inference, record archive/file names, byte counts, source URLs/etags, and SHA-256; preserve the archive hash and extracted manifest; mismatch, missing config labels, or incompatible terms fails closed and requires a new preregistration before inference",
+      "threshold_fit": "entity, predicate, connectivity, SigLIP task, and top-two-margin thresholds use development only and freeze before validation",
+      "resource_envelope": {"peak_vram_gib_max": 24, "peak_rss_gib_max": 32, "median_seconds_per_image_max": 30, "p95_seconds_per_image_max": 60},
+      "failure_behavior": "licence/provenance ambiguity, unavailable official checkpoint, artifact/config mismatch, unsupported exact label, required-component failure, OOM, or malformed bounded observation is a typed pipeline failure; do not restore SGTR or add another candidate"
+    }
+  ],
+  "rejected_graph_candidates": [
+    {"pipeline": "SGTR", "historical_role": "v3.0.0 Pipeline B", "reason": "superseded before output by EGTR due older/thinner artifact, legacy multi-GPU path, and licence presentation conflict; retained in immutable v3.0.0"},
+    {"pipeline": "ROBIN/Synthetic Visual Genome", "repository_revision": "29146b9d81333e0af039c617b22ccf618031c07c", "reason": "autoregressive scene-graph text/JSON and semantic label mapping reintroduce structured-generation risk; multi-component artifact and release metadata are not preferable to bounded EGTR tensors"}
+  ]
+}
