@@ -1,6 +1,6 @@
 # Research direction v2
 
-Status: Gate V2-N passed with narrowing on 2026-08-25; no v2 experiment has run.
+Status: Gate V2-N passed with narrowing; P9-v2 failed its monolithic extractor gate; P9-v3A completed an architecture/preregistration reframe on 2026-08-25 without running a v3 experiment.
 
 ## Thesis
 
@@ -10,17 +10,20 @@ The image is not a password object and its pixels do not supply entropy. It is a
 
 ## Scientific chain
 
-Let a controlled concept be `C`, a reconstruction prompt be `P`, generator randomness be `r`, a frozen local generator be `G`, and a frozen local extractor be `E`:
+Let a controlled concept be `C*`, a reconstruction prompt be `P`, generator randomness be `r`, a frozen local generator be `G`, a modular observation pipeline be `Observe`, and a deterministic semantic compiler be `C_s`:
 
 ```text
 I = G(P,r)
-S = E(I)
+O = Observe(I)
+S = C_s(O)
 S = (V,E_S,A,C_S)
 Π(S) = (M,T)
 R = Protect(S,M,T,context)
 ```
 
-`M` contains mandatory discriminative anchors; `T` contains explicitly tolerant secondary facts. At authentication, independently generated `I'` yields `S'` and `(M',T')`. A plaintext reference predicate first decides whether the mandatory constraints and tolerant threshold are satisfied. A private protocol must later reproduce that same bit without disclosing more than its stated leakage.
+Models infer bounded evidence with local confidence and provenance; they do not author credential JSON. `C_s` deterministically validates, deduplicates, assigns canonical IDs, derives counts/geometry, normalises edges, and returns a valid graph or typed failure. `M` contains mandatory discriminative anchors; `T` contains explicitly tolerant secondary facts. At authentication, independently generated `I'` yields `S'` and `(M',T')`. A plaintext reference predicate first decides whether the mandatory constraints and tolerant threshold are satisfied. A private protocol must later reproduce that same bit without disclosing more than its stated leakage.
+
+`L_visual` is broad. `L_cred` contains only atom types independently qualifying in both controlled and naturalistic P9-v3B strata. Action and interaction types are evaluated independently; neither is mandatory nor discarded.
 
 This creates two independent questions:
 
@@ -59,9 +62,15 @@ independent generative reconstruction
 
 P8 tested this combination against visual/graphical authentication, VSA, semantic/story authentication, generative graphical authentication, fuzzy extractors and PAKE, exact/fuzzy/circuit/committed PSI, private fuzzy records and graph/vector/biometric matching, protected templates, OPRF/OPAQUE, AI guessing, and adaptive-oracle attacks. All component mechanisms are prior art. The remaining combined empirical/systems question was not found in the focused verified corpus, so Gate V2-N passed with narrowed claims. This is not an exhaustive absence or “first” claim.
 
+## P9 evidence and reframe boundary
+
+P9-v2 tested `image -> general VLM -> exact complete graph JSON -> strict validator`. Moondream emitted non-JSON and SmolVLM2 emitted malformed/truncated JSON. One invalid among 32 made the 0.98 validity threshold unreachable, so the frozen path correctly failed. Full semantic F1, determinism, error strata, and full latency were not estimated. The conclusion is architectural and bounded, not universal.
+
+P9-v3A separates perception from deterministic compilation. It freezes two modular pipelines, 240 new future capability images across controlled and naturalistic strata, at least 320 exact compiler tests, type-level statistical eligibility, and Gate V3-A1. A later, separately preregistered P9-v3C and Gate V3-A2 would test independent reconstruction. P10 remains blocked until V3-A2. No v3 performance result exists.
+
 ## Evidence boundaries
 
-- No v2 performance, security, privacy, usability, or deployability result exists yet.
+- P9-v2 provides only the bounded negative structured-output result above. No v3 performance, security, privacy, usability, or deployability result exists yet.
 - No human recall, memorability, or user-choice inference is authorised.
 - Technical reconstruction trials use researcher-controlled concepts and paraphrase/style/seed variation only.
 - The twelve sealed v1 P6 test families remain untouched.
@@ -70,4 +79,4 @@ P8 tested this combination against visual/graphical authentication, VSA, semanti
 
 ## Decision sequence
 
-P8 completed only novelty refresh, formalisation, baseline definition, and preregistration. `docs/p8_novelty_review_v2.md`, `docs/formal_specification_v2.md`, and `experiments/v2/config/preregistration_v2.json` are the freeze. Gates V2-A, V2-B, V2-C, V2-D, V2-E, and V2-F prevent later cost from laundering an earlier scientific failure. The valid terminal outcomes include a narrowed factor, a policy-constrained credential, a negative/measurement paper, or stopping the project.
+P8 completed novelty refresh and the original v2 freeze. P9-v2 failed Gate V2-A and remains immutable. P9-v3A is an explicit new-version reframe governed by `docs/formal_specification_v3.md` and `experiments/v3/config/*.json`; it is not a retune or bypass. Gate V3-A1 controls modular extraction, Gate V3-A2 controls independent reconstruction, and only V3-A2 can unlock P10. Later V2-B–V2-F gates remain. Valid outcomes include a narrowed factor, a policy-constrained credential, a negative/measurement paper, or stopping the project.

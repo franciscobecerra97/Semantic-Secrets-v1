@@ -15,7 +15,7 @@
 \begin{document}
 
 \begin{abstract}
-This planning manuscript defines and tests a revised research direction; it does not report a completed authentication system. We ask whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and privately verified under a system-derived policy. The prompt is a reconstruction interface rather than the secret, and generated pixels are transient observations rather than entropy. A focused P8 primary-source review found that generative graphical authentication, flexible semantic policy, fuzzy/private matching, protected templates, AI-assisted guessing, and adaptive verifier attacks are all prior art. Gate V2-N therefore passed only after narrowing the remaining question and freezing the graph, data isolation, model limits, attacks, uncertainty, and numeric gates. P9 then tested two frozen local extractors on a new controlled capability set. Each produced an invalid graph on its first formal validation fixture. With 32 validation fixtures, one invalid output caps best-case schema validity at $31/32=96.875\%$, below the preregistered 98\% requirement. Neither extractor advanced, P9B was not executed, Gate V2-A failed, and policy and cryptographic phases remain blocked. This bounded negative result rejects the tested representation path, not every possible visual-semantic extractor.
+This planning manuscript defines a revised research direction; it does not report a completed authentication system. We ask whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and privately verified under a system-derived policy. P8 narrowed the prospective contribution after finding prior art for the component mechanisms. P9-v2 then tested two frozen local extractors that each had to infer a scene and author the complete exact credential JSON. Each produced an invalid graph on its first formal validation fixture. With 32 validation fixtures, one invalid output caps best-case schema validity at $31/32=96.875\%$, below the preregistered 98\% requirement. Gate V2-A failed; full semantic accuracy was not estimated. P9-v3A now preregisters a distinct modular architecture: perception models emit bounded observations and provenance, while a deterministic compiler emits a canonical graph or typed failure. It freezes two pipelines, controlled and naturalistic capability strata, per-type credential eligibility, exact compiler tests, and new extraction/reconstruction gates. No v3 model, image, inference, authentication, or cryptographic experiment has run. P10 remains blocked.
 \end{abstract}
 
 \maketitle
@@ -34,11 +34,15 @@ Let $C$ denote a remembered visual concept and $P$ a free-form reconstruction pr
 \begin{equation}
   I = G(P,r),
 \end{equation}
-where $I$ is a transient, independently generated image. Pixels do not contribute password entropy merely because generation is stochastic. A versioned extractor $E$ produces
+where $I$ is a transient, independently generated image. Pixels do not contribute password entropy merely because generation is stochastic. A versioned modular pipeline produces observations
 \begin{equation}
-  S = E(I).
+  O = \mathsf{Observe}(I),
 \end{equation}
-The credential source is the canonical semantics and, operationally, the complete set of candidate semantics the verifier accepts.
+and a deterministic semantic compiler produces
+\begin{equation}
+  S = \mathcal{C}(O)
+\end{equation}
+or a typed failure. Models infer bounded evidence; code owns schema, identifiers, duplicates, inverse normalization, derived counts and geometry, ordering, and serialization. The credential source is the canonical semantics and, operationally, the complete set of candidate semantics the verifier accepts.
 
 This framing differs from treating direct text embeddings or a single generated image as the authentication object. It also creates a falsifiable condition: if independent generation and fresh extraction do not preserve security-relevant structure, the visual reconstruction hypothesis fails.
 
@@ -59,7 +63,7 @@ A P8-frozen reference functionality has the form
   \mathsf{Accept}_{\mathrm{ref}}=\mathsf{MandatoryOK}(M,M')
   \land [\mathsf{TolSim}(T,T')\geq\tau],
 \end{equation}
-The exact closed vocabulary, canonical graph correspondence, policy eligibility and ranking, tolerant weighted-F1 semantics, malformed/version behavior, threshold grid and development-only selector are specified in \texttt{docs/formal\_specification\_v2.md}. The notation and policy split are not claimed as standalone novelty.
+The v3 observation/compiler contract is specified in \path{docs/formal_specification_v3.md}. Its broad candidate language $L_{\mathrm{visual}}$ contains entities, attributes, actions/interactions, derived geometry/counts, and scenes. A type enters $L_{\mathrm{cred}}\subseteq L_{\mathrm{visual}}$ only after independent capability evidence passes in both controlled and naturalistic strata. Actions and interactions are independently gated: neither is required nor silently discarded. The $M/T$ notation and policy split are preserved but are not implemented or tuned in P9-v3A and are not claimed as standalone novelty.
 
 \section{Acceptance-region security}
 
@@ -114,6 +118,8 @@ VSA calls its hash binding server-opaque and explicitly weaker than strict zero 
 
 SemanticLock uses semantically linked image tokens and story structure for graphical authentication~\cite{Olade2023SemanticLock}. PassStyles~\cite{Matsuzaki2025PassStyles} and Omokage~\cite{Matsuzaki2026Omokage} use StyleGAN-generated changing face candidates and recognition criteria, preventing broad ``first semantic'', ``first generative'', or ``first changing-image'' authentication language. Adaptive score-guided verifier search is likewise established~\cite{MartinezDiaz2011HillClimbing}. The P8 review found no verified source combining free-language independent text-to-image reconstruction and fresh typed extraction with a system-derived policy, finite-budget semantic attacks, and construction-specific private/domain-separated verification. Gate V2-N passed for that scoped question only; this is not an exhaustive absence or first claim.
 
+The v3 shortlist is grounded in prior visual-understanding work. Grounding DINO produces open-set, language-conditioned boxes~\cite{Liu2024GroundingDINO}; SigLIP~2 provides contrastive vision-language encoders for closed-label scoring and localization-oriented transfer~\cite{Tschannen2025SigLIP2}; and SGTR predicts entity/predicate proposals and graph connectivity end to end~\cite{Li2022SGTR}. Visual Genome illustrates the dense object/attribute/relation annotation problem and its dataset limitations~\cite{Krishna2017VisualGenome}. These are established perception components, not authentication or privacy contributions.
+
 \section{Research questions}
 
 \begin{sloppypar}
@@ -133,7 +139,7 @@ The execution order is deliberately staged.
 
 \paragraph{Novelty and preregistration.} P8 completed a focused primary-source novelty refresh and froze graph tasks, controlled concepts, splits, capability screening, policy derivation, attack budgets, uncertainty, and numeric gate thresholds. It performed no model acquisition, dataset acquisition, v2 inference, sealed-v1 access, or cryptographic implementation.
 
-\paragraph{Representation before authentication.} P9A screened two preregistered extractors on 96 new controlled images with known object, attribute, count, action, relation, and context ground truth. Both failed the schema-validity prerequisite under exact logical futility. P9B was restricted to P9A survivors and was therefore not executed. Direct text remained an ablation rather than the target credential path.
+\paragraph{Representation before authentication.} P9-v2 screened two preregistered monolithic extractors on 96 controlled images. Both failed the schema-validity prerequisite under exact logical futility, and reconstruction was not executed. P9-v3A is a new architecture/preregistration phase, not a repair. It freezes $I=G(P,r)$, $O=\mathsf{Observe}(I)$, $S=\mathcal{C}(O)$ and $(M,T)=\Pi(S)$; two modular pipelines; a new 240-image capability design; compiler/perception metrics; and Gates V3-A1/V3-A2. It runs no model.
 
 \paragraph{Policy and attackers.} P10 compares dense similarity, global fuzzy overlap, a feasible VSA-style policy, and the proposed system-derived $M/T$ policy. P11 evaluates the full acceptance region under budgeted attackers before any cryptographic implementation.
 
@@ -147,9 +153,21 @@ The P9 capability manifest contains 64 development and 32 validation fixtures, e
 
 The preregistration did not specify an early-stop rule. After separate plumbing smoke and before formal validation output, we implemented exact logical futility: because all checks are conjunctive, one invalid result makes the 98\% schema-validity check impossible even if all remaining fixtures pass. This procedural deviation cannot create a pass, but it limits the negative evidence. We did not estimate full atom F1, bootstrap intervals, determinism, structured error strata, or full-set latency medians. We made no candidate replacement, prompt/output repair, fine-tuning, or authentication-outcome selection.
 
+\section{P9-v3A modular extraction preregistration}
+
+The v2 failure conflated serialization correctness with semantic correctness. A model can describe an image correctly yet truncate JSON, or emit valid JSON containing false facts. V3 therefore makes the observation object explicit: detections carry category, normalized box, component-local confidence and revision; attributes, unary actions, binary interactions, and scene hypotheses reference those detections and retain provenance, abstention, failure, latency and memory events. Confidence values are not compared across components or treated as calibrated probabilities.
+
+The deterministic compiler validates versions, labels, boxes and references; resolves same-category duplicates under a frozen IoU/tie-break rule; assigns canonical identifiers; derives counts and spatial relations; normalizes inverse edges; and serializes sorted UTF-8 JSON. It returns a valid graph or a valid typed failure, never malformed output. At least 320 exact tests must pass with 100\% oracle agreement, schema validity and byte repeatability. One compiler invariant failure blocks V3-A1 regardless of perception scores.
+
+The two frozen pipelines test distinct assumptions. The first combines Grounding DINO Tiny with SigLIP~2 Base for entity localization and closed-label crop, pair-crop and scene scoring. The second combines SGTR's graph-native entity/predicate assembly with SigLIP~2 attributes and scenes. Exact revisions and licence conditions are preregistered; missing SGTR checkpoint terms fail closed rather than opening a replacement slot. Planning bounds permit one GPU with at most 24~GiB VRAM and 32~GiB RAM, median latency at most 30 seconds/image and p95 at most 60 seconds/image. These are thresholds, not measurements.
+
+Future P9-v3B uses 120 controlled geometric/composited fixtures and 120 new naturalistic outputs from the intended local generator. Each stratum has 24 semantic families split 12/12 between development and validation, five images per family. Labels and provenance are fixed before model output. An atom type must pass precision, recall, F1, coverage and family-level uncertainty separately in both strata; pooled results cannot rescue failure. Gate V3-A1 requires a complete pipeline with eligible entity plus at least two further types, including one structural count, geometry, action, or interaction type. Types from different pipelines cannot be unioned.
+
+P9-v3C is future and requires a separate reconstruction freeze. Gate V3-A2 requires eligible enrolment, FRR, targeted-neighbour FAR, random FAR, same/near AUC, and a material paired $M/T$ improvement over the strongest baseline. Passing it would establish only technical reconstruction feasibility. P10 remains blocked until V3-A2; cryptography remains further downstream.
+
 \section{Decision gates}
 
-The gates are: V2-N novelty viability; V2-A visual-semantic reconstruction viability; V2-B policy-aware semantic viability; V2-C acceptance-region security viability; V2-D private-functionality viability; V2-E protocol selection/privacy viability; and V2-F end-to-end evidence/paper story. No later cost may bypass an earlier failure. Valid outcomes include standalone authentication, second factor, policy-constrained credential, measurement/negative contribution, or stop.
+Gate V2-N passed with narrowing. Gate V2-A is the immutable failed monolithic path. The explicit new-version path uses V3-A1 modular extraction viability and V3-A2 independent reconstruction viability before the retained V2-B policy, V2-C acceptance-region, V2-D private-functionality, V2-E protocol/privacy, and V2-F end-to-end gates. No later cost may bypass an earlier failure. Valid outcomes include standalone authentication, second factor, policy-constrained credential, measurement/negative contribution, or stop.
 
 \section{Formative v1 evidence}
 
@@ -161,11 +179,11 @@ These are immutable formative negative results, not v2 measurements. They motiva
 
 If all gates pass, C1 would establish technical behaviour of the scoped free-language generative reconstruction path; C2 would establish only the measured incremental value of the frozen system-derived typed policy; C3 would characterise the accepted region under finite-budget attackers; and C4 would establish construction-specific private and unlinkable verification. C3/C4 carry the prospective principal contribution. P8 rejected C5 as standalone and retained adaptive semantic verification-oracle leakage as mandatory evidence inside C3/C4.
 
-The frozen path stopped at the first risk: neither tested extractor met the structured-output prerequisite. Whether another independently justified representation could work remains unresolved, as do the downstream policy, guessing-region, and private-construction questions; they were not authorised after Gate V2-A failed. The controlled methodology cannot establish human memorability or usability. A future participant study would require separate ethics, design, and evidence.
+The frozen v2 path stopped at the first risk: neither tested extractor met the structured-output prerequisite. P9-v3A provides an independently justified representation architecture but no empirical rescue. Whether either modular pipeline works remains unresolved, as do reconstruction, policy, guessing-region, and private-construction questions. The controlled methodology cannot establish human memorability or usability. A future participant study would require separate ethics, design, and evidence.
 
 \section{Conclusion}
 
-This work treats visual generation as a testable reconstruction layer, not a source of magical entropy, and privacy as a construction-specific property rather than a consequence of hashing semantics. P8 passed Gate V2-N with narrowed claims, but P9 falsified the tested frozen extractor path at its first independent capability prerequisite. P9B, policy optimisation, attacker evaluation, and cryptographic prototyping were correctly withheld. The project must now stop or explicitly reframe with a new representation, rationale, data, preregistration, and gate; the failed P9 evidence cannot be tuned into a pass.
+This work treats visual generation as a testable reconstruction layer, not a source of magical entropy, and privacy as a construction-specific property rather than a consequence of hashing semantics. P9-v2 falsified its frozen monolithic extractor path, and that evidence remains unchanged. P9-v3A supplies the required explicit reframe: models produce evidence, a deterministic compiler constructs the credential, and atom types qualify independently on new controlled and naturalistic data. It passes no empirical gate. P9-v3B is the next permitted experiment only after explicit authorisation; P9-v3C, P10, attacker evaluation, and cryptographic prototyping remain blocked by their gates.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

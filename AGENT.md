@@ -1,8 +1,8 @@
-# AGENT.md — Semantic Secrets v2 research contract
+# AGENT.md — Semantic Secrets research contract (v3 extraction reframe)
 
 ## 1. Authority and status
 
-This file is the authoritative scientific and engineering contract for **Semantic Secrets v2**, a prospective PoPETs/PETS 2027 project. Read it before changing the research design, prototype, experiments, manuscript, or artifact.
+This file is the authoritative scientific and engineering contract for **Semantic Secrets**, a prospective PoPETs/PETS 2027 project. P9-v3A replaces only the failed extraction architecture and its gates; the narrowed v2 C1–C4 contribution boundary and security model remain active. Read this file before changing the research design, prototype, experiments, manuscript, or artifact.
 
 The project changed direction after the completed `visual-semantic-pipeline-v1` P0–P7 programme and a complete review of Jeong's 2026 Visual Semantic Authentication (VSA) paper. P0–P7 remain immutable historical evidence. Their negative and formative findings are not v2 results, must not be retuned into v2, and must not be erased.
 
@@ -20,7 +20,7 @@ No human-subject study is authorised. The project may measure technical reconstr
 
 The remembered concept is the intended credential. A natural-language prompt is an input interface, not the credential. Generated pixels are transient local observations, not the credential.
 
-## 3. v2 system path and notation
+## 3. Active v3 extraction path and notation
 
 ```text
 remembered visual concept C
@@ -28,8 +28,10 @@ remembered visual concept C
 prompt P (interface, not secret)
         ↓ local generation with randomness r
 independently generated image I = G(P, r) (transient, not secret)
-        ↓ local canonical extraction E
-typed visual-semantic graph S = E(I)
+        ↓ modular local observation
+typed evidence O = Observe(I)
+        ↓ deterministic semantic compiler C_s
+typed visual-semantic graph or typed failure S = C_s(O)
         ↓ frozen system policy Π
 (M, T) = Π(S)
         ↓ construction-specific protection
@@ -45,8 +47,10 @@ Notation:
 - `G`: versioned local image generator;
 - `r`: generation randomness;
 - `I = G(P,r)`: transient generated image;
-- `E`: versioned canonical visual-semantic extractor;
-- `S = E(I)`: typed semantic graph;
+- `Observe`: one of at most two versioned modular perception pipelines; it emits bounded evidence and provenance, never credential JSON;
+- `O = Observe(I)`: detections, attributes, actions/interactions, scene hypotheses, component-local confidence, provenance, abstentions, and typed component failures;
+- `C_s`: deterministic semantic compiler that emits a schema-valid canonical graph or a schema-valid typed failure, never malformed JSON;
+- `S = C_s(O)`: typed semantic graph on compiler success;
 - `S = (V,E_S,A,C_S)`: nodes, typed edges, attributes, and count/cardinality facts;
 - `Π`: frozen, system-derived credential policy;
 - `Π(S) = (M,T)`: mandatory security anchors and tolerant secondary semantics;
@@ -54,7 +58,7 @@ Notation:
 - `B`: attacker attempt or computation budget;
 - `K0`–`K3`: attacker-knowledge levels.
 
-The overloading of `E` for extraction and `E_S` for graph edges is intentional only in prose; code and formal text must use unambiguous names.
+`L_visual` is the broad candidate observation language. `L_cred` is the subset of atom types independently qualifying in P9-v3B in both controlled and naturalistic strata. Reconstruction or authentication outcomes may not promote a type. Actions and interactions receive their own gates: neither is automatically discarded nor required for extraction viability.
 
 ## 4. Intended contributions
 
@@ -167,7 +171,10 @@ Normal verification should reveal no more than an authorised, context-bound `Acc
 ## 9. Data and evaluation rules
 
 - P8 is novelty refresh, formalisation, and preregistration only. It may not execute the expensive v2 experiment.
-- P8 completed on 2026-08-25. `docs/formal_specification_v2.md` and `experiments/v2/config/preregistration_v2.json` are binding for P9–P11; outcome-affecting changes require a new version before held-out outputs are viewed.
+- P8 completed on 2026-08-25. `docs/formal_specification_v2.md` and `experiments/v2/config/preregistration_v2.json` remain the binding historical freeze for the failed P9-v2 path; they may not be edited after its output.
+- P9-v2 completed negatively and is immutable. Its monolithic VLM-to-credential-JSON path failed schema validity; it did not measure full semantic capability and is not a universal extractor-impossibility result.
+- P9-v3A completed on 2026-08-25 as architecture and preregistration only. `docs/formal_specification_v3.md`, `docs/p9_v3_reframe.md`, and `experiments/v3/config/*.json` bind future P9-v3B. No v3 model, image, inference, policy, authentication, or cryptographic experiment has run.
+- P9-v3B requires explicit authorisation and new `cap-v3-*` data. P9-v3C requires constructive Gate V3-A1 and a separate preregistration/data freeze. P10 requires constructive Gate V3-A2.
 - New v2 evidence requires new version identifiers, data, splits, configs, and gates. Do not reuse v1 thresholds as v2 evidence.
 - Keep a sealed held-out test partition. Fit vocabulary, policy rules, weights, thresholds, attacker orderings, and all selection decisions on permitted development data only.
 - Use independent generations for enrolment and authentication trials. A cached sample selected because it already satisfies a policy is not a positive reconstruction trial.
@@ -179,7 +186,9 @@ Normal verification should reveal no more than an authorised, context-bound `Acc
 ## 10. Gates and stop rules
 
 - **V2-N — Novelty/formalisation:** C1–C4 remain jointly distinguishable from verified prior work; definitions, baselines, and preregistration are frozen.
-- **V2-A — Reconstruction viability:** independent-image semantic reconstruction meets preregistered technical completeness and targeted-separation bounds.
+- **V2-A — Failed historical extractor gate:** the frozen P9-v2 monolithic representation path failed and can never be relabelled as a pass.
+- **V3-A1 — Modular extraction viability:** compiler invariants pass exactly and at least one frozen observation pipeline yields an independently evidenced `L_cred` containing entity plus at least two additional types, including a structural type.
+- **V3-A2 — Independent reconstruction viability:** using only V3-A1-eligible types on separate data, independent-image reconstruction meets preregistered enrolment, FRR/FAR, separation, and policy-improvement bounds.
 - **V2-B — Policy value:** system-derived `M/T` materially improves the security–reconstruction trade-off over VSA-style and non-policy baselines without post-hoc tuning.
 - **V2-C — Acceptance-region viability:** budgeted K0–K3 and AI/adaptive success supports the selected positioning.
 - **V2-D — Cryptographic feasibility:** at least one construction preserves the frozen plaintext predicate with acceptable leakage, correctness, and cost.
@@ -191,10 +200,10 @@ An expensive later phase cannot bypass an earlier failed gate. Valid outcomes in
 ## 11. Engineering and reproducibility contract
 
 - Follow the budget sequence: primary literature/analysis → deterministic smoke test → small preregistered pilot → eliminate weak candidates → full experiment only after its gate.
-- Do not benchmark many generators or VLMs. Screen extractor capabilities before authentication trials, freeze a small justified shortlist, and never search until a favourable result appears.
+- Do not benchmark many generators or VLMs. The v3 shortlist is capped at the two pipelines frozen in `visual_observation_v3.json`; models emit evidence, not final credential JSON. Never search until a favourable result appears.
 - Cache generated images and canonical graphs, reuse valid version-matched outputs, and create new-version manifests instead of overwriting evidence.
 - Prefer mature cryptographic libraries and implement only the small set of candidates surviving theoretical elimination; do not build every possible protocol.
-- Keep semantic extraction, policy derivation, plaintext decision, protocol, attack, and analysis modules separable.
+- Keep observation, deterministic compilation, policy derivation, plaintext decision, protocol, attack, and analysis modules separable.
 - Implement a deterministic plaintext reference predicate before private evaluation.
 - Fail closed on malformed graphs, unsupported operators, version mismatch, missing mandatory anchors, and migration ambiguity.
 - Pin dependencies and model revisions; record licences and acquisition provenance.
@@ -206,8 +215,8 @@ An expensive later phase cannot bypass an earlier failed gate. Valid outcomes in
 
 P0–P7 tested `visual-semantic-pipeline-v1`. P6 failed Gate A because all tested matchers poorly separated same-concept from targeted-neighbour pairs; the primary weighted matcher accepted 75% of targeted validation neighbours at its training-selected threshold. P7 then found no material technical benefit from its tested image pathways over paired text pathways and selected removal of that image stage from the v1 authentication core.
 
-Those results motivate, but do not validate or invalidate, v2. The v2 image path is part of the new scientific hypothesis: independent image generation is the reconstruction medium from which a typed graph and system-derived policy are obtained. It requires new data and Gates V2-A/V2-B. No v1 result may be relabelled as evidence that this new mechanism works.
+Those results motivate, but do not validate or invalidate, the active hypothesis. The image path is an independently tested reconstruction medium. No v1 result may be relabelled as evidence that the v3 modular mechanism works.
 
 ## 13. Immediate execution boundary
 
-P9 completed negatively on 2026-08-25. Neither frozen extractor survived P9A's schema-validity requirement, P9B was not executed, and Gate V2-A failed. P10 and every later constructive phase remain blocked. The next action must be an explicit scientific reframe or a stop/negative-measurement disposition; P9 may not be retuned or relabelled as a pass. See `docs/p9_capability_screen_v2.md` and decision `P9-00`.
+P9-v3A completed on 2026-08-25. It froze the modular observation/compiler architecture, `L_visual`/`L_cred` rule, two candidate pipelines, new two-stratum data design, compiler/perception separation, and Gates V3-A1/V3-A2. It ran no model or experiment and did not alter P9-v2. The next permitted phase is P9-v3B only after explicit user instruction. P9-v3C is blocked on constructive V3-A1; P10 and every cryptographic phase are blocked on constructive V3-A2. See `docs/p9_v3_reframe.md` and decision `P9-v3A-00`.

@@ -1,0 +1,217 @@
+{
+  "$schema_version": "semantic-secrets-preregistration-v3.0.0",
+  "preregistration_id": "p9-v3a-freeze-2026-08-25",
+  "phase": "P9-v3A",
+  "publication_result": false,
+  "status": "architecture and future-experiment preregistration only",
+  "execution_boundary": {
+    "permitted_now": ["primary-source review", "architecture specification", "compiler contract", "dataset design", "preregistration", "documentation and manuscript update"],
+    "forbidden_now": ["model download", "model weight acquisition", "image authoring or generation", "perception inference", "P9-v3B", "P9-v3C", "P10", "cryptographic implementation", "v2 evidence modification", "sealed-v1 access"]
+  },
+  "versions": {
+    "observation": "visual-observation-v3.0.0",
+    "observation_config": "visual_observation_v3.json",
+    "compiler": "semantic-compiler-v3.0.0",
+    "compiler_result": "semantic-compiler-result-v3.0.0",
+    "visual_language": "L_visual-v3.0.0",
+    "credential_language": "L_cred-v3.0.0-data-derived-by-type",
+    "policy_interface": "semantic-policy-interface-v3.0.0",
+    "dataset_design": "p9-v3-capability-data-v3.0.0"
+  },
+  "architecture": {
+    "equations": ["I=G(P,r)", "O=Observe(I)", "S=C(O)", "(M,T)=Pi(S)"],
+    "model_responsibility": "infer bounded evidence with component-local scores and provenance",
+    "compiler_responsibility": "construct exact versioned credential graph or typed failure",
+    "policy_responsibility": "future training-only derivation over independently eligible credential atom types",
+    "serialization_is_not_semantics": true
+  },
+  "candidate_shortlist": {
+    "maximum_pipelines": 2,
+    "pipelines": ["v3-gdino-siglip2", "v3-sgtr-siglip2"],
+    "selection_rationale": "one compositional detector-plus-contrastive pipeline and one end-to-end scene-graph pipeline test distinct observation assumptions without arbitrary VLM-to-JSON generation",
+    "replacement_rule": "no replacement after any validation output; a licensing or acquisition failure is a recorded pipeline failure, not permission to add a candidate",
+    "fine_tuning": false,
+    "authentication_outcome_selection": false
+  },
+  "dataset": {
+    "total_images": 240,
+    "strata": {
+      "A_controlled_geometric": {
+        "images": 120,
+        "families": 24,
+        "development_families": 12,
+        "validation_families": 12,
+        "images_per_family": 5,
+        "source": "project-authored deterministic geometric/composited fixtures with exact boxes and compiler-edge cases"
+      },
+      "B_naturalistic_t2i": {
+        "images": 120,
+        "families": 24,
+        "development_families": 12,
+        "validation_families": 12,
+        "images_per_family": 5,
+        "source": "new project-authored prompts rendered later by the intended local authentication generator; independent visual annotation precedes perception inference",
+        "generator": {
+          "model_id": "stabilityai/sd-turbo",
+          "revision": "b261bac6fd2cf515557d5d0707481eafa0485ec2",
+          "license": "Stability AI Community License",
+          "width": 512,
+          "height": 512,
+          "steps": 1,
+          "guidance_scale": 0.0,
+          "seed_rule": "committed family/image identifier derivation before generation"
+        },
+        "annotation": "two project researchers independently label visible facts without model outputs; disagreements are adjudicated before inference; agreement is reported descriptively"
+      }
+    },
+    "identifier_prefix": "cap-v3",
+    "split_seed": 925031,
+    "split_unit": "semantic scenario family",
+    "development_images": 120,
+    "validation_images": 120,
+    "sealed_reconstruction_data": "P9-v3C must author a separate dataset and preregistration; capability validation images never become reconstruction test images",
+    "minimum_validation_reference_positives_per_type_per_stratum": 60,
+    "minimum_validation_applicable_negatives_per_type_per_stratum": 60,
+    "provenance_required": ["image_id", "family_id", "stratum", "split", "source_type", "licence", "generator_or_asset_revision", "prompt_hash_if_applicable", "seed_if_applicable", "image_sha256", "annotation_version"],
+    "human_subjects": false,
+    "participant_data": false,
+    "licence_rule": "exclude any source whose image-level reuse terms or provenance cannot be recorded"
+  },
+  "compiler_tests": {
+    "minimum_cases": 320,
+    "case_counts": {
+      "schema_and_version": 40,
+      "detection_and_box_normalisation": 48,
+      "duplicate_resolution_and_ids": 48,
+      "inverse_and_geometry_relations": 48,
+      "counts_sorting_and_limits": 48,
+      "malformed_and_unsupported_failures": 40,
+      "serialization_and_repeatability": 24,
+      "seeded_property_cases": 24
+    },
+    "required_pass_rates": {
+      "expected_graph_exact_match": 1.0,
+      "expected_typed_failure_exact_match": 1.0,
+      "valid_result_schema": 1.0,
+      "byte_identical_repeat": 1.0,
+      "malformed_json_outputs": 0.0
+    },
+    "failure_rule": "any compiler invariant failure blocks Gate V3-A1 regardless of perception metrics"
+  },
+  "perception_metrics": {
+    "entity_match": "category-equal one-to-one Hungarian assignment at IoU >= 0.50",
+    "reported_by_atom_type": ["entity", "colour", "size", "material", "pattern", "count", "unary_action", "binary_interaction", "geometry_relation", "scene"],
+    "primary": ["precision", "recall", "F1", "coverage", "abstention rate", "pipeline failure rate", "repeat consistency"],
+    "secondary": ["average precision", "IoU distribution", "conditional-on-matched-entity metrics", "10-bin ECE within each component score domain", "latency", "peak RSS", "peak GPU memory"],
+    "invalid_or_typed_failure_scoring": "all reference facts count as false negatives; no predicted false positives are imputed",
+    "abstention_scoring": "abstained applicable facts count as false negatives for recall and reduce coverage; abstention is not a crash",
+    "coverage_definition": "applicable reference opportunities receiving a non-abstained type prediction divided by all applicable reference opportunities",
+    "pipeline_failure_rate_definition": "validation images ending in a required-component or compiler typed failure divided by all validation images",
+    "duplicate_rule": "score only compiler-normalised observations; also report pre-compiler duplicate rate",
+    "stratum_rule": "each eligibility threshold must pass separately in A and B; pooled performance cannot rescue a failed stratum",
+    "type_eligibility_thresholds": {
+      "precision_point_min": 0.90,
+      "precision_family_bootstrap_lower_min": 0.85,
+      "recall_point_min": 0.70,
+      "recall_family_bootstrap_lower_min": 0.60,
+      "f1_point_min": 0.80,
+      "f1_family_bootstrap_lower_min": 0.70,
+      "coverage_point_min": 0.75,
+      "coverage_wilson_lower_min": 0.65
+    }
+  },
+  "uncertainty": {
+    "rate_interval": "two-sided Wilson 95%",
+    "bootstrap_unit": "semantic scenario family",
+    "bootstrap_repetitions": 5000,
+    "bootstrap_seed": 925032,
+    "confidence_level": 0.95,
+    "multiple_types": "report all planned types; eligibility is conjunctive per type and stratum, with no p-value selection"
+  },
+  "repeatability": {
+    "validation_repeat_count": 1,
+    "canonical_observation_projection": "visual_observation_v3.json observation_canonicalisation; volatile timing, memory, timestamps, and paths excluded",
+    "canonical_observation_equality_point_min": 0.95,
+    "canonical_observation_equality_wilson_lower_min": 0.90,
+    "canonical_graph_equality_point_min": 0.95,
+    "canonical_graph_equality_wilson_lower_min": 0.90
+  },
+  "compute": {
+    "development_machine": "compiler tests, manifest/schema audit, and at most two predeclared tiny smoke images with reduced components; no full inference claim",
+    "full_inference_machine": "one documented local or dedicated research GPU with at most 24 GiB VRAM and 32 GiB system RAM; no secret-bearing cloud service",
+    "pipeline_peak_vram_gib_max": 24,
+    "pipeline_peak_rss_gib_max": 32,
+    "median_seconds_per_image_max": 30,
+    "p95_seconds_per_image_max": 60,
+    "estimated_full_inference_images_per_pipeline": 360,
+    "estimated_full_inference_explanation": "120 development + 120 validation + one 120-image validation repeat",
+    "smoke_rule": "two development images per pipeline; smoke may find plumbing/OOM/licence failure but may not tune labels, prompts, thresholds, or candidate identity"
+  },
+  "gate_v3_a1": {
+    "name": "modular extraction viability",
+    "compiler_invariants_conjunctive": true,
+    "pipeline_failure_rate_point_max": 0.05,
+    "pipeline_failure_rate_wilson_upper_max": 0.10,
+    "resource_limits_conjunctive": true,
+    "minimum_eligible_language": {
+      "required_types": ["entity"],
+      "minimum_additional_types": 2,
+      "minimum_structural_types_from": ["count", "geometry_relation", "unary_action", "binary_interaction"],
+      "minimum_structural_type_count": 1
+    },
+    "action_relation_rule": "unary_action and binary_interaction are evaluated and may enter L_cred only on their own evidence; neither is mandatory for Gate V3-A1 and neither is discarded by design",
+    "pass_rule": "at least one frozen pipeline passes compiler, operational, resource, repeatability, and minimum eligible-language requirements",
+    "failure_rule": "if no pipeline passes, stop the visual constructive path or preregister a genuinely new reframe; do not execute P9-v3C"
+  },
+  "future_gate_v3_a2": {
+    "name": "independent visual reconstruction viability",
+    "status": "future P9-v3C; no execution or tuning in P9-v3A",
+    "eligible_enrolment_rate_point_min": 0.80,
+    "eligible_enrolment_rate_wilson_lower_min": 0.70,
+    "validation_frr_point_max": 0.25,
+    "validation_frr_wilson_upper_max": 0.35,
+    "validation_targeted_near_far_point_max": 0.25,
+    "validation_targeted_near_far_wilson_upper_max": 0.35,
+    "validation_random_far_point_max": 0.05,
+    "validation_random_far_wilson_upper_max": 0.10,
+    "same_vs_near_auc_family_bootstrap_lower_min": 0.65,
+    "mt_minimax_absolute_improvement_over_strongest_baseline_min": 0.10,
+    "mt_paired_family_bootstrap_improvement_lower_strictly_above": 0.0,
+    "pass_rule": "all checks pass on a separate preregistered reconstruction dataset using only Gate V3-A1-eligible atom types",
+    "meaning": "technical reconstruction feasibility only; not memorability, usability, entropy, attack resistance, or privacy"
+  },
+  "policy_boundary": {
+    "mt_preserved": true,
+    "implementation_now": false,
+    "tuning_now": false,
+    "eligibility_source": "P9-v3B capability validation only",
+    "ineligible_enrolment": true,
+    "p10_dependency": "constructive Gate V3-A2",
+    "p10_blocked": true
+  },
+  "cache": {
+    "hash": "SHA-256",
+    "content_addressed": true,
+    "overwrite": false,
+    "exact_version_match_required": true,
+    "record_failures_abstentions_and_exclusions": true,
+    "large_artifacts_in_git": false,
+    "credential_inputs_local_only": true
+  },
+  "stop_rules": [
+    "licence or provenance ambiguity fails closed",
+    "no candidate replacement after validation output",
+    "no validation-driven label, score threshold, prompt, NMS, geometry, compiler, or type change",
+    "one compiler invariant failure blocks Gate V3-A1",
+    "logical futility may stop remaining inference only when a conjunctive gate is mathematically impossible; report every unestimated metric",
+    "P9-v3B requires explicit user authorisation after P9-v3A",
+    "P9-v3C requires constructive Gate V3-A1 and a separate preregistration",
+    "P10 remains blocked until constructive Gate V3-A2"
+  ],
+  "preserved_claims": {
+    "C1": "technical stability of independent generative visual reconstruction, conditional on V3-A1 and V3-A2",
+    "C2": "incremental systems evidence for typed system-derived M/T policy, not standalone novelty",
+    "C3": "system-specific finite-budget acceptance-region characterization",
+    "C4": "construction-specific private, policy-hiding, offline-resistant-under-declared-views, domain-separated and unlinkable verification"
+  }
+}

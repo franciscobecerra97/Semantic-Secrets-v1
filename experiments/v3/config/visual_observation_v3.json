@@ -1,0 +1,174 @@
+{
+  "$schema_version": "visual-observation-v3.0.0",
+  "observation_language": "L_visual-v3.0.0",
+  "credential_language_rule": "L_cred is the subset of atom types independently eligible under Gate V3-A1; labels are never selected from reconstruction or authentication outcomes",
+  "limits": {
+    "maximum_observations_per_image": 64,
+    "maximum_credential_nodes": 8,
+    "bbox_format": ["x_min", "y_min", "x_max", "y_max"],
+    "bbox_range": [0.0, 1.0],
+    "positive_area_required": true
+  },
+  "entity_categories": [
+    "person", "cat", "dog", "bird", "horse", "bicycle", "motorcycle", "car",
+    "bus", "train", "boat", "airplane", "chair", "bench", "table", "sofa",
+    "bottle", "cup", "book", "laptop", "backpack", "umbrella", "tree", "flower",
+    "ball", "camera", "hat", "phone", "plate", "bed", "desk", "door"
+  ],
+  "attributes": {
+    "colour": ["red", "orange", "yellow", "green", "blue", "purple", "pink", "black", "white", "brown", "gray"],
+    "size": ["small", "medium", "large"],
+    "material": ["wood", "metal", "plastic", "glass", "fabric"],
+    "pattern": ["solid", "striped", "spotted"]
+  },
+  "unary_actions": ["standing", "sitting", "running", "walking", "flying", "sleeping", "jumping", "reading", "drinking", "cooking"],
+  "binary_interactions": ["holding", "riding", "eating", "wearing", "carrying", "looking_at", "touching", "using"],
+  "derived_spatial_relations": ["left_of", "above", "overlap", "inside", "on", "under", "near"],
+  "inverse_normalisation": {
+    "right_of": {"canonical": "left_of", "swap_nodes": true},
+    "below": {"canonical": "above", "swap_nodes": true},
+    "contains": {"canonical": "inside", "swap_nodes": true}
+  },
+  "scenes": ["indoor", "outdoor", "road", "park", "beach", "kitchen", "office", "bedroom", "shop", "station", "sports_field", "waterfront"],
+  "count_buckets": ["1", "2", "3", "4", "5_plus"],
+  "observation_record": {
+    "required_fields": ["observation_version", "pipeline_id", "pipeline_revision", "image_id", "image_sha256", "detections", "attributes", "unary_actions", "binary_interactions", "scenes", "component_events"],
+    "detection": ["local_id", "category", "bbox", "confidence", "component_id", "component_revision"],
+    "attribute": ["detection_id", "attribute_type", "value", "confidence", "component_id", "component_revision"],
+    "unary_action": ["detection_id", "action", "confidence", "component_id", "component_revision"],
+    "binary_interaction": ["source_detection_id", "interaction", "target_detection_id", "confidence", "component_id", "component_revision"],
+    "scene": ["value", "confidence", "component_id", "component_revision"],
+    "component_event": ["component_id", "component_revision", "status", "failure_code", "elapsed_seconds", "peak_rss_bytes", "peak_gpu_bytes"]
+  },
+  "confidence_contract": {
+    "scope": "component-local ranking and predeclared component thresholding only",
+    "cross_component_comparison": false,
+    "calibrated_probability_claim": false,
+    "required_metadata": ["score_name", "score_range", "threshold", "threshold_source"],
+    "threshold_source": "development split only; frozen before validation"
+  },
+  "observation_canonicalisation": {
+    "include": ["observation_version", "pipeline_id", "pipeline_revision", "image_id", "image_sha256", "detections", "attributes", "unary_actions", "binary_interactions", "scenes", "component status and failure code"],
+    "exclude_from_repeat_equality": ["elapsed_seconds", "peak_rss_bytes", "peak_gpu_bytes", "wall-clock timestamps", "host-specific paths"],
+    "confidence_round_decimal_places": 6,
+    "collection_order": "lexicographic over each record's complete canonical tuple",
+    "serialization": "same canonical UTF-8 JSON rule as compiler output"
+  },
+  "compiler": {
+    "compiler_id": "semantic-compiler-v3.0.0",
+    "result_schema": "semantic-compiler-result-v3.0.0",
+    "success_status": "graph",
+    "failure_status": "typed_failure",
+    "never_emit_malformed_json": true,
+    "operations_in_order": [
+      "validate observation and version",
+      "validate component provenance and local confidence domains",
+      "discard only predeclared below-threshold or explicitly abstained observations",
+      "normalise boxes and closed labels",
+      "resolve duplicates by frozen category-aware NMS and deterministic tie-breaks",
+      "reject unresolved identity conflicts",
+      "assign canonical node IDs after deterministic category-box ordering",
+      "attach supported attributes, unary actions, and binary interactions",
+      "derive counts from accepted nodes",
+      "derive spatial relations from accepted boxes",
+      "normalise inverse relations and collapse exact duplicates",
+      "sort every collection and serialize canonical UTF-8 JSON"
+    ],
+    "duplicate_rule": {
+      "same_category_iou_at_least": 0.80,
+      "winner": "higher component-local confidence, then smaller box area, then lexicographic source tuple",
+      "cross_category_overlap": "retain unless an exact predeclared alias rule applies"
+    },
+    "geometry_rules": {
+      "left_of": "source centre_x + 0.05 <= target centre_x",
+      "above": "source centre_y + 0.05 <= target centre_y",
+      "overlap": "intersection_over_union >= 0.20",
+      "inside": "at least 0.90 of source area lies inside target",
+      "on": "source bottom is within 0.08 image height of target top and horizontal overlap/source width >= 0.50",
+      "under": "target is above source under the on vertical/horizontal tolerances",
+      "near": "normalised centre distance <= 0.25"
+    },
+    "count_rule": "derive one bucket for every accepted entity category; never accept model-authored counts",
+    "maximum_node_rule": "more than eight accepted credential entities returns TOO_MANY_CREDENTIAL_ENTITIES; never truncate silently",
+    "typed_failure_codes": [
+      "UNSUPPORTED_OBSERVATION_VERSION", "MALFORMED_OBSERVATION", "UNKNOWN_LABEL",
+      "INVALID_BOUNDING_BOX", "DUPLICATE_LOCAL_ID", "DANGLING_REFERENCE",
+      "UNDECLARED_COMPONENT", "UNDECLARED_SCORE_DOMAIN", "AMBIGUOUS_IDENTITY",
+      "TOO_MANY_CREDENTIAL_ENTITIES", "REQUIRED_COMPONENT_FAILURE",
+      "UNSUPPORTED_CREDENTIAL_TYPE", "SERIALIZATION_FAILURE"
+    ],
+    "unsupported_type_rule": "an ineligible type is omitted from L_cred with an audit event; a label outside L_visual is UNKNOWN_LABEL",
+    "canonical_serialization": "UTF-8, Unicode NFKC, lowercase ASCII vocabulary tokens, sorted keys, arrays in specified deterministic order, separators comma/colon, newline terminated"
+  },
+  "pipelines": [
+    {
+      "pipeline_id": "v3-gdino-siglip2",
+      "scientific_role": "compositional open-set entity localization followed by closed-label crop, pair-crop, and global scoring",
+      "adapter": {
+        "detection_query": "all entity_categories joined by period-space in config order",
+        "entity_threshold": "fit one global detector threshold on development only, then freeze",
+        "single_crop": "tight detection box plus 10 percent of box width/height padding, clipped to image",
+        "pair_crop": "union of source and target boxes plus 10 percent padding; draw a two-pixel red source border and two-pixel blue target border",
+        "attribute_template": "a photo of a {attribute_value} {entity_category}",
+        "unary_template": "a photo of a {entity_category} {unary_action}",
+        "binary_template": "a photo of the red-box {source_category} {binary_interaction} the blue-box {target_category}",
+        "scene_template": "a photo taken in a {scene}",
+        "score_rule": "SigLIP component logits scored only against the complete label set for that task; one task threshold and minimum top-two margin fitted on development, then frozen"
+      },
+      "components": [
+        {
+          "component_id": "grounding-dino-tiny",
+          "model_id": "IDEA-Research/grounding-dino-tiny",
+          "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+          "license": "Apache-2.0",
+          "output": "category, normalized box, detector confidence"
+        },
+        {
+          "component_id": "siglip2-base-384",
+          "model_id": "google/siglip2-base-patch16-384",
+          "revision": "f775b65a79762255128c981547af89addcfe0f88",
+          "license": "Apache-2.0",
+          "output": "closed-label similarity scores for crop attributes/actions, ordered pair-crop interactions, and global scene"
+        }
+      ],
+      "expected_download_gib": 2.1,
+      "expected_peak_vram_gib": [6, 10],
+      "expected_median_seconds_per_image": [2, 12]
+    },
+    {
+      "pipeline_id": "v3-sgtr-siglip2",
+      "scientific_role": "end-to-end entity/predicate proposal and graph assembly, with an independent contrastive component for attributes and scene",
+      "adapter": {
+        "sgtr_label_rule": "lowercase, replace spaces and hyphens with underscores, then accept exact L_visual token intersection only; no learned or hand-authored aliases",
+        "sgtr_entity_threshold": "fit one global entity threshold on development only, then freeze",
+        "sgtr_predicate_threshold": "fit one global predicate threshold on development only, then freeze",
+        "inverse_rule": "apply the compiler inverse_normalisation table after exact-token intersection",
+        "siglip_single_crop": "tight SGTR entity box plus 10 percent padding, clipped to image",
+        "attribute_template": "a photo of a {attribute_value} {entity_category}",
+        "scene_template": "a photo taken in a {scene}",
+        "siglip_score_rule": "score the complete label set per task; fit one task threshold and top-two margin on development, then freeze"
+      },
+      "components": [
+        {
+          "component_id": "sgtr-vg",
+          "repository": "Scarecrow0/SGTR",
+          "revision": "03bdd6554f12d521807cf95fe6a7daa7d3bb01dc",
+          "checkpoint_identity": "official SGTR(VG) checkpoint linked from MODELZOO.md",
+          "license": "Apache-2.0 code; checkpoint terms must be recorded and approved before acquisition",
+          "activation_precondition": "record official checkpoint URL, terms, byte count, and SHA-256; fail closed if terms are absent or incompatible",
+          "output": "entity proposals, boxes, predicate triplets, and component-local scores"
+        },
+        {
+          "component_id": "siglip2-base-384",
+          "model_id": "google/siglip2-base-patch16-384",
+          "revision": "f775b65a79762255128c981547af89addcfe0f88",
+          "license": "Apache-2.0",
+          "output": "closed-label crop attributes and global scene scores"
+        }
+      ],
+      "expected_download_gib": [2.0, 3.0],
+      "expected_peak_vram_gib": [10, 16],
+      "expected_median_seconds_per_image": [4, 20]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 # Semantic Secrets execution plan
 
-Status: P0–P7 are complete historical v1 evidence; P8 passed Gate V2-N with narrowed claims; P9 completed negatively on 2026-08-25. No frozen extractor survived P9A, P9B was not run, Gate V2-A failed, and P10–P20 remain blocked pending an explicit scientific reframe.
-Authority: `AGENT.md` is the active v2 scientific and engineering contract. This plan operationalises it and may not silently weaken it.
+Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; P9-v3A completed the modular extraction reframe and preregistration on 2026-08-25 without running a model or experiment. P9-v3B awaits explicit authorisation. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
+Authority: `AGENT.md` is the active scientific and engineering contract. This plan operationalises it and may not silently weaken it.
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
 
 ## How to execute this plan
@@ -86,8 +86,11 @@ Active v2 decisions are phase-gated:
 | Decision | Phase | Cheapest valid evidence | Required outcome |
 |---|---|---|---|
 | V2-DN combined novelty and scope | P8 | Verified primary literature and formal comparison | C1–C4 remain jointly defensible or are narrowed before implementation |
-| V2-D1 extractor/generator capability | P9 | Frozen capability smoke then small preregistered reconstruction pilot | One bounded representation passes V2-A without outcome-driven model search |
-| V2-D2 policy and baselines | P10 | Training-only derivation and new pilot against B0/B1/B2 | Proposed policy passes V2-B without held-out tuning |
+| V2-D1 failed monolithic capability | P9-v2 | Immutable formal capability fixture | Gate V2-A failed; no reinterpretation or rerun |
+| V3-D1 modular extraction architecture | P9-v3A | Primary literature plus formal/preregistered design | Freeze model-evidence/compiler separation, two candidates, data, metrics, and gates |
+| V3-D2 modular component capability | P9-v3B | New controlled/naturalistic capability data | One whole pipeline passes V3-A1; no cross-pipeline type union |
+| V3-D3 independent reconstruction | P9-v3C | Separate preregistered reconstruction data | Frozen eligible language and M/T interface pass V3-A2 |
+| V2-D2 policy and baselines | P10 | Training-only derivation and new pilot against B0/B1/B2 | Proposed policy passes V2-B without held-out tuning after V3-A2 |
 | V2-D3 attack distributions/positioning | P11 | Frozen K0–K3 strategies and budget curves | V2-C selects standalone, factor, constrained, negative, or stop |
 | V2-D4 private functionality | P12 | Primary-source/security/leakage comparison | V2-D identifies a property beyond VSA/hash/plaintext baselines |
 | V2-D5 protocol and architecture | P13 | Minimal mature-library POCs under common fixtures | V2-E selects one primary and meaningful baselines or stops |
@@ -425,9 +428,69 @@ Active v2 decisions are phase-gated:
 
 **Stop / fallback:** Do not search indefinitely. Preserve negative evidence and reconsider whether the visual-reconstruction hypothesis can continue.
 
+### P9-v3A — Modular visual-semantic extraction architecture and preregistration
+
+**Status:** Complete on 2026-08-25. This phase created only architecture, formal specification, literature traceability, machine-readable configs, deterministic config tests, governance, and manuscript updates. No model weights, images, model inference, P9-v3B/P9-v3C/P10 work, or cryptography was executed. P9-v2 remains byte-unchanged failed evidence.
+
+**Objective:** Replace the rejected monolithic VLM-to-credential-JSON assumption with a testable separation between learned observations and deterministic credential compilation.
+
+**Supports:** RQ1/RQ2/RQ6; preserves C1–C4 without adding empirical support; preregisters Gates V3-A1/V3-A2.
+
+**Tasks completed:**
+
+1. Diagnose P9-v2's architecture and evidence boundary without altering its artifacts.
+2. Freeze `I=G(P,r)`, `O=Observe(I)`, `S=C(O)`, `(M,T)=Pi(S)`.
+3. Define `L_visual`, component-local confidence/provenance, abstention, compiler invariants, typed failures, canonical IDs, duplicates, derived counts/geometry, and serialization.
+4. Freeze at most two literature-justified modular pipelines with exact revisions/licence preconditions and compute estimates.
+5. Freeze a 240-image, family-split two-stratum future capability design, type-level metrics/uncertainty/eligibility, 320 compiler cases, cache rules, stop rules, V3-A1 and future V3-A2.
+
+**Outputs:** `docs/p9_v3_reframe.md`; `docs/formal_specification_v3.md`; `experiments/v3/README.md`; `experiments/v3/config/*.json`; config audit test; updated contract, plan, decision log, related work, bibliography, and planning manuscript.
+
+**Validation:** JSON/config consistency; exactly two distinct pipelines; exact compiler-test count; critical rules numeric; v2 protected paths unchanged; no large artifacts; repository tests; LaTeX/PDF build and visual inspection.
+
+**Decision / gate:** No empirical gate is passed in P9-v3A. It authorises only a later P9-v3B when explicitly requested.
+
+**Dependencies:** Immutable P9-v2 failure and explicit scientific direction change.
+
+**Cost:** AI-token Medium–High; compute Low; storage Low.
+
+**Stop / fallback:** If the design cannot separate perception from compilation or cannot be licensed/reproduced, stop rather than run a vague model search.
+
+### P9-v3B — Modular component capability and `L_cred` eligibility
+
+**Status:** Not started; requires explicit user authorisation.
+
+**Objective:** Test perception and compiler capability on new controlled and naturalistic data before any reconstruction/authentication study.
+
+**Tasks:** Author the frozen `cap-v3-*` dataset and labels; implement/test the compiler; acquire only the two frozen pipelines after licence/hash checks; run bounded smoke; freeze development thresholds; execute validation and repeat; compute per-type/stratum metrics, uncertainty, resources, and exact compiler checks.
+
+**Outputs:** immutable manifests, observations, compiler cases/results, aggregate report, eligible `L_cred` per complete pipeline, and Gate V3-A1 decision.
+
+**Decision / gate:** **Gate V3-A1 — Modular extraction viability.** Pass only under the complete conjunction in `experiments/v3/config/preregistration_v3.json`. Do not union eligible types across pipelines.
+
+**Dependencies:** Complete P9-v3A and explicit instruction.
+
+**Stop / fallback:** If no pipeline passes, stop the visual constructive path or preregister a genuinely new reframe. Do not execute P9-v3C.
+
+### P9-v3C — Independent visual reconstruction
+
+**Status:** Not started; blocked on constructive Gate V3-A1 and a separate preregistration.
+
+**Objective:** Determine whether independently generated images yield stable, discriminative credentials using only V3-A1-eligible atom types.
+
+**Tasks:** Freeze separate concepts/data/splits/generation roles; implement the still-untuned `M/T` interface and baselines using development only; evaluate enrolment eligibility, FRR, targeted-neighbour FAR, random FAR, same/near AUC, paired policy improvement, failure, and uncertainty.
+
+**Outputs:** independent reconstruction evidence and Gate V3-A2 decision. This phase cannot claim memorability, entropy, attack resistance, or privacy.
+
+**Decision / gate:** **Gate V3-A2 — Independent visual reconstruction viability.** All numeric checks in the v3 preregistration must pass. A constructive result unlocks P10; failure preserves a negative result and blocks P10.
+
+**Dependencies:** Constructive V3-A1 and a new pre-output freeze.
+
+**Stop / fallback:** No policy repair from validation, no cross-pipeline union, and no cryptographic work after failure.
+
 ### P10 — Policy-aware semantic credential design `S=(M,T)`
 
-**Status:** Not started; blocked on Gate V2-A.
+**Status:** Not started; blocked on constructive Gate V3-A2.
 
 **Objective:** Freeze and evaluate a system-derived semantic policy independently of held-out outcomes.
 
@@ -440,7 +503,7 @@ Active v2 decisions are phase-gated:
 3. Do not ask users to select `M/T` in the primary study. Document any non-reproducible VSA detail and keep the full VSA semantic-plus-password architecture separate.
 4. Freeze missing-anchor, count/operator, relation, tolerance, duplicate, malformed, version-mismatch, and boundary behaviour.
 5. Evaluate a technical enrolment-strength policy that may reject insufficiently distinctive concepts. Do not call rejection usability.
-6. Use new v2 data, representation identifiers, thresholds, and preregistration; do not tune from P7 or held-out results.
+6. Use only the V3-A1-eligible language and the separate P9-v3C development data/identifiers allowed by a constructive V3-A2; do not tune from P7, P9-v2, or held-out results.
 
 **Outputs:** frozen reference predicate; policy derivation spec; baseline implementations; pilot report; Gate V2-B decision.
 
@@ -448,7 +511,7 @@ Active v2 decisions are phase-gated:
 
 **Decision / gate:** **Gate V2-B — Policy-aware semantic viability.** Proceed only if `P1` preserves legitimate independent reconstruction variation while materially improving security-relevant discrimination over B0–B2.
 
-**Dependencies:** Constructive Gate V2-A.
+**Dependencies:** Constructive Gate V3-A2.
 
 **Cost:** AI-token Medium; compute Medium; storage Medium.
 
@@ -666,12 +729,16 @@ Active v2 decisions are phase-gated:
 
 **Decision / gate:** Final enforcement of **Gate V2-F — End-to-end evidence/paper story.** No submission if the paper story exceeds the evidence.
 
-## v2 gate order and anti-bypass rule
+## Active gate order and anti-bypass rule
 
 ```text
 Gate V2-N — Novelty viability (passed with narrowing, P8)
         ↓
-Gate V2-A — Visual-semantic reconstruction viability
+Gate V2-A — Failed monolithic extractor path (immutable P9-v2 result)
+        ↓ explicit v3 reframe, not a bypass
+Gate V3-A1 — Modular extraction viability
+        ↓
+Gate V3-A2 — Independent reconstruction viability
         ↓
 Gate V2-B — Policy-aware semantic viability
         ↓
@@ -684,4 +751,4 @@ Gate V2-E — Protocol selection/privacy viability
 Gate V2-F — End-to-end evidence/paper story
 ```
 
-No later expensive phase may bypass its corresponding gate. Cryptographic implementation remains blocked until a constructive Gate V2-C and a defined Gate V2-D functionality. Participant research is outside P0–P20.
+No later expensive phase may bypass its corresponding gate. P9-v3A passes no empirical gate. P10 is blocked until constructive V3-A2. Cryptographic implementation remains blocked until a constructive Gate V2-C and a defined Gate V2-D functionality. Participant research is outside P0–P20.

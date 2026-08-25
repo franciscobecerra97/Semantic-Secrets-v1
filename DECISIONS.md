@@ -531,3 +531,35 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** Full atom F1, determinism, error strata, and latency medians were not estimated; other independently justified future extractors or a non-visual research question may behave differently.
 
 **Revisit trigger:** Only an explicit scientific reframe with a new representation/version, independent rationale, new preregistration, new data, and a new gate. P9 cannot be relabelled or tuned into a pass.
+
+## P9-v3A-00 — Reframe extraction as modular observation plus deterministic compilation
+
+**Decision:** Preserve P9-v2 as a failed immutable experiment and adopt a new v3 extraction architecture: `I=G(P,r)`, `O=Observe(I)`, `S=C(O)`, `(M,T)=Pi(S)`. Learned components emit bounded evidence and provenance; a deterministic compiler emits a canonical graph or typed failure. Freeze P9-v3B capability and future P9-v3C reconstruction gates without running either phase.
+
+**Date:** 2026-08-25
+
+**Status:** Selected and preregistered; architecture only. Gate V3-A1 has not been evaluated.
+
+**Question:** Does P9-v2 justify stopping every visual-semantic path, or does it justify a new independently testable architecture that separates perception from exact credential construction?
+
+**Candidates:** Stop the project; repair/rerun P9-v2; replace its VLMs within the same full-JSON architecture; or create a new modular observation/compiler version with new data, metrics, candidates, and gates.
+
+**Evaluation criteria:** Faithfulness to the negative record; no outcome-driven repair; precise separation of semantic and serialization failure; deterministic graph invariants; per-type capability eligibility; controlled and naturalistic evidence; reproducible model/revision/licence/compute plan; bounded shortlist; explicit abstention/failure; no P10 or cryptographic work before reconstruction viability.
+
+**Evidence:** P9-v2's formal observations show Moondream non-JSON and SmolVLM2 malformed/truncated JSON. One invalid validation output makes `31/32=0.96875<0.98`, so the frozen gate failed, but full semantic F1, determinism, error strata, and full latency were not estimated. Grounding DINO supplies language-conditioned open-set detections; SigLIP 2 supplies released contrastive encoders for closed-label image scoring; SGTR supplies end-to-end entity/predicate proposals and graph assembly. `docs/p9_v3_reframe.md`, `docs/formal_specification_v3.md`, and `experiments/v3/config/*.json` freeze the new design.
+
+**Selected option:** Create v3. Freeze `L_visual-v3.0.0`; derive `L_cred` only from per-type P9-v3B evidence in both strata. Shortlist exactly `v3-gdino-siglip2` and `v3-sgtr-siglip2`. Require 320 exact compiler cases, 240 new capability images, family-level uncertainty, exact operational/resource rules, and no cross-pipeline union. Actions/interactions are independently gated, neither mandatory nor discarded.
+
+**Rejected alternatives:** Repairing, extending decoding, or replacing candidates inside P9-v2 would violate its freeze. Treating its syntax failures as universal perception impossibility exceeds the evidence. Stopping is not selected yet because deterministic compilation removes the failed serialization responsibility while preserving a falsifiable independent capability gate. A broad model search is rejected.
+
+**Reason:** The v2 model was asked to solve visual inference, schema construction, canonical identifiers, counts, references, and serialization in one generative response. Those are separable responsibilities. Moving invariants into deterministic code creates independently measurable perception estimands and prevents valid semantics from failing solely due to arbitrary JSON generation, without assuming the perception problem will pass.
+
+**Security/privacy assumptions:** This phase adds no security or privacy result. Observation, graph, prompt, and image remain sensitive client-side data. Confidence is component-local. Pixels/prompts provide no entropy. Compiler validity does not imply semantic correctness, discriminability, attack resistance, or template privacy.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ6; C1/C2 remain conditional; C3/C4 remain blocked. P9-v3B evaluates V3-A1. P9-v3C and V3-A2 are future. P10 requires constructive V3-A2.
+
+**Experiments supporting decision:** None. P9-v3A performed literature review, architecture/formalisation, preregistration, config tests, and manuscript/governance updates only. It acquired no model/image and ran no inference.
+
+**Remaining uncertainty:** Whether checkpoint terms permit SGTR acquisition; whether either complete pipeline meets object/type/stratum thresholds; whether action or interaction types qualify; naturalistic annotation reliability; actual GPU cost; reconstruction stability; M/T value; acceptance-region security; and private-protocol feasibility.
+
+**Revisit trigger:** A primary source invalidates a component rationale; a licence blocks a frozen pipeline; an outcome-independent design flaw is found before validation; Gate V3-A1 or V3-A2 fails; or new work subsumes C1–C4. Changes require an appended decision and new version, never a rewrite of P9-v2 or this record.
