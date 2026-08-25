@@ -1,6 +1,6 @@
 # Security and privacy model v1
 
-Status: frozen for P3–P8 pilot design on 2026-08-24; protocol and deployment architecture remain unselected until D6/D7.
+Status: frozen for P3–P8 pilot design on 2026-08-24; interpretively clarified by P6-R on 2026-08-25; protocol and deployment architecture remain unselected until a constructive Gate A2 and D6/D7.
 
 This document makes the project hypotheses falsifiable. It does not claim that a future construction satisfies any goal below. A claim becomes valid only for a named construction, adversary, compromise state, and evidence method.
 
@@ -126,6 +126,17 @@ Succ_online(Q,q) = Pr[there exists i <= q such that the target accepts g_i].
 ```
 
 Report success-versus-budget curves, per-account and aggregate outcomes, duplicate handling, rate-limit assumptions, and whether feedback is only `Accept/Reject` or richer. Expected guesses and median rank may supplement, but not replace, budgeted success.
+
+P6-R fixes four attacker-knowledge conditions for later budgeted evaluation:
+
+- **K0 — generic/random:** public system knowledge, but no target-specific or population-ordering advantage;
+- **K1 — population/distribution:** source, frequency, or population knowledge that improves ordering without target-specific facts;
+- **K2 — partial target:** some target-specific atoms, attributes, context, or equivalent side information;
+- **K3 — strong near-secret:** enough target-specific knowledge to construct candidates already close to the enrolled credential.
+
+P6 random negatives are only a limited K0-like diagnostic, and its frozen one-atom near negatives are a K3-like conditional stress test. Neither estimates `P(success within B attempts | K_i)`. P8 must report success@1, success@5, success@10, success@B, and guesses-to-success for each supported level, keeping online and offline views separate. A K3 FAR of zero is not required; the question is whether the accepted region creates material budgeted advantage under the named knowledge condition.
+
+Rate limits are explicit online assumptions, not substitutes for a nontrivial credential space. All algorithms, models, schemas, canonicalisation rules, thresholds, and protocol code remain public. If an optional `PS` or `IKS` improves an outcome, the benefit must be traced to key possession, protocol or rate-limit enforcement, and a stated non-collusion/isolation assumption—not to model secrecy or to the existence of a third party by itself.
 
 For an offline view `V`, an **offline validation procedure** is an algorithm that uses `V` to test or rank candidate guesses without interacting with an uncompromised rate-limiting service. Measure candidate throughput/cost, success by budget, and ranking or distinguishing advantage relative to the same attacker without `V`. “No offline oracle” may be claimed only if the construction's proof and implementation support that statement for the exact compromise state.
 

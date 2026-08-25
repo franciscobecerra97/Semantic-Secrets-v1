@@ -1,0 +1,80 @@
+{
+  "$schema_version": "semantic-secrets-p7-config-v1",
+  "experiment_id": "p7-cached-v1",
+  "publication_result": false,
+  "execution_boundary": {
+    "source": "existing P5 cached train/validation outputs only",
+    "rows": 27,
+    "families": 9,
+    "splits": ["train", "validation"],
+    "test_rows_allowed": 0,
+    "new_model_execution": false,
+    "new_model_download": false,
+    "p6_artifact_access": false
+  },
+  "source_sha256": {
+    "results/p5/smoke_v1.json": "97e8f29817f9b92b320ecd0202978bc10b59352a5d34fc20d94586805c608e0e",
+    "results/p5/structured_v1.jsonl": "a402d3568a2e0ac9a187b5d08b9f677321c37f40461178b5c2884d5f05707ca7",
+    "results/p5/florence_raw_v1.jsonl": "28e19c94aa66295f3d0aa566aac5356bca08ef5e3a8d61097de7d21fe8a4f4e5",
+    "results/p5/siglip_image_v1.npy": "6ae8e755cae62f858ba35e9b0c6b090176fae97e788576d9732fa171e50ca766",
+    "results/p5/minilm_text_v1.npy": "6c7b70ac6b4a45e79f99e288d516a9814e2baab1f527baa124038c4379b414f5",
+    "results/p5/generation_manifest_smoke_v1.json": "27d6c3bc9122763bc44367e04fbfa09eee1d57ab9978c4601830d2657dd16299",
+    "results/p5/florence_metadata_v1.json": "6605b8d6054a2338c7ae03e5ef019785fb20faebb15e4ed9788a3f5908980312",
+    "results/p5/embedding_metadata_v1.json": "243293050df09298b4b1e3e171f0cab829c4adb26e9795d8bb27eafdab677f58",
+    "experiments/representation_screen/config/p5_smoke_v1.json": "54794d2dd7470032ca34ceeee5cc9fb021027722aa2ab3d545112bdc399459e9"
+  },
+  "paired_comparisons": {
+    "structured_jaccard": {
+      "image": "florence_jaccard",
+      "text": "controlled_text_jaccard",
+      "shared_matcher": "jaccard"
+    },
+    "structured_weighted": {
+      "image": "florence_weighted",
+      "text": "controlled_text_weighted",
+      "shared_matcher": "frozen P5 oracle-train-idf-v1 enrolled overlap"
+    },
+    "dense_cosine": {
+      "image": "siglip_image_cosine",
+      "text": "minilm_text_cosine",
+      "shared_matcher": "cosine",
+      "confound": "image/text encoders differ in training, capacity, and representation dimension"
+    }
+  },
+  "analysis": {
+    "bootstrap_seed": 7207,
+    "bootstrap_repetitions": 4000,
+    "cluster": "family_id",
+    "interval": "percentile 95%",
+    "threshold_rule": "frozen deterministic P6 minimax rule on train; unchanged evaluation on validation",
+    "metrics": [
+      "nonempty_rate",
+      "same_stability",
+      "same_minus_near_gap",
+      "same_minus_random_gap",
+      "paired_image_minus_text_gap_effect",
+      "near_auc",
+      "all_negative_auc",
+      "validation_frr",
+      "validation_near_far",
+      "validation_random_far",
+      "atom_precision_recall_f1",
+      "changed_atom_near_scores",
+      "latency_memory_storage_privacy",
+      "model_drift_availability"
+    ]
+  },
+  "material_benefit_rule": {
+    "retain_as_core_outcome_a_requires": [
+      "at least one paired comparison has a strictly positive lower 95% family-bootstrap bound for image-minus-text improvement in same-minus-near gap",
+      "the same comparison has same-minus-random image-minus-text lower bound >= -0.02",
+      "its validation minimax worst error is at least 0.10 lower for image than text",
+      "if structured, image macro atom F1 is no lower than text macro atom F1",
+      "benefit is attributable enough to the image pathway to justify added compute, storage, and privacy exposure"
+    ],
+    "unresolved_outcome_c_requires": "required cached artifacts are missing/incompatible, or every available comparison is incapable of answering the transformation question because no downstream matcher is comparable",
+    "otherwise": "outcome B: make image optional, reposition it as a measurement baseline, or remove it from the authentication core",
+    "near_k3_zero_far_required": false
+  },
+  "semantic_policy_boundary": "mandatory-anchor plus tolerant-attribute matching may be recorded only as a future hypothesis; no P7 implementation or tuning; any test requires a new version, independent rationale, new data, preregistration, and gate"
+}

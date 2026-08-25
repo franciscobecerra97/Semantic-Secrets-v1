@@ -375,3 +375,69 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** General-vocabulary extractors, a scientifically distinct semantic representation, image-path paired behavior, generator/extractor drift, real attacker priors, public-prompt frequency, full held-out performance, population guessing, and private-protocol costs. These uncertainties do not convert the failed P6 candidate into a Gate A survivor.
 
 **Revisit trigger:** An explicit project reframe with a new representation rationale, independent vocabulary source, new version, new preregistration, and new data; or a P7 bounded paired diagnostic demonstrating a distinct measurement contribution. `p6-pilot-v1` itself can never be reclassified as a pass.
+
+## P6-R — Amend Gate A interpretation; preserve the P6 result
+
+**Decision:** Preserve every P6 artifact and numeric result, but correct the security interpretation. P6 measured conditional acceptance for candidates already drawn from frozen same, random, near-neighbour, and finite-dictionary conditions. It did not measure `P(success within B attempts | K_i)`. Gate A is now recorded as **conditional failure / unresolved security viability**: not a pass, not a conclusive impossibility result. P9/P10 remain blocked until a constructive Gate A2 after P8.
+
+**Date:** 2026-08-25
+
+**Status:** Interpretive amendment frozen; no P6 rerun, tuning, threshold change, artifact change, or held-out test access.
+
+**Question:** What conclusion is licensed by P6's high targeted-neighbour acceptance when the experiment conditioned on a near neighbour already having been constructed?
+
+**Candidates:** retain the original conclusive `stop-or-reframe` interpretation; reinterpret P6 as a pass because random FAR is low; or separate conditional boundary failure from budgeted attack success and defer the integrated positioning decision to Gate A2.
+
+**Evaluation criteria:** Preserve preregistration integrity; distinguish `P(accept | already near)` from `P(success within B attempts | K_i)`; keep failed conditional quality checks visible; avoid model-security-by-obscurity; avoid requiring K3 FAR=0; and do not authorise protocol engineering without integrated attack evidence.
+
+**Evidence:** The unchanged P6 weighted-overlap result has FRR 0.208, conditional targeted-neighbour acceptance 0.750, random FAR 0.030, and near-only AUC 0.517. P6 evaluated no ordered attacker strategy, discovery process, guesses-to-success, or success@budget. Its finite candidate dictionaries were explicitly not population priors.
+
+**Selected option:** Separate the estimands. Introduce K0 generic/random, K1 population/distribution, K2 partial-target, and K3 strong-near-secret knowledge. Treat P6 random negatives as incomplete K0-like evidence and frozen one-atom near negatives as K3-like conditional evidence. Require P8 budgeted attacks and Gate A2 integration before choosing standalone, second-factor, policy-constrained, negative/measurement, or stop positioning.
+
+**Rejected alternatives:** Reclassifying P6 as a pass is rejected because its frozen reliability and targeted-separation checks failed. Treating 0.750 conditional near acceptance as direct practical attack success is rejected because candidate discovery and ordering were not measured. Requiring near/K3 FAR=0 is rejected as an absolute criterion unsupported by the intended tolerant semantics. Reopening P6 or viewing its held-out test families is rejected.
+
+**Reason:** Conditional vulnerability and practical exploitability are different quantities. The former is adverse evidence about the acceptance boundary; the latter also depends on how an attacker reaches and orders candidates within a fixed budget and knowledge condition.
+
+**Security/privacy assumptions:** Algorithms, model identities, canonicalisation, thresholds, and future protocol code are public. Online rate limits must be stated and measured but cannot rescue a trivially enumerable space. A trusted third party provides benefit only through explicit keys, protocol/rate-limit enforcement, and non-collusion/isolation assumptions.
+
+**Affected RQs/threats/claims:** RQ1–RQ4; A1/A4/A5/A8; E1–E8/E12/E13; D4/D8; Gates A and A2. P7 is authorised only as a bounded image-stage diagnostic. P9/P10 remain blocked.
+
+**Experiments supporting decision:** Interpretive audit of the immutable `p6-pilot-v1` aggregate report and its frozen estimands; no new experiment and no held-out test-family access.
+
+**Remaining uncertainty:** Budgeted K0–K3 success, real candidate ordering, population priors, online/offline compromise views, and whether any operational positioning remains constructive.
+
+**Revisit trigger:** Completed preregistered P8 attack suite and Gate A2 review. P6 itself remains immutable.
+
+## P7-00 / D5 — Remove the image stage from the authentication core
+
+**Decision:** Select Gate B outcome B. The prompt→image→representation path is removed from the authentication core and retained only as an optional perturbation/measurement baseline. Direct-text semantics is the sole pathway hypothesis entering P8. This is a decision about the tested P5/P7 pipelines, not a universal claim that every possible image extractor must fail.
+
+**Date:** 2026-08-25
+
+**Status:** Selected; `p7-cached-v1` complete and frozen.
+
+**Question:** Does the existing image transformation provide a material non-human technical or privacy benefit over paired direct-text processing that justifies its compute, storage, failure modes, and added exposure?
+
+**Candidates:** (A) retain image as core; (B) make image optional/reposition/remove it from the authentication core; (C) leave the decision unresolved because extraction is the bottleneck.
+
+**Evaluation criteria:** Same cached concepts, roles, families, splits, and pair definitions; comparable matchers; non-empty rate; same/near/random separation; family-bootstrap paired effects; AUC; identical training-only threshold rule and validation evaluation; atom errors; changed-atom sensitivity; latency/memory/storage; privacy exposure; model drift availability; attribution confounds; no human claims; no requirement that K3 FAR equal zero.
+
+**Evidence:** Across nine families, image-minus-text improvements in same-minus-near gap were -0.076 (95% CI `[-0.274, 0.091]`) for structured Jaccard, -0.022 (`[-0.189, 0.134]`) for weighted structured matching, and -0.005 (`[-0.056, 0.042]`) for dense cosine. Corresponding same-minus-random effects were -0.346, -0.275, and -0.468 with all upper interval bounds below zero. Every validation pathway had worst minimax error 0.667. Florence macro F1 was 0.375 versus 0.638 for controlled text, with zero action/count/relation recall. The image path added median 25.80-second generation, median 10.64-second Florence extraction, 11.88 MB of cached PNGs, and additional local semantic/model exposure.
+
+**Selected option:** B. Remove image processing from the authentication core; preserve the cached image path as a scientific baseline and possible future measurement mechanism.
+
+**Rejected alternatives:** A is rejected because no comparison met any complete frozen material-benefit case and costs/exposure increased. C is rejected because Florence's clear bottleneck does not erase the available evidence: structured pathways use comparable downstream rules and the distinct dense pathway independently shows no measured advantage. A new extractor is rejected in P7 because existing evidence is sufficient for the bounded disposition and a post-result model search would expand/tune the question.
+
+**Reason:** The tested image transformation adds stochastic/model processing and exposure without uncertainty-supported near separation, random separation, validation error, atom fidelity, or privacy benefit. Keeping it central would be unsupported by the evidence.
+
+**Security/privacy assumptions:** Images and representations stay local only in the strongest hypothetical architecture; raw artifacts are not private storage. Algorithms and models are public. No protocol or trusted-third-party privacy benefit was evaluated. P9/P10 remain blocked by Gate A2.
+
+**Affected RQs/threats/claims:** RQ1–RQ3/RQ5/RQ6; A1/A4/A5/A8; E1–E8/E13/E14/E16; D5/D9; Gate B. The original image-essential title/thesis is no longer supported and must be reconsidered at Gate A2/D9.
+
+**Experiments supporting decision:** `p7-cached-v1`; 27 paired P5 train/validation relationships; structured Jaccard and weighted-overlap pathway comparisons; dense cosine pathway comparison; 4,000 fixed-seed family bootstraps per effect; equivalent threshold rule; P5 atom/resource/determinism evidence; deterministic cache hash checks.
+
+**Remaining uncertainty:** A future independently justified extractor, new model revisions/drift, larger/new data, budgeted K0–K3 attack success, and whether direct-text semantics supports any constructive Gate A2 positioning.
+
+**Revisit trigger:** Only a new-version study with an independent extractor rationale, new data, preregistration, and gate. P7 cannot be retuned or relabelled as outcome A.
+
+**Semantic-policy note:** Mandatory discriminative anchors plus tolerant secondary attributes are scientifically motivated as a future hypothesis by oracle/real and changed-atom gaps, but were neither implemented nor tuned. Testing requires a new scheme/version, independent rationale, new data, preregistration, and gate; exact prompt/set equality remains outside the design.

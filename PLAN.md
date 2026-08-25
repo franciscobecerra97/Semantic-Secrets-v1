@@ -1,8 +1,8 @@
 # Semantic Secrets execution plan
 
-Status: P0–P6 complete; P7–P17 not started.
+Status: P0–P7 complete; P8 is next; P9/P10 blocked pending constructive Gate A2; P11–P17 depend on later gates.
 Authority: `AGENT.md` is the scientific and engineering contract. This plan operationalises it and may not silently weaken it.  
-Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study.
+Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study. After Gate B, the image stage is not part of the authentication core and remains only an optional/measurement baseline unless new-version evidence later justifies it.
 
 ## How to execute this plan
 
@@ -294,7 +294,7 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 
 ### P6 — Plaintext matching, thresholds, and acceptance-region analysis
 
-**Status:** Complete on 2026-08-24 with Gate A failed (`stop-or-reframe`). The preregistered 60-family pilot evaluated 36 train and 12 validation families while leaving 12 test families unevaluated. Weighted controlled-text overlap had validation FRR 0.208, targeted-neighbour FAR 0.750, random FAR 0.030, and same-minus-neighbour 95% family-bootstrap interval `[0.000, 0.063]`. No matcher/representation met all frozen viability bounds; P9/P10 protocol engineering is forbidden absent an explicit scientific reframe. P7 may only perform the bounded image-stage disposition described in D4/P6 documentation.
+**Status:** Complete on 2026-08-24; interpretation amended by P6-R on 2026-08-25. The preregistered 60-family pilot evaluated 36 train and 12 validation families while leaving 12 test families unevaluated. Weighted controlled-text overlap had validation FRR 0.208, conditional targeted-neighbour acceptance 0.750, random FAR 0.030, and same-minus-neighbour 95% family-bootstrap interval `[0.000, 0.063]`. These unchanged results fail the frozen conditional separation/reliability criteria, but do not estimate practical attack success within a guess budget. Gate A is therefore a **conditional failure / unresolved security viability**, neither a pass nor evidence of impossibility. P9/P10 remain blocked pending a constructive Gate A2 result after P8.
 
 **Objective:** Demonstrate useful technical separation and quantify the tolerance–guessability trade-off before cryptography.
 
@@ -317,15 +317,17 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 
 **Acceptance criteria:** A preregistered matcher/representation operating region simultaneously satisfies the documented technical-reliability and attack-surface bounds with uncertainty, and remains plausibly private-computable. Numeric bounds must be frozen before full data, not invented after it.
 
-**Decision / gate:** **Gate A — Semantic representation viability.** Pass, repeat one justified pilot revision, or stop/reframe as a negative/measurement result. P9/P10 protocol engineering is forbidden on a failed Gate A.
+**Decision / gate:** **Gate A — Conditional semantic representation viability.** P6 asks whether already-constructed same and near-neighbour samples separate at a frozen threshold. Its failure is a conditional failure: it blocks a viability claim but cannot by itself establish budgeted attacker success. P7 and P8 may proceed as bounded diagnostics; P9/P10 remain forbidden until Gate A2.
 
 **Dependencies:** P5.
 
 **Cost:** AI-token Medium; compute Medium; storage Medium.
 
-**Stop / fallback:** Tighten the use case or require a second factor; if no useful operating region exists, do not optimise cryptography for it.
+**Stop / fallback:** Preserve P6 unchanged. Measure the missing attacker-budget quantity in P8, then let Gate A2 decide standalone, second-factor, policy-constrained, negative/measurement, or stop positioning before any protocol optimisation.
 
 ### P7 — Image-stage versus text-only experiment
+
+**Status:** Complete on 2026-08-25 with **Gate B outcome B**: remove the image stage from the authentication core and retain it only as an optional/measurement baseline. `p7-cached-v1` reused the 27 P5 train/validation rows and existing SD-Turbo, Florence, SigLIP, controlled-text, and MiniLM artifacts; it executed no model and accessed no P6 artifact or held-out test row. No image comparison met the frozen material-benefit rule. Image-minus-text same-minus-near effects were `-0.076` (95% family-bootstrap `[-0.274, 0.091]`) for structured Jaccard, `-0.022` (`[-0.189, 0.134]`) for weighted structured matching, and `-0.005` (`[-0.056, 0.042]`) for dense cosine. All image paths also had materially worse same-minus-random effects. Florence macro atom F1 was 0.375 versus 0.638 for direct text; every validation pathway had worst minimax error 0.667. This is evidence about the tested pipelines, not universal extractor impossibility.
 
 **Objective:** Determine whether image generation contributes measurable non-human technical value.
 
@@ -333,23 +335,23 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 
 **Tasks:**
 
-1. Freeze a paired design using identical concepts, paraphrases, splits, attacker inputs, and comparable downstream representations for image and direct-text paths.
-2. Compare stability, random/near-neighbour separation, thresholds, acceptance-region mass, drift, semantic failure modes, latency, memory, storage, and new privacy exposure.
-3. Use paired effect sizes/CIs and the preregistered “meaningful benefit versus added cost” rule; do not use human memorability/usability as an explanation.
-4. Test whether any apparent gain is due to extra information/model capacity rather than the image transformation itself.
-5. Record D5 and update title/architecture/experiment scope if the stage is removed or repositioned.
+1. Freeze a paired design using identical P5 concepts, paraphrases, splits, and pair definitions. Compare Florence structured atoms with controlled-text structured atoms under identical Jaccard and frozen weighted-overlap rules; compare SigLIP image embeddings with MiniLM text embeddings under cosine while explicitly treating model capacity/modality as a confound.
+2. Reuse only cached P5 outputs. Compare non-empty rate, same stability, random and near-neighbour separation, paired same-minus-near and same-minus-random effects with family-bootstrap intervals, near-only and all-negative AUC, equivalent training-selected threshold rules evaluated on validation, atom precision/recall/F1 and changed-atom failures, latency, memory, storage, and privacy exposure. Drift remains unavailable because P5 contains one frozen revision per model.
+3. Apply the frozen material-benefit rule in `experiments/image_stage_ablation/config/p7_cached_v1.json`: the image path must show uncertainty-supported improvement in same-minus-near separation without a material threshold trade-off, and structured extraction must not lose atom fidelity. Added compute/storage/privacy exposure counts against retention. This is a bounded diagnostic, not a new Gate A test.
+4. Audit attribution: dense image/text results cannot isolate the image transformation from encoder differences; structured results share canonicalisation and matching but Florence extraction quality can bottleneck the image path.
+5. Record D5 and exactly one Gate B disposition: (A) retain image as core, (B) make it optional/reposition/remove from the authentication core, or (C) leave the question unresolved because extraction is the bottleneck. Do not implement any semantic-policy redesign in P7.
 
-**Inputs:** Gate A survivors; P3 paired manifest; P4/P5 cached outputs; P6 metrics.
+**Inputs:** P6-R conditional-failure interpretation; P3 smoke paired manifest; P4/P5 cached outputs. P6 metrics provide context only and are not pooled with or tuned against P7.
 
 **Outputs:** paired ablation run/report, technical-cost table, D5 record, approved pipeline thesis.
 
 **Tests / validation:** Same split and concept IDs; paired statistical analysis; equivalent threshold-selection procedure; resource accounting; confound audit.
 
-**Acceptance criteria:** The decision is supported by preregistered paired evidence and all costs/failure modes, with no human inference. Both paths remain reported as scientifically meaningful baselines where applicable.
+**Acceptance criteria:** The disposition is supported by the frozen paired metrics, uncertainty, atom errors, costs, and confound audit, with no human inference and no claim that K3 conditional FAR must be zero. Both paths remain reported as scientifically meaningful baselines where applicable.
 
 **Decision / gate:** **Gate B — Image-stage justification.** Retain as core, make optional/auxiliary, remove, or reframe the thesis.
 
-**Dependencies:** P6 Gate A disposition.
+**Dependencies:** P6-R amendment and unchanged P6 evidence.
 
 **Cost:** AI-token Medium; compute Medium (low if caches suffice); storage Medium.
 
@@ -363,10 +365,10 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 
 **Tasks:**
 
-1. Implement common guess-candidate and account interfaces with fixed budgets and online rate-limit scenarios.
-2. Build random, frequency-ordered, public-prompt-derived, LLM-assisted, generator/VLM-assisted, partial-information (`k` atoms), inversion/linkage, and adversarial-collision strategies only where D8 finds distinct value.
+1. Implement common guess-candidate and account interfaces with frozen budgets `B` and distinct online and offline views. The primary estimand is `P(success within B attempts | K_i)` for K0–K3, not conditional acceptance after a candidate is already near the target.
+2. Build random, population/distribution-informed, public-prompt-derived, LLM-assisted, generator/VLM-assisted, partial-target, strong-near-secret, inversion/linkage, and adversarial-collision strategies only where D8 finds distinct value. Map each strategy to K0 (generic/random), K1 (population/distribution knowledge), K2 (partial target information), or K3 (strong near-secret knowledge).
 3. Separate attacker training/auxiliary data from target test accounts; log model prompts, versions, seeds, costs, and deduplication.
-4. Measure success@budgets, guesses-to-success, accounts compromised, acceptance-region probability, benefit over simpler ordering, and sensitivity to partial knowledge.
+4. Measure success@1, success@5, success@10, success@B, guesses-to-success, accounts compromised, acceptance-region probability, benefit over simpler ordering, and sensitivity to attacker knowledge. Rate limiting is an explicit online assumption, never an excuse for a trivially enumerable semantic space.
 5. Add cheap attack smoke tests and ethical/licensing controls; do not attack third-party services.
 6. Freeze attack interfaces/distributions for protocol comparison while allowing explicitly versioned stronger attacks later.
 
@@ -376,15 +378,15 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 
 **Tests / validation:** Fixed-seed determinism; target/auxiliary separation; monotonic budget and `k` checks where expected; random/frequency controls; no external target; traceable costs.
 
-**Acceptance criteria:** A1/A4/A5/A6/A7/A8 each has a concrete analysis/experiment path or documented inapplicability; attack methods are reproducible and do not overclaim public prompts as secret choices.
+**Acceptance criteria:** A1/A4/A5/A6/A7/A8 each has a concrete analysis/experiment path or documented inapplicability; `P(success within B attempts | K_i)` is reported for each supported K0–K3 view with uncertainty; online and offline results are separated; attack methods are reproducible; public prompts are not overclaimed as secret choices; and no result relies on model, threshold, canonicaliser, or protocol secrecy.
 
-**Decision / gate:** Freeze attack suite v1 and identify threats any protocol must materially improve.
+**Decision / gate:** **Gate A2 — Integrated security viability.** Combine P6 conditional quality/separation evidence with P8 budgeted attack success. Decide exactly one positioning: standalone authentication, second factor, policy-constrained credential, negative/measurement contribution, or stop. A constructive pass must state acceptable budgets, K0–K3 boundaries, and operational assumptions; only then may P9/P10 begin.
 
 **Dependencies:** P7 decision.
 
 **Cost:** AI-token Medium–High; compute Medium; storage Medium.
 
-**Stop / fallback:** Use controlled synthetic distributions/bounds and narrow claims if public/AI resources are unsuitable; if guessing already defeats the standalone use case, record this for Gate E and consider second-factor/measurement positioning.
+**Stop / fallback:** Use controlled synthetic distributions/bounds and narrow claims if public/AI resources are unsuitable. If the semantic space is cheaply enumerable, rate limiting alone does not rescue standalone positioning. Preserve a negative/measurement outcome or stop rather than forcing protocol work.
 
 ### P9 — Privacy-protocol and architecture theoretical comparison
 
@@ -411,7 +413,7 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 
 **Decision / gate:** Stage-1 protocol shortlist and architecture hypotheses. No full protocol implementation.
 
-**Dependencies:** P6 Gate A, P7 Gate B, P8 v1.
+**Dependencies:** Constructive Gate A2 outcome after P8, P7 Gate B, and P8 v1. **Blocked as of P6-R.** Any claimed benefit from a trusted third party must be attributed to keys, protocol enforcement, rate limits, and non-collusion assumptions—not to secrecy of algorithms or models.
 
 **Cost:** AI-token High; compute Low; storage Low.
 
@@ -442,7 +444,7 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 
 **Decision / gate:** **Gate C — Protocol selection.** Select primary protocol, architecture hypothesis, and baselines; otherwise stop/reframe. Do not fully implement rejected candidates.
 
-**Dependencies:** P9.
+**Dependencies:** P9 after constructive Gate A2. **Blocked as of P6-R.**
 
 **Cost:** AI-token Medium–High; compute Medium; storage Low–Medium.
 

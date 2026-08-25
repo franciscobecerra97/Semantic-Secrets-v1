@@ -1,0 +1,1158 @@
+{
+  "$schema_version": "semantic-secrets-p7-result-v1",
+  "artifacts": {
+    "paired_scores_sha256": "43518f80413332062b9f22970af6ba7c9d145f354b342ba7b005ce54a4c875aa"
+  },
+  "atom_metrics": {
+    "controlled_text": {
+      "by_atom_type": {
+        "action": {
+          "fn": 6,
+          "fp": 0,
+          "recall": 0.333333,
+          "tp": 3
+        },
+        "attribute": {
+          "fn": 11,
+          "fp": 3,
+          "recall": 0.266667,
+          "tp": 4
+        },
+        "count": {
+          "fn": 3,
+          "fp": 4,
+          "recall": 0.5,
+          "tp": 3
+        },
+        "object": {
+          "fn": 15,
+          "fp": 3,
+          "recall": 0.6875,
+          "tp": 33
+        },
+        "relation": {
+          "fn": 7,
+          "fp": 7,
+          "recall": 0.222222,
+          "tp": 2
+        },
+        "scene": {
+          "fn": 1,
+          "fp": 0,
+          "recall": 0.952381,
+          "tp": 20
+        }
+      },
+      "empty_rows": 0,
+      "macro_f1": 0.638181,
+      "macro_precision": 0.78642,
+      "macro_recall": 0.625926,
+      "row_count": 27
+    },
+    "florence": {
+      "by_atom_type": {
+        "action": {
+          "fn": 9,
+          "fp": 2,
+          "recall": 0.0,
+          "tp": 0
+        },
+        "attribute": {
+          "fn": 14,
+          "fp": 15,
+          "recall": 0.066667,
+          "tp": 1
+        },
+        "count": {
+          "fn": 6,
+          "fp": 28,
+          "recall": 0.0,
+          "tp": 0
+        },
+        "object": {
+          "fn": 11,
+          "fp": 46,
+          "recall": 0.770833,
+          "tp": 37
+        },
+        "relation": {
+          "fn": 9,
+          "fp": 81,
+          "recall": 0.0,
+          "tp": 0
+        },
+        "scene": {
+          "fn": 7,
+          "fp": 0,
+          "recall": 0.666667,
+          "tp": 14
+        }
+      },
+      "empty_rows": 0,
+      "macro_f1": 0.374508,
+      "macro_precision": 0.334556,
+      "macro_recall": 0.532716,
+      "row_count": 27
+    }
+  },
+  "atom_type_unions": {
+    "image": [
+      "action:chef:hold:chef",
+      "action:hat:hold:bowl",
+      "attribute:apron:color:orange",
+      "attribute:apron:color:red",
+      "attribute:box:color:red",
+      "attribute:box:color:white",
+      "attribute:chef:color:white",
+      "attribute:fox:color:red",
+      "attribute:sailboat:material:wooden",
+      "attribute:scarf:color:blue",
+      "attribute:scarf:color:red",
+      "attribute:teapot:material:glass",
+      "count:boat:2",
+      "count:boat:3",
+      "count:book:14",
+      "count:book:2",
+      "count:book:31",
+      "count:bowl:2",
+      "count:box:11",
+      "count:box:18",
+      "count:box:2",
+      "count:box:9",
+      "count:button:3",
+      "count:button:4",
+      "count:clock:2",
+      "count:coffee_cup:2",
+      "count:fish:2",
+      "count:fox:2",
+      "count:orange:5",
+      "count:orange:6",
+      "count:orange:7",
+      "count:oven:2",
+      "count:owl:2",
+      "count:person:5",
+      "count:sailboat:2",
+      "count:tree:2",
+      "count:wheel:2",
+      "count:wheel:4",
+      "count:wheel:6",
+      "object:apron",
+      "object:axolotl",
+      "object:bicycle",
+      "object:boat",
+      "object:book",
+      "object:bowl",
+      "object:box",
+      "object:bull_mastiff",
+      "object:button",
+      "object:cat",
+      "object:chef",
+      "object:clock",
+      "object:coffee_cup",
+      "object:drawer",
+      "object:fish",
+      "object:fox",
+      "object:goldfish",
+      "object:hat",
+      "object:kitchen_dining_room_table",
+      "object:knob",
+      "object:motorcycle",
+      "object:orange",
+      "object:oven",
+      "object:owl",
+      "object:person",
+      "object:picnic_basket",
+      "object:sail",
+      "object:sailboat",
+      "object:scarf",
+      "object:teapot",
+      "object:tree",
+      "object:wheel",
+      "relation:apron:left_of:drawer",
+      "relation:apron:left_of:knob",
+      "relation:apron:left_of:orange",
+      "relation:apron:left_of:oven",
+      "relation:axolotl:on:axolotl",
+      "relation:boat:left_of:boat",
+      "relation:boat:left_of:bull_mastiff",
+      "relation:book:left_of:book",
+      "relation:book:left_of:teapot",
+      "relation:bowl:left_of:apron",
+      "relation:bowl:left_of:bowl",
+      "relation:bowl:left_of:coffee_cup",
+      "relation:bowl:left_of:person",
+      "relation:box:left_of:box",
+      "relation:box:on:box",
+      "relation:button:left_of:bowl",
+      "relation:button:left_of:button",
+      "relation:button:left_of:coffee_cup",
+      "relation:button:left_of:orange",
+      "relation:cat:on:cat",
+      "relation:chef:in_front_of:chef",
+      "relation:coffee_cup:left_of:bowl",
+      "relation:coffee_cup:left_of:button",
+      "relation:coffee_cup:left_of:coffee_cup",
+      "relation:coffee_cup:left_of:person",
+      "relation:drawer:left_of:knob",
+      "relation:drawer:left_of:oven",
+      "relation:fish:left_of:fish",
+      "relation:fish:on:fish",
+      "relation:fox:on:fox",
+      "relation:hat:in_front_of:bowl",
+      "relation:hat:left_of:orange",
+      "relation:orange:in_front_of:chef",
+      "relation:orange:left_of:button",
+      "relation:orange:left_of:drawer",
+      "relation:orange:left_of:hat",
+      "relation:orange:left_of:knob",
+      "relation:orange:left_of:orange",
+      "relation:orange:left_of:oven",
+      "relation:orange:left_of:person",
+      "relation:oven:left_of:apron",
+      "relation:oven:left_of:drawer",
+      "relation:oven:left_of:knob",
+      "relation:oven:left_of:orange",
+      "relation:oven:left_of:oven",
+      "relation:oven:left_of:person",
+      "relation:owl:on:clock",
+      "relation:owl:on:owl",
+      "relation:person:left_of:bowl",
+      "relation:person:left_of:coffee_cup",
+      "relation:person:left_of:knob",
+      "relation:person:left_of:orange",
+      "relation:person:left_of:oven",
+      "relation:person:left_of:person",
+      "relation:sail:in_front_of:sailboat",
+      "relation:sail:left_of:boat",
+      "relation:sail:left_of:bull_mastiff",
+      "relation:sailboat:on:orange",
+      "relation:scarf:on:cat",
+      "relation:teapot:in_front_of:book",
+      "relation:teapot:on:book",
+      "relation:wheel:left_of:box",
+      "relation:wheel:left_of:wheel",
+      "relation:wheel:on:bicycle",
+      "scene:aquarium",
+      "scene:forest",
+      "scene:kitchen",
+      "scene:library",
+      "scene:warehouse"
+    ],
+    "text": [
+      "action:chef:hold:orange",
+      "action:chef:juggle:orange",
+      "attribute:scarf:color:blue",
+      "attribute:scarf:color:green",
+      "attribute:scarf:color:red",
+      "attribute:scarf:color:yellow",
+      "attribute:teapot:material:glass",
+      "count:bicycle:1",
+      "count:book:1",
+      "count:chef:1",
+      "count:orange:3",
+      "count:sailboat:1",
+      "object:axolotl",
+      "object:bicycle",
+      "object:book",
+      "object:boulder",
+      "object:chef",
+      "object:fox",
+      "object:motorcycle",
+      "object:orange",
+      "object:sailboat",
+      "object:scarf",
+      "object:teapot",
+      "object:tree",
+      "relation:axolotl:inside:axolotl",
+      "relation:book:beside:teapot",
+      "relation:book:inside:book",
+      "relation:boulder:beside:fox",
+      "relation:fox:between:boulder",
+      "relation:scarf:inside:scarf",
+      "relation:tree:on:boulder",
+      "scene:aquarium",
+      "scene:coastal_night",
+      "scene:coastal_sunrise",
+      "scene:forest",
+      "scene:kitchen",
+      "scene:library",
+      "scene:lunar",
+      "scene:warehouse"
+    ]
+  },
+  "boundaries": {
+    "families": 9,
+    "human_claims": 0,
+    "human_participants": 0,
+    "model_drift": "not available: one frozen revision per P5 model",
+    "new_model_download": false,
+    "new_model_execution": false,
+    "p6_artifact_access": false,
+    "pair_count": 27,
+    "rows": 27,
+    "source": "existing P5 cached train/validation outputs only",
+    "splits": [
+      "train",
+      "validation"
+    ],
+    "test_rows_allowed": 0,
+    "test_rows_evaluated": 0
+  },
+  "comparisons": {
+    "dense_cosine": {
+      "attribution": "image/text encoders differ in training, capacity, and representation dimension",
+      "image": "siglip_image_cosine",
+      "same_minus_near_effect": {
+        "bootstrap_95pct": [
+          -0.05603301,
+          0.04212623
+        ],
+        "bootstrap_repetitions": 4000,
+        "family_count": 9,
+        "image_minus_text_mean_effect": -0.00466614
+      },
+      "same_minus_random_effect": {
+        "bootstrap_95pct": [
+          -0.53693271,
+          -0.38478085
+        ],
+        "bootstrap_repetitions": 4000,
+        "family_count": 9,
+        "image_minus_text_mean_effect": -0.4677261
+      },
+      "text": "minilm_text_cosine",
+      "validation_worst_error_image_minus_text": 0.0
+    },
+    "structured_jaccard": {
+      "attribution": "shared canonical atom schema and matcher; upstream extraction path differs",
+      "image": "florence_jaccard",
+      "same_minus_near_effect": {
+        "bootstrap_95pct": [
+          -0.27417547,
+          0.09088689
+        ],
+        "bootstrap_repetitions": 4000,
+        "family_count": 9,
+        "image_minus_text_mean_effect": -0.07600327
+      },
+      "same_minus_random_effect": {
+        "bootstrap_95pct": [
+          -0.54129697,
+          -0.16375662
+        ],
+        "bootstrap_repetitions": 4000,
+        "family_count": 9,
+        "image_minus_text_mean_effect": -0.34614706
+      },
+      "text": "controlled_text_jaccard",
+      "validation_worst_error_image_minus_text": 0.0
+    },
+    "structured_weighted": {
+      "attribution": "shared canonical atom schema and matcher; upstream extraction path differs",
+      "image": "florence_weighted",
+      "same_minus_near_effect": {
+        "bootstrap_95pct": [
+          -0.18941973,
+          0.13416176
+        ],
+        "bootstrap_repetitions": 4000,
+        "family_count": 9,
+        "image_minus_text_mean_effect": -0.02206363
+      },
+      "same_minus_random_effect": {
+        "bootstrap_95pct": [
+          -0.48334291,
+          -0.08045044
+        ],
+        "bootstrap_repetitions": 4000,
+        "family_count": 9,
+        "image_minus_text_mean_effect": -0.27493427
+      },
+      "text": "controlled_text_weighted",
+      "validation_worst_error_image_minus_text": 0.0
+    }
+  },
+  "config_sha256": "08e79b909dd1299e3c72f10a491ac5ec8f315776885a832feeff67efa19405b9",
+  "confound_audit": {
+    "dense": "SigLIP versus MiniLM compares complete image/text pathways, not the image transform alone; encoder training, capacity, and dimensions differ",
+    "extra_information": "the generated image is derived from the same source prompt and adds stochastic/model transformation, not a separately measured information source",
+    "structured": "comparable canonical schema and matcher isolate the instantiated upstream paths, but Florence's low fidelity is an image-path bottleneck"
+  },
+  "experiment_id": "p7-cached-v1",
+  "material_benefit": {
+    "comparison_checks": {
+      "dense_cosine": {
+        "checks": {
+          "attribution_and_cost_case": false,
+          "near_effect_ci_lower_positive": false,
+          "random_effect_ci_lower_at_least_minus_0_02": false,
+          "structured_atom_f1_not_lower": true,
+          "validation_worst_error_improves_by_at_least_0_10": false
+        },
+        "passes": false
+      },
+      "structured_jaccard": {
+        "checks": {
+          "attribution_and_cost_case": false,
+          "near_effect_ci_lower_positive": false,
+          "random_effect_ci_lower_at_least_minus_0_02": false,
+          "structured_atom_f1_not_lower": false,
+          "validation_worst_error_improves_by_at_least_0_10": false
+        },
+        "passes": false
+      },
+      "structured_weighted": {
+        "checks": {
+          "attribution_and_cost_case": false,
+          "near_effect_ci_lower_positive": false,
+          "random_effect_ci_lower_at_least_minus_0_02": false,
+          "structured_atom_f1_not_lower": false,
+          "validation_worst_error_improves_by_at_least_0_10": false
+        },
+        "passes": false
+      }
+    },
+    "frozen_rule": {
+      "near_k3_zero_far_required": false,
+      "otherwise": "outcome B: make image optional, reposition it as a measurement baseline, or remove it from the authentication core",
+      "retain_as_core_outcome_a_requires": [
+        "at least one paired comparison has a strictly positive lower 95% family-bootstrap bound for image-minus-text improvement in same-minus-near gap",
+        "the same comparison has same-minus-random image-minus-text lower bound >= -0.02",
+        "its validation minimax worst error is at least 0.10 lower for image than text",
+        "if structured, image macro atom F1 is no lower than text macro atom F1",
+        "benefit is attributable enough to the image pathway to justify added compute, storage, and privacy exposure"
+      ],
+      "unresolved_outcome_c_requires": "required cached artifacts are missing/incompatible, or every available comparison is incapable of answering the transformation question because no downstream matcher is comparable"
+    },
+    "gate_b_label": "make image optional/reposition as measurement baseline/remove from authentication core",
+    "gate_b_outcome": "B",
+    "reason": "No tested image pathway met the frozen material-benefit rule; comparable structured and dense pathway evidence is available, so the outcome is B rather than an unresolved C."
+  },
+  "nonempty_rate": {
+    "controlled_text": 1.0,
+    "dense_vectors": 1.0,
+    "florence": 1.0
+  },
+  "privacy_exposure": {
+    "image_path": [
+      "adds a local generated image containing visual semantic content",
+      "adds generator and image-extractor/encoder model supply-chain and drift surfaces",
+      "raw SigLIP embeddings remain linkable/candidate-retrievable in the P5 cheap probe",
+      "images may be discarded after local extraction, but this does not remove runtime exposure"
+    ],
+    "shared": "neither plaintext path is privacy-preserving storage; protocol protection remains unevaluated and blocked",
+    "text_path": [
+      "raw prompt and structured atoms remain readable locally",
+      "raw MiniLM embeddings remain linkable/candidate-retrievable in the P5 cheap probe"
+    ]
+  },
+  "publication_result": false,
+  "representations": {
+    "controlled_text_jaccard": {
+      "all": {
+        "all_negative_auc": 0.7962963,
+        "near_auc": 0.59259259,
+        "near_mean": 0.60740741,
+        "near_median": 0.66666667,
+        "random_mean": 0.0,
+        "random_median": 0.0,
+        "same_mean": 0.71428571,
+        "same_median": 0.66666667,
+        "same_minus_near_gap": 0.10687831,
+        "same_minus_random_gap": 0.71428571
+      },
+      "by_split": {
+        "train": {
+          "all_negative_auc": 0.75694444,
+          "near_auc": 0.51388889,
+          "near_mean": 0.52222222,
+          "near_median": 0.66666667,
+          "random_mean": 0.0,
+          "random_median": 0.0,
+          "same_mean": 0.57142857,
+          "same_median": 0.58333334,
+          "same_minus_near_gap": 0.04920635,
+          "same_minus_random_gap": 0.57142857
+        },
+        "validation": {
+          "all_negative_auc": 0.83333333,
+          "near_auc": 0.66666667,
+          "near_mean": 0.77777778,
+          "near_median": 1.0,
+          "random_mean": 0.0,
+          "random_median": 0.0,
+          "same_mean": 1.0,
+          "same_median": 1.0,
+          "same_minus_near_gap": 0.22222222,
+          "same_minus_random_gap": 1.0
+        }
+      },
+      "near_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "mean": 0.66666667,
+          "values": [
+            0.66666667
+          ]
+        },
+        "attribute": {
+          "count": 3,
+          "mean": 0.6,
+          "values": [
+            0.33333333,
+            0.66666667,
+            0.8
+          ]
+        },
+        "count": {
+          "count": 1,
+          "mean": 1.0,
+          "values": [
+            1.0
+          ]
+        },
+        "object": {
+          "count": 1,
+          "mean": 0.0,
+          "values": [
+            0.0
+          ]
+        },
+        "relation": {
+          "count": 2,
+          "mean": 0.83333334,
+          "values": [
+            0.66666667,
+            1.0
+          ]
+        },
+        "scene": {
+          "count": 1,
+          "mean": 0.33333333,
+          "values": [
+            0.33333333
+          ]
+        }
+      },
+      "threshold": {
+        "evaluated_on": "validation",
+        "selected_on": "train",
+        "selected_threshold": 0.42857143,
+        "training_objective": [
+          0.66666667,
+          0.83333333,
+          0.66666667,
+          -0.42857143
+        ],
+        "validation": {
+          "all_negative_auc": 0.83333333,
+          "frr": 0.0,
+          "near_auc": 0.66666667,
+          "near_far": 0.66666667,
+          "random_far": 0.0,
+          "worst_error": 0.66666667
+        }
+      }
+    },
+    "controlled_text_weighted": {
+      "all": {
+        "all_negative_auc": 0.84876543,
+        "near_auc": 0.69753086,
+        "near_mean": 0.71862798,
+        "near_median": 0.8,
+        "random_mean": 0.0,
+        "random_median": 0.0,
+        "same_mean": 0.87780231,
+        "same_median": 1.0,
+        "same_minus_near_gap": 0.15917433,
+        "same_minus_random_gap": 0.87780231
+      },
+      "by_split": {
+        "train": {
+          "all_negative_auc": 0.86805556,
+          "near_auc": 0.73611111,
+          "near_mean": 0.62918047,
+          "near_median": 0.7874862,
+          "random_mean": 0.0,
+          "random_median": 0.0,
+          "same_mean": 0.81670347,
+          "same_median": 0.9001104,
+          "same_minus_near_gap": 0.187523,
+          "same_minus_random_gap": 0.81670347
+        },
+        "validation": {
+          "all_negative_auc": 0.83333333,
+          "near_auc": 0.66666667,
+          "near_mean": 0.89752302,
+          "near_median": 1.0,
+          "random_mean": 0.0,
+          "random_median": 0.0,
+          "same_mean": 1.0,
+          "same_median": 1.0,
+          "same_minus_near_gap": 0.10247698,
+          "same_minus_random_gap": 1.0
+        }
+      },
+      "near_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "mean": 0.8,
+          "values": [
+            0.8
+          ]
+        },
+        "attribute": {
+          "count": 3,
+          "mean": 0.75584715,
+          "values": [
+            0.69256905,
+            0.7749724,
+            0.8
+          ]
+        },
+        "count": {
+          "count": 1,
+          "mean": 1.0,
+          "values": [
+            1.0
+          ]
+        },
+        "object": {
+          "count": 1,
+          "mean": 0.0,
+          "values": [
+            0.0
+          ]
+        },
+        "relation": {
+          "count": 2,
+          "mean": 0.9500552,
+          "values": [
+            0.9001104,
+            1.0
+          ]
+        },
+        "scene": {
+          "count": 1,
+          "mean": 0.5,
+          "values": [
+            0.5
+          ]
+        }
+      },
+      "threshold": {
+        "evaluated_on": "validation",
+        "selected_on": "train",
+        "selected_threshold": 0.9001104,
+        "training_objective": [
+          0.33333333,
+          0.5,
+          0.16666667,
+          -0.9001104
+        ],
+        "validation": {
+          "all_negative_auc": 0.83333333,
+          "frr": 0.0,
+          "near_auc": 0.66666667,
+          "near_far": 0.66666667,
+          "random_far": 0.0,
+          "worst_error": 0.66666667
+        }
+      }
+    },
+    "florence_jaccard": {
+      "all": {
+        "all_negative_auc": 0.78703704,
+        "near_auc": 0.57407407,
+        "near_mean": 0.34652287,
+        "near_median": 0.3,
+        "random_mean": 0.00925926,
+        "random_median": 0.0,
+        "same_mean": 0.37739791,
+        "same_median": 0.33333333,
+        "same_minus_near_gap": 0.03087504,
+        "same_minus_random_gap": 0.36813865
+      },
+      "by_split": {
+        "train": {
+          "all_negative_auc": 0.84722222,
+          "near_auc": 0.69444444,
+          "near_mean": 0.27216526,
+          "near_median": 0.23333333,
+          "random_mean": 0.01388889,
+          "random_median": 0.0,
+          "same_mean": 0.38703704,
+          "same_median": 0.36666667,
+          "same_minus_near_gap": 0.11487178,
+          "same_minus_random_gap": 0.37314815
+        },
+        "validation": {
+          "all_negative_auc": 0.66666667,
+          "near_auc": 0.33333333,
+          "near_mean": 0.4952381,
+          "near_median": 0.6,
+          "random_mean": 0.0,
+          "random_median": 0.0,
+          "same_mean": 0.35811966,
+          "same_median": 0.30769231,
+          "same_minus_near_gap": -0.13711844,
+          "same_minus_random_gap": 0.35811966
+        }
+      },
+      "near_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "mean": 0.14035088,
+          "values": [
+            0.14035088
+          ]
+        },
+        "attribute": {
+          "count": 3,
+          "mean": 0.35555556,
+          "values": [
+            0.6,
+            0.16666667,
+            0.3
+          ]
+        },
+        "count": {
+          "count": 1,
+          "mean": 0.28571429,
+          "values": [
+            0.28571429
+          ]
+        },
+        "object": {
+          "count": 1,
+          "mean": 0.0,
+          "values": [
+            0.0
+          ]
+        },
+        "relation": {
+          "count": 2,
+          "mean": 0.58571429,
+          "values": [
+            0.57142857,
+            0.6
+          ]
+        },
+        "scene": {
+          "count": 1,
+          "mean": 0.45454545,
+          "values": [
+            0.45454545
+          ]
+        }
+      },
+      "threshold": {
+        "evaluated_on": "validation",
+        "selected_on": "train",
+        "selected_threshold": 0.33333333,
+        "training_objective": [
+          0.33333333,
+          0.66666667,
+          0.33333333,
+          -0.33333333
+        ],
+        "validation": {
+          "all_negative_auc": 0.66666667,
+          "frr": 0.66666667,
+          "near_auc": 0.33333333,
+          "near_far": 0.66666667,
+          "random_far": 0.0,
+          "worst_error": 0.66666667
+        }
+      }
+    },
+    "florence_weighted": {
+      "all": {
+        "all_negative_auc": 0.82098765,
+        "near_auc": 0.64197531,
+        "near_mean": 0.48958356,
+        "near_median": 0.56418968,
+        "random_mean": 0.02382622,
+        "random_median": 0.0,
+        "same_mean": 0.62669426,
+        "same_median": 0.77164489,
+        "same_minus_near_gap": 0.1371107,
+        "same_minus_random_gap": 0.60286804
+      },
+      "by_split": {
+        "train": {
+          "all_negative_auc": 0.88194444,
+          "near_auc": 0.76388889,
+          "near_mean": 0.41888246,
+          "near_median": 0.41070232,
+          "random_mean": 0.03573933,
+          "random_median": 0.0,
+          "same_mean": 0.70788184,
+          "same_median": 0.79063445,
+          "same_minus_near_gap": 0.28899938,
+          "same_minus_random_gap": 0.6721425
+        },
+        "validation": {
+          "all_negative_auc": 0.66666667,
+          "near_auc": 0.33333333,
+          "near_mean": 0.63098578,
+          "near_median": 0.75,
+          "random_mean": 0.0,
+          "random_median": 0.0,
+          "same_mean": 0.46431911,
+          "same_median": 0.33333333,
+          "same_minus_near_gap": -0.16666667,
+          "same_minus_random_gap": 0.46431911
+        }
+      },
+      "near_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "mean": 0.21087966,
+          "values": [
+            0.21087966
+          ]
+        },
+        "attribute": {
+          "count": 3,
+          "mean": 0.54367621,
+          "values": [
+            0.809624,
+            0.25721496,
+            0.56418968
+          ]
+        },
+        "count": {
+          "count": 1,
+          "mean": 0.33333333,
+          "values": [
+            0.33333333
+          ]
+        },
+        "object": {
+          "count": 1,
+          "mean": 0.0,
+          "values": [
+            0.0
+          ]
+        },
+        "relation": {
+          "count": 2,
+          "mean": 0.81791123,
+          "values": [
+            0.88582245,
+            0.75
+          ]
+        },
+        "scene": {
+          "count": 1,
+          "mean": 0.595188,
+          "values": [
+            0.595188
+          ]
+        }
+      },
+      "threshold": {
+        "evaluated_on": "validation",
+        "selected_on": "train",
+        "selected_threshold": 0.77164489,
+        "training_objective": [
+          0.33333333,
+          0.5,
+          0.16666667,
+          -0.77164489
+        ],
+        "validation": {
+          "all_negative_auc": 0.66666667,
+          "frr": 0.66666667,
+          "near_auc": 0.33333333,
+          "near_far": 0.33333333,
+          "random_far": 0.0,
+          "worst_error": 0.66666667
+        }
+      }
+    },
+    "minilm_text_cosine": {
+      "all": {
+        "all_negative_auc": 0.81481481,
+        "near_auc": 0.62962963,
+        "near_mean": 0.88433937,
+        "near_median": 0.92185426,
+        "random_mean": 0.11299738,
+        "random_median": 0.10312089,
+        "same_mean": 0.92364873,
+        "same_median": 0.92522579,
+        "same_minus_near_gap": 0.03930936,
+        "same_minus_random_gap": 0.81065135
+      },
+      "by_split": {
+        "train": {
+          "all_negative_auc": 0.81944444,
+          "near_auc": 0.63888889,
+          "near_mean": 0.8763272,
+          "near_median": 0.89467874,
+          "random_mean": 0.15309217,
+          "random_median": 0.16623348,
+          "same_mean": 0.9130146,
+          "same_median": 0.91763723,
+          "same_minus_near_gap": 0.0366874,
+          "same_minus_random_gap": 0.75992243
+        },
+        "validation": {
+          "all_negative_auc": 0.77777778,
+          "near_auc": 0.55555556,
+          "near_mean": 0.90036372,
+          "near_median": 0.92185426,
+          "random_mean": 0.03280781,
+          "random_median": 0.06140161,
+          "same_mean": 0.944917,
+          "same_median": 0.94453651,
+          "same_minus_near_gap": 0.04455328,
+          "same_minus_random_gap": 0.91210919
+        }
+      },
+      "near_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "mean": 0.80042815,
+          "values": [
+            0.80042815
+          ]
+        },
+        "attribute": {
+          "count": 3,
+          "mean": 0.88832388,
+          "values": [
+            0.78443265,
+            0.94627768,
+            0.93426132
+          ]
+        },
+        "count": {
+          "count": 1,
+          "mean": 0.92185426,
+          "values": [
+            0.92185426
+          ]
+        },
+        "object": {
+          "count": 1,
+          "mean": 0.77890283,
+          "values": [
+            0.77890283
+          ]
+        },
+        "relation": {
+          "count": 2,
+          "mean": 0.96890065,
+          "values": [
+            0.94299704,
+            0.99480426
+          ]
+        },
+        "scene": {
+          "count": 1,
+          "mean": 0.85509616,
+          "values": [
+            0.85509616
+          ]
+        }
+      },
+      "threshold": {
+        "evaluated_on": "validation",
+        "selected_on": "train",
+        "selected_threshold": 0.9075104,
+        "training_objective": [
+          0.5,
+          0.66666667,
+          0.5,
+          -0.9075104
+        ],
+        "validation": {
+          "all_negative_auc": 0.77777778,
+          "frr": 0.0,
+          "near_auc": 0.55555556,
+          "near_far": 0.66666667,
+          "random_far": 0.0,
+          "worst_error": 0.66666667
+        }
+      }
+    },
+    "siglip_image_cosine": {
+      "all": {
+        "all_negative_auc": 0.82716049,
+        "near_auc": 0.65432099,
+        "near_mean": 0.89747124,
+        "near_median": 0.91924155,
+        "random_mean": 0.58918921,
+        "random_median": 0.58750248,
+        "same_mean": 0.93211446,
+        "same_median": 0.93599069,
+        "same_minus_near_gap": 0.03464322,
+        "same_minus_random_gap": 0.34292525
+      },
+      "by_split": {
+        "train": {
+          "all_negative_auc": 0.84722222,
+          "near_auc": 0.69444444,
+          "near_mean": 0.8820012,
+          "near_median": 0.90718311,
+          "random_mean": 0.61425676,
+          "random_median": 0.60246814,
+          "same_mean": 0.93516909,
+          "same_median": 0.92835462,
+          "same_minus_near_gap": 0.05316789,
+          "same_minus_random_gap": 0.32091233
+        },
+        "validation": {
+          "all_negative_auc": 0.77777778,
+          "near_auc": 0.55555556,
+          "near_mean": 0.92841133,
+          "near_median": 0.92560101,
+          "random_mean": 0.53905413,
+          "random_median": 0.49517524,
+          "same_mean": 0.9260052,
+          "same_median": 0.94619322,
+          "same_minus_near_gap": -0.00240612,
+          "same_minus_random_gap": 0.38695108
+        }
+      },
+      "near_by_changed_atom_type": {
+        "action": {
+          "count": 1,
+          "mean": 0.91924155,
+          "values": [
+            0.91924155
+          ]
+        },
+        "attribute": {
+          "count": 3,
+          "mean": 0.90716735,
+          "values": [
+            0.89483118,
+            0.93154621,
+            0.89512467
+          ]
+        },
+        "count": {
+          "count": 1,
+          "mean": 0.92560101,
+          "values": [
+            0.92560101
+          ]
+        },
+        "object": {
+          "count": 1,
+          "mean": 0.70235014,
+          "values": [
+            0.70235014
+          ]
+        },
+        "relation": {
+          "count": 2,
+          "mean": 0.97305444,
+          "values": [
+            0.98130709,
+            0.96480179
+          ]
+        },
+        "scene": {
+          "count": 1,
+          "mean": 0.86243755,
+          "values": [
+            0.86243755
+          ]
+        }
+      },
+      "threshold": {
+        "evaluated_on": "validation",
+        "selected_on": "train",
+        "selected_threshold": 0.92071855,
+        "training_objective": [
+          0.33333333,
+          0.66666667,
+          0.33333333,
+          -0.92071855
+        ],
+        "validation": {
+          "all_negative_auc": 0.77777778,
+          "frr": 0.33333333,
+          "near_auc": 0.55555556,
+          "near_far": 0.66666667,
+          "random_far": 0.0,
+          "worst_error": 0.66666667
+        }
+      }
+    }
+  },
+  "resources": {
+    "controlled_text_parser_latency": "not measured in P5; no numeric comparison claimed",
+    "image_dense_encoding": {
+      "peak_cuda_allocated_mib": [
+        829.97,
+        829.97
+      ],
+      "run_seconds": [
+        1.152585,
+        0.988164
+      ],
+      "shape": [
+        27,
+        768
+      ]
+    },
+    "image_generation": {
+      "cached_png_bytes_total": 11877601,
+      "median_seconds_per_row": 25.795122,
+      "peak_cuda_allocated_mib": 5716.78
+    },
+    "image_structured_extraction": {
+      "median_seconds_per_row": 10.635787,
+      "peak_cuda_allocated_mib": 1210.65
+    },
+    "representation_storage_bytes": {
+      "minilm_array": 41600,
+      "siglip_array": 83072,
+      "structured_jsonl_shared_file": 15816
+    },
+    "text_dense_encoding": {
+      "peak_cuda_allocated_mib": [
+        101.27,
+        101.27
+      ],
+      "run_seconds": [
+        0.179569,
+        0.103586
+      ],
+      "shape": [
+        27,
+        384
+      ]
+    }
+  },
+  "run_kind": "bounded cache-only paired engineering diagnostic; not publication or Gate A result",
+  "semantic_policy": {
+    "exact_prompt_or_exact_set_equality": false,
+    "future_hypothesis": "mandatory discriminative anchors with tolerant secondary attributes",
+    "implemented_or_tuned": false,
+    "requirements_before_test": [
+      "new scheme/version",
+      "independent rationale",
+      "new data",
+      "preregistration",
+      "new gate"
+    ],
+    "scientific_status": "motivated for future study by oracle-versus-extractor gaps and changed-atom failures, but not established or tested by P7"
+  },
+  "source_sha256": {
+    "experiments/representation_screen/config/p5_smoke_v1.json": "54794d2dd7470032ca34ceeee5cc9fb021027722aa2ab3d545112bdc399459e9",
+    "results/p5/embedding_metadata_v1.json": "243293050df09298b4b1e3e171f0cab829c4adb26e9795d8bb27eafdab677f58",
+    "results/p5/florence_metadata_v1.json": "6605b8d6054a2338c7ae03e5ef019785fb20faebb15e4ed9788a3f5908980312",
+    "results/p5/florence_raw_v1.jsonl": "28e19c94aa66295f3d0aa566aac5356bca08ef5e3a8d61097de7d21fe8a4f4e5",
+    "results/p5/generation_manifest_smoke_v1.json": "27d6c3bc9122763bc44367e04fbfa09eee1d57ab9978c4601830d2657dd16299",
+    "results/p5/minilm_text_v1.npy": "6c7b70ac6b4a45e79f99e288d516a9814e2baab1f527baa124038c4379b414f5",
+    "results/p5/siglip_image_v1.npy": "6ae8e755cae62f858ba35e9b0c6b090176fae97e788576d9732fa171e50ca766",
+    "results/p5/smoke_v1.json": "97e8f29817f9b92b320ecd0202978bc10b59352a5d34fc20d94586805c608e0e",
+    "results/p5/structured_v1.jsonl": "a402d3568a2e0ac9a187b5d08b9f677321c37f40461178b5c2884d5f05707ca7"
+  }
+}
