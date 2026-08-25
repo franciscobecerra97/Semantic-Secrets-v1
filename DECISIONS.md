@@ -499,3 +499,35 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** Whether either frozen extractor meets capability bounds; whether independent generations preserve graph facts; whether M/T beats VSA/global baselines; whether the accepted region survives K0–K3 budgets; whether any private construction preserves the predicate with acceptable leakage/cost; and whether later literature subsumes the remaining combination.
 
 **Revisit trigger:** A new primary source substantially combining the remaining properties; Gate V2-A/B/C failure; or an outcome-independent design flaw discovered before the affected held-out output. Revisions require a new version and appended decision.
+
+## P9-00 — Gate V2-A fails at extractor capability
+
+**Decision:** Stop the frozen v2 constructive path at P9A. Neither preregistered extractor advances; do not execute P9B and do not begin P10.
+
+**Date:** 2026-08-25
+
+**Status:** P9 complete and frozen with a negative result; Gate V2-A failed.
+
+**Question:** Can either frozen local extractor reliably produce the security-critical typed graph required before visual reconstruction and policy evaluation?
+
+**Candidates:** advance a passing extractor to P9B; replace/repair/tune candidates after observing outputs; or preserve a negative result and stop the frozen path.
+
+**Evaluation criteria:** Frozen 96-image capability manifest with 32 validation fixtures; schema validity at least 0.98; failure at most 0.05; the preregistered F1, bootstrap, determinism, latency, and memory checks; all checks conjunctive; no authentication-outcome selection or replacement search.
+
+**Evidence:** On formal validation fixture `cap-v2-064`, Moondream2 revision `9a7d4024050840e001defacec2b00727e89149e6` emitted no JSON in 157.57 seconds at 4.58 GiB peak RSS. SmolVLM2-2.2B-Instruct revision `c0a7af506d0f71a771f24216ade491dec52ff6c5` emitted malformed/truncated JSON in 392.10 seconds at 5.62 GiB. One invalid validation result fixes the best possible completed validity at `31/32 = 0.96875`, below 0.98, even if every unobserved item passed.
+
+**Selected option:** Preserve the negative result and stop. P9B is inapplicable because it is restricted to P9A survivors. Gate V2-A fails and P10 remains blocked.
+
+**Rejected alternatives:** Candidate replacement, prompt/output repair, longer decoding, fine-tuning, and outcome-driven model search are rejected by the frozen design. Running the remaining expensive fixtures after pass became mathematically impossible is rejected as unnecessary; the post-smoke logical-futility deviation is explicitly recorded and cannot create a pass.
+
+**Reason:** A private protocol or policy layer cannot repair an image-derived representation that fails its independent structured-output capability prerequisite. Continuing to P9B or P10 would bypass the gate rather than answer it.
+
+**Security/privacy assumptions:** Models, schemas, prompts, and decisions remain public; images and prompts provide no credential entropy. Model weights and generated images stay local and outside Git. No participant or sealed-v1 data was used.
+
+**Affected RQs/threats/claims:** C1 lacks constructive support under the frozen extractor path; C2–C4 cannot be evaluated in this path. Gate V2-A fails; Gates V2-B/V2-C and P10 onward remain blocked. This is not universal extractor impossibility.
+
+**Experiments supporting decision:** `p9a-capability-futility-v2`; separate excluded plumbing/development smoke; frozen capability and model-acquisition manifests; exact best-case gate calculations.
+
+**Remaining uncertainty:** Full atom F1, determinism, error strata, and latency medians were not estimated; other independently justified future extractors or a non-visual research question may behave differently.
+
+**Revisit trigger:** Only an explicit scientific reframe with a new representation/version, independent rationale, new preregistration, new data, and a new gate. P9 cannot be relabelled or tuned into a pass.

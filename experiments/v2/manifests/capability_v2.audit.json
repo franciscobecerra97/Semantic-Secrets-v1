@@ -1,0 +1,33 @@
+{
+  "all_image_hashes_unique": true,
+  "image_directory_committed": false,
+  "manifest": "experiments/v2/manifests/capability_v2.jsonl",
+  "manifest_sha256": "43f89f0012520865b2d780ee19fbc4f2d27c1eb279edadf37342ee6074db8c76",
+  "record_count": 96,
+  "split_counts": {
+    "development": 64,
+    "validation": 32
+  },
+  "style_counts": {
+    "procedural_composite": 48,
+    "synthetic_raster": 48
+  },
+  "task_applicable_negative_counts_validation": {
+    "action": 1128,
+    "attribute": 1100,
+    "count": 3748,
+    "object": 676,
+    "relation": 2192,
+    "scene": 224
+  },
+  "task_positive_counts_validation": {
+    "action": 44,
+    "attribute": 200,
+    "count": 92,
+    "object": 100,
+    "relation": 48,
+    "scene": 32
+  },
+  "unique_image_hashes": 96,
+  "v1_sources_accessed": false
+}

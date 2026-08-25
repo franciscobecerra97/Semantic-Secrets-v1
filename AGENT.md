@@ -210,4 +210,4 @@ Those results motivate, but do not validate or invalidate, v2. The v2 image path
 
 ## 13. Immediate execution boundary
 
-The next executable phase is **P9 — canonical visual-semantic credential derivation**. Gate V2-N passed with narrowing on 2026-08-25. P9 must follow the frozen capability/reconstruction design; do not start P10 unless Gate V2-A passes, and do not start cryptographic implementation before the later semantic-security gates.
+P9 completed negatively on 2026-08-25. Neither frozen extractor survived P9A's schema-validity requirement, P9B was not executed, and Gate V2-A failed. P10 and every later constructive phase remain blocked. The next action must be an explicit scientific reframe or a stop/negative-measurement disposition; P9 may not be retuned or relabelled as a pass. See `docs/p9_capability_screen_v2.md` and decision `P9-00`.

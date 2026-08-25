@@ -1,0 +1,9 @@
+# Platform-specific PyTorch wheels are installed separately from the official
+# PyTorch index. P9 measured torch==2.12.1+cu126 on the declared Windows host.
+-r ../representation_screen/requirements-p5.txt
+num2words==0.5.14
+docopt==0.6.2
+numpy==2.5.2
+pillow==12.3.0
+psutil==7.2.2
+scipy==1.18.0

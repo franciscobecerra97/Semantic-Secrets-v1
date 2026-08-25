@@ -10,7 +10,7 @@ The natural-language prompt is a reconstruction interface, not the secret. Gener
 
 ## Current status
 
-P8 is complete. Its focused primary-source review passed Gate V2-N with narrowed claims, froze the formal graph/policy/reference functionality and preregistered P9–P11. No v2 experiment or implementation has run. The next permitted phase is **P9 — canonical visual-semantic credential derivation**; P10 and all cryptographic work remain blocked until their preceding gates pass.
+P8 passed Gate V2-N with narrowed claims and froze P9–P11. P9 then completed negatively: neither frozen extractor survived P9A's 98% schema-validity requirement, P9B was not executed, and Gate V2-A failed. P10 and all later constructive or cryptographic work remain blocked pending an explicit scientific reframe.
 
 P0–P7 remain frozen evidence for `visual-semantic-pipeline-v1`:
 
@@ -28,8 +28,9 @@ Those findings remain valid and have not been retuned. The v2 image hypothesis i
 5. `docs/vsa_2026_comparison.md` — complete closest-work comparison.
 6. `docs/security_model_v2.md` and `docs/threat_claim_matrix_v2.csv` — active v2 security contract.
 7. `docs/p8_novelty_review_v2.md` and `docs/formal_specification_v2.md` — Gate V2-N outcome and P9–P11 freeze.
-8. `experiments/v2/config/preregistration_v2.json` — machine-readable candidates, limits, budgets, and gates.
-9. `paper/draft.tex` — planning manuscript; hypotheses are not results.
+8. `docs/p9_capability_screen_v2.md` — P9A negative evidence, logical-futility boundary, and failed Gate V2-A decision.
+9. `experiments/v2/config/preregistration_v2.json` — machine-readable candidates, limits, budgets, and gates.
+10. `paper/draft.tex` — planning manuscript with the bounded P9 result; downstream hypotheses remain untested.
 
 `docs/security_model.md` remains the frozen v1 model. `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or evidence bibliography.
 

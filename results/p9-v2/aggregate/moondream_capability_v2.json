@@ -1,0 +1,42 @@
+{
+  "advance": false,
+  "backend": "moondream",
+  "best_case_if_every_unobserved_image_passed": {
+    "failure_rate": 0.03125,
+    "schema_valid": 31,
+    "schema_valid_rate": 0.96875
+  },
+  "config_sha256": "2efac377088a151e25f00f1146e72af0c1977ae1872ea3a6ce9ba3438417f20c",
+  "early_stop_reason": "Logical futility: all P9A checks must pass, but the observed validation schema failures make schema-valid rate impossible even if every unobserved image passed.",
+  "fatal_checks": {
+    "failure_rate": {
+      "best_case_value": 0.03125,
+      "pass_possible": true,
+      "threshold": 0.05
+    },
+    "schema_valid_rate": {
+      "best_case_value": 0.96875,
+      "pass_possible": false,
+      "threshold": 0.98
+    }
+  },
+  "graph_sha256": "12bc406f0b5e2ae078be21b71cf9f123e5162cd15fa0507cc3ce759cd899e6c5",
+  "manifest_sha256": "43f89f0012520865b2d780ee19fbc4f2d27c1eb279edadf37342ee6074db8c76",
+  "metrics_not_estimated": [
+    "atom precision/recall/F1 and bootstrap intervals",
+    "full-set latency median",
+    "determinism",
+    "structured error strata"
+  ],
+  "observed_resource_descriptive": {
+    "median_seconds": 157.5725242998451,
+    "peak_gpu_allocated_bytes": 0,
+    "peak_rss_bytes": 4919562240
+  },
+  "run_id": "futility",
+  "schema_invalid_observed": 1,
+  "schema_version": "p9a-capability-futility-result-v2",
+  "selection_rule": "No candidate replacement, prompt change, output repair, or authentication outcome was used.",
+  "validation_images_observed": 1,
+  "validation_images_planned": 32
+}

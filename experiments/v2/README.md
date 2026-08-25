@@ -1,6 +1,6 @@
 # v2 preregistered experiment boundary
 
-P8 created only this design record and the machine-readable preregistration. It did not acquire models or data, generate images, access the sealed v1 families, run a v2 experiment, or implement cryptography.
+P8 created the design record and machine-readable preregistration. P9 subsequently executed the frozen capability screen and ended with a negative Gate V2-A result. It did not access sealed v1 families or implement cryptography.
 
 The authoritative files are:
 
@@ -16,5 +16,7 @@ Execution order is binding:
 3. Gate V2-A;
 4. P10 policy/baseline comparison and Gate V2-B;
 5. P11 attacks and Gate V2-C.
+
+Current disposition: step 1 failed for both frozen extractors by exact schema-validity futility (`31/32 = 0.96875 < 0.98`). Step 2 was consequently forbidden, Gate V2-A failed, and P10/P11 are blocked. The evidence and bounded interpretation are in `docs/p9_capability_screen_v2.md`.
 
 Smoke results can detect broken plumbing but cannot alter candidates, metrics, thresholds, data roles, or gates. Any outcome-affecting amendment creates a new version before the affected output is viewed.

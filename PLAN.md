@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P7 are complete historical v1 evidence; P8 completed Gate V2-N constructively with narrowed claims on 2026-08-25. P9 is next; P10–P20 remain blocked by their gates.
+Status: P0–P7 are complete historical v1 evidence; P8 passed Gate V2-N with narrowed claims; P9 completed negatively on 2026-08-25. No frozen extractor survived P9A, P9B was not run, Gate V2-A failed, and P10–P20 remain blocked pending an explicit scientific reframe.
 Authority: `AGENT.md` is the active v2 scientific and engineering contract. This plan operationalises it and may not silently weaken it.
 Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
 
@@ -394,7 +394,7 @@ Active v2 decisions are phase-gated:
 
 ### P9 — Canonical visual-semantic credential derivation
 
-**Status:** Next permitted phase; Gate V2-N passed with narrowing on 2026-08-25. No P9 execution has started.
+**Status:** Complete on 2026-08-25 with a negative result. Both frozen extractors produced an invalid graph on their first formal validation fixture. Because one invalid among 32 caps best-case schema validity at 0.96875 below the frozen 0.98 threshold, P9A stopped for exact logical futility. No extractor survived; P9B was not executed; Gate V2-A failed; P10 is blocked. Full F1, determinism, error-stratum, and latency-median estimates were not made. See `docs/p9_capability_screen_v2.md`.
 
 **Objective:** Determine whether the image-derived representation required by C1 is technically viable before authentication-policy optimisation.
 

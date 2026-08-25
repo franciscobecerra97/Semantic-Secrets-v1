@@ -4,6 +4,7 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{url}
+\setlength{\emergencystretch}{1em}
 
 \settopmatter{printacmref=false,printccs=false,printfolios=true}
 \renewcommand\footnotetextcopyrightpermission[1]{}
@@ -14,7 +15,7 @@
 \begin{document}
 
 \begin{abstract}
-This planning manuscript defines a revised research direction; it does not report a completed system or v2 experiment. We ask whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and privately verified under a system-derived policy. The prompt is a reconstruction interface rather than the secret, and generated pixels are transient observations rather than entropy. A focused P8 primary-source review found that generative graphical authentication, flexible semantic policy, fuzzy/private matching, protected templates, AI-assisted guessing, and adaptive verifier attacks are all prior art. Gate V2-N therefore passed only after narrowing the remaining question to the combined technical reconstruction, system-derived-policy ablation, finite-budget acceptance-region measurement, and construction-specific private/domain-separated verification. C5 was folded into C3/C4. P8 froze the graph, reference functionality, data isolation, model limits, attacks, uncertainty, and numeric gates before any v2 output. Frozen negative P6/P7 evidence from the earlier v1 pipeline remains formative motivation only. P9 is the next permitted experiment.
+This planning manuscript defines and tests a revised research direction; it does not report a completed authentication system. We ask whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and privately verified under a system-derived policy. The prompt is a reconstruction interface rather than the secret, and generated pixels are transient observations rather than entropy. A focused P8 primary-source review found that generative graphical authentication, flexible semantic policy, fuzzy/private matching, protected templates, AI-assisted guessing, and adaptive verifier attacks are all prior art. Gate V2-N therefore passed only after narrowing the remaining question and freezing the graph, data isolation, model limits, attacks, uncertainty, and numeric gates. P9 then tested two frozen local extractors on a new controlled capability set. Each produced an invalid graph on its first formal validation fixture. With 32 validation fixtures, one invalid output caps best-case schema validity at $31/32=96.875\%$, below the preregistered 98\% requirement. Neither extractor advanced, P9B was not executed, Gate V2-A failed, and policy and cryptographic phases remain blocked. This bounded negative result rejects the tested representation path, not every possible visual-semantic extractor.
 \end{abstract}
 
 \maketitle
@@ -132,13 +133,19 @@ The execution order is deliberately staged.
 
 \paragraph{Novelty and preregistration.} P8 completed a focused primary-source novelty refresh and froze graph tasks, controlled concepts, splits, capability screening, policy derivation, attack budgets, uncertainty, and numeric gate thresholds. It performed no model acquisition, dataset acquisition, v2 inference, sealed-v1 access, or cryptographic implementation.
 
-\paragraph{Representation before authentication.} P9A screens a small preregistered set of extractors on images with known object, attribute, count, action, relation, and context ground truth. P9B then measures independent generative reconstruction across paraphrases, seeds, layouts, justified styles, and selected version drift. Direct text is an ablation, not the target credential path.
+\paragraph{Representation before authentication.} P9A screened two preregistered extractors on 96 new controlled images with known object, attribute, count, action, relation, and context ground truth. Both failed the schema-validity prerequisite under exact logical futility. P9B was restricted to P9A survivors and was therefore not executed. Direct text remained an ablation rather than the target credential path.
 
 \paragraph{Policy and attackers.} P10 compares dense similarity, global fuzzy overlap, a feasible VSA-style policy, and the proposed system-derived $M/T$ policy. P11 evaluates the full acceptance region under budgeted attackers before any cryptographic implementation.
 
 \paragraph{Private verification.} Only a constructive semantic-security gate permits P12 to define the ideal functionality and compare mature constructions. Minimal POCs precede selection. The selected protocol is then evaluated for reference correctness, leakage, offline validation, compromise, linkage, and cost.
 
 \paragraph{Baselines.} Planned baselines include direct-text processing, dense visual/text similarity, global fuzzy semantic overlap, VSA semantic-policy behaviour, the full VSA binding model where reproducible, plaintext/hash records, and relevant mature private-matching constructions. Any inaccessible or underspecified VSA behaviour will be documented rather than guessed.
+
+\section{P9 capability outcome}
+
+The P9 capability manifest contains 64 development and 32 validation fixtures, equally divided between procedural/composite and researcher-authored synthetic-raster scenes. It accesses no participant or sealed-v1 data. Moondream2 at revision prefix \texttt{9a7d40240508} emitted no JSON on formal validation fixture \texttt{cap-v2-064} in 157.57 seconds with 4.58~GiB peak process RSS. SmolVLM2-2.2B-Instruct at revision prefix \texttt{c0a7af506d0f} emitted malformed, truncated JSON in 392.10 seconds with 5.62~GiB peak RSS. The artifact records both complete immutable revisions.
+
+The preregistration did not specify an early-stop rule. After separate plumbing smoke and before formal validation output, we implemented exact logical futility: because all checks are conjunctive, one invalid result makes the 98\% schema-validity check impossible even if all remaining fixtures pass. This procedural deviation cannot create a pass, but it limits the negative evidence. We did not estimate full atom F1, bootstrap intervals, determinism, structured error strata, or full-set latency medians. We made no candidate replacement, prompt/output repair, fine-tuning, or authentication-outcome selection.
 
 \section{Decision gates}
 
@@ -154,11 +161,11 @@ These are immutable formative negative results, not v2 measurements. They motiva
 
 If all gates pass, C1 would establish technical behaviour of the scoped free-language generative reconstruction path; C2 would establish only the measured incremental value of the frozen system-derived typed policy; C3 would characterise the accepted region under finite-budget attackers; and C4 would establish construction-specific private and unlinkable verification. C3/C4 carry the prospective principal contribution. P8 rejected C5 as standalone and retained adaptive semantic verification-oracle leakage as mandatory evidence inside C3/C4.
 
-Major unresolved risks are that independent visual extraction is not stable, $M/T$ adds no value over VSA-style policy, the semantic region is cheaply reachable, the privacy construction is an obvious application of known primitives, policy metadata recreates an offline oracle, or the required trust/cost is impractical. The controlled methodology cannot establish human memorability or usability. A future participant study would require separate ethics, design, and evidence.
+The frozen path stopped at the first risk: neither tested extractor met the structured-output prerequisite. Whether another independently justified representation could work remains unresolved, as do the downstream policy, guessing-region, and private-construction questions; they were not authorised after Gate V2-A failed. The controlled methodology cannot establish human memorability or usability. A future participant study would require separate ethics, design, and evidence.
 
 \section{Conclusion}
 
-This blueprint treats visual generation as a testable reconstruction layer, not a source of magical entropy, and treats privacy as a construction-specific property, not a consequence of hashing semantics. P8 passed Gate V2-N with narrowed claims and a frozen preregistration. The next permitted work is P9 representation capability and independent reconstruction; no v2 model output, dataset result, authentication result, or cryptographic prototype yet exists.
+This work treats visual generation as a testable reconstruction layer, not a source of magical entropy, and privacy as a construction-specific property rather than a consequence of hashing semantics. P8 passed Gate V2-N with narrowed claims, but P9 falsified the tested frozen extractor path at its first independent capability prerequisite. P9B, policy optimisation, attacker evaluation, and cryptographic prototyping were correctly withheld. The project must now stop or explicitly reframe with a new representation, rationale, data, preregistration, and gate; the failed P9 evidence cannot be tuned into a pass.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
