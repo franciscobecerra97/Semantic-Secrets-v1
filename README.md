@@ -1,35 +1,42 @@
 # Semantic Secrets
 
-Research project for a prospective PoPETs/PETS 2027 paper on privacy-preserving authentication of noisy semantic credentials derived from AI-generated images.
+Research project for a prospective PoPETs/PETS 2027 paper on private authentication from reconstructable visual semantics.
 
-## Current state
+## Active v2 goal
 
-P0–P6 are complete. The repository now contains a frozen semantic canonicaliser, a 60-family audited pilot catalog, reusable plaintext similarity matrices, and a preregistered train/validation threshold and acceptance-region analysis. Gate A failed: weighted controlled-text overlap accepted 75% of targeted validation neighbours at its training-selected threshold, and no structured or dense matcher achieved useful targeted-neighbour separation. The result is `stop-or-reframe`; P9/P10 protocol engineering is forbidden absent an explicit scientific reframe. Twelve pilot test families remain unevaluated. No authentication implementation, downloaded public dataset, held-out test evaluation, protocol implementation, publication experiment result, or human-subject evidence has been produced.
+The project asks whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and verified under a system-derived mandatory/tolerant policy without exposing a practical semantic guess-testing or linking oracle.
 
-Read these files before beginning work:
+The natural-language prompt is a reconstruction interface, not the secret. Generated pixels are transient and do not supply credential entropy. The strongest target keeps prompts, images, plaintext graphs, and raw embeddings on the trusted client.
 
-1. `AGENT.md` — persistent scientific and engineering contract.
-2. `PLAN.md` — phased execution plan and decision gates.
-3. `paper/draft.tex` — research-direction manuscript; hypotheses are not results.
-4. `docs/security_model.md` — frozen P2 definitions, compromise states, and claim boundaries.
-5. `experiments/datasets/README.md` — approved P3 smoke/pilot methodology and data restrictions.
-6. `docs/model_screening.md` — P4 hardware, model/licence screen, smoke observations, and D1/D2 handoff.
-7. `docs/representation_screening.md` — P5 canonicalisation, representation comparison, negative uncertainty result, and P6 boundary.
-8. `docs/plaintext_matching.md` — P6 pilot thresholds, acceptance-region evidence, failed Gate A disposition, and D4 boundary.
+## Current status
 
-`paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or verified project bibliography. Verified references belong in `paper/references.bib`.
+The v2 research-contract migration is complete; no v2 experiment or implementation has run. The next permitted phase is **P8 — v2 novelty, formalisation, and preregistration design**. P9 and all expensive/model/cryptographic work remain blocked until their preceding gates pass.
 
-## Repository areas
+P0–P7 remain frozen evidence for `visual-semantic-pipeline-v1`:
 
-- `paper/` — manuscript, verified bibliography, and final figures.
-- `prototype/` — future modular client/server/semantic/cryptographic implementation.
-- `experiments/` — controlled dataset specifications/manifests plus future runners, attacks, and analysis.
-- `tests/` — future unit, integration, security-regression, and smoke tests.
-- `results/` — future immutable run outputs and compact reproducibility evidence.
-- `artifacts/` — future artifact-evaluation instructions and release scripts.
+- P6 failed its original Gate A: the primary weighted matcher accepted 75% of targeted validation neighbours at its training-selected threshold; the twelve v1 test families remain sealed.
+- P7 found no material benefit from its tested image pathways over paired text pathways and removed that image stage from the v1 authentication core.
 
-Large models, raw datasets, generated images, secrets, caches, and recomputable intermediates must not be committed. Small manifests, exact configurations, analysis inputs needed for paper claims, final figures, and compact result tables should remain versioned.
+Those findings remain valid and have not been retuned. The v2 image hypothesis is scientifically distinct and requires new representation, data, preregistration, pilot, and gates.
 
-## Working rule
+## Read first
 
-Execute one numbered phase from `PLAN.md` at a time. Do not pass a decision gate without its recorded evidence and acceptance criteria, and do not claim human memorability or usability: this project has no human-subject study.
+1. `AGENT.md` — authoritative v2 scientific and engineering contract.
+2. `PLAN.md` — preserved P0–P7 history and gated P8–P20 execution plan.
+3. `DECISIONS.md` — immutable decisions, including P7-R2 direction amendment.
+4. `docs/research_direction_v2.md` — concise v2 thesis and evidence boundary.
+5. `docs/vsa_2026_comparison.md` — complete closest-work comparison.
+6. `docs/security_model_v2.md` and `docs/threat_claim_matrix_v2.csv` — active v2 security contract.
+7. `paper/draft.tex` — planning manuscript; hypotheses are not results.
+
+`docs/security_model.md` remains the frozen v1 model. `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or evidence bibliography.
+
+## Scientific boundaries
+
+- No participant study is authorised. Do not claim memorability, recall, usability, preference, or learning effort.
+- Algorithms, model identities, canonicalisation, policies, and thresholds are public.
+- VSA already covers image-independent visual-semantic authentication, VLM extraction, canonical tokens, object/attribute/count/quadrant facts, Flexible Range Logic, and user-selected policies. These are not v2 novelty.
+- Semantic correctness and cryptographic privacy are separate gates. Hashing, salting, or encryption alone does not establish template privacy, offline resistance, or unlinkability.
+- Execute one numbered phase at a time and never bypass Gate V2-N, V2-A, V2-B, V2-C, V2-D, V2-E, or V2-F.
+
+Large models, raw datasets, generated images, secrets, caches, and recomputable intermediates must not be committed. Version compact manifests, configs, tests, aggregate evidence, and exact provenance required for claims.

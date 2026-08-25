@@ -441,3 +441,27 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Revisit trigger:** Only a new-version study with an independent extractor rationale, new data, preregistration, and gate. P7 cannot be retuned or relabelled as outcome A.
 
 **Semantic-policy note:** Mandatory discriminative anchors plus tolerant secondary attributes are scientifically motivated as a future hypothesis by oracle/real and changed-atom gaps, but were neither implemented nor tuned. Testing requires a new scheme/version, independent rationale, new data, preregistration, and gate; exact prompt/set equality remains outside the design.
+
+## P7-R2 — Research direction amendment after complete VSA review
+
+**Decision:** Adopt reconstructable visual-semantic authentication v2 as the active constructive hypothesis. Preserve `visual-semantic-pipeline-v1` and every P0–P7 result as immutable historical evidence.
+
+**Date:** 2026-08-25
+
+**Status:** Selected by explicit user direction; documentation migration only. P8 and all v2 experiments remain unexecuted.
+
+**Reason:** The original project description conflated prompt/text semantics with the intended remembered visual concept. The prompt is an interface for reconstructing that concept; neither the prompt nor generated pixels are the credential. P7 validly rejected the tested v1 SD-Turbo/Florence/SigLIP image pathways, but it did not test a pipeline designed around independent visual reconstruction, a security-capable typed scene representation, system-derived mandatory/tolerant policy, and private verification.
+
+**Evidence:** Immutable P6 and P7 results; the complete 16-page 2026 VSA paper; `docs/vsa_2026_comparison.md`; `docs/novelty_matrix_v2.csv`. No model, dataset, held-out v1 family, cryptographic implementation, or new experiment was used.
+
+**VSA overlap:** VSA already enrols a reference image; uses arbitrary policy-satisfying images plus a password at authentication; extracts objects, attributes, quantities, visibility, and 2×2 quadrant location; serialises canonical semantic tokens; lets users select two or three facts and quantity operators; evaluates Flexible Range Logic conjunctions; and creates SHA-256 semantic/password bindings while retaining operator/quantity metadata. It calls this server-opaque rather than strict zero knowledge, acknowledges offline guessing from the small semantic space, recommends Argon2id with a user-specific salt, evaluates mainly COCO FAR/FRR without independent positive re-inference or a human study, and leaves Semantic Relationship Logic as future work. These features are not project novelty.
+
+**Remaining candidate novelty:** C1, technical stability of independent generative visual reconstruction; C2, typed graphs with a frozen system-derived mandatory/tolerant policy as part of the combined system; C3, full acceptance-region security under budgeted K0–K3 and AI/adaptive attackers; C4, construction-specific private, policy-hiding, offline-resistant-under-declared-views, domain-separated and unlinkable verification. C5 adaptive semantic verification-oracle leakage remains optional pending a distinct novelty/evidence finding.
+
+**Scientific rule:** v2 is not a retune or relabelling. It requires new representation and policy versions, new data/splits, independent screening criteria, new preregistration, and Gates V2-N through V2-F. P7 data may motivate questions but may not tune v2 policy. The twelve sealed P6 test families remain untouched. A failed earlier gate cannot be bypassed by later implementation cost.
+
+**Affected RQs/threats/claims:** Replaces the active RQs with v2 RQ1–RQ6 and the threat/claim model in `docs/security_model_v2.md`; supersedes the old constructive path after P7 without changing any v1 evidence. Removes novelty claims for semantic/image-independent/VLM/policy/canonical-token/flexible-range authentication and forbids privacy-by-hash reasoning.
+
+**Next permitted action:** Execute P8 only after explicit user instruction. P8 is literature, formalisation, and preregistration; it may not run the expensive v2 experiment.
+
+**Revisit trigger:** Gate V2-N finds the C1–C4 combination substantially subsumed, or a later preregistered gate requires a narrower positioning. Any revision must append a new decision rather than rewrite this record.

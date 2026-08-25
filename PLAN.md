@@ -1,8 +1,8 @@
 # Semantic Secrets execution plan
 
-Status: P0–P7 complete; P8 is next; P9/P10 blocked pending constructive Gate A2; P11–P17 depend on later gates.
-Authority: `AGENT.md` is the scientific and engineering contract. This plan operationalises it and may not silently weaken it.  
-Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study. After Gate B, the image stage is not part of the authentication core and remains only an optional/measurement baseline unless new-version evidence later justifies it.
+Status: P0–P7 are complete historical v1 evidence; the v2 contract migration is complete; P8 is next and unexecuted. P9–P20 are blocked by their gates.
+Authority: `AGENT.md` is the active v2 scientific and engineering contract. This plan operationalises it and may not silently weaken it.
+Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
 
 ## How to execute this plan
 
@@ -24,7 +24,7 @@ Phase status values are `not started`, `in progress`, `blocked by gate`, `comple
 - Treat all current model, representation, matching, protocol, and architecture preferences as hypotheses.
 - Do not claim memorability, usability, human preference, recall, natural secret-selection entropy, or human authentication speed.
 - Model security over the whole acceptance region, not image pixels or exact semantic equality.
-- Distinguish A1–A8 and state which data, keys, services, and transcripts each attacker obtains.
+- Use `docs/threat_claim_matrix_v2.csv`; state which data, keys, services, records, policies, and transcripts each attacker obtains.
 - Keep prompts, images, plaintext atoms, raw embeddings, and exact scores client-side in the strongest target architecture; document every deviation.
 - Use mature maintained cryptographic libraries. Never invent or reimplement a standard primitive merely for convenience.
 - Verify references against primary papers, standards, official specifications, publisher records, or trusted bibliographic indexes before adding them to `paper/references.bib`.
@@ -77,21 +77,21 @@ Revisit trigger:
 
 Experiment manifests and decision records are concise sources of truth; do not duplicate long summaries across files.
 
-## Mandatory decision investigations
+## Decision investigations
 
-Each decision uses the evidence ladder above. No row preselects its first candidate.
+The former D1–D5 generator/extractor/representation/matcher/image investigations belong to the completed v1 history recorded in P4–P7 and `DECISIONS.md`. The former unexecuted D6–D9 path is superseded by P7-R2 and must not control v2.
 
-| ID / phase | Candidates | Criteria and cheapest useful screen | Minimal experiment if still uncertain | Evidence and decision rule | Fallback |
-|---|---|---|---|---|---|
-| D1 generator, P4 | Locally deployable SDXL-class model; one newer/leaner open-weight alternative; no-image path for P7 | Reproducible pinned version/hash, licence and redistribution/acquisition terms, local hardware fit, deterministic seeds, quality sufficient to render controlled atoms, stable availability, latency/storage cost. First reject on licence, availability, determinism, or infeasible hardware; benchmark no more than 2–3 justified finalists on smoke concepts. | Paired smoke generations with identical concept/seed manifest; score atom renderability, failures, latency, memory, and reproducibility. | Record model cards/licences/hashes/configs and run IDs. Select one primary generator if it meets preregistered feasibility and semantic-coverage criteria; retain at most one scientifically useful drift/comparison model. | Reduce resolution/model size, use an acquisition script for weights, or stop/reposition the image path if no local model is reproducible and adequate. |
-| D2 extractor, P4–P5 | Open-vocabulary detector + VLM encoder/geometry; constrained local multimodal VLM with fixed JSON; captioning/parsing pipeline if justified; dense embedding baseline | Objects, attributes, actions, counts, relations, schema validity, determinism, stability, separability, calibration, latency/memory, licensing, portability/versioning. Reject gross schema/coverage/runtime failures on a hand-auditable smoke set before pilot generation. | Run surviving families on the same cached smoke/pilot images and annotated semantic atoms; measure atom-level coverage/error, run-to-run determinism, failure rate, and downstream separation. | Keep the smallest set that represents materially different scientific approaches. Select primary only after P5 paired results and uncertainty intervals; dense embeddings remain a baseline even if not primary. | Narrow atom vocabulary, combine deterministic geometry with a model, or report extractor limitations/reframe if no structured approach is reliable. |
-| D3 representation/canonicalisation, P5 | Structured set; weighted structured set; dense embedding; text-derived structured/embedding representation | Stability, negative/near-neighbour separation, interpretability, deterministic versioned canonicalisation, portability, leakage/inversion surface, private-matching compatibility, performance. Analytically reject representations incompatible with required semantics or realistic private evaluation; never reject embedding/text baselines merely because another is preferred. | Apply all surviving representations to the identical cached pilot outputs. Compare positive/negative score distributions, atom errors, drift, inversion/linkage probes, and compute/storage. | Freeze schema and canonicaliser version before P6. Select the primary representation only if its preregistered technical and privacy/protocol constraints pass; weighting must derive from frozen training/corpus statistics, not test labels or intuition. | Simplify vocabulary/relations, use unweighted sets, make embeddings primary if evidence warrants, or fail Gate A/reframe. |
-| D4 plaintext matcher and threshold, P6 | Cardinality threshold; Jaccard; weighted overlap; cosine for embeddings | Discrimination, calibration, acceptance-region mass, stability across strata/models, private computability, threshold leakage and complexity. Reuse one similarity matrix and analytically exclude metrics that cannot support a credible selected protocol except as baselines. | Nested/frozen train-validation-test threshold sweep on pilot; random and targeted near-neighbours; bootstrap CIs and sensitivity analysis. | Predeclare operating-point selection and maximum tolerable security/reliability bounds before the held-out full test. Select jointly with representation and protocol constraints; report the full trade-off rather than one favourable threshold. | Change representation/canonicalisation and repeat the pilot once, require a second factor, or fail Gate A. |
-| D5 image-stage necessity, P7 | Prompt→image→semantics; prompt→semantics; image as optional interface/augmentation | Paired technical stability, separability, acceptance-region mass/guessability, privacy exposure, model drift, latency/memory/storage. Human memorability/usability cannot be a criterion. | Same concepts/paraphrases/splits and downstream metrics in a paired ablation; control extractor capacity and avoid giving one path extra information without disclosure. | Retain the image stage as core only if preregistered paired evidence shows a meaningful technical/security benefit commensurate with added cost and failure modes. | Remove it, make it optional, treat it as a perturbation/measurement mechanism, or revise title/thesis. |
-| D6 privacy protocol, P9–P10 | Structured OPRF/PSI/PSI-CA/private threshold variants; fuzzy recovery/secure sketch + OPAQUE/PAKE; embedding + MPC/HE similarity | Security assumptions/proof model, noisy correctness, offline verification, database and server/key compromise, helper leakage, transcript leakage, linkability/domain separation, Accept/Reject-only capability, maturity, novelty, dependency/implementation complexity, latency/bandwidth/storage, artifact reproducibility, 12-page explainability. Stage 1 literature/security matrix eliminates candidates that violate essential goals. | Implement only uncertain operations for genuinely competitive survivors: representative set/vector sizes, synthetic credentials, correctness vectors, leakage surface, and microbenchmarks. Do not build full systems. | P9 produces signed-off theoretical shortlist; P10 uses common benchmark conditions and selects one primary plus justified baseline(s). Selection requires a precise claim stronger than plaintext/hash binding under a stated compromise model and acceptable uncertainty/cost. | Weaken and label the claim, choose a simpler protocol, reposition as measurement/negative result, or stop PETS protocol framing. |
-| D7 architecture/compromise assumptions, P9–P11 | Single server; separate privacy service with non-collusion; threshold keying; hardware/key isolation; another justified design | Concrete protection gained under A2/A3/A7 versus deployment/trust burden, collusion result, availability, key rotation/recovery, transcripts, rate-limiting, and operational realism. First construct a data/key/compromise matrix; reject components that add no measurable property. | Minimal failure/collusion/key-compromise tests for shortlisted protocol architectures. | Select the least-assumptive architecture that achieves the recorded privacy claim. Every trusted component and collusion boundary appears in protocol spec, code, experiments, and paper. | State weaker protection under full compromise, use operational isolation only as a clearly weaker variant, or fail Gate D. |
-| D8 attack distributions, P3/P8 | Random; empirical frequency/public prompt corpus; LLM-ordered; generator/VLM-assisted; partial-information and adversarial search | Ethical/licence fit, relation to A1/A4/A5/A8, reproducibility, realistic capability without claiming real authentication-choice distribution. Reject sources that cannot be documented or lawfully used. | Pilot dictionary coverage and attack ordering on frozen synthetic accounts; compare against random/frequency controls. | Retain attacks that add a distinct capability or alter conclusions. Report success by budget and acceptance-region mass with limitations. | Use controlled synthetic distributions and bounds; narrow claims rather than treating public prompts as password choices. |
-| D9 paper positioning, Gates B/D/E/F | Private authentication system; second-factor construction; measurement/limitations paper; image-stage optional or removed | Novelty versus verified 2026 VSA and related work, strength of privacy claim, semantic viability, attack results, deployment assumptions, page-budget coherence. | No separate experiment: use frozen evidence/claim matrix. | Choose the strongest story for which every contribution maps to evidence and limitations; never force the original title/thesis. | Reframe, narrow, or do not submit to PETS. |
+Active v2 decisions are phase-gated:
+
+| Decision | Phase | Cheapest valid evidence | Required outcome |
+|---|---|---|---|
+| V2-DN combined novelty and scope | P8 | Verified primary literature and formal comparison | C1–C4 remain jointly defensible or are narrowed before implementation |
+| V2-D1 extractor/generator capability | P9 | Frozen capability smoke then small preregistered reconstruction pilot | One bounded representation passes V2-A without outcome-driven model search |
+| V2-D2 policy and baselines | P10 | Training-only derivation and new pilot against B0/B1/B2 | Proposed policy passes V2-B without held-out tuning |
+| V2-D3 attack distributions/positioning | P11 | Frozen K0–K3 strategies and budget curves | V2-C selects standalone, factor, constrained, negative, or stop |
+| V2-D4 private functionality | P12 | Primary-source/security/leakage comparison | V2-D identifies a property beyond VSA/hash/plaintext baselines |
+| V2-D5 protocol and architecture | P13 | Minimal mature-library POCs under common fixtures | V2-E selects one primary and meaningful baselines or stops |
+| V2-D6 paper positioning | P16–P20 | Frozen end-to-end evidence and claim matrix | V2-F supports only the strongest evidence-backed story |
 
 ## Phase plan
 
@@ -357,398 +357,331 @@ Each decision uses the evidence ladder above. No row preselects its first candid
 
 **Stop / fallback:** Continue with text semantics or a measurement paper if the image stage adds no meaningful benefit.
 
-### P8 — Attack framework and semantic-guessing methodology
+> **v2 transition note (2026-08-25):** P0–P7 above are preserved verbatim as the historical `visual-semantic-pipeline-v1` plan and evidence. Their forward references to the former P8/Gate A2/P9/P10 path are superseded by decision P7-R2. They do not authorise or describe the active v2 phases below.
 
-**Objective:** Build reproducible attacker models before selecting a privacy protocol, so protocol claims address realistic semantic guessing.
+### P8 — v2 novelty, formalisation, and preregistration design
 
-**Supports:** RQ2–RQ4; A1/A4–A8; E8/E10–E13 and inputs to E9; D8.
+**Status:** Next permitted phase; not started.
+
+**Objective:** Establish a defensible v2 gap and freeze the research design before any expensive implementation or experiment.
+
+**Execution boundary:** No expensive experiment, model or dataset acquisition, or cryptographic implementation is permitted in P8.
+
+**Supports:** RQ1–RQ6; C1–C5; Gate V2-N.
 
 **Tasks:**
 
-1. Implement common guess-candidate and account interfaces with frozen budgets `B` and distinct online and offline views. The primary estimand is `P(success within B attempts | K_i)` for K0–K3, not conditional acceptance after a candidate is already near the target.
-2. Build random, population/distribution-informed, public-prompt-derived, LLM-assisted, generator/VLM-assisted, partial-target, strong-near-secret, inversion/linkage, and adversarial-collision strategies only where D8 finds distinct value. Map each strategy to K0 (generic/random), K1 (population/distribution knowledge), K2 (partial target information), or K3 (strong near-secret knowledge).
-3. Separate attacker training/auxiliary data from target test accounts; log model prompts, versions, seeds, costs, and deduplication.
-4. Measure success@1, success@5, success@10, success@B, guesses-to-success, accounts compromised, acceptance-region probability, benefit over simpler ordering, and sensitivity to attacker knowledge. Rate limiting is an explicit online assumption, never an excuse for a trivially enumerable semantic space.
-5. Add cheap attack smoke tests and ethical/licensing controls; do not attack third-party services.
-6. Freeze attack interfaces/distributions for protocol comparison while allowing explicitly versioned stronger attacks later.
+1. Complete a focused primary-source novelty refresh covering graphical/image authentication, SemanticLock, VSA, generative-AI authentication, fuzzy authentication/extractors/secure sketches/PAKE, OPAQUE/PAKE, OPRF/VOPRF, PSI/PSI-cardinality/Circuit-PSI and committed/input-consistent variants, private biometrics/vector/graph matching, cancelable templates, unlinkability/inversion, oracle leakage, and AI-assisted guessing.
+2. Update `docs/related_work.csv`, `paper/references.bib`, and `docs/novelty_matrix_v2.csv`; narrow C1–C4 if verified work subsumes any part. Treat C5 as optional.
+3. Freeze RQ1–RQ6, the typed graph and `S=(M,T)` semantics, the plaintext reference functionality, and the two required VSA baselines.
+4. Define the v2 controlled concepts, ground-truth semantic tasks, train/validation/sealed-test splits, independent-generation trial structure, and licence/ethics rules. Do not access the twelve sealed v1 P6 test families.
+5. Freeze generator/extractor capability screening before model execution: few justified candidates, independent capability criteria, model/revision/resource limits, failure rules, and no outcome-driven search.
+6. Freeze system-derived policy methodology, planned baselines, attack budgets/K0–K3 distributions, uncertainty methods, viability thresholds, caching/versioning, and the P9–P11 preregistrations.
 
-**Inputs:** P2 adversaries; P3 data design; P6/P7 selected pipeline and thresholds.
+**Inputs:** v1 P0–P7 evidence; complete VSA review; v2 research/security contracts.
 
-**Outputs:** attack modules/configs/tests, attacker-distribution manifests, pilot attack report, D8 record.
+**Outputs:** verified novelty record; formal specification; data/split and screening plans; P9–P11 preregistration; Gate V2-N decision.
 
-**Tests / validation:** Fixed-seed determinism; target/auxiliary separation; monotonic budget and `k` checks where expected; random/frequency controls; no external target; traceable costs.
+**Validation:** Primary-source traceability; no unsupported “first” language; all thresholds and selection rules fixed before expensive outputs; no model/dataset acquisition or experiment.
 
-**Acceptance criteria:** A1/A4/A5/A6/A7/A8 each has a concrete analysis/experiment path or documented inapplicability; `P(success within B attempts | K_i)` is reported for each supported K0–K3 view with uncertainty; online and offline results are separated; attack methods are reproducible; public prompts are not overclaimed as secret choices; and no result relies on model, threshold, canonicaliser, or protocol secrecy.
+**Decision / gate:** **Gate V2-N — Novelty viability.** Proceed only if C1–C4 retain a defensible combined gap relative to VSA and broader prior art. Otherwise narrow/reframe before implementation.
 
-**Decision / gate:** **Gate A2 — Integrated security viability.** Combine P6 conditional quality/separation evidence with P8 budgeted attack success. Decide exactly one positioning: standalone authentication, second factor, policy-constrained credential, negative/measurement contribution, or stop. A constructive pass must state acceptable budgets, K0–K3 boundaries, and operational assumptions; only then may P9/P10 begin.
+**Dependencies:** P7-R2 direction amendment.
 
-**Dependencies:** P7 decision.
+**Cost:** AI-token Medium–High; compute None/Low; storage Low.
+
+**Stop / fallback:** A novelty failure blocks P9. Preserve the review as evidence and select a narrower measurement or privacy question.
+
+### P9 — Canonical visual-semantic credential derivation
+
+**Status:** Not started; blocked on constructive Gate V2-N.
+
+**Objective:** Determine whether the image-derived representation required by C1 is technically viable before authentication-policy optimisation.
+
+**Supports:** RQ1/RQ2/RQ6; C1/C2; Gate V2-A.
+
+**P9A — Extractor capability:**
+
+1. Evaluate only preregistered visual-semantic extraction families on controlled images with known ground truth.
+2. Measure objects, attributes, counts, actions, relationships, and scene/context separately where required by the frozen graph.
+3. Report atom/predicate precision, recall, F1, calibration/failure, determinism, latency, memory, model/revision drift, and structured error strata.
+4. Eliminate any extractor that cannot reliably represent frozen security-critical dimensions; do not tune on authentication outcomes.
+
+**P9B — Generative reconstruction:**
+
+1. For the surviving generator/extractor pair(s), run independent images from semantically equivalent reconstructions across paraphrases, seeds, stochasticity, layout, justified styles, and selected version/model drift.
+2. Canonicalise graphs under the frozen v2 specification and quantify same-concept stability, extraction fidelity, targeted separation, failure rates, and uncertainty.
+3. Include direct-text processing only as an ablation/baseline. Cache images and graphs; never treat pixels or prompts as credential entropy.
+
+**Outputs:** capability screen; v2 representation/version selection or negative result; immutable pilot evidence.
+
+**Validation:** Split isolation; independent generation/re-inference; fixed model budget; no policy/threshold optimisation; repeatability and provenance.
+
+**Decision / gate:** **Gate V2-A — Visual-semantic reconstruction viability.** Advance only if at least one image-based representation has uncertainty-supported technical reconstruction signal suitable for policy evaluation.
+
+**Dependencies:** Constructive Gate V2-N.
+
+**Cost:** AI-token Medium; compute Medium; storage Medium.
+
+**Stop / fallback:** Do not search indefinitely. Preserve negative evidence and reconsider whether the visual-reconstruction hypothesis can continue.
+
+### P10 — Policy-aware semantic credential design `S=(M,T)`
+
+**Status:** Not started; blocked on Gate V2-A.
+
+**Objective:** Freeze and evaluate a system-derived semantic policy independently of held-out outcomes.
+
+**Supports:** RQ2/RQ3; C2/C3; Gate V2-B.
+
+**Tasks:**
+
+1. Compare: `B0` dense semantic similarity, `B1` global fuzzy overlap, `B2` closest feasible VSA-style semantic-policy component, and `P1` proposed policy-aware `S=(M,T)`.
+2. Derive `M` mandatory structural predicates and `T` tolerant secondary predicates deterministically from independent semantic rationale, training-only statistics, extractor reliability, attacker-frequency evidence, and protocol compatibility.
+3. Do not ask users to select `M/T` in the primary study. Document any non-reproducible VSA detail and keep the full VSA semantic-plus-password architecture separate.
+4. Freeze missing-anchor, count/operator, relation, tolerance, duplicate, malformed, version-mismatch, and boundary behaviour.
+5. Evaluate a technical enrolment-strength policy that may reject insufficiently distinctive concepts. Do not call rejection usability.
+6. Use new v2 data, representation identifiers, thresholds, and preregistration; do not tune from P7 or held-out results.
+
+**Outputs:** frozen reference predicate; policy derivation spec; baseline implementations; pilot report; Gate V2-B decision.
+
+**Validation:** Training-only fitting; sealed evaluation; baseline fidelity; ablations; family-level uncertainty; no manual primary policy.
+
+**Decision / gate:** **Gate V2-B — Policy-aware semantic viability.** Proceed only if `P1` preserves legitimate independent reconstruction variation while materially improving security-relevant discrimination over B0–B2.
+
+**Dependencies:** Constructive Gate V2-A.
+
+**Cost:** AI-token Medium; compute Medium; storage Medium.
+
+**Stop / fallback:** Preserve the negative/conditional result and do not repair the policy from held-out errors.
+
+### P11 — Acceptance-region and budgeted attacker evaluation
+
+**Status:** Not started; blocked on Gate V2-B.
+
+**Objective:** Measure C3 over the complete accepted region rather than infer security from random FAR.
+
+**Supports:** RQ3; C3 and optional C5; Gate V2-C.
+
+**Tasks:**
+
+1. Freeze K0–K3 strategy inputs and budgets; include random, frequency, targeted neighbours, valid public-prompt-derived distributions, LLM-assisted, generator/VLM-assisted, partial-information, and adaptive semantic search where justified.
+2. Report `success@1`, `success@5`, `success@10`, `success@B`, guesses-to-success, acceptance-region mass, accounts compromised, duplicates, cost, and uncertainty.
+3. Separate bounded online `Accept/Reject` attacks from offline attacks requiring a stolen verifier view. P11 measures semantic viability; construction-specific offline validation follows later.
+4. Compare increasingly knowledgeable attackers to simple controls and keep target data separate from attacker auxiliary/training data.
+5. Preserve P6's 75% targeted-neighbour conditional v1 result as a formative K3-like baseline, not a v2 result or total success estimate.
+6. Determine whether adaptive verification-oracle leakage is distinct enough to retain C5 separately.
+
+**Outputs:** frozen attack framework; budgeted attack report; C5 disposition; Gate V2-C positioning.
+
+**Validation:** Determinism; budget monotonicity checks; auxiliary/target separation; reproducible model prompts/seeds/costs; ethical local targets only.
+
+**Decision / gate:** **Gate V2-C — Acceptance-region security viability.** Select exactly one: standalone, second factor, policy-constrained, measurement/negative contribution, or stop. Only a constructive result unlocks protocol engineering.
+
+**Dependencies:** Constructive Gate V2-B.
 
 **Cost:** AI-token Medium–High; compute Medium; storage Medium.
 
-**Stop / fallback:** Use controlled synthetic distributions/bounds and narrow claims if public/AI resources are unsuitable. If the semantic space is cheaply enumerable, rate limiting alone does not rescue standalone positioning. Preserve a negative/measurement outcome or stop rather than forcing protocol work.
+**Stop / fallback:** Rate limiting cannot rescue an efficiently enumerable offline semantic region. Stop or narrow rather than force cryptography.
 
-### P9 — Privacy-protocol and architecture theoretical comparison
+### P12 — Private-verification functionality and protocol comparison
 
-**Objective:** Eliminate unsuitable cryptographic candidates through literature, security, correctness, and feasibility analysis before implementation.
+**Status:** Not started; blocked on constructive Gate V2-C.
 
-**Supports:** RQ4/RQ5; A2/A3/A6/A7; E9–E11/E15; D6/D7.
+**Objective:** Define the ideal C4 functionality and compare mature constructions before choosing primitives.
+
+**Supports:** RQ4–RQ6; C4/C5; Gate V2-D.
 
 **Tasks:**
 
-1. Verify primary sources/specifications and mature implementations for OPRF/VOPRF/threshold OPRF, PSI/PSI-CA/private threshold matching, secure sketches/fuzzy extractors + OPAQUE/PAKE, and MPC/HE similarity.
-2. Define each construction concretely enough to analyse inputs, record format, keys, parties, outputs, leakage, correctness under noise, domain separation, and authentication/session binding.
-3. Compare database-only, server/key, one-service, collusion/full-compromise, transcript, helper-data, inversion, linkability, and offline-dictionary outcomes.
-4. Compare maturity, proof assumptions, novelty, set/vector compatibility, expected latency/bandwidth/storage, dependency health, implementation risk, and 12-page/artifact burden.
-5. Reject candidates on documented essential failures; identify uncertain properties requiring only a minimal P10 proof-of-concept.
-6. Produce D6/D7 shortlist; do not claim ordinary encrypted representations support approximate comparison.
+1. Specify `PrivateSemanticVerify(protected M,T; candidate M',T'; domain; session) -> Accept/Reject`, party outputs, policy privacy, metadata, malicious-input behaviour, and exact compromise views.
+2. Compare justified OPRF/VOPRF and threshold variants, PSI/PSI-cardinality/Circuit-PSI, MPC, fuzzy extractors/secure sketches, PAKE/OPAQUE/fuzzy PAKE, HE/vector matching, and compositions.
+3. Analyse database-only validation, AS/PS/share compromise, collusion/total compromise, policy leakage, input consistency, transcript leakage, domain separation, linking, adaptive-query controls, correctness, cost, and deployment assumptions.
+4. Ask whether each candidate is merely an obvious wrapper around an established primitive. Do not claim cryptographic novelty without a distinct property and evidence.
+5. Select at most a small set for P13 using predeclared elimination criteria.
 
-**Inputs:** Gate A representation/matcher; Gate B architecture path; P2 model; P8 attacks; P1 literature.
+**Outputs:** ideal functionality; leakage/compromise matrix; theoretical comparison; P13 shortlist or stop.
 
-**Outputs:** protocol/security comparison matrix, data/key/compromise diagrams, candidate specifications, rejection records, P10 microbenchmark plan.
+**Validation:** Primary-source grounding; explicit assumptions; reference-function mapping; no prototype or benchmark used to mask an undefined property.
 
-**Tests / validation:** Each claim cites a primary source or is labelled inference; adversary walk-throughs cover A2/A3/A6/A7; leakage is explicit; no candidate is described only by a primitive name.
+**Decision / gate:** **Gate V2-D — Private-functionality viability.** Proceed only if a candidate provides a concrete property beyond VSA's hash-based server-opaque design and plaintext/hash baselines.
 
-**Acceptance criteria:** Clearly unsuitable candidates are eliminated; each survivor has a precise unresolved question testable by a minimal POC; at least one plausible construction offers a concrete benefit over plaintext/hash-bound baselines, or a negative outcome is recorded.
-
-**Decision / gate:** Stage-1 protocol shortlist and architecture hypotheses. No full protocol implementation.
-
-**Dependencies:** Constructive Gate A2 outcome after P8, P7 Gate B, and P8 v1. **Blocked as of P6-R.** Any claimed benefit from a trusted third party must be attributed to keys, protocol enforcement, rate limits, and non-collusion assumptions—not to secrecy of algorithms or models.
+**Dependencies:** Constructive Gate V2-C.
 
 **Cost:** AI-token High; compute Low; storage Low.
 
-**Stop / fallback:** If none survives, fail the protocol thesis and invoke D9 rather than implementing every candidate.
+**Stop / fallback:** If all constructions are trivial wrappers without a defensible system/privacy contribution, narrow C4 or stop before P13.
 
-### P10 — Minimal protocol candidate proofs-of-concept and selection
+### P13 — Minimal privacy-protocol proofs of concept and selection
 
-**Objective:** Resolve only empirical uncertainties left by P9 and select the main protocol/baselines.
+**Status:** Not started; blocked on Gate V2-D.
 
-**Supports:** RQ4/RQ5; A2/A3/A7; E9/E11/E15; D6/D7; Gate C.
+**Objective:** Implement only the surviving candidates with mature libraries and select one research direction.
 
-**Tasks:**
-
-1. Implement mature-library wrappers only for shortlisted uncertain operations using synthetic semantic sets/vectors at observed representative sizes.
-2. Create common correctness vectors for exact threshold boundaries, duplicates, malformed input, domain separation, and protocol failure.
-3. Benchmark client/server time, bandwidth, record size, memory, and scaling under identical hardware/network assumptions; separate setup/preprocessing/online costs.
-4. Demonstrate stored-record guess-validation and linkability capabilities under each P2 compromise state; test one-service/collusion failures where relevant.
-5. Compare results against P9 predictions and P6 plaintext matcher needs; record implementation/dependency risk.
-6. Select one main construction and justified baselines using the frozen D6/D7 rule; preserve rejections and uncertainty.
-
-**Inputs:** P9 shortlist/specs; P6 set sizes/thresholds; P2 threat model; P8 attack interfaces.
-
-**Outputs:** minimal POCs/wrappers/tests, common benchmark results, leakage/compromise report, D6/D7 records.
-
-**Tests / validation:** Known-answer/library vectors where available; threshold edge cases; repeated benchmarks with uncertainty; transcript/serialization tests; no homemade cryptographic primitive.
-
-**Acceptance criteria:** Remaining uncertain properties are measured; selection has a precise security claim, deployment assumptions, and reproducible performance evidence; retained baselines answer distinct reviewer questions.
-
-**Decision / gate:** **Gate C — Protocol selection.** Select primary protocol, architecture hypothesis, and baselines; otherwise stop/reframe. Do not fully implement rejected candidates.
-
-**Dependencies:** P9 after constructive Gate A2. **Blocked as of P6-R.**
-
-**Cost:** AI-token Medium–High; compute Medium; storage Low–Medium.
-
-**Stop / fallback:** Choose a weaker but accurately labelled construction only if it still supports a worthwhile claim; otherwise pursue a measurement/negative paper.
-
-### P11 — Selected privacy protocol implementation and security analysis
-
-**Objective:** Implement and analyse the selected construction to research quality under the exact threat model.
-
-**Supports:** RQ4/RQ5; A1–A3/A6/A7; E9–E11/E15; Gate D.
+**Supports:** RQ4–RQ6; C4; Gate V2-E.
 
 **Tasks:**
 
-1. Write a versioned protocol specification: setup, registration, authentication, message formats, authentication/session binding, error behaviour, key/domain separation, rotation/migration, parties, outputs, and leakage.
-2. Implement modular client/server/privacy-service components with mature primitives, input validation, replay/session protections, rate-limit hooks, and safe failure.
-3. State and prove/reduce security/correctness claims where appropriate; clearly separate formal guarantees, operational assumptions, and empirical privacy evidence.
-4. Evaluate database-only, server/key, one-service, collusion/full compromise; offline validation; record/transcript inversion; linkability; exact-score/intersection leakage.
-5. Benchmark representative sizes and compare plaintext/hash-bound and retained candidate baselines.
-6. Add unit, integration, security-regression, malformed-message, and known-answer tests; commission later expert review rather than treating tests as a cryptographic audit.
+1. Implement minimal candidates against the frozen plaintext predicate and identical fixtures.
+2. Compare correctness, explicit leakage, database compromise, server/key/share compromise, collusion, offline guess testing, linkage, bandwidth, latency, storage, and artifact complexity.
+3. Test boundary values, duplicates, malformed graphs, policy/version mismatch, replay/context binding, and failure behaviour.
+4. Record any construction change as a new version; do not optimise a failed privacy property away by changing the semantic predicate.
 
-**Inputs:** Gate C record/spec; P2 threat model; P8 attacks; P10 wrappers/results.
+**Outputs:** reproducible POCs; differential/security tests; benchmark and leakage report; primary/baseline selection.
 
-**Outputs:** selected protocol modules/spec, security analysis/proofs, tests, benchmark/leakage runs, deployment assumption record.
+**Validation:** Mature pinned libraries; no custom cryptography; exact reference agreement; attackable records/transcripts retained only as safe synthetic evidence.
 
-**Tests / validation:** Correctness and threshold boundary; replay/malformed messages; domain separation; persistence/restart; compromise experiments; dependency/version scan; reproducible benchmarks.
+**Decision / gate:** **Gate V2-E — Protocol selection/privacy viability.** Select one primary protocol plus meaningful baselines only if the named privacy property, functional correctness, and feasibility survive.
 
-**Acceptance criteria:** Implementation matches the spec; claims survive all scoped compromise cases or are narrowed; compared with baselines, the construction provides a concrete measurable/formal privacy benefit at documented cost and realistic assumptions.
+**Dependencies:** Constructive Gate V2-D.
 
-**Decision / gate:** **Gate D — Privacy contribution viability.** Continue PETS privacy framing only if a defensible advantage exists; freeze protocol/architecture version for integration.
+**Cost:** AI-token High; compute Medium; storage Low–Medium.
 
-**Dependencies:** Gate C.
+**Stop / fallback:** Preserve the POCs and select no protocol if every candidate exposes a disqualifying oracle/leakage or cost.
 
-**Cost:** AI-token High; compute Medium; storage Medium.
+### P14 — Selected private and unlinkable verifier
 
-**Stop / fallback:** Narrow protection claims, revise architecture, or reframe/stop if benefit depends on unrealistic trust or leakage/offline testing remains equivalent to baselines.
+**Status:** Not started; blocked on Gate V2-E.
 
-### P12 — End-to-end research prototype
+**Objective:** Implement and analyse the selected verifier to research quality.
 
-**Objective:** Integrate the approved semantic and privacy components into a runnable non-UI scientific prototype.
+**Supports:** RQ4–RQ6; C4/C5; evidence for Gate V2-F.
 
-**Supports:** RQ1–RQ5; all relevant threats; E1–E16 integration; prototype contribution.
+**Tasks:** Add domain separation, session binding, transcript minimisation, replay/downgrade handling, key rotation, explicit failure/collusion behaviour, compromise tests, policy/privacy attacks, cross-service unlinkability games, and adaptive-query analysis if retained. Formalise construction-specific claims where appropriate.
 
-**Tasks:**
+**Outputs:** selected verifier library/service; tests; proof/argument; threat-view and performance evidence.
 
-1. Implement stable backend interfaces for generation/text path, extraction, canonicalisation, matching, protocol, account storage, and optional privacy service.
-2. Build enrolment/authentication CLIs/APIs; keep prompt/image/plaintext semantics local in the strong mode and label debug/plaintext baselines.
-3. Persist scheme/model/canonicaliser/protocol versions; reject or safely handle mismatches and specify re-enrolment/migration.
-4. Add rate limiting, replay/session handling, restart/persistence, unavailability, malformed input, and audit-safe logging.
-5. Integrate immutable experiment runner/config/provenance capture. A UI may be added only after the scientific CLI works.
-6. Document local smoke use and resource expectations without implying production readiness.
+**Validation:** Differential, property, security-regression, compromise, linking, and transcript tests; external primitive test vectors where available.
 
-**Inputs:** P5/P7 frozen pipeline; Gate D protocol; P3 schemas; P8 attacks.
+**Dependencies:** Constructive Gate V2-E.
 
-**Outputs:** modular prototype, CLI/API, experiment runner, configs, end-to-end tests, architecture documentation.
+**Cost:** AI-token High; compute Medium; storage Low.
 
-**Tests / validation:** Enrol/auth success; incorrect rejection; restart; version mismatch; privacy-service failure; malformed/replay; server-visible-data audit; deterministic smoke run.
+**Stop / fallback:** Narrow claims to the strongest passing compromise/leakage scope; never silently downgrade.
 
-**Acceptance criteria:** A fresh documented environment can run enrolment/authentication and a smoke experiment without UI; server observables match the protocol claim; all integration tests pass.
+### P15 — End-to-end reconstructable visual-semantic prototype
 
-**Decision / gate:** Freeze end-to-end interface v1 for full experiments.
+**Status:** Not started; blocked on P14.
 
-**Dependencies:** Gate D.
+**Objective:** Integrate `prompt -> generated image -> canonical semantic graph -> policy derivation -> private verification` in a scientific CLI/API.
 
-**Cost:** AI-token High; compute Medium; storage Medium.
+**Supports:** RQ1–RQ6; C1–C4.
 
-**Stop / fallback:** Ship a research CLI without UI; if integration invalidates protocol/privacy assumptions, return to P11 and version the correction before P13.
+**Tasks:** Integrate versioned modules, local-only prompt/image/plaintext-graph handling, deletion/retention rules, enrolment/authentication state machines, observability without semantic leakage, error handling, and reproducible smoke mode. A UI is not required.
 
-### P13 — Full experiment and attack matrix
+**Outputs:** end-to-end prototype; integration tests; deployment diagram; resource trace.
 
-**Objective:** Produce held-out evidence for all RQs, threats, required experiments, and baselines after viability gates justify the cost.
+**Validation:** Local-data boundary audit; reference/private equivalence; fresh independent generations; replay/version/failure tests.
 
-**Supports:** RQ1–RQ6; A1–A8; E1–E16; Gate E.
-
-**Tasks:**
-
-1. Freeze full manifests, hypotheses, primary/secondary outcomes, thresholds, models, attacks, baselines, sample-size rationale, exclusions, and compute/storage budget before the test run.
-2. Execute E1–E7 stability/separability/threshold tests across semantic strata and required baselines using cached generation and representations.
-3. Execute E8/E12/E13 acceptance-region, partial-information, and AI-assisted guessing at defined budgets; distinguish online rate-limited and offline settings.
-4. Execute E9–E11 database/server/key compromise, offline validation, inversion, and cross-service linkability for every stored-record baseline and selected protocol.
-5. Execute E14 model drift matrix and migration/re-enrolment analysis.
-6. Execute E15 performance with repeated client/server/network conditions and scaling; execute E16 paired text-only comparison.
-7. Execute A8 adversarial semantic collision search and other approved failure analyses.
-8. Preserve all valid runs, failures, exclusions, and deviations; deviations require a versioned amendment before rerun.
-
-**Inputs:** Frozen P12 prototype; P3 full manifest; P6/P7 preregistration; P8 attacks; Gate D protocol.
-
-**Outputs:** Immutable raw/full runs with manifests/provenance, compact metric tables, failure/deviation log, Gate E evidence package.
-
-**Tests / validation:** Smoke before each expensive run; configuration hashes; completeness checker; seed/split audit; baseline parity; repeated measurements/CIs; no overwritten runs; spot reproduction from raw data.
-
-**Acceptance criteria:** Every E1–E16 item and A1–A8 has valid evidence or an explicit, justified inapplicability/failure; all RQs have interpretable held-out outcomes; negative results are retained.
-
-**Decision / gate:** **Gate E — Attack resistance and honest limitations.** Keep standalone, require second factor, reposition as measurement/limitation, revise claims, or stop. No result is forced positive.
-
-**Dependencies:** P12; all prior gates.
-
-**Cost:** AI-token High; compute High; storage High.
-
-**Stop / fallback:** Stop further costly runs once a preregistered decisive failure answers the question unless a smaller follow-up is necessary to localise the cause; reframe transparently.
-
-### P14 — Statistical analysis, consolidation, figures, and tables
-
-**Objective:** Convert immutable evidence into statistically defensible, reproducible answers and publication visuals.
-
-**Supports:** RQ1–RQ6; A1–A8; E1–E16; all empirical claims.
-
-**Tasks:**
-
-1. Lock analysis scripts and apply the predeclared estimands, grouped resampling/CIs, threshold policy, multiple-comparison handling, and missing/failure policy.
-2. Produce ROC/DET and FAR–FRR curves, acceptance-region/security–reliability plots, success-versus-budget curves, partial-information effects, drift matrices, inversion/linkability metrics, compromise/leakage tables, and performance scaling.
-3. Report effect sizes and uncertainty, not only point estimates or p-values; distinguish exploratory from confirmatory analyses.
-4. Audit subgroup/model sensitivity and unexpected failures without cherry-picking.
-5. Generate every final figure/table from compact saved results; maintain a claim→run→analysis→figure/table traceability matrix.
-6. Draft concise RQ answers and limitations based only on evidence.
-
-**Inputs:** P13 immutable runs; preregistration/amendments; P2 definitions.
-
-**Outputs:** Versioned analysis code, compact final result tables, `paper/figures/*`, traceability matrix, RQ answer/limitation summary.
-
-**Tests / validation:** Rebuild all figures/tables from clean compact inputs; independent metric spot checks; CI/resampling unit tests; no manual plot edits; provenance links resolve.
-
-**Acceptance criteria:** Every reported number is reproducible and traceable; uncertainty and negative results are visible; no machine metric is interpreted as human evidence.
-
-**Decision / gate:** Freeze evidence version for manuscript; new analyses are labelled exploratory or require an amendment.
-
-**Dependencies:** Gate E disposition.
+**Dependencies:** P9–P14 constructive outputs.
 
 **Cost:** AI-token Medium–High; compute Medium; storage Medium.
 
-**Stop / fallback:** Remove unsupported claims/visuals; if analysis reveals leakage or invalid design, correct and rerun only affected phases with versioned justification.
+**Stop / fallback:** Keep components separable and report an integration limitation rather than weaken privacy or semantic rules.
 
-### P15 — PETS manuscript construction and evidence-backed writing
+### P16 — Full held-out evaluation
 
-**Objective:** Build a coherent, anonymised, page-budgeted manuscript whose contributions exactly match the evidence.
+**Status:** Not started; blocked on completed P15 and all prior gates.
 
-**Supports:** All RQs/threats/experiments; privacy positioning; Gate F.
+**Objective:** Execute the frozen full manifests once and evaluate all contributions and baselines.
 
-**Tasks:**
+**Supports:** RQ1–RQ6; C1–C5; Gate V2-F.
 
-1. Reverify official PoPETs 2027 template/requirements and migrate validated content from `draft.tex`; do not assume the current sample `main.tex` remains authoritative.
-2. Write Introduction/Related Work/System & Threat Model/Semantic Construction/Protocol/Security/Implementation/Evaluation/Limitations/Conclusion within the 12-page main-body target.
-3. Make real-world privacy relevance explicit on page 1 and distinguish this work precisely from verified VSA/closest work.
-4. State every assumption, leakage, compromise result, negative outcome, deployment limitation, and absence of human evidence.
-5. Add mandatory Ethical Considerations, Open Science, and AI Use sections; maintain anonymisation and citation verification.
-6. Create a claim-evidence checklist for abstract, contribution bullets, protocol claims, and conclusion; use `TODO_RESULT` rather than invented numbers while drafting.
-7. Build/lint the paper in a clean supported TeX environment and review rendered pages, figures, references, accessibility/readability, and appendix dependence.
+**Tasks:** Evaluate reconstruction stability, extraction fidelity, M/T policy behaviour, random/near negatives, K0–K3 attacks, acceptance-region security, offline attacks, template inference, database and service/key/share compromise, linking/domain separation, adaptive queries if retained, model drift, protocol cost, VSA baselines where feasible, and text-only ablation.
 
-**Inputs:** P1 references/requirements; P2 model; P14 evidence/figures; protocol spec/proof; decision records.
+**Outputs:** immutable raw/aggregate evidence; complete failure/uncertainty analyses; audit trail.
 
-**Outputs:** Submission manuscript source/PDF, verified bibliography, appendices/supplement as permitted, claim-evidence matrix, build instructions.
+**Validation:** Sealed-test access log; frozen configs/hashes; independent reproduction checks; no result-dependent exclusions or retuning.
 
-**Tests / validation:** Clean build; page count; unresolved TODO/citation/reference scan; all BibTeX verified; anonymisation scan; figure/table provenance; internal consistency of claims and threat model.
+**Decision / gate:** **Gate V2-F — End-to-end evidence/paper story.** Decide whether the evidence supports a PETS privacy paper, a narrowed/negative paper, or stop.
 
-**Acceptance criteria:** Every major claim maps to measured evidence, formal reasoning/proof, a figure/table, or a verified citation; main contribution is understandable without appendices; mandatory sections and page rules pass.
+**Dependencies:** Constructive V2-N through V2-E and completed P15.
 
-**Decision / gate:** **Gate F — Paper story.** Select D9 positioning and approve substantive manuscript only when the evidence supports it.
+**Cost:** AI-token High; compute High; storage High but bounded.
 
-**Dependencies:** P14.
+**Stop / fallback:** Preserve all results. A failed V2-F cannot be repaired on the held-out test; redesign requires v3 and new data.
 
-**Cost:** AI-token High; compute Low; storage Low.
+### P17 — Statistical analysis and evidence consolidation
 
-**Stop / fallback:** Narrow/rewrite contribution claims or choose the negative/measurement story; do not polish an unsupported thesis.
+**Status:** Not started; blocked on P16.
 
-### P16 — Research artifact and reproducibility package
+**Objective:** Produce reproducible figures, tables, uncertainty estimates, and claim-to-evidence mappings without changing frozen decisions.
 
-**Objective:** Enable evaluators to reproduce core evidence legally and within documented resource tiers.
+**Tasks:** Consolidate primary/secondary outcomes, family/account-cluster uncertainty, multiplicity and sensitivity analyses, attack curves, leakage/compromise tables, resource costs, negative results, and machine-readable claim provenance.
 
-**Supports:** Reproducibility/artifact contribution; RQ1–RQ6 evidence.
+**Outputs:** final figures/tables; statistics report; claim-evidence matrix; result hashes.
 
-**Tasks:**
+**Validation:** Independent recomputation from immutable results; table/figure cross-checks; no unsupported causal or human inference.
 
-1. Freeze source, dependency lock/container, model/dataset acquisition and verification scripts, configs/seeds, attack/analysis scripts, compact results, and figure/table regeneration.
-2. Provide minimal/smoke and full modes with expected time, CPU/GPU, memory, storage, network, licences, and expected outputs.
-3. Exclude non-redistributable weights/data and secrets; test fresh acquisition hashes and document licences/filters.
-4. Add one-command or short staged validation for core claims; ensure the scientific pipeline needs no UI.
-5. Produce artifact README, component map, troubleshooting, provenance/SBOM, archival plan, and badges/DOIs only when actually obtained.
-6. Test on a clean supported environment and, if feasible, a second machine/runtime.
-
-**Inputs:** P12 code/tests; P13/P14 runs/analysis; P15 paper mapping.
-
-**Outputs:** Complete artifact package, environment lock/container, minimal/full scripts, verified instructions, release manifest.
-
-**Tests / validation:** Clean-room setup; smoke reproduction; selected full/representative reproduction; figure/table hash/semantic checks; licence/secret/large-file scan; broken-link and dependency checks.
-
-**Acceptance criteria:** A fresh evaluator can reproduce the core paper evidence using documented resources; restricted materials are acquired rather than redistributed; outputs trace to paper claims.
-
-**Decision / gate:** Artifact-ready checkpoint; record unavoidable non-reproducible items and their effect.
-
-**Dependencies:** P15 evidence story substantially frozen; P12–P14 complete.
-
-**Cost:** AI-token Medium–High; compute Medium–High; storage Medium–High.
-
-**Stop / fallback:** Provide validated compact/precomputed mode plus acquisition/full instructions when full compute is impractical; remove any claim whose only evidence cannot be preserved or explained.
-
-### P17 — PETS 2027 submission-readiness audit
-
-**Objective:** Perform a final adversarial audit of science, privacy claims, submission compliance, and artifact readiness.
-
-**Supports:** Entire submission.
-
-**Tasks:**
-
-1. Recheck current official deadline, template, page, anonymisation, conflicts, ethics, open-science, AI-use, supplemental, and artifact rules.
-2. Audit RQ1–RQ6, A1–A8, E1–E16, baselines, decision gates, claim-evidence traceability, proofs/assumptions, statistics, and limitations.
-3. Conduct citation-to-source and BibTeX audit; confirm peer-review/preprint labels and VSA comparison.
-4. Perform fresh manuscript/artifact builds, secret/personal-data/licence/large-file scans, and anonymisation review.
-5. Seek domain review of cryptographic reasoning and statistical methodology where possible; triage findings without hiding limitations.
-6. Freeze archival hashes/version, submission PDF, source, and artifact; record exact submitted state. Submission itself requires explicit user authorisation.
-
-**Inputs:** P15 manuscript; P16 artifact; all decision/evidence records; official current requirements.
-
-**Outputs:** `SUBMISSION_CHECKLIST.md`, audit findings/resolutions, frozen candidate manuscript/artifact and hashes.
-
-**Tests / validation:** Two clean builds; automated TODO/reference/anonymity/secret/licence/size scans; manual page-one/privacy/claim review; all checklist items signed or explicitly waived with risk.
-
-**Acceptance criteria:** No unsupported major claim, unresolved critical compliance issue, unverified citation, missing mandatory section, or irreproducible core result remains; residual limitations are disclosed.
-
-**Decision / gate:** Submit, revise, defer, reframe, or stop. Never submit automatically.
-
-**Dependencies:** P15 and P16.
+**Dependencies:** P16.
 
 **Cost:** AI-token Medium; compute Low–Medium; storage Low.
 
-**Stop / fallback:** Defer submission or narrow claims if a critical issue cannot be resolved honestly before the deadline.
+### P18 — PETS manuscript
 
-## Coverage cross-check
+**Status:** Not started; blocked on Gate V2-F and P17.
 
-### Research questions
+**Objective:** Build the evidence-backed manuscript.
 
-| RQ | Primary phases | Required outcome |
-|---|---|---|
-| RQ1 semantic stability | P3–P7, P13–P15 | Seed/paraphrase/style/perturbation/drift evidence with uncertainty. |
-| RQ2 separability | P5–P8, P13–P15 | Random/near-neighbour discrimination, thresholds, FAR/FRR/EER/ROC/AUC. |
-| RQ3 AI-assisted guessability | P3, P6–P8, P13–P15 | Budgeted empirical/AI/partial-information attacks and acceptance-region mass. |
-| RQ4 template/protocol privacy | P2, P5, P8–P11, P13–P15 | Offline validation, leakage/inversion, linkability, compromise-specific claims. |
-| RQ5 practicality | P4, P7, P9–P15 | Generation/extraction/crypto/end-to-end time, memory, bandwidth, storage, scaling. |
-| RQ6 image necessity | P3–P7, P13–P15 | Paired text-only ablation and Gate B decision without human claims. |
+**Tasks:** Position C3/C4 as expected primary PETS contributions and C1/C2 as application/mechanism; differentiate VSA prominently and fairly; describe both VSA baselines; report all gates and negative results; align every claim/citation/number with evidence; include limitations, ethics, and future human study without human claims.
 
-### Threats
+**Outputs:** submission manuscript; appendix/supplement; rebuttal-risk audit.
 
-| Threat | Defined | Framework/design | Full evidence |
-|---|---|---|---|
-| A1 online guesser | P2 | P6/P8/P12 | P13/P14 |
-| A2 database attacker | P2 | P9–P11 | P13/P14 |
-| A3 server/key compromise | P2 | P9–P11 | P13/P14 |
-| A4 AI-assisted attacker | P2 | P3/P6/P8 | P13/P14 |
-| A5 partial information | P2 | P3/P8 | P13/P14 |
-| A6 representation inversion | P2 | P5/P8/P9/P11 | P13/P14 |
-| A7 cross-service linking | P2 | P5/P8–P11 | P13/P14 |
-| A8 adversarial semantic collision | P2 | P3/P6/P8 | P13/P14 |
+**Validation:** Claim-evidence and citation audit; anonymisation; no novelty overclaim; no invented v2 number.
 
-### Experiments
+**Dependencies:** Constructive/narrowed Gate V2-F and P17.
 
-| Experiment | Design/pilot | Full execution/reporting |
-|---|---|---|
-| E1 seed stability | P3–P6 | P13/P14 |
-| E2 paraphrase stability | P3–P7 | P13/P14 |
-| E3 style variation | P3–P7 | P13/P14 |
-| E4 semantic perturbation | P3–P7 | P13/P14 |
-| E5 random impostors | P3–P7 | P13/P14 |
-| E6 near-neighbour impostors | P3–P7 | P13/P14 |
-| E7 threshold sweep | P6/P7 | P13/P14 |
-| E8 acceptance-region security | P6–P8 | P13/P14 |
-| E9 offline dictionary attack | P8–P11 | P13/P14 |
-| E10 representation inversion | P5/P8/P9/P11 | P13/P14 |
-| E11 cross-service linkability | P5/P8–P11 | P13/P14 |
-| E12 partial-information attack | P3/P8 | P13/P14 |
-| E13 AI-assisted guessing | P3/P7/P8 | P13/P14 |
-| E14 model drift | P3–P5/P7 | P13/P14 |
-| E15 protocol performance | P9–P11 | P13/P14 |
-| E16 text-only baseline | P3–P7 | P13/P14 |
+**Cost:** AI-token High; compute Low; storage Low.
 
-### Mandatory baselines
+### P19 — Research artifact
 
-| Baseline | Selection/implementation | Evaluation |
-|---|---|---|
-| Plain embedding + cosine | P4–P6 | P7/P13/P14 |
-| Plain structured matching | P5/P6 | P7/P13/P14 |
-| Closest verified visual-semantic/VSA policy | P1/P4–P6 | P13/P14; exact documented reason if infeasible |
-| Fuzzy recovery/secure sketch candidate | P1/P9/P10 | P13 if retained; explicit rejection evidence otherwise |
-| Selected privacy-preserving protocol | P9–P11 | P13/P14 |
-| Text-only semantic authentication | P4–P7 | P13/P14 |
+**Status:** Not started; blocked on stable P18 evidence.
 
-### Decision gates
+**Objective:** Package reproducible smoke and full modes with minimal sensitive/large data.
 
-| Gate | Evidence | Permitted outcomes |
-|---|---|---|
-| A semantic viability, P6 | Frozen representation/matcher pilot; positive/random/near-neighbour distributions; acceptance-region trade-off; private-computability | Pass; one justified redesign; second-factor/narrowing; negative result/stop. |
-| B image justification, P7 | Paired image/text technical/security/cost ablation | Core; optional/auxiliary; remove; revise thesis. |
-| C protocol selection, P10 | P9 theoretical screen + survivor POCs under common compromise/performance criteria | Select primary/baselines; weaken accurately; reframe/stop. |
-| D privacy contribution, P11 | Concrete privacy benefit versus plaintext/hash-bound prior baselines under explicit assumptions | PETS privacy framing; architecture/claim revision; reframe/stop. |
-| E attacks/limitations, P13 | Full A1–A8/E1–E16 held-out evidence | Standalone; second factor; measurement/limitations; revise/stop. |
-| F paper story, P15 | Claim→proof/run→figure/table/citation matrix and page-budgeted manuscript | Approve supported positioning; narrow/rewrite; do not submit. |
+**Tasks:** Provide acquisition instructions, hashes, licences, manifests, configs, scripts, environment capture, expected outputs, runtime/storage estimates, safe synthetic tests, and artifact-evaluation guide.
 
-## Initial consistency and risk register
+**Outputs:** versioned artifact package and archival metadata.
 
-1. `AGENT.md` and `paper/draft.tex` agree on RQ1–RQ6, A1–A8, no human study, acceptance-region security, mandatory baselines, the three protocol families, and the need for evidence gates.
-2. `AGENT.md` is slightly more operational: it explicitly lists cardinality threshold as a plaintext matcher and E1–E16 as named requirements. This plan follows it while preserving the draft’s Jaccard/weighted/cosine candidates.
-3. Both documents describe structured semantics and OPRF/PSI as current preferred directions, but explicitly call them hypotheses. D3/D6 and Gates A/C prevent premature selection.
-4. `paper/draft.tex` is an 18-page research-direction article, not a submission manuscript. `paper/main.tex` plus `sample-base.bib` are PoPETs template examples with sample authors/references, not project evidence. P15 must verify the then-current official template before migration.
-5. The asserted closely related 2026 VSA work is the most immediate novelty risk and has not yet been bibliographically verified in this initialization; P1 begins with that verification. No citation from the template bibliography is treated as verified.
-6. The image stage has no allowed human-factors justification in this project. A negative Gate B could require changing the title and central thesis.
-7. Low/nonuniform semantic entropy and a large acceptance region may defeat standalone authentication even if matching is accurate. P6/P8/P13 allow a second-factor or measurement-paper outcome.
-8. A single server holding both protected records and tokenisation keys may remain an offline oracle after full compromise. D6/D7 and Gates C/D require the actual benefit to justify any non-collusion, threshold, or hardware-isolation assumption.
-9. The repository began without Git, README, ignore rules, environment/dependencies, verified research bibliography, code, datasets, or results. Environment selection is deliberately deferred until P4 requirements are known, preventing premature dependency/model installation.
+**Validation:** Clean-environment smoke reproduction; hash/licence/secrets scan; documented optional/full resources.
 
-No phase assumes a positive result. Failure, narrowing, second-factor positioning, measurement/limitation framing, and stopping are first-class outcomes.
+**Dependencies:** P15–P18.
+
+**Cost:** AI-token Medium; compute Medium; storage Medium.
+
+### P20 — PETS submission audit
+
+**Status:** Not started; blocked on P18/P19.
+
+**Objective:** Perform the final novelty, privacy, threat-model, evidence, citation, artifact, ethics, open-science, AI-use, anonymisation, and page-budget audit.
+
+**Tasks:** Re-run consistency/reproducibility checks; verify every gate and limitation; check venue requirements; freeze submission and artifact identifiers; record the final decision.
+
+**Outputs:** submission-readiness report; final manuscript/artifact checkpoint or explicit stop.
+
+**Validation:** No unresolved critical claim/evidence/citation/security issue; clean build and artifact smoke; branch/tag policy documented.
+
+**Dependencies:** P18 and P19.
+
+**Cost:** AI-token Medium; compute Low; storage Low.
+
+**Decision / gate:** Final enforcement of **Gate V2-F — End-to-end evidence/paper story.** No submission if the paper story exceeds the evidence.
+
+## v2 gate order and anti-bypass rule
+
+```text
+Gate V2-N — Novelty viability
+        ↓
+Gate V2-A — Visual-semantic reconstruction viability
+        ↓
+Gate V2-B — Policy-aware semantic viability
+        ↓
+Gate V2-C — Acceptance-region security viability
+        ↓
+Gate V2-D — Private-functionality viability
+        ↓
+Gate V2-E — Protocol selection/privacy viability
+        ↓
+Gate V2-F — End-to-end evidence/paper story
+```
+
+No later expensive phase may bypass its corresponding gate. Cryptographic implementation remains blocked until a constructive Gate V2-C and a defined Gate V2-D functionality. Participant research is outside P0–P20.
