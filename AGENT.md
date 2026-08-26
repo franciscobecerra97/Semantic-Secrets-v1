@@ -2,11 +2,13 @@
 
 ## 1. Authority and status
 
-This file is the authoritative scientific and engineering contract for **Semantic Secrets**, a prospective PoPETs/PETS 2027 project. P9-v3A replaces only the failed extraction architecture and its gates; the narrowed v2 C1–C4 contribution boundary and security model remain active. Read this file before changing the research design, prototype, experiments, manuscript, or artifact.
+This file is the authoritative scientific and engineering contract for **Semantic Secrets**, a prospective PoPETs/PETS 2027 project about **reconstructable semantic authentication, acceptance-region security, and private verification**. P9-v3A replaces only the failed extraction architecture and its gates; the narrowed v2 C1–C4 contribution boundary and security model remain active. Read this file before changing the research design, prototype, experiments, manuscript, or artifact.
 
 The project changed direction after the completed `visual-semantic-pipeline-v1` P0–P7 programme and a complete review of Jeong's 2026 Visual Semantic Authentication (VSA) paper. P0–P7 remain immutable historical evidence. Their negative and formative findings are not v2 results, must not be retuned into v2, and must not be erased.
 
-No human-subject study is authorised. The project may measure technical reconstruction stability, not human recall, memorability, usability, preference, or natural secret choice.
+The primary motivation is the security transition from exact secret reproduction to approximate semantic reconstruction. Traditional authentication usually requires an exact value or exact cryptographic possession. This project instead asks whether independent reconstructions of one intended concept can yield compatible canonical semantics, what complete fuzzy acceptance region that creates, and whether the predicate can be evaluated without exposing a reusable semantic template, practical offline guess-testing oracle, or cross-domain linkage. It does not assume that the primitive will replace passwords or passkeys; standalone, second-factor, policy-constrained, restricted-use, negative/measurement, and stop outcomes remain possible.
+
+No human-subject study is authorised. The project may measure technical reconstruction stability under researcher-controlled inputs, not human recall, memorability, usability, preference, accessibility, natural secret choice, or real-world authentication time. It cannot establish that visual concepts are easier to remember than passwords or that this primitive is superior to passwords, passkeys, biometrics, or hardware authenticators.
 
 ## 2. Working title and central question
 
@@ -16,15 +18,15 @@ No human-subject study is authorised. The project may measure technical reconstr
 
 **Central research question:**
 
-> Can a user reconstruct a remembered visual concept through independently generated images and authenticate using its canonical semantics while preventing the authentication infrastructure or a database attacker from learning, linking, reconstructing, or efficiently testing guesses about that semantic secret?
+> Can independently reconstructed visual concepts yield stable and discriminative canonical semantic credentials whose complete acceptance region remains sufficiently resistant to realistic and AI-assisted guessing, and whose authentication predicate can be privately verified without exposing a reusable semantic template, practical offline guess-testing oracle, or cross-domain linkage?
 
-The remembered concept is the intended credential. A natural-language prompt is an input interface, not the credential. Generated pixels are transient local observations, not the credential.
+The intended semantic concept is reconstructed rather than reproduced exactly. The natural-language prompt is a reconstruction interface, not the credential. A generated image is a transient reconstruction medium, not the credential, and generated pixels provide no credential entropy. Probabilistic observations are evidence; the deterministic canonical graph is the security-sensitive semantic representation; operationally, the secret surface is the complete acceptance region.
 
 ## 3. Active v3 extraction path and notation
 
 ```text
-remembered visual concept C
-        ↓ free natural-language reconstruction
+intended reconstructable semantic concept C
+        ↓ natural-language reconstruction interface
 prompt P (interface, not secret)
         ↓ local generation with randomness r
 independently generated image I = G(P, r) (transient, not secret)
@@ -42,8 +44,8 @@ At authentication, the client independently obtains `I'`, extracts `S'`, derives
 
 Notation:
 
-- `C`: remembered visual concept represented by a controlled technical specification;
-- `P`: free natural-language reconstruction supplied to the local generator;
+- `C`: intended semantic concept represented by a controlled technical specification; this is researcher-controlled ground truth, not evidence of human memory;
+- `P`: natural-language reconstruction interface supplied to the local generator;
 - `G`: versioned local image generator;
 - `r`: generation randomness;
 - `I = G(P,r)`: transient generated image;
@@ -64,7 +66,7 @@ Notation:
 
 These are hypotheses to be validated, not present claims.
 
-### C1 — Generatively reconstructable visual-semantic credentials
+### C1 — Technical reconstructability of visual-semantic credentials
 
 Establish whether independent generated images produced from controlled reconstructions of the same concept yield sufficiently stable canonical semantics while remaining distinguishable from targeted alternatives. This is a technical reconstruction question only. It does not establish that people can remember or reproduce concepts.
 
@@ -79,13 +81,13 @@ The primary policy must be system-derived, deterministic, versioned, and frozen 
 
 ### C3 — Acceptance-region and budgeted guessing analysis
 
-The secret is the full acceptance region, not one prompt, image, or graph. For enrolment state `S`, define
+Exact authentication can be idealised as a singleton acceptance set, `A(s)={s}`. Semantic authentication instead induces a fuzzy region. The secret surface is the full acceptance region, not one prompt, image, or graph. For enrolment state `S`, define
 
 ```text
 A(S) = { S' : Accept(S,S',Π) = 1 }.
 ```
 
-Evaluate success within budget for random, frequency-informed, near, partial-information, LLM-assisted, VLM/generator-assisted, and adaptive attackers. Report `success@1`, `success@5`, `success@10`, `success@B`, guesses-to-success, uncertainty, duplicate handling, and online/offline access separately.
+An attacker succeeds with any `S' ∈ A(S)` and need not recover the enrolment prompt, image, or exact graph. This creates the central security trade-off: a predicate that is too strict rejects legitimate independent reconstructions, while one that is too tolerant gives attackers more accepted alternatives. Evaluate success within budget for random, frequency-informed, near, partial-information, LLM-assisted, VLM/generator-assisted, and adaptive attackers. Report `success@1`, `success@5`, `success@10`, `success@B`, guesses-to-success, uncertainty, duplicate handling, and online/offline access separately.
 
 Knowledge levels are:
 
@@ -107,7 +109,9 @@ Keep `P`, `I`, plaintext `S`, and raw embeddings local. For each candidate const
 - transcript privacy and adaptive verification-oracle leakage;
 - exact compromise views and residual guarantees.
 
-Cryptography can hide a comparison without making a small semantic space strong. Semantic correctness and cryptographic privacy are separate gates.
+Cryptography can hide a comparison without making a small or easily reached semantic region strong. Conversely, good semantic discrimination does not provide template, policy, transcript, or linkage privacy. Semantic correctness and cryptographic privacy are separate gates.
+
+C1 and C2 are enabling contributions. If the constructive path survives, C3 and C4 are the strongest eventual security/privacy contributions and should lead the paper positioning. Their scientific meanings may not be redesigned by narrative edits.
 
 ### C5 — Adaptive verification-oracle leakage (folded into C3/C4)
 
@@ -140,6 +144,9 @@ Never claim or imply any of the following without a new, verified, scoped prior-
 - novelty of PSI, OPRF, PAKE, fuzzy extraction, secure computation, FHE, or other standard primitives;
 - entropy or unpredictability from AI-generated pixels;
 - human memorability, reproducibility, preference, or usability;
+- accessibility, natural secret-selection entropy, or real-world authentication time;
+- superiority to passwords, passkeys, biometrics, or hardware authenticators;
+- proof that generated images or visual concepts are easier to remember than passwords;
 - privacy, zero knowledge, offline resistance, unlinkability, or irreversibility merely because values are hashed, salted, encoded, or encrypted.
 
 Every novelty statement must identify the combined system property, closest prior work, exact difference, evidence, and limitation. If P8 finds prior work that subsumes C1–C4 in combination, narrow the contribution before implementation.
@@ -195,12 +202,14 @@ Normal verification should reveal no more than an authorised, context-bound `Acc
 - **V2-E — Privacy/security evidence:** database, transcript, inversion, linking, compromise, and oracle claims survive their preregistered evaluations.
 - **V2-F — End-to-end/publication readiness:** integrated evidence, reproducibility, limitations, and claim audit are complete.
 
-An expensive later phase cannot bypass an earlier failed gate. Valid outcomes include standalone authentication, second factor, policy-constrained credential, negative/measurement contribution, or stop. A failed gate is evidence, not permission to retune.
+An expensive later phase cannot bypass an earlier failed gate. Valid outcomes include standalone authentication, second factor, policy-constrained or restricted/high-value authentication, another bounded deployment setting, negative/measurement contribution, or stop. A failed gate is evidence, not permission to retune.
 
 ## 11. Engineering and reproducibility contract
 
 - Follow the budget sequence: primary literature/analysis → deterministic smoke test → small preregistered pilot → eliminate weak candidates → full experiment only after its gate.
 - Do not benchmark many generators or VLMs. The executable v3.1 shortlist is exactly the two pipelines frozen in `visual_observation_v3_1.json`; v3.0.0 remains historical. Models emit evidence, not final credential JSON. Never search until a favourable result appears.
+- Treat client-side computational feasibility as an empirical RQ6 outcome, not an assumption. P9-v3B has established no actual resource requirement. A powerful research GPU is experimental infrastructure, not automatically part of a deployment architecture; impractical trusted-client requirements are a valid limitation, restricted-use result, failed practicality gate, or negative outcome.
+- Do not move prompt, image, observation, graph, or other secret-bearing processing to an untrusted cloud to repair a practicality failure, and do not replace the visual path with direct prompt/text authentication without a new authorised research decision.
 - Cache generated images and canonical graphs, reuse valid version-matched outputs, and create new-version manifests instead of overwriting evidence.
 - Prefer mature cryptographic libraries and implement only the small set of candidates surviving theoretical elimination; do not build every possible protocol.
 - Keep observation, deterministic compilation, policy derivation, plaintext decision, protocol, attack, and analysis modules separable.

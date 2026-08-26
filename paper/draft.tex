@@ -15,34 +15,36 @@
 \begin{document}
 
 \begin{abstract}
-This planning manuscript defines a revised research direction; it does not report a completed authentication system. We ask whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and privately verified under a system-derived policy. P8 narrowed the prospective contribution after finding prior art for the component mechanisms. P9-v2 then tested two frozen local extractors that each had to infer a scene and author the complete exact credential JSON. Each produced an invalid graph on its first formal validation fixture. With 32 validation fixtures, one invalid output caps best-case schema validity at $31/32=96.875\%$, below the preregistered 98\% requirement. Gate V2-A failed; full semantic accuracy was not estimated. P9-v3A preregistered a distinct modular architecture: perception models emit bounded observations and provenance, while a deterministic compiler emits a canonical graph or typed failure. A prospective v3.1 audit then selected EGTR as the graph-native comparator, separated GPU capacity from measured consumption, and froze feasible type-support rules before output. No v3 weight, capability image, inference, authentication, or cryptographic experiment has run. P10 remains blocked.
+Most authentication requires exact secret reproduction or exact cryptographic possession. This planning manuscript studies a different primitive: approximate semantic reconstruction, in which independently reconstructed prompts and images may yield compatible canonical semantic credentials. The resulting fuzzy predicate creates a complete acceptance region; legitimate variation must be accepted without making realistic or AI-assisted semantic alternatives too easy to reach. Even a discriminative predicate raises a separate privacy problem if its graph, policy, record, or transcripts enable inversion, offline candidate validation, adaptive probing, or cross-domain linkage. We therefore ask whether reconstructable visual semantics can be stable and discriminative, whether the induced region survives finite-budget attacks, and whether the frozen predicate can be privately verified. This is not a completed system or a human-memory study. P8 narrowed the prospective C1--C4 contribution after finding prior art for the component mechanisms. P9-v2 then tested two frozen local extractors that each had to infer a scene and author complete exact credential JSON; each produced an invalid graph on its first formal validation fixture. One invalid among 32 caps best-case schema validity at $31/32=96.875\%$, below the preregistered 98\% requirement. Gate V2-A failed and full semantic accuracy was not estimated. P9-v3A preregistered a modular observation/compiler architecture, and a prospective v3.1 audit selected EGTR as the graph-native comparator while freezing resource and support rules before output. No v3 weight, capability image, inference, authentication, or cryptographic experiment has run. P10 remains blocked.
 \end{abstract}
 
 \maketitle
 
 \section{Problem and scope}
 
-Authentication based on approximate semantic meaning has an unusual tension. Benign reconstructions must vary, yet every tolerated variation enlarges the set an attacker may submit. If a server stores a deterministic semantic verifier, the same structure that permits fuzzy acceptance may reveal semantic content, support offline candidate testing, or link reuse across services. Secure computation may hide the comparison while leaving the accepted region easily enumerable.
+Exact-secret authentication can be idealised as accepting a singleton, $\mathcal{A}(s)=\{s\}$. Semantic authentication replaces exact reproduction with approximate reconstruction: different prompts and visual realizations of one intended concept may need to authenticate as equivalent. It therefore induces a fuzzy set $\mathcal{A}(S)=\{S':\mathsf{Accept}(S,S')=1\}$. Benign reconstructions must vary, yet every tolerated variation can enlarge the set an attacker may submit. Too strict a predicate rejects independent same-concept reconstructions; too tolerant a predicate gives attackers more accepted alternatives.
 
-We study a prospective client-side pipeline in which a person reconstructs a remembered visual concept using free natural language. A local generator produces a new image, and a local extractor maps that image into a canonical semantic representation. The strongest target sends neither prompt, image, plaintext graph, nor raw embedding to the authentication infrastructure.
+This yields a central security question: can independently reconstructed visual concepts produce stable and discriminative canonical credentials whose complete acceptance region remains sufficiently resistant to realistic and AI-assisted guessing? It also yields a separate privacy question. A deterministic graph, policy, protected record, or transcript may reveal semantic content, support database-only candidate testing or adaptive probing, and link reuse across accounts or services. Secure computation may hide the comparison while leaving the accepted region easily enumerable; good discrimination may coexist with template leakage.
 
-No participant study is planned. Researcher-authored concepts and reconstructions can measure only technical semantic reconstruction stability. They cannot establish memorability, recall, usability, preference, or natural credential choice.
+We study a prospective client-side pipeline in which an intended concept is reconstructed through free natural language, a local generator produces an independent visual realization, and local perception plus deterministic compilation produce canonical semantics. The strongest target sends neither prompt, image, observation, plaintext graph, nor raw embedding to the authentication infrastructure. The generator serves as a semantic reconstruction and normalisation boundary, not as a memorability device.
 
-\section{The prompt and image are not the secret}
+No participant study is planned. Researcher-authored concepts and reconstructions can measure only technical semantic reconstruction stability. They cannot establish memorability, recall, usability, preference, accessibility, natural credential choice, real-world authentication time, superiority to passwords or passkeys, or that images are easier to remember. The primitive is not presumed to replace passwords: standalone, second-factor, policy-constrained, restricted-use, negative/measurement, and stop outcomes remain possible.
 
-Let $C$ denote a remembered visual concept and $P$ a free-form reconstruction prompt. Different expressions may aim at the same concept---for example, ``a cat beside a red car'' and ``a feline next to a crimson automobile.'' The hypothesis is not exact prompt reproduction. With generator $G$ and randomness $r$,
+\section{Reconstruction media are not credentials}
+
+Let $C$ denote an intended semantic concept and $P$ a free-form reconstruction interface. Different expressions may aim at the same concept---for example, ``a cat beside a red car'' and ``a feline next to a crimson automobile.'' The hypothesis is not exact prompt reproduction. With generator $G$ and randomness $r$,
 \begin{equation}
   I = G(P,r),
 \end{equation}
-where $I$ is a transient, independently generated image. Pixels do not contribute password entropy merely because generation is stochastic. A versioned modular pipeline produces observations
+where $I$ is a transient, independently generated reconstruction medium. Pixels do not contribute credential entropy merely because generation is stochastic. A versioned modular pipeline produces probabilistic visual evidence
 \begin{equation}
   O = \mathsf{Observe}(I),
 \end{equation}
-and a deterministic semantic compiler produces
+and a deterministic semantic compiler produces the security-sensitive representation
 \begin{equation}
   S = \mathcal{C}(O)
 \end{equation}
-or a typed failure. Models infer bounded evidence; code owns schema, identifiers, duplicates, inverse normalization, derived counts and geometry, ordering, and serialization. The credential source is the canonical semantics and, operationally, the complete set of candidate semantics the verifier accepts.
+or a typed failure. Models infer bounded evidence; code owns schema, identifiers, duplicates, inverse normalization, derived counts and geometry, ordering, and serialization. Thus the prompt is an interface, the image is a transient medium, observations are evidence, and the canonical graph is the representation used by the predicate. Operationally, the security surface is the complete set of candidate semantics the verifier accepts.
 
 This framing differs from treating direct text embeddings or a single generated image as the authentication object. It also creates a falsifiable condition: if independent generation and fresh extraction do not preserve security-relevant structure, the visual reconstruction hypothesis fails.
 
@@ -71,7 +73,7 @@ For an enrolled state, define the accepted region
 \begin{equation}
   \mathcal{A}(S,M,T)=\{(S',M',T'): \mathsf{Accept}_{\mathrm{ref}}=1\}.
 \end{equation}
-An attacker succeeds by finding any member, not by recovering the enrolled prompt, image, or exact graph. We distinguish:
+An attacker succeeds by finding any member, not by recovering the enrolled prompt, image, or exact graph. Acceptance-region reachability is therefore the security object rather than a usability feature. We distinguish:
 
 \begin{itemize}[leftmargin=*]
   \item $K_0$: generic public knowledge and random candidates;
@@ -106,7 +108,7 @@ A later protocol should reproduce the frozen plaintext decision while revealing 
 
 Established fuzzy extractors~\cite{Dodis2008FuzzyExtractors}, fuzzy aPAKE~\cite{Erwig2020FuzzyAPAKE}, OPRFs~\cite{Davidson2023OPRF}, OPAQUE~\cite{Bourdrez2025OPAQUE}, exact PSI~\cite{Freedman2004PrivateMatching,Pinkas2015Phasing}, fuzzy PSI/private biometric matching~\cite{Uzun2021FLPSI,Blass2026FuzzyPSI}, committed PSI~\cite{Goel2026PICS}, private fuzzy-record computation~\cite{Han2025FuzzyRecords}, private graph operations~\cite{Li2020PrivateGraph}, and homomorphic vector matching~\cite{Martin2025HyDia} are candidate foundations, not novel primitives. Raw learned representations are not automatically private; embedding leakage is an explicit concern~\cite{Song2020EmbeddingLeakage}. Protected-template unlinkability and irreversibility must be attacked rather than inferred from an encoding~\cite{GomezBarrero2016Unlinkable}.
 
-Semantic correctness and cryptographic privacy are independent. FAR/FRR do not prove privacy; private computation does not repair an easily guessed acceptance region.
+Semantic correctness and cryptographic privacy are independent. FAR/FRR do not prove template, policy, transcript, or linkage privacy; private computation does not repair an easily guessed acceptance region.
 
 \section{Closest work and VSA boundary}
 
@@ -121,6 +123,8 @@ SemanticLock uses semantically linked image tokens and story structure for graph
 The v3 shortlist is grounded in prior visual-understanding work. Grounding DINO produces open-set, language-conditioned boxes~\cite{Liu2024GroundingDINO}; SigLIP~2 provides contrastive vision-language encoders for closed-label scoring and localization-oriented transfer~\cite{Tschannen2025SigLIP2}; and EGTR exposes object, relation, and connectivity predictions from a DETR-based graph model~\cite{Im2024EGTR}. SGTR~\cite{Li2022SGTR} remains the historical v3.0 graph candidate. The newer autoregressive ROBIN/Synthetic Visual Genome path~\cite{Park2025SyntheticVG} was audited but rejected because generated graph text and semantic label mapping would reintroduce structured-generation risk. Visual Genome illustrates the dense annotation problem and its dataset limitations~\cite{Krishna2017VisualGenome}. These are established perception components, not authentication or privacy contributions.
 
 \section{Research questions}
+
+Together these questions ask whether technical reconstruction works, whether its necessary tolerance creates an acceptable attack surface, whether that predicate can be evaluated privately, and whether the trusted-client design is computationally practical. They do not evaluate human memory or claim password replacement.
 
 \begin{sloppypar}
 \begin{enumerate}[leftmargin=*,label={}]
@@ -144,6 +148,8 @@ The execution order is deliberately staged.
 \paragraph{Policy and attackers.} P10 compares dense similarity, global fuzzy overlap, a feasible VSA-style policy, and the proposed system-derived $M/T$ policy. P11 evaluates the full acceptance region under budgeted attackers before any cryptographic implementation.
 
 \paragraph{Private verification.} Only a constructive semantic-security gate permits P12 to define the ideal functionality and compare mature constructions. Minimal POCs precede selection. The selected protocol is then evaluated for reference correctness, leakage, offline validation, compromise, linkage, and cost.
+
+\paragraph{Practicality.} RQ6 measures client-side generator, perception, compiler, and protocol costs rather than assuming them. P9-v3B has not established actual resource requirements. A powerful research GPU is experimental infrastructure, not automatically part of the intended deployment architecture. If trusted-client execution is impractical, the valid result is a deployment limitation, restricted-use outcome, failed practicality gate, or negative finding---not migration of secret-bearing prompt, image, observation, or graph processing to an untrusted cloud.
 
 \paragraph{Baselines.} Planned baselines include direct-text processing, dense visual/text similarity, global fuzzy semantic overlap, VSA semantic-policy behaviour, the full VSA binding model where reproducible, plaintext/hash records, and relevant mature private-matching constructions. Any inaccessible or underspecified VSA behaviour will be documented rather than guessed.
 
@@ -177,13 +183,13 @@ These are immutable formative negative results, not v2 measurements. They motiva
 
 \section{Expected contributions and limitations}
 
-If all gates pass, C1 would establish technical behaviour of the scoped free-language generative reconstruction path; C2 would establish only the measured incremental value of the frozen system-derived typed policy; C3 would characterise the accepted region under finite-budget attackers; and C4 would establish construction-specific private and unlinkable verification. C3/C4 carry the prospective principal contribution. P8 rejected C5 as standalone and retained adaptive semantic verification-oracle leakage as mandatory evidence inside C3/C4.
+If all gates pass, C1 would establish technical reconstructability of the scoped free-language generative path; C2 would establish only the measured incremental value of the frozen system-derived typed policy; C3 would characterise the accepted region under finite-budget attackers; and C4 would establish construction-specific private and unlinkable verification. C1/C2 are enabling contributions; C3/C4 carry the prospective principal security/privacy contribution. Their scientific meanings are unchanged by the narrative reframe. P8 rejected C5 as standalone and retained adaptive semantic verification-oracle leakage as mandatory evidence inside C3/C4.
 
-The frozen v2 path stopped at the first risk: neither tested extractor met the structured-output prerequisite. P9-v3A provides an independently justified representation architecture but no empirical rescue. Whether either modular pipeline works remains unresolved, as do reconstruction, policy, guessing-region, and private-construction questions. The controlled methodology cannot establish human memorability or usability. A future participant study would require separate ethics, design, and evidence.
+The frozen v2 path stopped at the first risk: neither tested extractor met the structured-output prerequisite. P9-v3A provides an independently justified representation architecture but no empirical rescue. Whether either modular pipeline works remains unresolved, as do reconstruction, policy, guessing-region, private-construction, and client-side practicality questions. A research GPU does not establish deployment feasibility. The controlled methodology cannot establish human memorability, recall, usability, preference, accessibility, natural secret-selection entropy, or real-world authentication time; nor can it establish superiority to passwords, passkeys, biometrics, or hardware authenticators. A future participant study would require separate ethics, design, and evidence.
 
 \section{Conclusion}
 
-This work treats visual generation as a testable reconstruction layer, not a source of magical entropy, and privacy as a construction-specific property rather than a consequence of hashing semantics. P9-v2 falsified its frozen monolithic extractor path, and that evidence remains unchanged. P9-v3A supplies the explicit reframe; v3.1 prospectively freezes the final two-pipeline and support design before output. It passes no empirical gate. P9-v3B is the next permitted experiment only after explicit authorisation and resolution of the annotation blocker; P9-v3C, P10, attacker evaluation, and cryptographic prototyping remain blocked by their gates.
+Semantic Secrets asks what follows when authentication moves from exact reproduction to approximate semantic reconstruction. Visual generation is a testable reconstruction/normalisation boundary, not a source of entropy or an asserted memory aid. The induced acceptance region is the central security object, and privacy is a separate construction-specific property rather than a consequence of hashing semantics. P9-v2 falsified its frozen monolithic extractor path, and that evidence remains unchanged. P9-v3A supplies the explicit reframe; v3.1 prospectively freezes the final two-pipeline and support design before output. It passes no empirical gate. P9-v3B is the next permitted experiment only after explicit authorisation and resolution of the annotation blocker; P9-v3C, P10, attacker evaluation, and cryptographic prototyping remain blocked by their gates.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

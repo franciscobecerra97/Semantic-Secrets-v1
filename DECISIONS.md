@@ -595,3 +595,37 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Remaining uncertainty:** EGTR checkpoint bytes/hash and extracted label metadata cannot be recorded until authorised acquisition; actual resource use and semantic accuracy are unmeasured; a second independent annotator is not yet guaranteed; primary-type feasibility still requires successful authored scenes under the frozen manifest.
 
 **Revisit trigger:** Before output, official EGTR checkpoint/licence/artifact metadata fails closed or a documented implementation requirement proves incompatibility. After validation begins, no candidate, support, hardware-for-accuracy, or threshold change is permitted; a genuinely new question requires a new version and decision.
+
+## NARRATIVE-01 — Reframe motivation around reconstructable semantic authentication
+
+**Decision:** Make the transition from exact secret reproduction to approximate semantic reconstruction the primary project motivation. Present acceptance-region security and private verification as the central security/privacy problems. Treat the earlier password-memorability motivation as historical context rather than an active justification.
+
+**Date:** 2026-08-26
+
+**Status:** Selected research-direction and paper-positioning guidance; documentation only. This decision is not empirical evidence and authorises no experiment.
+
+**Question:** What motivation accurately describes the technical evidence the controlled Semantic Secrets programme can produce without implying unmeasured human-memory or password-replacement benefits?
+
+**Candidates:** Retain password memorability as the primary motivation; frame the project around reconstructable semantic authentication and its acceptance-region/privacy consequences; or stop describing a constructive authentication hypothesis.
+
+**Evaluation criteria:** Alignment with the frozen C1–C4 and RQ1–RQ6 scope; fidelity to the no-human-study boundary; prominence of the complete accepted semantic region; separation of semantic correctness from cryptographic privacy; preservation of v3.1 architecture, gates, thresholds, data, candidates, and phase dependencies; accurate practicality and status statements.
+
+**Evidence:** The active local research contract, `docs/research_direction_v2.md`, `docs/security_model_v2.md`, the frozen v2/v3/v3.1 formal specifications, P8 novelty record, immutable P9-v2 negative result, v3.0 reframe, and v3.1 pre-execution audit. This is a synthesis of existing scope and evidence boundaries; no new empirical observation was made.
+
+**Selected option:** Reframe the active narrative around a reconstructable semantic authentication primitive. A natural-language prompt is the reconstruction interface; a generated image is a transient semantic reconstruction/normalisation medium; observations are probabilistic visual evidence; the canonical graph is the security-sensitive representation; and the complete fuzzy acceptance region is the operational secret surface. C1 tests technical reconstructability, C2 tests system-derived mandatory/tolerant semantics, C3 measures acceptance-region reachability under budgeted attackers, and C4 evaluates private and unlinkable verification.
+
+**Rejected alternatives:** Password memorability is rejected as the primary justification because the project does not measure recall, memorability, usability, preference, accessibility, natural secret selection, or real-world authentication time. Universal password replacement is rejected as a presumed outcome because the evidence may instead support a factor, constrained/restricted setting, negative/measurement result, or stop. Removing the constructive hypothesis is not selected because its existing prospective gates remain well-defined and unexecuted.
+
+**Reason:** Approximate reconstruction changes the security object from one exact enrolled value to a set of accepted semantic alternatives. A predicate that is too strict rejects legitimate independent reconstructions; one that is too tolerant expands attacker opportunity. Even a stable and discriminative predicate may expose semantic templates, policy structure, offline candidate-validation capability, adaptive leakage, or cross-domain linkage. These are the technical security/privacy questions that the current controlled design can actually test.
+
+**Security/privacy assumptions:** Unchanged. Public algorithms, models, schemas, policies, thresholds, and attack code remain assumed. Prompts, images, observations, plaintext graphs, and raw embeddings remain local in the strongest target. Semantic correctness does not imply cryptographic privacy, and private computation cannot repair an easily guessed accepted region. Client-side practicality is measured rather than assumed; an untrusted cloud is not an authorised secret-processing fallback.
+
+**Affected RQs/threats/claims:** C1–C4 remain scientifically unchanged. RQ1–RQ6 remain materially unchanged. C1/C2 remain enabling contributions; C3/C4 remain the strongest eventual security/privacy contributions if the constructive path survives. No novelty, security, privacy, memorability, usability, password-superiority, or deployment claim is added.
+
+**Experiments supporting decision:** None. No model, dataset, threshold, gate, capability image, inference, private protocol, or sealed evidence was accessed or changed. No experiment is authorised by this record.
+
+**Remaining uncertainty:** Every existing empirical uncertainty remains: v3.1 component capability and measured resources, independent reconstruction, policy value, acceptance-region reachability, private-construction leakage/cost, and viable deployment positioning. Human memorability/usability remain possible future human-subject questions outside the current evidence.
+
+**Revisit trigger:** New empirical evidence or verified prior work materially changes the C1–C4 scope; a gate selects a narrower deployment/negative position; or a separately authorised human-subject programme changes the evidence boundary. Any change must append a new decision rather than rewrite this record.
+
+**Frozen-material confirmation:** No model candidate, dataset, threshold, support opportunity, annotation requirement, gate, v3.1 architectural rule, or phase dependency changes. The binding order remains P9-v3B → V3-A1 → P9-v3C → V3-A2 → P10 and later gated phases.

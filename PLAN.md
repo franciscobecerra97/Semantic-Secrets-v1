@@ -2,7 +2,7 @@
 
 Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; P9-v3A froze v3.0.0; and P9-v3A.1 completed a prospective v3.1.0 pipeline/resource/support audit on 2026-08-25 without weights, images, or inference. P9-v3B awaits explicit authorisation and a confirmed two-human annotation resource. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
 Authority: `AGENT.md` is the active scientific and engineering contract. This plan operationalises it and may not silently weaken it.
-Scope: prospective PoPETs/PETS 2027 paper, prototype, experiments, and research artifact; no human-subject study. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
+Scope: prospective PoPETs/PETS 2027 study of reconstructable semantic authentication, the security of its induced acceptance region, and private verification of the frozen fuzzy predicate; no human-subject study. The primary motivation is approximate semantic reconstruction rather than password memorability or password replacement. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
 
 ## How to execute this plan
 
@@ -22,10 +22,13 @@ Phase status values are `not started`, `in progress`, `blocked by gate`, `comple
 ## Non-negotiable research controls
 
 - Treat all current model, representation, matching, protocol, and architecture preferences as hypotheses.
-- Do not claim memorability, usability, human preference, recall, natural secret-selection entropy, or human authentication speed.
-- Model security over the whole acceptance region, not image pixels or exact semantic equality.
+- Do not claim memorability, usability, human preference, recall, accessibility, natural secret-selection entropy, human authentication speed, superiority to passwords/passkeys, or that images are easier to remember.
+- Treat the prompt as a reconstruction interface, the generated image as a transient reconstruction medium, bounded observations as probabilistic evidence, the canonical graph as the security-sensitive representation, and the whole acceptance region as the operational secret surface. Neither prompts nor pixels provide credential entropy.
+- Model security over the whole acceptance region, not image pixels, the enrolled prompt/graph, or exact semantic equality. An attacker wins with any accepted semantic alternative.
+- Keep the strictness/tolerance tension explicit: strict predicates reject benign independent reconstructions, while tolerant predicates expand the attacker's accepted alternatives.
 - Use `docs/threat_claim_matrix_v2.csv`; state which data, keys, services, records, policies, and transcripts each attacker obtains.
 - Keep prompts, images, plaintext atoms, raw embeddings, and exact scores client-side in the strongest target architecture; document every deviation.
+- Measure client-side practicality under RQ6 rather than assume it. A research GPU is experimental infrastructure, not automatically a deployment requirement; impractical trusted-client execution is a valid limitation, restricted-use result, failed practicality gate, or negative outcome. Do not move secret-bearing reconstruction/semantic processing to an untrusted cloud to rescue feasibility.
 - Use mature maintained cryptographic libraries. Never invent or reimplement a standard primitive merely for convenience.
 - Verify references against primary papers, standards, official specifications, publisher records, or trusted bibliographic indexes before adding them to `paper/references.bib`.
 - Label preprints and peer-reviewed work distinctly. Preserve negative/null results and distinguish hypotheses, measured observations, inferences, and cited facts.
@@ -96,6 +99,8 @@ Active v2 decisions are phase-gated:
 | V2-D4 private functionality | P12 | Primary-source/security/leakage comparison | V2-D identifies a property beyond VSA/hash/plaintext baselines |
 | V2-D5 protocol and architecture | P13 | Minimal mature-library POCs under common fixtures | V2-E selects one primary and meaningful baselines or stops |
 | V2-D6 paper positioning | P16–P20 | Frozen end-to-end evidence and claim matrix | V2-F supports only the strongest evidence-backed story |
+
+The eventual paper should lead with the transition from exact reproduction to approximate semantic reconstruction, then the induced acceptance-region security problem and the separate privacy problem. C1/C2 remain enabling contributions; C3/C4 remain the strongest eventual security/privacy contributions if the constructive path survives. Evidence may support standalone, second-factor, policy-constrained, restricted-use, another bounded setting, negative/measurement, or stop positioning; universal password replacement is not presumed.
 
 ## Phase plan
 
@@ -711,7 +716,7 @@ Active v2 decisions are phase-gated:
 
 **Objective:** Build the evidence-backed manuscript.
 
-**Tasks:** Position C3/C4 as expected primary PETS contributions and C1/C2 as application/mechanism; differentiate VSA prominently and fairly; describe both VSA baselines; report all gates and negative results; align every claim/citation/number with evidence; include limitations, ethics, and future human study without human claims.
+**Tasks:** Lead with exact reproduction versus approximate semantic reconstruction, then the induced acceptance-region and private-verification problems. Position C3/C4 as expected primary PETS contributions and C1/C2 as enabling application/mechanism contributions; differentiate VSA prominently and fairly; describe both VSA baselines; report all gates and negative results; align every claim/citation/number with evidence; include practicality, limitations, ethics, and future human study without human claims or password-replacement superiority claims.
 
 **Outputs:** submission manuscript; appendix/supplement; rebuttal-risk audit.
 
@@ -777,4 +782,4 @@ Gate V2-E — Protocol selection/privacy viability
 Gate V2-F — End-to-end evidence/paper story
 ```
 
-No later expensive phase may bypass its corresponding gate. P9-v3A passes no empirical gate. P10 is blocked until constructive V3-A2. Cryptographic implementation remains blocked until a constructive Gate V2-C and a defined Gate V2-D functionality. Participant research is outside P0–P20.
+No later expensive phase may bypass its corresponding gate. P9-v3A passes no empirical gate. P9-v3B remains the next empirical phase only after explicit authorisation and resolution of its annotation prerequisite; P9-v3C remains blocked on constructive V3-A1; P10 is blocked until constructive V3-A2. Cryptographic implementation remains blocked until a constructive Gate V2-C and a defined Gate V2-D functionality. Participant research is outside P0–P20.

@@ -1,12 +1,26 @@
 # Semantic Secrets
 
-Research project for a prospective PoPETs/PETS 2027 paper on private authentication from reconstructable visual semantics.
+Research project for a prospective PoPETs/PETS 2027 paper on reconstructable semantic authentication, acceptance-region security, and private verification.
 
 ## Active research goal
 
-The project asks whether a remembered visual concept can be reconstructed through independently generated images, converted locally into a canonical typed semantic graph, and verified under a system-derived mandatory/tolerant policy without exposing a practical semantic guess-testing or linking oracle.
+Most authentication relies on exact secret reproduction or exact cryptographic possession. Semantic Secrets studies a different primitive: independently reconstructing an intended concept into different prompts and images that may nevertheless produce compatible canonical semantics.
 
-The natural-language prompt is a reconstruction interface, not the secret. Generated pixels are transient and do not supply credential entropy. The strongest target keeps prompts, images, plaintext graphs, and raw embeddings on the trusted client.
+```text
+exact reproduction
+        ↓
+approximate semantic reconstruction
+        ↓
+fuzzy semantic acceptance region
+        ↓
+guessing and privacy questions
+```
+
+The central question is whether independently reconstructed visual concepts can yield stable and discriminative canonical semantic credentials, whether their complete acceptance region withstands realistic and AI-assisted guessing under finite budgets, and whether the frozen predicate can be privately verified without exposing a reusable semantic template, practical offline guess-testing oracle, or cross-domain linkage.
+
+The generator is an experimental semantic reconstruction and normalisation boundary, not a memorability mechanism. The natural-language prompt is the reconstruction interface; the generated image is a transient reconstruction medium; bounded observations are probabilistic evidence; the deterministic canonical graph is the security-sensitive representation; and the complete acceptance region is the operational secret surface. Neither prompts nor generated pixels supply credential entropy. The strongest target keeps prompts, images, observations, plaintext graphs, and raw embeddings on the trusted client.
+
+This controlled technical study does not establish human memorability, recall, usability, preference, accessibility, natural secret-selection entropy, real-world authentication time, proof that images are easier to remember, or superiority to passwords, passkeys, biometrics, or hardware authenticators. It does not assume universal password replacement. Evidence may support standalone, second-factor, policy-constrained, restricted-use, negative/measurement, or stop outcomes.
 
 ## Current status
 
@@ -42,9 +56,11 @@ Those findings remain valid and have not been retuned. The v2 image hypothesis i
 ## Scientific boundaries
 
 - No participant study is authorised. Do not claim memorability, recall, usability, preference, or learning effort.
-- Algorithms, model identities, canonicalisation, policies, and thresholds are public.
+- Reconstructable semantic authentication is the object of study; C1/C2 enable the central C3 acceptance-region and C4 private-verification questions.
+- Algorithms, model identities, canonicalisation, policies, and thresholds are public. An attacker succeeds with any accepted semantic alternative, not only the enrolled prompt, image, or graph.
 - VSA already covers image-independent visual-semantic authentication, VLM extraction, canonical tokens, object/attribute/count/quadrant facts, Flexible Range Logic, and user-selected policies. These are not v2 novelty.
 - Semantic correctness and cryptographic privacy are separate gates. Hashing, salting, or encryption alone does not establish template privacy, offline resistance, or unlinkability.
+- Client-side feasibility is measured under RQ6 rather than assumed. Research-GPU availability is not a deployment result, and secret-bearing prompt/image/semantic processing must not be moved to an untrusted cloud to rescue an impractical client design.
 - Execute one numbered phase at a time. P9-v2's V2-A failure remains historical evidence; the explicit v3 reframe must pass V3-A1 and V3-A2 before P10. Never bypass later V2-B–V2-F gates.
 
 Large models, raw datasets, generated images, secrets, caches, and recomputable intermediates must not be committed. Version compact manifests, configs, tests, aggregate evidence, and exact provenance required for claims.
