@@ -19,4 +19,8 @@ Models emit bounded observations, never the final credential JSON. `C` returns a
 
 No model weights, images, manifests, raw outputs, or results belong here yet. P9-v3B requires explicit authorisation and a completed two-independent-human annotation-resource record before image creation. P9-v3C additionally requires constructive Gate V3-A1 and a separate reconstruction preregistration. P10 remains blocked until Gate V3-A2.
 
+Pre-execution engineering now lives in `prototype/semantic_secrets/v3/`, `experiments/v3/runtime/`, and `infra/runpod/`. The deterministic compiler has a locally passing 320-case matrix, but this is preparation evidence only: it does not start P9-v3B or satisfy Gate V3-A1, and the locked execution image must rerun it. Runtime commands isolate the modern Grounding DINO/SigLIP2 stack from historical EGTR, bind caches to hashes, record allocated/reserved GPU memory plus RSS/elapsed time, and refuse validation without external records that bind the exact commit, configs, annotation resource, dataset, thresholds, weights, and GPU environment.
+
+The annotation resource remains unresolved as of 2026-08-26. No capability image, weight, model output, or experimental result was created during execution preparation.
+
 All `experiments/v2/` configs, manifests, outputs, and tests are immutable historical evidence. Do not copy validation outcomes or thresholds into v3 except where the new preregistration explicitly records and justifies a new rule.

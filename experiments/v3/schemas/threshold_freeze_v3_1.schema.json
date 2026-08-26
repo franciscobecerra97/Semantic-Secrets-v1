@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "threshold-freeze-v3.1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "development_manifest_sha256", "frozen_at_utc", "pipelines"],
+  "properties": {
+    "schema_version": {"const": "threshold-freeze-v3.1.0"},
+    "status": {"const": "frozen_before_validation"},
+    "development_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "frozen_at_utc": {"type": "string", "format": "date-time"},
+    "pipelines": {
+      "type": "object", "additionalProperties": false,
+      "required": ["v3.1-gdino-siglip2", "v3.1-egtr-siglip2"],
+      "properties": {
+        "v3.1-gdino-siglip2": {"$ref": "#/$defs/thresholdSet"},
+        "v3.1-egtr-siglip2": {"$ref": "#/$defs/thresholdSet"}
+      }
+    }
+  },
+  "$defs": {
+    "thresholdSet": {
+      "type": "object", "minProperties": 1,
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["score_name", "score_range", "threshold", "threshold_source"],
+        "properties": {
+          "score_name": {"type": "string", "minLength": 1},
+          "score_range": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "minItems": 2, "maxItems": 2},
+          "threshold": {"type": "number"},
+          "minimum_top_two_margin": {"type": "number"},
+          "threshold_source": {"const": "development"}
+        }
+      }
+    }
+  }
+}

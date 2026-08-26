@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "semantic-compiler-result-v3.0.0",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["audit", "compiler_id", "graph", "result_schema", "source", "status"],
+      "properties": {
+        "audit": {"$ref": "#/$defs/successAudit"},
+        "compiler_id": {"const": "semantic-compiler-v3.0.0"},
+        "graph": {"$ref": "#/$defs/graph"},
+        "result_schema": {"const": "semantic-compiler-result-v3.0.0"},
+        "source": {"type": "object"},
+        "status": {"const": "graph"}
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": ["audit", "compiler_id", "failure", "result_schema", "source", "status"],
+      "properties": {
+        "audit": {"$ref": "#/$defs/failureAudit"},
+        "compiler_id": {"const": "semantic-compiler-v3.0.0"},
+        "failure": {
+          "type": "object",
+          "required": ["code", "detail"],
+          "properties": {
+            "code": {"enum": ["UNSUPPORTED_OBSERVATION_VERSION", "MALFORMED_OBSERVATION", "UNKNOWN_LABEL", "INVALID_BOUNDING_BOX", "DUPLICATE_LOCAL_ID", "DANGLING_REFERENCE", "UNDECLARED_COMPONENT", "UNDECLARED_SCORE_DOMAIN", "AMBIGUOUS_IDENTITY", "TOO_MANY_CREDENTIAL_ENTITIES", "REQUIRED_COMPONENT_FAILURE", "UNSUPPORTED_CREDENTIAL_TYPE", "SERIALIZATION_FAILURE"]},
+            "detail": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "result_schema": {"const": "semantic-compiler-result-v3.0.0"},
+        "source": {"type": "object"},
+        "status": {"const": "typed_failure"}
+      },
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "events": {"type": "array", "items": {"type": "object"}},
+    "failureAudit": {
+      "type": "object",
+      "required": ["events"],
+      "properties": {"events": {"$ref": "#/$defs/events"}},
+      "additionalProperties": false
+    },
+    "successAudit": {
+      "type": "object",
+      "required": ["events", "node_boxes"],
+      "properties": {
+        "events": {"$ref": "#/$defs/events"},
+        "node_boxes": {
+          "type": "array",
+          "items": {
+            "type": "object", "required": ["bbox", "id"], "additionalProperties": false,
+            "properties": {
+              "bbox": {"type": "array", "prefixItems": [{"type": "number", "minimum": 0, "maximum": 1}, {"type": "number", "minimum": 0, "maximum": 1}, {"type": "number", "minimum": 0, "maximum": 1}, {"type": "number", "minimum": 0, "maximum": 1}], "minItems": 4, "maxItems": 4},
+              "id": {"$ref": "#/$defs/nodeId"}
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "graph": {
+      "type": "object",
+      "required": ["attributes", "binary", "counts", "nodes", "scenes", "unary"],
+      "properties": {
+        "attributes": {"type": "array", "items": {"type": "object", "required": ["node", "type", "value"], "additionalProperties": false, "properties": {"node": {"$ref": "#/$defs/nodeId"}, "type": {"enum": ["colour", "size", "material", "pattern"]}, "value": {"$ref": "#/$defs/token"}}}},
+        "binary": {"type": "array", "items": {"type": "object", "required": ["relation", "source", "target"], "additionalProperties": false, "properties": {"relation": {"$ref": "#/$defs/token"}, "source": {"$ref": "#/$defs/nodeId"}, "target": {"$ref": "#/$defs/nodeId"}}}},
+        "counts": {"type": "array", "items": {"type": "object", "required": ["bucket", "category"], "additionalProperties": false, "properties": {"bucket": {"enum": ["1", "2", "3", "4", "5_plus"]}, "category": {"$ref": "#/$defs/token"}}}},
+        "nodes": {"type": "array", "maxItems": 8, "items": {"type": "object", "required": ["category", "id"], "additionalProperties": false, "properties": {"category": {"$ref": "#/$defs/token"}, "id": {"$ref": "#/$defs/nodeId"}}}},
+        "scenes": {"type": "array", "items": {"type": "object", "required": ["value"], "additionalProperties": false, "properties": {"value": {"$ref": "#/$defs/token"}}}},
+        "unary": {"type": "array", "items": {"type": "object", "required": ["action", "node"], "additionalProperties": false, "properties": {"action": {"$ref": "#/$defs/token"}, "node": {"$ref": "#/$defs/nodeId"}}}}
+      },
+      "additionalProperties": false
+    },
+    "nodeId": {"type": "string", "pattern": "^n[0-9]{3}$"},
+    "token": {"type": "string", "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$"}
+  }
+}

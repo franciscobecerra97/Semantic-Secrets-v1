@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; P9-v3A froze v3.0.0; and P9-v3A.1 completed a prospective v3.1.0 pipeline/resource/support audit on 2026-08-25 without weights, images, or inference. P9-v3B awaits explicit authorisation and a confirmed two-human annotation resource. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
+Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; P9-v3A froze v3.0.0; and P9-v3A.1 completed a prospective v3.1.0 pipeline/resource/support audit on 2026-08-25 without weights, images, or inference. On 2026-08-26, pre-execution engineering prepared the deterministic compiler, exact two-pipeline subprocess boundary, dataset/annotation checks, formal guards, and reproducible RunPod package; its local 320-case pass is not Gate evidence. P9-v3B remains not started and awaits explicit formal authorisation plus a confirmed two-human annotation resource. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
 Authority: `AGENT.md` is the active scientific and engineering contract. This plan operationalises it and may not silently weaken it.
 Scope: prospective PoPETs/PETS 2027 study of reconstructable semantic authentication, the security of its induced acceptance region, and private verification of the frozen fuzzy predicate; no human-subject study. The primary motivation is approximate semantic reconstruction rather than password memorability or password replacement. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
 
@@ -490,6 +490,8 @@ The eventual paper should lead with the transition from exact reproduction to ap
 ### P9-v3B — Modular component capability and `L_cred` eligibility
 
 **Status:** Not started; requires explicit user authorisation and resolution of the v3.1 two-human annotation-resource blocker.
+
+**Prepared execution boundary (2026-08-26):** `prototype/semantic_secrets/v3/` implements the frozen compiler; `experiments/v3/runtime/` supplies schemas, manifest/annotation tooling, isolated adapter orchestration, content-addressed caches, telemetry, and fail-closed formal guards; `infra/runpod/` supplies the pinned dual-environment container and runbook. The pre-execution compiler matrix passes 320/320 locally and must pass again in the locked image. This preparation did not create a capability image, acquire a weight, inspect a model output, freeze a development threshold, start P9-v3B, or pass V3-A1. EGTR artifact terms/layout/base-transform provenance remain acquisition-time fail-closed checks.
 
 **Objective:** Test perception and compiler capability on new controlled and naturalistic data before any reconstruction/authentication study.
 

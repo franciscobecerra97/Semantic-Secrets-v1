@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gpu-environment-v3.1.0",
+  "type": "object",
+  "required": ["schema_version", "container_image_digest", "cuda_available", "nvidia_smi_sha256", "verified_environment"],
+  "properties": {
+    "schema_version": {"const": "gpu-environment-v3.1.0"},
+    "container_image_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "cuda_available": {"const": true},
+    "nvidia_smi_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "verified_environment": {
+      "type": "object", "required": ["config_hashes", "packages", "pipeline_ids", "pipeline_revisions"]
+    }
+  }
+}

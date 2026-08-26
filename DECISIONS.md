@@ -629,3 +629,37 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Revisit trigger:** New empirical evidence or verified prior work materially changes the C1–C4 scope; a gate selects a narrower deployment/negative position; or a separately authorised human-subject programme changes the evidence boundary. Any change must append a new decision rather than rewrite this record.
 
 **Frozen-material confirmation:** No model candidate, dataset, threshold, support opportunity, annotation requirement, gate, v3.1 architectural rule, or phase dependency changes. The binding order remains P9-v3B → V3-A1 → P9-v3C → V3-A2 → P10 and later gated phases.
+
+## P9-v3B-PREP-01 — Prepare isolated, fail-closed GPU execution
+
+**Decision:** Prepare deterministic compiler and RunPod execution software before paid GPU use while preserving the v3.0 + v3.1 freeze and keeping P9-v3B experimentally unstarted.
+
+**Date:** 2026-08-26
+
+**Status:** Selected engineering preparation; no experiment authorised or executed.
+
+**Question:** How can formal P9-v3B later use paid GPU time mainly for permitted acquisition verification, smoke, and inference without resolving software or reproducibility problems interactively on a Pod?
+
+**Candidates:** Build interactively during paid GPU time; combine modern and historical dependencies in one mutable Python environment; isolate EGTR and modern components behind the frozen bounded-observation schema; or change the frozen models to obtain an easier stack.
+
+**Evaluation criteria:** Exact candidate/revision preservation; no weight/image/output access; deterministic compiler invariants; historical EGTR compatibility; local-only model loading; content/provenance hashing; per-component allocated/reserved GPU, RSS, and elapsed telemetry; resumability; explicit formal authorization; annotation/data/threshold/GPU guards; no learned final-graph authorship.
+
+**Evidence:** Static review of the active v3.0/v3.1 configs and specifications; official exact-revision EGTR requirements/evaluation code; exact Hugging Face snapshot records; local deterministic tests; local Docker availability check. Docker CLI/Buildx existed but the Linux daemon was stopped, so no local image build occurred. No weight, capability image, or model output was accessed.
+
+**Selected option:** Keep EGTR's official `nvcr.io/nvidia/pytorch:21.11-py3` base and historical dependency stack separate from a pinned modern Grounding DINO/SigLIP2/controller environment. Communicate by canonical bounded-observation subprocess records, then invoke the unchanged deterministic compiler. Before any model output, name the component-local `[0,1]` domains as Grounding DINO postprocessed score, SigLIP2 sigmoid logit, EGTR object softmax, relation sigmoid, and connectivity sigmoid; require the already-frozen SigLIP2 top-two-margin rule, but set no numeric threshold. Require external records binding the exact commit, configs, annotation resource, manifest, development threshold freeze, acquisition inventory, and GPU environment before formal validation. Provide a manual digest-addressed GHCR build path.
+
+**Rejected alternatives:** Interactive environment construction wastes paid GPU time and weakens reproducibility. A combined mutable environment risks ABI/version contamination. Model substitution, quantization, resizing, changed preprocessing, mutable revisions, direct prompt authentication, cloud secret processing, and a third pipeline violate the freeze. Baking weights into the image is unnecessary and creates provenance/licence/storage risk.
+
+**Reason:** The modern Transformers components and EGTR's Torch 1.12.1/Transformers 4.18.0 stack have incompatible dependency requirements, while the scientific interface is already a bounded observation record. Process isolation preserves the model/compiler responsibility boundary and permits deterministic caching and fail-closed acquisition checks.
+
+**Security/privacy assumptions:** Unchanged. The future dedicated research Pod is experimental infrastructure, not the intended untrusted service architecture. Capability data and outputs remain controlled research data in persistent storage. No security, privacy, reconstruction, acceptance-region, or deployment result follows from preparation or compiler validity.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ6 execution readiness only. C1–C4 and RQ1–RQ6 remain scientifically unchanged. Gate V3-A1 remains unevaluated; P9-v3C and all later phases remain blocked exactly as before.
+
+**Experiments supporting decision:** None. The 320/320 deterministic local compiler cases, schema/config checks, and command guard checks are pre-execution engineering validation, not formal P9-v3B output or Gate evidence.
+
+**Remaining uncertainty:** The human annotation resource remains unresolved. EGTR archive bytes, terms, hash, extracted vocabulary/config/checkpoint layout, and immutable base-model/feature-transform provenance require permitted acquisition-time verification and fail closed if ambiguous. The container must be built in GHCR or a running Linux Docker daemon and smoke-tested on the permitted GPU. Actual memory, time, and semantic capability are unmeasured.
+
+**Revisit trigger:** A locked-image test fails; the official EGTR artifact cannot satisfy provenance/compatibility checks; an explicit authorization record permits formal execution; or a genuinely prospective amendment is required before any validation output. Never repair ambiguity by silently changing the frozen candidate.
+
+**Frozen-material confirmation:** No v2/v3/v3.1 config, model, revision, resolution, preprocessing, label, threshold, dataset size, opportunity count, gate, compiler identity, or phase dependency changed. No P9-v3B/P9-v3C/P10 execution or cryptographic work occurred.
