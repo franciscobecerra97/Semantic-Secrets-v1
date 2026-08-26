@@ -34,6 +34,12 @@ pandas==1.2.5
 
 The official README names `nvcr.io/nvidia/pytorch:21.11-py3`, compiles `lib/fpn`, evaluates with one V100, and links the VG checkpoint as Google Drive file `18phcRxbrEI7HqIuM2OLAPuwAF5k3pUC2`. The Dockerfile retains that base and stack in the system environment. EGTR runs in a subprocess and returns only object/relation/connectivity evidence.
 
+### `pycocotools==2.0.5` build compatibility
+
+The frozen EGTR dependency `pycocotools==2.0.5` declares the unbounded build requirement `cython>=0.27.3`. Under PEP 517 build isolation, current installers can therefore select Cython 3, which is incompatible with this release's `pycocotools/_mask.pyx` and fails during Cythonization. This is a build-tool incompatibility, not a scientific dependency failure.
+
+`requirements-egtr-build.lock` pins the build-only compiler to `Cython==0.29.36`. The Dockerfile installs that pin first and installs the unchanged `pycocotools==2.0.5` with `--no-deps --no-build-isolation`, forcing compilation to use the pinned compatible Cython without resolving a separate runtime dependency set. The subsequent official EGTR lock still contains and verifies `pycocotools==2.0.5` and its dependencies; no EGTR runtime package, model, revision, preprocessing rule, or scientific parameter is substituted.
+
 The modern Transformers stack cannot safely coexist with EGTR's old Torch/Transformers ABI in one Python environment. Separate processes avoid import/library upgrades crossing the boundary. CUDA-driver compatibility must be verified on the selected Pod; no model substitution, quantization, or input/preprocessing change is an allowed compatibility remedy.
 
 ## Fail-closed artifact questions

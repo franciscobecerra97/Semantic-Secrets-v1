@@ -1,0 +1,3 @@
+# Build-only compatibility pin for pycocotools==2.0.5.
+# Cython 3 cannot compile that frozen release's _mask.pyx source.
+Cython==0.29.36

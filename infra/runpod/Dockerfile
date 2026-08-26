@@ -11,7 +11,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends git ca-certific
 
 COPY infra/runpod/requirements-egtr-official.lock /tmp/requirements-egtr-official.lock
 COPY infra/runpod/requirements-egtr-bridge.lock /tmp/requirements-egtr-bridge.lock
-RUN python -m pip install --no-cache-dir -r /tmp/requirements-egtr-official.lock \
+COPY infra/runpod/requirements-egtr-build.lock /tmp/requirements-egtr-build.lock
+# pycocotools 2.0.5 declares Cython>=0.27.3 in pyproject.toml. Isolated
+# builds therefore select incompatible Cython 3. Install the frozen package
+# with the pinned legacy Cython already present, then install the unchanged
+# official EGTR lock (where pycocotools remains pinned to 2.0.5).
+RUN python -m pip install --no-cache-dir -r /tmp/requirements-egtr-build.lock \
+    && test "$(python -c 'import Cython; print(Cython.__version__)')" = "0.29.36" \
+    && python -m pip install --no-cache-dir --no-deps --no-build-isolation pycocotools==2.0.5 \
+    && python -m pip install --no-cache-dir -r /tmp/requirements-egtr-official.lock \
     && python -m pip install --no-cache-dir -r /tmp/requirements-egtr-bridge.lock
 
 RUN git clone --filter=blob:none https://github.com/naver-ai/egtr.git /opt/egtr \
