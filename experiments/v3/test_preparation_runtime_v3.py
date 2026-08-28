@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import sys
 from pathlib import Path
 
 import jsonschema
@@ -16,6 +17,7 @@ from experiments.v3.runtime.guard import main as guard_main
 from experiments.v3.runtime.io import canonical_bytes, sha256_tree
 from experiments.v3.runtime.results import observation_projection
 from experiments.v3.runtime.schemas import SCHEMA_DIR, validate
+from experiments.v3.runtime.telemetry import environment_record
 from experiments.v3.runtime.thresholds import SCORE_CONTRACT, validate_settings
 from prototype.semantic_secrets.v3 import load_active_contract
 
@@ -112,6 +114,13 @@ def test_adapter_bundle_hash_is_repeatable() -> None:
     path = Path(__file__).parent / "runtime" / "adapters"
     assert len(sha256_tree(path)) == 64
     assert sha256_tree(path) == sha256_tree(path)
+
+
+def test_environment_record_reports_python_runtime() -> None:
+    record = environment_record()
+    assert record["python"] == sys.version
+    assert isinstance(record["platform"], str)
+    assert "cuda_available" in record
 
 
 def test_formal_guard_requires_explicit_flag() -> None:

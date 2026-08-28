@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import platform
+import sys
 import threading
 import time
 from dataclasses import dataclass
