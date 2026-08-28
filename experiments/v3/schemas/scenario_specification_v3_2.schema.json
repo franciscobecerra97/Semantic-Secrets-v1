@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "capability-scenario-specification-v3.2.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "scenario_specification_id", "image_id", "family_id", "stratum", "split", "authoring_method", "model_output_blind", "reference_entities", "reference_atoms"],
+  "properties": {
+    "schema_version": {"const": "capability-scenario-specification-v3.2.0"},
+    "scenario_specification_id": {"type": "string", "pattern": "^scenario-cap-v3-[AB]-F(0[1-9]|1[0-9]|2[0-4])-(0[1-5])$"},
+    "image_id": {"type": "string", "pattern": "^cap-v3-[AB]-F(0[1-9]|1[0-9]|2[0-4])-(0[1-5])$"},
+    "family_id": {"type": "string", "pattern": "^F(0[1-9]|1[0-9]|2[0-4])$"},
+    "stratum": {"enum": ["A_controlled_geometric", "B_naturalistic_t2i"]},
+    "split": {"enum": ["development", "validation"]},
+    "authoring_method": {"enum": ["controlled_scene_specification", "project_authored_naturalistic_reference"]},
+    "model_output_blind": {"const": true},
+    "reference_entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["reference_id", "category", "bbox_xyxy"],
+        "properties": {
+          "reference_id": {"type": "string", "minLength": 1},
+          "category": {"type": "string", "minLength": 1},
+          "bbox_xyxy": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number", "minimum": 0, "maximum": 1}}
+        }
+      }
+    },
+    "reference_atoms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["reference_atom_id", "atom_type", "value", "source_reference_id", "target_reference_id"],
+        "properties": {
+          "reference_atom_id": {"type": "string", "minLength": 1},
+          "atom_type": {"enum": ["entity", "colour", "size", "material", "pattern", "count", "unary_action", "binary_interaction", "geometry_relation", "scene"]},
+          "value": {"type": "string", "minLength": 1},
+          "source_reference_id": {"type": ["string", "null"]},
+          "target_reference_id": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

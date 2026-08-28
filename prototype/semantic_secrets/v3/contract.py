@@ -1,4 +1,4 @@
-"""Read-only composition of the frozen v3.0 and v3.1 contracts."""
+"""Read-only composition of the frozen v3.0, v3.1, and v3.2 contracts."""
 
 from __future__ import annotations
 
@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[3]
 CONFIG_DIR = ROOT / "experiments" / "v3" / "config"
 BASE_PREREG_PATH = CONFIG_DIR / "preregistration_v3.json"
 AMEND_PREREG_PATH = CONFIG_DIR / "preregistration_v3_1.json"
+GROUND_TRUTH_PREREG_PATH = CONFIG_DIR / "preregistration_v3_2.json"
 BASE_OBSERVATION_PATH = CONFIG_DIR / "visual_observation_v3.json"
 AMEND_OBSERVATION_PATH = CONFIG_DIR / "visual_observation_v3_1.json"
 
@@ -42,9 +43,10 @@ def _read(path: Path) -> dict[str, Any]:
 
 
 @dataclass(frozen=True)
-class ActiveV31Contract:
+class ActiveV3Contract:
     base_prereg: Mapping[str, Any]
     amend_prereg: Mapping[str, Any]
+    ground_truth_prereg: Mapping[str, Any]
     base_observation: Mapping[str, Any]
     amend_observation: Mapping[str, Any]
     config_hashes: Mapping[str, str]
@@ -84,16 +86,18 @@ class ActiveV31Contract:
 
 
 @lru_cache(maxsize=1)
-def load_active_contract() -> ActiveV31Contract:
+def load_active_contract() -> ActiveV3Contract:
     paths = {
         "preregistration_v3.json": BASE_PREREG_PATH,
         "preregistration_v3_1.json": AMEND_PREREG_PATH,
+        "preregistration_v3_2.json": GROUND_TRUTH_PREREG_PATH,
         "visual_observation_v3.json": BASE_OBSERVATION_PATH,
         "visual_observation_v3_1.json": AMEND_OBSERVATION_PATH,
     }
-    contract = ActiveV31Contract(
+    contract = ActiveV3Contract(
         base_prereg=_read(BASE_PREREG_PATH),
         amend_prereg=_read(AMEND_PREREG_PATH),
+        ground_truth_prereg=_read(GROUND_TRUTH_PREREG_PATH),
         base_observation=_read(BASE_OBSERVATION_PATH),
         amend_observation=_read(AMEND_OBSERVATION_PATH),
         config_hashes={name: sha256_file(path) for name, path in paths.items()},
@@ -104,4 +108,13 @@ def load_active_contract() -> ActiveV31Contract:
         raise RuntimeError("v3.1 pipeline shortlist mismatch")
     if contract.compiler_id != contract.amend_prereg["versions"]["compiler"]:
         raise RuntimeError("v3 compiler identity mismatch")
+    if contract.ground_truth_prereg["versions"]["observation"] != contract.observation_version:
+        raise RuntimeError("v3.2 must preserve the v3.1 observation contract")
+    if contract.ground_truth_prereg["versions"]["compiler"] != contract.compiler_id:
+        raise RuntimeError("v3.2 must preserve the v3.0 compiler")
     return contract
+
+
+# Compatibility alias for preparation code written before the v3.2
+# ground-truth-only amendment. It has no effect on the scientific contract.
+ActiveV31Contract = ActiveV3Contract

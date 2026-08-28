@@ -1,6 +1,6 @@
 # Semantic Secrets execution plan
 
-Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; P9-v3A froze v3.0.0; and P9-v3A.1 completed a prospective v3.1.0 pipeline/resource/support audit on 2026-08-25 without weights, images, or inference. On 2026-08-26, pre-execution engineering prepared the deterministic compiler, exact two-pipeline subprocess boundary, dataset/annotation checks, formal guards, and reproducible RunPod package; its local 320-case pass is not Gate evidence. P9-v3B remains not started and awaits explicit formal authorisation plus a confirmed two-human annotation resource. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
+Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; P9-v3A froze v3.0.0; and P9-v3A.1 completed a prospective v3.1.0 pipeline/resource/support audit on 2026-08-25 without weights, images, or inference. P9-v3A.2 prospectively corrected only the ground-truth method on 2026-08-28: P9-v3B has no human participants or annotators, and the historical two-human prerequisite is superseded by a deterministic project-authored ground-truth freeze. Pre-execution engineering prepared the compiler, exact two-pipeline subprocess boundary, ground-truth/provenance checks, formal guards, and reproducible RunPod package; its local 320-case pass is not Gate evidence. P9-v3B remains not started and awaits explicit authorisation plus complete model-blind capability data and ground-truth records. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
 Authority: `AGENT.md` is the active scientific and engineering contract. This plan operationalises it and may not silently weaken it.
 Scope: prospective PoPETs/PETS 2027 study of reconstructable semantic authentication, the security of its induced acceptance region, and private verification of the frozen fuzzy predicate; no human-subject study. The primary motivation is approximate semantic reconstruction rather than password memorability or password replacement. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
 
@@ -91,7 +91,7 @@ Active v2 decisions are phase-gated:
 | V2-DN combined novelty and scope | P8 | Verified primary literature and formal comparison | C1–C4 remain jointly defensible or are narrowed before implementation |
 | V2-D1 failed monolithic capability | P9-v2 | Immutable formal capability fixture | Gate V2-A failed; no reinterpretation or rerun |
 | V3-D1 modular extraction architecture | P9-v3A | Primary literature plus formal/preregistered design | Freeze model-evidence/compiler separation, two candidates, data, metrics, and gates |
-| V3-D1.1 pre-execution suitability | P9-v3A.1 | Bounded primary-artifact and support-feasibility audit | Freeze v3.1 hardware semantics, EGTR comparator, support opportunities, and annotation prerequisite before output |
+| V3-D1.1 pre-execution suitability | P9-v3A.1/P9-v3A.2 | Bounded primary-artifact, support, and ground-truth audit | Freeze v3.1 hardware/EGTR/support rules, then prospectively replace the mismatched human prerequisite with project-authored model-blind ground truth before output |
 | V3-D2 modular component capability | P9-v3B | New controlled/naturalistic capability data | One whole pipeline passes V3-A1; no cross-pipeline type union |
 | V3-D3 independent reconstruction | P9-v3C | Separate preregistered reconstruction data | Frozen eligible language and M/T interface pass V3-A2 |
 | V2-D2 policy and baselines | P10 | Training-only derivation and new pilot against B0/B1/B2 | Proposed policy passes V2-B without held-out tuning after V3-A2 |
@@ -474,7 +474,7 @@ The eventual paper should lead with the transition from exact reproduction to ap
 2. Compared only SGTR, EGTR, and ROBIN/Synthetic Visual Genome from primary papers and official repositories; selected EGTR before output.
 3. Preserved Grounding DINO + SigLIP2 and explicitly classified pair-crop relation scoring as an experimental hypothesis.
 4. Defined positive/applicable-negative opportunities, five primary gate types, exploratory `not_gate_evaluable` handling, and feasible family concentration.
-5. Preserved two-human model-blind annotation and recorded the unconfirmed second annotator as a blocker with an external-human replacement protocol.
+5. Historically preserved two-human model-blind annotation and recorded the unconfirmed second annotator as a blocker; P9-v3A.2 later superseded only this methodology before any output.
 6. Created v3.1 configs/addendum without modifying the meaning of v3.0.0.
 
 **Outputs:** `docs/p9_v3_preexecution_audit.md`; `docs/formal_specification_v3_1.md`; `experiments/v3/config/preregistration_v3_1.json`; `experiments/v3/config/visual_observation_v3_1.json`; v3.1 config tests; governance, literature, bibliography, and manuscript amendments.
@@ -485,23 +485,37 @@ The eventual paper should lead with the transition from exact reproduction to ap
 
 **Dependencies:** Immutable P9-v3A commit `8e44caa`.
 
-**Stop / fallback:** Do not create images until the annotation blocker is resolved. Do not restore SGTR, add another pipeline, or change hardware for semantic outcomes after validation.
+**Stop / fallback:** Historical v3.1 text blocked image creation on an annotation resource; P9-v3A.2 removes that mismatched human-resource gate. Do not run perception inference until the project-authored scenarios, images, manifest, and support opportunities are audited and frozen. Do not restore SGTR, add another pipeline, or change hardware for semantic outcomes after validation.
+
+## P9-v3A.2 — Project-authored ground-truth correction
+
+**Status:** Completed prospectively on 2026-08-28 before any P9-v3B image, weight, or model output. Documentation, schema, and fail-closed preparation only; no experiment authorised.
+
+**Objective:** Correct the accidental human-annotation dependency while preserving model-blind ground-truth separation and every frozen scientific parameter.
+
+**Method:** Retain the 240-image manifest and v3.1 support-opportunity design. For each final controlled/naturalistic image, create a versioned project-authored reference scene specification containing exact closed labels, normalized reference boxes, and semantic atoms. Link every positive/applicable-negative opportunity deterministically to that specification. Audit all identifiers, hashes, splits, boxes, scopes, polarities, and frozen per-type/per-stratum/per-split counts, then bind the manifest, scenarios, opportunities, and active config hashes in `ground-truth-freeze-v3.2.0` before any perception inference. No human participant, human annotator, agreement/adjudication step, or model-derived label is part of P9-v3B.
+
+**Outputs:** `docs/formal_specification_v3_2.md`; `experiments/v3/config/preregistration_v3_2.json`; v3.2 manifest/scenario/freeze/authorization schemas and tests; updated runtime guards and RunPod procedures; decision `P9-v3A.2-00`.
+
+**Unchanged:** The exact two v3.1 pipelines, model revisions, preprocessing, resolution, labels, threshold semantics, metrics, Gate V3-A1, hardware/resource limits, dataset/image/family/split counts, opportunity counts, compiler, and phase dependency chain.
+
+**Execution boundary:** This correction does not authorise image generation, acquisition, smoke, development inference, validation, P9-v3C, P10, or cryptography. Model acquisition may be separately authorised without a ground-truth freeze; any inference requires the complete ground-truth freeze, and formal validation additionally requires explicit authorization plus every existing model/threshold/GPU/commit/container record.
 
 ### P9-v3B — Modular component capability and `L_cred` eligibility
 
-**Status:** Not started; requires explicit user authorisation and resolution of the v3.1 two-human annotation-resource blocker.
+**Status:** Not started; requires explicit user authorisation. The v3.1 two-human blocker is superseded by P9-v3A.2. Any inference requires the complete project-authored model-blind ground-truth freeze.
 
-**Prepared execution boundary (2026-08-26):** `prototype/semantic_secrets/v3/` implements the frozen compiler; `experiments/v3/runtime/` supplies schemas, manifest/annotation tooling, isolated adapter orchestration, content-addressed caches, telemetry, and fail-closed formal guards; `infra/runpod/` supplies the pinned dual-environment container and runbook. The pre-execution compiler matrix passes 320/320 locally and must pass again in the locked image. This preparation did not create a capability image, acquire a weight, inspect a model output, freeze a development threshold, start P9-v3B, or pass V3-A1. EGTR artifact terms/layout/base-transform provenance remain acquisition-time fail-closed checks.
+**Prepared execution boundary (updated 2026-08-28):** `prototype/semantic_secrets/v3/` implements the frozen compiler; `experiments/v3/runtime/` supplies schemas, deterministic manifest/scenario/opportunity auditing, isolated adapter orchestration, content-addressed caches, telemetry, and fail-closed formal guards; `infra/runpod/` supplies the pinned dual-environment container and runbook. The pre-execution compiler matrix passes 320/320 locally and must pass again in the locked image. This preparation did not create a capability image, acquire a weight, inspect a model output, freeze a development threshold, start P9-v3B, or pass V3-A1. EGTR artifact terms/layout/base-transform provenance remain acquisition-time fail-closed checks.
 
 **Objective:** Test perception and compiler capability on new controlled and naturalistic data before any reconstruction/authentication study.
 
-**Tasks:** After the annotation-resource record exists, author the frozen `cap-v3-*` dataset and labels; implement/test the compiler; acquire only the two v3.1 pipelines after licence/hash checks; run bounded smoke; freeze development thresholds; execute validation and repeat; compute per-type/stratum support, metrics, uncertainty, measured resources, and exact compiler checks.
+**Tasks:** With explicit authorization, author the frozen `cap-v3-*` images, project reference scenarios, and deterministic support opportunities without perception outputs; audit and freeze their hashes; acquire only the two v3.1 pipelines after licence/hash checks; run bounded smoke only after the ground-truth freeze; freeze development thresholds; execute validation and repeat; compute per-type/stratum support, metrics, uncertainty, measured resources, and exact compiler checks.
 
 **Outputs:** immutable manifests, observations, compiler cases/results, aggregate report, eligible `L_cred` per complete pipeline, and Gate V3-A1 decision.
 
 **Decision / gate:** **Gate V3-A1 — Modular extraction viability.** Pass only under the complete conjunction formed by historical `preregistration_v3.json` plus prospective `preregistration_v3_1.json`. Do not union eligible types across pipelines. Installed GPU capacity is irrelevant; measured pipeline consumption is gated.
 
-**Dependencies:** Complete P9-v3A.1, explicit instruction, and a confirmed two-independent-human annotation record before image creation.
+**Dependencies:** Complete P9-v3A.1/P9-v3A.2 and explicit instruction. Image creation has no human-resource dependency. Any model inference additionally requires the complete `ground-truth-freeze-v3.2.0`; formal validation retains all explicit authorization, threshold, acquisition, GPU, commit, container, and empty-output guards.
 
 **Stop / fallback:** If no pipeline passes, stop the visual constructive path or preregister a genuinely new reframe. Do not execute P9-v3C.
 
@@ -784,4 +798,4 @@ Gate V2-E — Protocol selection/privacy viability
 Gate V2-F — End-to-end evidence/paper story
 ```
 
-No later expensive phase may bypass its corresponding gate. P9-v3A passes no empirical gate. P9-v3B remains the next empirical phase only after explicit authorisation and resolution of its annotation prerequisite; P9-v3C remains blocked on constructive V3-A1; P10 is blocked until constructive V3-A2. Cryptographic implementation remains blocked until a constructive Gate V2-C and a defined Gate V2-D functionality. Participant research is outside P0–P20.
+No later expensive phase may bypass its corresponding gate. P9-v3A/P9-v3A.1/P9-v3A.2 pass no empirical gate. P9-v3B remains the next empirical phase only after explicit authorisation and the required project-authored model-blind ground-truth freeze; P9-v3C remains blocked on constructive V3-A1; P10 is blocked until constructive V3-A2. Cryptographic implementation remains blocked until a constructive Gate V2-C and a defined Gate V2-D functionality. Participant research is outside P0–P20.

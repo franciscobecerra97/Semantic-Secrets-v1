@@ -19,6 +19,7 @@ from typing import Any
 
 from prototype.semantic_secrets.v3 import SemanticCompilerV3, load_active_contract
 
+from .dataset import audit_ground_truth_freeze
 from .guard import FormalPaths, verify_formal
 from .io import atomic_write, canonical_bytes, read_json, sha256_file, sha256_tree
 from .schemas import validate
@@ -59,7 +60,7 @@ def run_adapter(command: str, request: dict[str, Any]) -> dict[str, Any]:
 def execute(args: argparse.Namespace) -> int:
     contract = load_active_contract()
     manifest = read_json(args.manifest)
-    validate("capability_manifest_v3_1.schema.json", manifest)
+    validate("capability_manifest_v3_2.schema.json", manifest)
     thresholds = read_json(args.thresholds)
     if args.mode == "development":
         if thresholds.get("schema_version") != "development-threshold-settings-v3.1.0" or not isinstance(thresholds.get("pipelines"), dict):
@@ -74,16 +75,22 @@ def execute(args: argparse.Namespace) -> int:
     model_manifest_sha = sha256_file(args.model_manifest)
     threshold_sha = sha256_file(args.thresholds)
     adapter_sha = sha256_tree(args.adapter_source)
+    ground_truth_sha = sha256_file(args.ground_truth)
+    opportunities_sha = sha256_file(args.opportunities)
 
     if args.mode != "development":
         if not args.formal:
             raise SystemExit("REFUSED: validation and repeat require --formal")
         verify_formal(
-            FormalPaths(args.authorization, args.annotation, args.manifest, args.opportunities, args.thresholds, args.model_manifest, args.gpu_environment, args.models, args.results),
+            FormalPaths(args.authorization, args.ground_truth, args.manifest, args.opportunities, args.thresholds, args.model_manifest, args.gpu_environment, args.models, args.results),
             pipeline_ids=tuple(args.pipeline), mode=args.mode, resume=args.resume,
         )
     elif args.formal:
         raise SystemExit("REFUSED: --formal is reserved for validation modes")
+    else:
+        audit_ground_truth_freeze(
+            read_json(args.ground_truth), args.manifest, args.opportunities, args.data
+        )
 
     images = [row for row in manifest["images"] if row["split"] == ("development" if args.mode == "development" else "validation")]
     if args.limit is not None:
@@ -105,10 +112,12 @@ def execute(args: argparse.Namespace) -> int:
                 "image_id": image["image_id"],
                 "image_path": str(image_path.resolve()),
                 "image_sha256": image["image_sha256"],
+                "ground_truth_freeze_sha256": ground_truth_sha,
                 "mode": args.mode,
                 "model_manifest_sha256": model_manifest_sha,
                 "pipeline_id": pipeline_id,
                 "pipeline_revision": contract.expected_pipeline_revision(pipeline_id),
+                "opportunities_sha256": opportunities_sha,
                 "repeat_index": 1 if args.mode == "validation-repeat" else 0,
                 "threshold_freeze_sha256": threshold_sha,
                 "thresholds": thresholds["pipelines"][pipeline_id],
@@ -142,7 +151,7 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--adapter-command", action="append", metavar="PIPELINE=COMMAND", required=True)
     for name in ("manifest", "thresholds", "model-manifest", "adapter-source", "models", "data", "results"):
         result.add_argument(f"--{name}", type=Path, required=True)
-    for name in ("authorization", "annotation", "opportunities", "gpu-environment"):
+    for name in ("authorization", "ground-truth", "opportunities", "gpu-environment"):
         result.add_argument(f"--{name}", type=Path)
     return result
 
@@ -158,8 +167,10 @@ def main(argv: list[str] | None = None) -> int:
     if set(args.pipeline) != set(parsed):
         raise SystemExit("every and only requested pipelines need an adapter command")
     args.adapter_command = parsed
-    if args.mode != "development" and any(value is None for value in (args.authorization, args.annotation, args.opportunities, args.gpu_environment)):
-        raise SystemExit("formal validation requires authorization, annotation, opportunity, and GPU environment records")
+    if args.ground_truth is None or args.opportunities is None:
+        raise SystemExit("all inference modes require a frozen ground-truth record and opportunity table")
+    if args.mode != "development" and any(value is None for value in (args.authorization, args.gpu_environment)):
+        raise SystemExit("formal validation requires authorization and GPU environment records")
     return execute(args)
 
 

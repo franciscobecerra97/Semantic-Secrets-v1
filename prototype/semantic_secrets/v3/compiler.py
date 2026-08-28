@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from typing import Any, Iterable, Mapping, MutableMapping, Sequence
 
 from .contract import (
-    ActiveV31Contract,
+    ActiveV3Contract,
     canonical_json_bytes as _contract_canonical_json_bytes,
     load_active_contract,
 )
@@ -114,7 +114,7 @@ def _intersection(a: Sequence[float], b: Sequence[float]) -> tuple[float, float,
 class SemanticCompilerV3:
     """Compile bounded v3.1 observations into deterministic v3 graph results."""
 
-    def __init__(self, contract: ActiveV31Contract | None = None) -> None:
+    def __init__(self, contract: ActiveV3Contract | None = None) -> None:
         self.contract = contract or load_active_contract()
         self.base = self.contract.base_observation
         self.compiler_config = self.base["compiler"]

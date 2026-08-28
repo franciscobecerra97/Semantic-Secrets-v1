@@ -60,7 +60,7 @@ class V31PreregistrationTests(unittest.TestCase):
         self.assertEqual(sum(self.base_prereg["compiler_tests"]["case_counts"].values()), 320)
         self.assertFalse(self.prereg["gate_v3_a1"]["cross_pipeline_union"])
 
-    def test_annotation_and_execution_remain_blocked(self) -> None:
+    def test_historical_v31_annotation_blocker_is_preserved(self) -> None:
         self.assertEqual(self.prereg["annotation"]["status"], "unresolved execution blocker")
         self.assertFalse(self.prereg["annotation"]["model_assisted_ground_truth"])
         self.assertFalse(self.prereg["execution_boundary"]["authorized_by_this_amendment"])

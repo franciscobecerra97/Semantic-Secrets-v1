@@ -12,12 +12,13 @@ import json
 import subprocess
 import sys
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 from prototype.semantic_secrets.v3 import load_active_contract
 
-from .dataset import audit_manifest, audit_opportunities
+from .dataset import audit_ground_truth_freeze
 from .io import canonical_bytes, read_json, sha256_file, sha256_tree
 from .schemas import validate
 from .thresholds import validate_settings
@@ -33,7 +34,7 @@ class GuardFailure(RuntimeError):
 @dataclass(frozen=True)
 class FormalPaths:
     authorization: Path
-    annotation: Path
+    ground_truth: Path
     manifest: Path
     opportunities: Path
     thresholds: Path
@@ -54,33 +55,43 @@ def _equal(label: str, actual: Any, expected: Any) -> None:
         raise GuardFailure(f"{label} mismatch: expected {expected!r}, found {actual!r}")
 
 
+def _utc(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
 def verify_formal(paths: FormalPaths, *, pipeline_ids: tuple[str, ...], mode: str | None = None, resume: bool = False) -> dict[str, Any]:
     contract = load_active_contract()
     authorization = read_json(paths.authorization)
-    annotation = read_json(paths.annotation)
+    ground_truth = read_json(paths.ground_truth)
     manifest = read_json(paths.manifest)
     thresholds = read_json(paths.thresholds)
     model_manifest = read_json(paths.model_manifest)
     gpu_environment = read_json(paths.gpu_environment)
 
-    validate("formal_authorization_v3_1.schema.json", authorization)
-    validate("annotation_resource_v3_1.schema.json", annotation)
-    validate("capability_manifest_v3_1.schema.json", manifest)
+    validate("formal_authorization_v3_2.schema.json", authorization)
+    validate("ground_truth_freeze_v3_2.schema.json", ground_truth)
+    validate("capability_manifest_v3_2.schema.json", manifest)
     validate("threshold_freeze_v3_1.schema.json", thresholds)
     validate("model_acquisition_v3_1.schema.json", model_manifest)
     validate("gpu_environment_v3_1.schema.json", gpu_environment)
-    audit_manifest(manifest, paths.manifest.parent)
-    audit_opportunities(paths.opportunities)
+    audit_ground_truth_freeze(ground_truth, paths.manifest, paths.opportunities, paths.manifest.parent)
 
     _equal("Git commit", git_commit(), authorization["expected_git_commit"])
     _equal("configuration hashes", dict(contract.config_hashes), authorization["expected_config_hashes"])
     _equal("manifest SHA-256", sha256_file(paths.manifest), authorization["expected_manifest_sha256"])
     _equal("opportunities SHA-256", sha256_file(paths.opportunities), authorization["expected_opportunities_sha256"])
-    _equal("annotation record SHA-256", sha256_file(paths.annotation), authorization["expected_annotation_record_sha256"])
+    _equal("ground-truth freeze SHA-256", sha256_file(paths.ground_truth), authorization["expected_ground_truth_freeze_sha256"])
     _equal("threshold freeze SHA-256", sha256_file(paths.thresholds), authorization["expected_threshold_freeze_sha256"])
     _equal("model manifest SHA-256", sha256_file(paths.model_manifest), authorization["expected_model_manifest_sha256"])
     _equal("pipeline shortlist", list(contract.pipeline_ids), authorization["pipeline_ids"])
     _equal("requested pipelines", tuple(contract.pipeline_ids), pipeline_ids)
+    if not (
+        _utc(manifest["created_at_utc"])
+        <= _utc(ground_truth["frozen_at_utc"])
+        <= _utc(thresholds["frozen_at_utc"])
+        <= _utc(authorization["authorized_at_utc"])
+    ):
+        raise GuardFailure("manifest/ground-truth/threshold/authorization chronology is invalid")
 
     for pipeline_id in contract.pipeline_ids:
         try:
@@ -120,6 +131,19 @@ def verify_formal(paths: FormalPaths, *, pipeline_ids: tuple[str, ...], mode: st
             if candidate.stat().st_size != item.get("bytes") or sha256_file(candidate) != item.get("sha256"):
                 raise GuardFailure(f"model file provenance mismatch: {candidate}")
 
+    for prior_dir in (paths.results / "development", paths.results / "smoke" / "development"):
+        if not prior_dir.exists():
+            continue
+        for path in prior_dir.rglob("*.json"):
+            request = read_json(path).get("request")
+            if not isinstance(request, dict):
+                raise GuardFailure(f"prior development/smoke record lacks request provenance: {path}")
+            if (
+                request.get("ground_truth_freeze_sha256") != authorization["expected_ground_truth_freeze_sha256"]
+                or request.get("opportunities_sha256") != authorization["expected_opportunities_sha256"]
+            ):
+                raise GuardFailure(f"prior development/smoke output predates or mismatches ground truth: {path}")
+
     validation_dir = paths.results / "validation"
     validation_records = list(validation_dir.rglob("*.json")) if validation_dir.exists() else []
     if mode != "validation-repeat" and validation_records and not resume:
@@ -153,13 +177,20 @@ def verify_formal(paths: FormalPaths, *, pipeline_ids: tuple[str, ...], mode: st
                     raise GuardFailure(f"resume cache-key mismatch: {path}")
                 if request.get("mode") != expected_mode or request.get("image_sha256") != expected_images[key[1]]:
                     raise GuardFailure(f"resume mode/image mismatch: {path}")
-                if request.get("model_manifest_sha256") != authorization["expected_model_manifest_sha256"] or request.get("threshold_freeze_sha256") != authorization["expected_threshold_freeze_sha256"] or request.get("adapter_source_sha256") != adapter_sha:
+                if (
+                    request.get("model_manifest_sha256") != authorization["expected_model_manifest_sha256"]
+                    or request.get("threshold_freeze_sha256") != authorization["expected_threshold_freeze_sha256"]
+                    or request.get("ground_truth_freeze_sha256") != authorization["expected_ground_truth_freeze_sha256"]
+                    or request.get("opportunities_sha256") != authorization["expected_opportunities_sha256"]
+                    or request.get("adapter_source_sha256") != adapter_sha
+                ):
                     raise GuardFailure(f"resume provenance mismatch: {path}")
                 if request.get("pipeline_revision") != contract.expected_pipeline_revision(key[0]):
                     raise GuardFailure(f"resume pipeline revision mismatch: {path}")
 
     return {
-        "annotation_status": annotation["status"],
+        "ground_truth_status": ground_truth["status"],
+        "ground_truth_freeze_sha256": authorization["expected_ground_truth_freeze_sha256"],
         "config_hashes": dict(contract.config_hashes),
         "git_commit": authorization["expected_git_commit"],
         "manifest_sha256": authorization["expected_manifest_sha256"],
@@ -175,7 +206,7 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--formal", action="store_true", help="required acknowledgement; no default formal mode")
     result.add_argument("--resume", action="store_true", help="allow only hash-verified partial caches")
     result.add_argument("--authorization", type=Path, required=True)
-    result.add_argument("--annotation", type=Path, required=True)
+    result.add_argument("--ground-truth", type=Path, required=True)
     result.add_argument("--manifest", type=Path, required=True)
     result.add_argument("--opportunities", type=Path, required=True)
     result.add_argument("--thresholds", type=Path, required=True)
@@ -194,7 +225,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(raw)
     try:
         record = verify_formal(
-            FormalPaths(args.authorization, args.annotation, args.manifest, args.opportunities, args.thresholds, args.model_manifest, args.gpu_environment, args.models, args.results),
+            FormalPaths(args.authorization, args.ground_truth, args.manifest, args.opportunities, args.thresholds, args.model_manifest, args.gpu_environment, args.models, args.results),
             pipeline_ids=tuple(args.pipeline), mode=None, resume=args.resume,
         )
     except (GuardFailure, FileNotFoundError, ValueError) as exc:

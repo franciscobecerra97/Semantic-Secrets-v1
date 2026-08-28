@@ -2,6 +2,8 @@
 
 Status: prospective P9-v3A.1 freeze. It amends, but does not overwrite, `formal_specification_v3.md` v3.0.0. No v3 experimental output existed when this addendum was frozen.
 
+Historical-method note (2026-08-28): Section 5 records the v3.1 decision but is superseded for execution by `formal_specification_v3_2.md`. P9-v3B has no human annotators; project-authored model-blind ground truth must instead satisfy the v3.2 freeze. All other v3.1 clauses remain active.
+
 ## 1. Binding version
 
 The binding future capability design is `semantic-secrets-preregistration-v3.1.0` with `visual-observation-v3.1.0`. All v3.0.0 definitions remain in force except where this addendum or the v3.1 machine-readable configs explicitly supersede them. P9-v2 and v3.0.0 remain historical records.
@@ -34,7 +36,7 @@ For type `t` and stratum `d`, let `PosSupport(t,d)` be the number of predeclared
 
 The predeclared primary gate types are entity, colour, count, binary interaction, and geometry relation. Size, material, pattern, unary action, and scene remain observable but are frozen at 30 positive/30 negative validation opportunities per stratum and therefore cannot enter `L_cred-v3.1.0`. No post-output support increase is permitted.
 
-## 5. Annotation prerequisite
+## 5. Historical v3.1 annotation prerequisite (superseded by v3.2)
 
 Naturalistic labels require two independent human annotators who have not seen perception outputs. One may be an independent external annotator. The annotator identities/roles, availability, rubric version, independence statement, and adjudication procedure must be recorded before any capability image is created. Model-assisted ground truth and fabricated or same-person duplicate annotation are forbidden. Until this record exists, P9-v3B is blocked.
 

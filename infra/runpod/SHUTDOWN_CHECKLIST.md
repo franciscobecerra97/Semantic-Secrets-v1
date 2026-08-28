@@ -5,5 +5,5 @@
 - Run `export_results.sh` to a persistent path and copy the export off the Pod.
 - Verify the exported manifest and SHA-256 inventory on the destination system.
 - Preserve `/workspace/environment`, raw bounded observations, compiler results, logs, and acquisition provenance.
-- Confirm no model weight, generated image, cache, raw output, or annotation identity was added to Git.
+- Confirm no model weight, generated image, cache, raw output, or external ground-truth record was added to Git.
 - Terminate the Pod only after the persistent volume and external export are verified. Remove the volume later only through an explicit, separately reviewed retention decision.

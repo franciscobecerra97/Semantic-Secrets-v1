@@ -663,3 +663,37 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Revisit trigger:** A locked-image test fails; the official EGTR artifact cannot satisfy provenance/compatibility checks; an explicit authorization record permits formal execution; or a genuinely prospective amendment is required before any validation output. Never repair ambiguity by silently changing the frozen candidate.
 
 **Frozen-material confirmation:** No v2/v3/v3.1 config, model, revision, resolution, preprocessing, label, threshold, dataset size, opportunity count, gate, compiler identity, or phase dependency changed. No P9-v3B/P9-v3C/P10 execution or cryptographic work occurred.
+
+## P9-v3A.2-00 — Replace human annotation prerequisite with project-authored ground truth
+
+**Decision:** Prospectively supersede only the v3.0/v3.1 two-human annotation method and resource blocker. P9-v3B is a technical capability experiment with no human participants or human annotators. Its reference semantics will be project-authored in a closed, versioned scenario schema, linked to deterministic support opportunities, audited, and SHA-256-frozen before any perception inference.
+
+**Date:** 2026-08-28
+
+**Status:** Selected and preregistered prospectively before any v3 capability image, model acquisition, inference, threshold output, or validation result. This is methodology/governance and engineering evidence only; it authorises no execution.
+
+**Question:** How should P9-v3B obtain reproducible model-blind ground truth when its intended controlled technical methodology has no human-annotation study, but v3.0/v3.1 accidentally required two independent annotators?
+
+**Candidates:** Retain the two-human blocker; silently remove the guard; derive labels from the evaluated models; use one unversioned free-form reference file; or add a prospective project-authored, schema-bound and hash-frozen ground-truth amendment.
+
+**Evaluation criteria:** Preserve the controlled/naturalistic capability objective, exact v3.1 support opportunities and counts, IoU/entity scope, family/split isolation, model-blind separation, pre-inference freezing, fail-closed provenance, and every frozen pipeline/gate/resource parameter; add no participant or annotator dependency and create no empirical output.
+
+**Evidence:** Repository audit of the v3.0 dataset text, v3.1 suitability amendment, pre-execution audit, RunPod guards, manifest/support templates, and tests. The human dependency originated as a conservative response to naturalistic visibility ambiguity in v3.0 and became an explicit v3.1 resource blocker when a second researcher was not guaranteed. RunPod preparation faithfully encoded that blocker, but it did not originate the scientific mismatch. No image, weight, prediction, or validation output was inspected.
+
+**Selected option:** Add `semantic-secrets-preregistration-v3.2.0` and `formal_specification_v3_2.md` without rewriting v3.0/v3.1 history. Each final image receives a project-authored `capability-scenario-specification-v3.2.0` containing exact closed-label reference entities, normalized boxes, and semantic atoms. The existing positive/applicable-negative support-opportunity surface is retained and expanded only in provenance fields: each row deterministically binds its scenario, entity/pair scope, boxes, value, polarity, split, and ground-truth version. `ground-truth-freeze-v3.2.0` binds active config, manifest, opportunity, and aggregate scenario hashes and asserts that no model prediction was produced or accessed before freezing. Formal authorization binds that freeze record.
+
+**Rejected alternatives:** Retaining human annotation conflicts with the intended non-human technical methodology. Removing the guard without a replacement weakens provenance. Model-assisted ground truth is circular and forbidden. An unversioned table cannot establish exact file, reference, or timing integrity. Rewriting v3.0/v3.1 would erase the historical reason the blocker existed.
+
+**Reason:** The manifest and support-opportunity design already provides the correct dataset/split/count skeleton, but it lacked a complete non-human reference representation and formal provenance binding. Project-authored scenario records supply the missing exact reference entities/boxes/atoms; deterministic audits and the freeze record preserve model blindness and fail closed on any later change.
+
+**Security/privacy assumptions:** Unchanged. Capability ground truth is controlled technical data, not a credential or human-subject record. Model outputs may never author or revise reference semantics. Ground-truth integrity does not establish authentication security, semantic privacy, or deployment feasibility.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ6 execution methodology only. C1–C4, RQ1–RQ6, the scientific objective, and all claim boundaries remain materially unchanged. Gate V3-A1 remains unevaluated.
+
+**Experiments supporting decision:** None. Local schema, deterministic data-audit, guard, configuration, and compiler tests are preparation checks, not P9-v3B evidence.
+
+**Remaining uncertainty:** The 240 capability images, scenario specifications, manifest, opportunities, and ground-truth freeze must still be authored and audited. EGTR acquisition provenance, container/GPU smoke, thresholds, actual resources, and all model capability remain unmeasured. Naturalistic project-authored reference quality remains a dataset-construction limitation to report, not permission to use model predictions.
+
+**Revisit trigger:** Before inference, the project-authored reference schema proves insufficient for a frozen metric or cannot express an intended support opportunity; the official model artifact fails acquisition; or an audit detects ambiguity. Any correction must be prospective and model-output blind. After inference, ground truth may not be changed in place.
+
+**Frozen-material confirmation:** The exact two pipelines, models, revisions, preprocessing, input resolution, labels, threshold semantics, metrics, Gate V3-A1 criteria, hardware/resource limits, 240-image design, family/split structure, support-opportunity counts, compiler, and P9-v3B → V3-A1 → P9-v3C → V3-A2 → P10 dependency remain unchanged. No image was generated, no model was acquired or run, and no later phase or cryptographic implementation started.

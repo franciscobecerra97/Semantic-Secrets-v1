@@ -1,5 +1,7 @@
 # P9-v3A modular visual-semantic extraction reframe
 
+> **Historical-method note (2026-08-28):** The two-researcher annotation text below is preserved as the v3.0 record and superseded for execution by the project-authored ground-truth mechanism in `formal_specification_v3_2.md`. No pipeline, dataset count, support count, metric, or gate changes.
+
 Status: complete design and preregistration phase on 2026-08-25. No v3 model, image, inference, authentication experiment, or cryptographic implementation was run.
 
 ## What P9-v2 tested and what failed

@@ -6,6 +6,7 @@ cd "$repo"
 /opt/envs/modern/bin/python -m pytest -q \
   experiments/v3/test_preregistration_v3.py \
   experiments/v3/test_preregistration_v3_1.py \
+  experiments/v3/test_preregistration_v3_2.py \
   experiments/v3/test_semantic_compiler_v3.py
 test "$(git -C /opt/egtr rev-parse HEAD)" = "7f87450f32758ed8583948847a8186f2ee8b21e3"
 /opt/conda/bin/python - <<'PY'

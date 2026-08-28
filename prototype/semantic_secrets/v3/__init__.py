@@ -5,9 +5,10 @@ bounded observations; only :mod:`compiler` constructs canonical graph results.
 """
 
 from .compiler import SemanticCompilerV3, canonical_json_bytes
-from .contract import ActiveV31Contract, load_active_contract
+from .contract import ActiveV3Contract, ActiveV31Contract, load_active_contract
 
 __all__ = [
+    "ActiveV3Contract",
     "ActiveV31Contract",
     "SemanticCompilerV3",
     "canonical_json_bytes",

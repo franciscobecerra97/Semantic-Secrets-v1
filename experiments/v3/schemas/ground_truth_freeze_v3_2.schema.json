@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ground-truth-freeze-v3.2.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "methodology", "dataset_version", "ground_truth_version", "config_hashes", "manifest_sha256", "opportunities_sha256", "scenario_specifications_sha256", "project_authored", "human_participants", "human_annotators", "derived_from_model_predictions", "model_outputs_accessed_before_freeze", "frozen_before_model_inference", "frozen_by", "frozen_at_utc"],
+  "properties": {
+    "schema_version": {"const": "ground-truth-freeze-v3.2.0"},
+    "status": {"const": "frozen_before_model_inference"},
+    "methodology": {"const": "project-authored-scenario-specifications-and-support-opportunities"},
+    "dataset_version": {"const": "p9-v3-capability-data-v3.0.0"},
+    "ground_truth_version": {"const": "project-authored-ground-truth-v3.2.0"},
+    "config_hashes": {"type": "object", "minProperties": 5, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "opportunities_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "scenario_specifications_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "project_authored": {"const": true},
+    "human_participants": {"const": false},
+    "human_annotators": {"const": false},
+    "derived_from_model_predictions": {"const": false},
+    "model_outputs_accessed_before_freeze": {"const": false},
+    "frozen_before_model_inference": {"const": true},
+    "frozen_by": {"type": "string", "minLength": 1},
+    "frozen_at_utc": {"type": "string", "format": "date-time"}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "ground-truth-freeze-v3.2.0",
+  "status": "INCOMPLETE",
+  "methodology": "project-authored-scenario-specifications-and-support-opportunities",
+  "dataset_version": "p9-v3-capability-data-v3.0.0",
+  "ground_truth_version": "project-authored-ground-truth-v3.2.0",
+  "config_hashes": {},
+  "manifest_sha256": "REQUIRED",
+  "opportunities_sha256": "REQUIRED",
+  "scenario_specifications_sha256": "REQUIRED",
+  "project_authored": true,
+  "human_participants": false,
+  "human_annotators": false,
+  "derived_from_model_predictions": false,
+  "model_outputs_accessed_before_freeze": false,
+  "frozen_before_model_inference": true,
+  "frozen_by": "REQUIRED",
+  "frozen_at_utc": "REQUIRED"
+}

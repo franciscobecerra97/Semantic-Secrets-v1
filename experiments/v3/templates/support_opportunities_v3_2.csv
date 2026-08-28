@@ -1,0 +1,1 @@
+opportunity_id,image_id,family_id,stratum,split,scenario_specification_id,atom_type,polarity,reference_value,source_reference_id,source_reference_bbox_xyxy,target_reference_id,target_reference_bbox_xyxy,ground_truth_version

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -11,9 +12,17 @@ import jsonschema
 import pytest
 
 from experiments.v3.runtime.acquire import plan
-from experiments.v3.runtime.dataset import audit_manifest, audit_opportunities, expected_image_ids, randomized_assignment
+from experiments.v3.runtime.dataset import (
+    GROUND_TRUTH_VERSION,
+    OPPORTUNITY_FIELDS,
+    audit_manifest,
+    audit_opportunities,
+    audit_scenario_specification,
+    deterministic_opportunity_id,
+    expected_image_ids,
+)
 from experiments.v3.runtime.execution import cache_key
-from experiments.v3.runtime.guard import main as guard_main
+from experiments.v3.runtime.guard import FormalPaths, main as guard_main, parser as guard_parser
 from experiments.v3.runtime.io import canonical_bytes, sha256_tree
 from experiments.v3.runtime.results import observation_projection
 from experiments.v3.runtime.schemas import SCHEMA_DIR, validate
@@ -32,11 +41,20 @@ def manifest() -> dict:
             "image_id": image_id, "family_id": family, "stratum": stratum, "split": split,
             "source_type": "deterministic_fixture" if stratum.startswith("A_") else "frozen_t2i",
             "licence": "project-authored", "generator_or_asset_revision": "fixture-v3",
-            "prompt_hash_if_applicable": None, "seed_if_applicable": None,
+            "prompt_hash_if_applicable": "1" * 64 if stratum.startswith("B_") else None,
+            "seed_if_applicable": 1 if stratum.startswith("B_") else None,
             "relative_path": f"images/{image_id}.png", "image_sha256": "0" * 64,
-            "annotation_version": "rubric-v3.1",
+            "scenario_specification_id": f"scenario-{image_id}",
+            "scenario_specification_path": f"scenarios/{image_id}.json",
+            "scenario_specification_sha256": "2" * 64,
         })
-    return {"schema_version": "capability-manifest-v3.1.0", "dataset_version": "p9-v3-capability-data-v3.0.0", "created_at_utc": "2026-08-26T00:00:00Z", "images": rows}
+    return {
+        "schema_version": "capability-manifest-v3.2.0",
+        "dataset_version": "p9-v3-capability-data-v3.0.0",
+        "ground_truth_version": GROUND_TRUTH_VERSION,
+        "created_at_utc": "2026-08-28T00:00:00Z",
+        "images": rows,
+    }
 
 
 def test_manifest_schema_and_frozen_split_counts() -> None:
@@ -47,54 +65,121 @@ def test_manifest_schema_and_frozen_split_counts() -> None:
 
 def test_manifest_identifier_change_fails_closed() -> None:
     value = manifest()
-    value["images"][0]["image_id"] = "cap-v3-A-F01-99"
+    value["images"][0]["image_id"] = "cap-v3-A-F01-02"
     with pytest.raises(ValueError, match="deterministic"):
         audit_manifest(value)
 
 
-def test_annotation_example_is_deliberately_unconfirmed() -> None:
-    example = json.loads((Path(__file__).parent / "templates" / "annotation_resource_v3_1.example.json").read_text(encoding="utf-8"))
+def test_manifest_scenario_provenance_fails_closed(tmp_path: Path) -> None:
+    value = manifest()
+    first = value["images"][0]
+    image_path = tmp_path / first["relative_path"]
+    image_path.parent.mkdir(parents=True)
+    image_path.write_bytes(b"fixture-image")
+    first["image_sha256"] = hashlib.sha256(b"fixture-image").hexdigest()
+    scenario_path = tmp_path / first["scenario_specification_path"]
+    scenario_path.parent.mkdir(parents=True)
+    scenario_path.write_text("{}\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="scenario"):
+        audit_manifest(value, tmp_path)
+
+
+def test_ground_truth_example_is_deliberately_incomplete() -> None:
+    example = json.loads((Path(__file__).parent / "templates" / "ground_truth_freeze_v3_2.example.json").read_text(encoding="utf-8"))
     with pytest.raises(jsonschema.ValidationError):
-        validate("annotation_resource_v3_1.schema.json", example)
+        validate("ground_truth_freeze_v3_2.schema.json", example)
 
 
-def test_confirmed_annotation_record_schema() -> None:
+def test_frozen_ground_truth_record_schema_forbids_humans_and_model_outputs() -> None:
     value = {
-        "schema_version": "annotation-resource-v3.1.0", "status": "confirmed",
-        "annotator_roles": ["project_researcher", "qualified_independent_external_human"],
-        "availability_confirmation": "Both named resources confirmed the scheduled independent sessions.",
-        "rubric_version": "visibility-rubric-v3.1", "independence_statement": "Both annotators work independently and remain model-output blind.",
-        "randomized_image_id_procedure": "Use the committed blind identifier map derived with split seed 925031.",
-        "conflict_provenance_statement": "Retain both raw records and link every conflict to its source rows.",
-        "adjudication_procedure": "Resolve conflicts by documented consensus against the frozen visibility rubric.",
-        "confirmed_by": "project-owner", "confirmed_at_utc": "2026-08-26T00:00:00Z",
+        "schema_version": "ground-truth-freeze-v3.2.0",
+        "status": "frozen_before_model_inference",
+        "methodology": "project-authored-scenario-specifications-and-support-opportunities",
+        "dataset_version": "p9-v3-capability-data-v3.0.0",
+        "ground_truth_version": GROUND_TRUTH_VERSION,
+        "config_hashes": {f"c{index}": "0" * 64 for index in range(5)},
+        "manifest_sha256": "1" * 64,
+        "opportunities_sha256": "2" * 64,
+        "scenario_specifications_sha256": "3" * 64,
+        "project_authored": True,
+        "human_participants": False,
+        "human_annotators": False,
+        "derived_from_model_predictions": False,
+        "model_outputs_accessed_before_freeze": False,
+        "frozen_before_model_inference": True,
+        "frozen_by": "project-owner",
+        "frozen_at_utc": "2026-08-28T00:00:00Z",
     }
-    validate("annotation_resource_v3_1.schema.json", value)
+    validate("ground_truth_freeze_v3_2.schema.json", value)
+    value["human_annotators"] = True
+    with pytest.raises(jsonschema.ValidationError):
+        validate("ground_truth_freeze_v3_2.schema.json", value)
 
 
-def test_randomization_is_seeded_and_complete() -> None:
-    first = randomized_assignment(manifest(), 925031)
-    second = randomized_assignment(manifest(), 925031)
-    assert first == second
-    assert len(first) == 240
-    assert len({row["blind_id"] for row in first}) == 240
+def test_scenario_schema_checks_reference_scope_and_boxes() -> None:
+    value = {
+        "schema_version": "capability-scenario-specification-v3.2.0",
+        "scenario_specification_id": "scenario-cap-v3-A-F01-01",
+        "image_id": "cap-v3-A-F01-01", "family_id": "F01",
+        "stratum": "A_controlled_geometric", "split": "development",
+        "authoring_method": "controlled_scene_specification", "model_output_blind": True,
+        "reference_entities": [{"reference_id": "r1", "category": "person", "bbox_xyxy": [0.1, 0.1, 0.4, 0.8]}],
+        "reference_atoms": [{"reference_atom_id": "a1", "atom_type": "entity", "value": "person", "source_reference_id": "r1", "target_reference_id": None}],
+    }
+    audit_scenario_specification(value)
+    value["reference_entities"][0]["bbox_xyxy"] = [0.4, 0.1, 0.1, 0.8]
+    with pytest.raises(ValueError, match="normalized"):
+        audit_scenario_specification(value)
 
 
 def test_opportunity_counts_match_frozen_plan(tmp_path: Path) -> None:
     path = tmp_path / "opportunities.csv"
-    fields = ["opportunity_id", "image_id", "family_id", "stratum", "split", "atom_type", "polarity", "reference_value", "source_detection_id", "target_detection_id", "rubric_version"]
+    fields = list(OPPORTUNITY_FIELDS)
     config = load_active_contract().amend_prereg["dataset_support"]["validation_plan_each_stratum"]
+    manifest_value = manifest()
+    labels = {
+        "entity": ["person", "cat"], "colour": ["red", "blue"],
+        "size": ["small", "large"], "material": ["wood", "metal"],
+        "pattern": ["solid", "striped"], "count": ["1", "2"],
+        "unary_action": ["standing", "sitting"],
+        "binary_interaction": ["holding", "riding"],
+        "geometry_relation": ["left_of", "above"], "scene": ["indoor", "outdoor"],
+    }
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         index = 0
-        for stratum in ("A_controlled_geometric", "B_naturalistic_t2i"):
-            for atom_type, rule in config.items():
-                for polarity in ("positive", "negative"):
-                    for _ in range(rule[polarity]):
-                        index += 1
-                        writer.writerow({"opportunity_id": f"opp-{index:05d}", "image_id": "fixture", "family_id": "F13", "stratum": stratum, "split": "validation", "atom_type": atom_type, "polarity": polarity, "reference_value": "x", "source_detection_id": "", "target_detection_id": "", "rubric_version": "v3.1"})
-    assert audit_opportunities(path)["opportunities"] == index
+        for split in ("development", "validation"):
+            for stratum in ("A_controlled_geometric", "B_naturalistic_t2i"):
+                images = [row for row in manifest_value["images"] if row["stratum"] == stratum and row["split"] == split]
+                for atom_type, rule in config.items():
+                    start_text, end_text = rule["families"].split("-")
+                    start, end = int(start_text[1:]), int(end_text[1:])
+                    eligible_images = [
+                        image for image in images
+                        if start <= int(image["family_id"][1:]) - (12 if split == "validation" else 0) <= end
+                    ]
+                    for polarity in ("positive", "negative"):
+                        for item_index in range(rule[polarity]):
+                            index += 1
+                            image = eligible_images[item_index % len(eligible_images)]
+                            source = "r1" if atom_type not in {"count", "scene"} else ""
+                            target = "r2" if atom_type in {"binary_interaction", "geometry_relation"} else ""
+                            row = {
+                                "opportunity_id": "", "image_id": image["image_id"], "family_id": image["family_id"],
+                                "stratum": stratum, "split": split,
+                                "scenario_specification_id": image["scenario_specification_id"],
+                                "atom_type": atom_type, "polarity": polarity,
+                                "reference_value": labels[atom_type][(item_index // len(images)) % len(labels[atom_type])],
+                                "source_reference_id": source,
+                                "source_reference_bbox_xyxy": "[0.1,0.1,0.4,0.8]" if source else "",
+                                "target_reference_id": target,
+                                "target_reference_bbox_xyxy": "[0.5,0.1,0.8,0.8]" if target else "",
+                                "ground_truth_version": GROUND_TRUTH_VERSION,
+                            }
+                            row["opportunity_id"] = deterministic_opportunity_id(row)
+                            writer.writerow(row)
+    assert audit_opportunities(path, manifest_value)["opportunities"] == index
 
 
 def test_pipeline_plan_is_exact_and_deduplicates_siglip() -> None:
@@ -126,6 +211,17 @@ def test_environment_record_reports_python_runtime() -> None:
 def test_formal_guard_requires_explicit_flag() -> None:
     with pytest.raises(SystemExit, match="--formal"):
         guard_main([])
+
+
+def test_formal_guard_exposes_only_ground_truth_freeze_dependency() -> None:
+    assert "ground_truth" in FormalPaths.__dataclass_fields__
+    assert "annotation" not in FormalPaths.__dataclass_fields__
+    help_text = guard_parser().format_help()
+    assert "--ground-truth" in help_text
+    assert "--annotation" not in help_text
+    schema = json.loads((SCHEMA_DIR / "formal_authorization_v3_2.schema.json").read_text(encoding="utf-8"))
+    assert "expected_ground_truth_freeze_sha256" in schema["required"]
+    assert "expected_annotation_record_sha256" not in schema["required"]
 
 
 def test_threshold_freeze_requires_both_pipelines() -> None:

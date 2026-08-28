@@ -1,6 +1,6 @@
 # P9-v3B RunPod runbook
 
-This runbook cannot authorise P9-v3B. The project owner must first resolve the two-independent-human annotation blocker and separately authorise formal execution. Until then, stop after container/environment verification and the acquisition dry run.
+This runbook cannot authorise P9-v3B. P9-v3B has no human participants or human annotators. Model acquisition still requires explicit permission; any inference additionally requires a complete, model-output-blind project-authored ground-truth freeze and the applicable smoke/formal authorization.
 
 ## 1. GPU characteristics
 
@@ -24,7 +24,7 @@ Attach 100 GiB at `/workspace` (60 GiB minimum before actual acquisition sizes a
 /workspace/semantic-secrets  repository checkout
 /workspace/models            verified model snapshots/artifacts
 /workspace/cache             Hugging Face and framework caches
-/workspace/data              capability images/manifests/annotations
+/workspace/data              capability images/manifests/scenario specifications
 /workspace/results           raw observations/compiler results/logs
 /workspace/environment       hashes, approvals, thresholds, GPU records
 ```
@@ -66,7 +66,7 @@ Only after acquisition is explicitly permitted, licence/provenance review is rec
 
 ## 7. Allowed smoke procedure
 
-Smoke is forbidden while the annotation record is unresolved or before the development capability images exist with frozen model-blind ground truth. After those prerequisites and an explicit smoke permission:
+Smoke is forbidden before all final images, scenario specifications, manifest rows, and support opportunities are frozen in a valid `ground_truth_freeze_v3_2.json`. This record must predate every perception output and must assert that no prediction contributed to ground truth. After that prerequisite and an explicit smoke permission:
 
 ```bash
 export P9_V3B_SMOKE_ALLOWED=yes
@@ -79,8 +79,9 @@ This runs at most two development images per pipeline. It may expose plumbing, l
 
 Formal validation requires all of the following external, schema-valid records:
 
-- confirmed annotation resource;
-- exact 240-image manifest and image hashes;
+- frozen project-authored ground-truth record;
+- exact 240-image manifest, image hashes, and scenario-specification hashes;
+- exact development/validation support-opportunity table;
 - verified acquisition manifest;
 - development-only threshold freeze created before validation;
 - recorded GPU environment;
@@ -92,7 +93,7 @@ The command has no implicit formal mode:
 bash infra/runpod/formal_run.sh --formal /workspace/semantic-secrets
 ```
 
-The guard rejects a missing `--formal`, either missing pipeline, any revision/hash mismatch, unresolved annotation, unfrozen thresholds, incorrect manifest, absent GPU record, or unexpected existing validation output. It runs validation once and then the one frozen validation repeat. Development output cannot be relabelled as formal output.
+The guard rejects a missing `--formal`, either missing pipeline, any revision/hash mismatch, unfrozen or model-dependent ground truth, unfrozen thresholds, incorrect manifest/opportunity/scenario linkage, absent GPU record, or unexpected existing validation output. It runs validation once and then the one frozen validation repeat. Development output cannot be relabelled as formal output.
 
 ## 9. Cache and resume
 

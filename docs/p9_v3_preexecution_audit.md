@@ -1,5 +1,7 @@
 # P9-v3A.1 pre-execution suitability amendment
 
+> **Historical-method note (2026-08-28):** This audit correctly records why v3.1 introduced a second-annotator blocker, but P9-v3A.2 supersedes that methodology before any capability image or model output. P9-v3B has no human annotators. Its active prerequisite is the deterministic project-authored, model-output-blind ground-truth freeze in `formal_specification_v3_2.md` and `preregistration_v3_2.json`. The pipeline, support, gate, and resource findings below remain binding.
+
 Status: complete prospective design audit on 2026-08-25. This amendment was made before any v3 model weight, capability image, perception output, validation output, or authentication result existed. P9-v3B was not executed.
 
 ## Version boundary
@@ -67,7 +69,7 @@ The v3.0 blanket minimum is superseded. A type is gate-evaluable only when its f
 
 This amendment does not weaken Gate V3-A1: a complete pipeline must still qualify entity plus at least two further types, including one structural type. Pipeline types may not be unioned.
 
-## Annotation feasibility
+## Historical v3.1 annotation feasibility (superseded by P9-v3A.2)
 
 Two independent, model-blind human annotations remain the target protocol for the naturalistic stratum. The repository contains no evidence that two project researchers are guaranteed. Therefore naturalistic image creation and P9-v3B execution are blocked until an annotation-resource record names both annotators and confirms availability.
 
@@ -88,6 +90,6 @@ Failure of one pipeline does not stop evaluation of the other unless the compile
 
 ## Execution boundary
 
-No v3 inference, model-weight download, capability-image creation, validation output, P9-v3C, P10, policy tuning, or cryptographic work occurred in this audit. P9-v3B remains the next phase but is not authorized by this amendment and is additionally blocked until the two-human annotation resource is documented.
+No v3 inference, model-weight download, capability-image creation, validation output, P9-v3C, P10, policy tuning, or cryptographic work occurred in this audit. At the time of v3.1, P9-v3B was additionally blocked until the two-human resource was documented; P9-v3A.2 later superseded that blocker with the project-authored ground-truth freeze before any output.
 
 The repository currently contains preregistration/configuration tests, not an implemented semantic compiler or 320 executed compiler cases. The audit verifies that the frozen eight-category case plan still totals exactly 320 and that its required pass rates remain unchanged. Actual execution of those 320 or more invariant cases belongs to P9-v3B; claiming that they already passed would exceed the available evidence.

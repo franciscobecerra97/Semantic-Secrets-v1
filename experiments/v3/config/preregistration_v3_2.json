@@ -1,0 +1,79 @@
+{
+  "$schema_version": "semantic-secrets-preregistration-v3.2.0",
+  "preregistration_id": "p9-v3a2-ground-truth-correction-2026-08-28",
+  "phase": "P9-v3A.2",
+  "status": "prospective methodology correction before any v3 capability image or model output",
+  "amends": {
+    "base_files": ["preregistration_v3.json", "preregistration_v3_1.json"],
+    "rule": "v3.0.0 and v3.1.0 remain binding except for the human-annotation method and blocker explicitly superseded here"
+  },
+  "publication_result": false,
+  "output_state_at_freeze": {
+    "model_inference": false,
+    "model_weights_downloaded": false,
+    "capability_images_created": false,
+    "validation_output_exists": false,
+    "p9_v3b_started": false
+  },
+  "supersedes": {
+    "preregistration_v3.json": [
+      "dataset.strata.B_naturalistic_t2i.annotation",
+      "dataset.provenance_required annotation_version"
+    ],
+    "preregistration_v3_1.json": [
+      "execution_boundary.additional_blocker",
+      "annotation"
+    ]
+  },
+  "versions": {
+    "observation": "visual-observation-v3.1.0",
+    "compiler": "semantic-compiler-v3.0.0",
+    "capability_manifest": "capability-manifest-v3.2.0",
+    "scenario_specification": "capability-scenario-specification-v3.2.0",
+    "ground_truth": "project-authored-ground-truth-v3.2.0",
+    "ground_truth_freeze": "ground-truth-freeze-v3.2.0",
+    "formal_authorization": "formal-authorization-v3.2.0"
+  },
+  "ground_truth": {
+    "method": "project-authored closed-label reference scene specifications and predeclared support opportunities",
+    "human_participants": false,
+    "human_annotators": false,
+    "model_assisted_ground_truth": false,
+    "derived_from_model_predictions": false,
+    "model_output_access_before_freeze": false,
+    "authoring_scope": "technical dataset construction only",
+    "controlled_stratum": "reference entities, normalized boxes, and semantic atoms are emitted from the project-authored controlled-scene specification",
+    "naturalistic_stratum": "the project author records the final image's closed-label reference entities, normalized boxes, and semantic atoms in the same versioned scenario schema without consulting perception outputs",
+    "opportunity_source": "positive and applicable-negative rows are deterministically linked to the frozen scenario specification; model predictions never create, remove, or revise an opportunity",
+    "freeze_timing": "all scenario specifications, image hashes, manifest rows, and development/validation support opportunities are complete and SHA-256-bound before any perception inference",
+    "required_record": [
+      "exact config hashes",
+      "capability manifest SHA-256",
+      "support-opportunity SHA-256",
+      "scenario-specification aggregate SHA-256",
+      "model-output-blind declarations",
+      "freeze identity and UTC timestamp"
+    ]
+  },
+  "execution_boundary": {
+    "authorized_by_this_amendment": false,
+    "image_creation_requires_human_resource": false,
+    "model_acquisition_requires_ground_truth_freeze": false,
+    "smoke_or_formal_inference_requires_ground_truth_freeze": true,
+    "formal_execution_requires_separate_authorization": true
+  },
+  "inherited_unchanged": [
+    "scientific objective",
+    "pipelines and model candidates",
+    "model revisions",
+    "preprocessing and input resolution",
+    "closed labels",
+    "threshold semantics and numeric gates",
+    "dataset image counts, strata, families, and splits",
+    "support-opportunity counts",
+    "metrics and Gate V3-A1 criteria",
+    "hardware and measured-resource limits",
+    "compiler and bounded-observation architecture",
+    "phase dependencies"
+  ]
+}
