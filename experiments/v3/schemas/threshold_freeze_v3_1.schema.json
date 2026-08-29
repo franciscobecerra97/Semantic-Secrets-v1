@@ -3,11 +3,12 @@
   "$id": "threshold-freeze-v3.1.0",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "status", "development_manifest_sha256", "frozen_at_utc", "pipelines"],
+  "required": ["schema_version", "status", "development_manifest_sha256", "development_results_sha256", "frozen_at_utc", "pipelines"],
   "properties": {
     "schema_version": {"const": "threshold-freeze-v3.1.0"},
     "status": {"const": "frozen_before_validation"},
     "development_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "development_results_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "frozen_at_utc": {"type": "string", "format": "date-time"},
     "pipelines": {
       "type": "object", "additionalProperties": false,

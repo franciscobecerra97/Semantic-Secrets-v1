@@ -21,14 +21,28 @@ from ..thresholds import validate_settings
 MODELS = Path(os.environ.get("SEMANTIC_SECRETS_MODELS", "/workspace/models"))
 
 
-def read_request() -> dict[str, Any]:
-    value = json.load(sys.stdin)
+def validate_request(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict) or value.get("adapter_protocol") != "bounded-observation-adapter-v3.1.0":
         raise ValueError("unsupported adapter request")
     path = Path(value["image_path"])
     if hashlib.sha256(path.read_bytes()).hexdigest() != value["image_sha256"]:
         raise ValueError("adapter image SHA-256 mismatch")
     return value
+
+
+def read_request() -> dict[str, Any]:
+    return validate_request(json.load(sys.stdin))
+
+
+def serve(handler: Any) -> int:
+    """Serve canonical one-line requests while retaining loaded model state."""
+
+    for line in sys.stdin.buffer:
+        if not line.strip():
+            continue
+        value = validate_request(json.loads(line))
+        emit(handler(value))
+    return 0
 
 
 def confidence(score: float, setting: dict[str, Any]) -> dict[str, Any]:
@@ -129,4 +143,4 @@ class SiglipScorer:
 def emit(value: dict[str, Any]) -> None:
     if sum(len(value[key]) for key in ("detections", "attributes", "unary_actions", "binary_interactions", "scenes")) > 64:
         raise RuntimeError("bounded observation exceeds the frozen 64-record limit")
-    print(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+    print(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")), flush=True)

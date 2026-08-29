@@ -98,6 +98,10 @@ def verify_formal(paths: FormalPaths, *, pipeline_ids: tuple[str, ...], mode: st
             validate_settings(pipeline_id, thresholds["pipelines"][pipeline_id], exact_tasks=True)
         except ValueError as exc:
             raise GuardFailure(str(exc)) from exc
+    development_dir = paths.results / "development"
+    if not (development_dir / ".complete").is_file() or len(list(development_dir.rglob("*.json"))) != 240:
+        raise GuardFailure("formal validation requires the complete 240-record development run")
+    _equal("development result SHA-256", sha256_tree(development_dir), thresholds["development_results_sha256"])
 
     if not gpu_environment.get("cuda_available") or not gpu_environment.get("nvidia_smi_sha256"):
         raise GuardFailure("recorded GPU environment is missing CUDA or nvidia-smi provenance")

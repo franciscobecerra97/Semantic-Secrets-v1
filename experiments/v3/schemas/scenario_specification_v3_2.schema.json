@@ -31,13 +31,14 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["reference_atom_id", "atom_type", "value", "source_reference_id", "target_reference_id"],
+        "required": ["reference_atom_id", "atom_type", "value", "source_reference_id", "target_reference_id", "scope_category"],
         "properties": {
           "reference_atom_id": {"type": "string", "minLength": 1},
           "atom_type": {"enum": ["entity", "colour", "size", "material", "pattern", "count", "unary_action", "binary_interaction", "geometry_relation", "scene"]},
           "value": {"type": "string", "minLength": 1},
           "source_reference_id": {"type": ["string", "null"]},
-          "target_reference_id": {"type": ["string", "null"]}
+          "target_reference_id": {"type": ["string", "null"]},
+          "scope_category": {"type": ["string", "null"]}
         }
       }
     }

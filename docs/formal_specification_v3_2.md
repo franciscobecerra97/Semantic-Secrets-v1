@@ -10,7 +10,7 @@ P9-v3B is technical dataset and model evaluation. It has no human participants a
 
 ## 2. Project-authored reference semantics
 
-Each `cap-v3-*` image has one versioned, project-authored reference scene specification. It records the image/family/split identity, closed-label reference entities, normalized reference boxes, and applicable semantic atoms. The controlled stratum derives these facts from its authored scene construction. The naturalistic stratum uses the same closed schema: the project author records the final image reference without consulting any perception output.
+Each `cap-v3-*` image has one versioned, project-authored reference scene specification. It records the image/family/split identity, closed-label reference entities, normalized reference boxes, and applicable semantic atoms. Count atoms additionally record their closed-label entity-category scope so the derived compiler count can be scored without ambiguity. The controlled stratum derives these facts from its authored scene construction. The naturalistic stratum uses the same closed schema: the project author records the final image reference without consulting any perception output.
 
 The existing support-opportunity table remains the scored ground-truth surface. Every positive or applicable-negative opportunity links to its image, scenario specification, reference entity scope, normalized boxes where applicable, atom type, polarity, and exact closed-label value. Opportunity IDs and ordering are deterministic. The frozen v3.1 opportunity counts and type roles do not change.
 

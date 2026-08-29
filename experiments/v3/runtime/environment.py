@@ -19,6 +19,7 @@ MODERN = {
     "torch": "2.4.1", "torchvision": "0.19.1", "transformers": "4.49.0",
     "huggingface-hub": "0.28.1", "safetensors": "0.5.2", "tokenizers": "0.21.0",
     "Pillow": "11.1.0", "numpy": "1.26.4", "jsonschema": "4.23.0", "psutil": "6.1.1",
+    "diffusers": "0.32.2", "accelerate": "1.3.0",
 }
 
 

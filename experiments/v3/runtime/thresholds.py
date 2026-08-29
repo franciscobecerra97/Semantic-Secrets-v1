@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 
+import argparse
+import json
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Mapping
+
+from .io import atomic_write, canonical_bytes, read_json, sha256_file, sha256_tree
+from .schemas import validate
 
 
 SCORE_CONTRACT: dict[str, dict[str, tuple[str, bool]]] = {
@@ -46,3 +53,48 @@ def validate_settings(pipeline_id: str, values: Mapping[str, Any], *, exact_task
             margin = setting.get("minimum_top_two_margin")
             if isinstance(margin, bool) or not isinstance(margin, (int, float)) or not 0 <= margin <= 1:
                 raise ValueError(f"missing/invalid top-two margin for {pipeline_id}/{task}")
+
+
+def freeze_settings(settings_path: Path, manifest_path: Path, results: Path, output: Path) -> dict[str, Any]:
+    """Freeze already development-fitted settings without inventing a fit rule."""
+
+    if output.exists():
+        raise ValueError("threshold freeze output already exists")
+    if (results / "validation").exists() and any((results / "validation").rglob("*.json")):
+        raise ValueError("thresholds cannot be frozen after validation output")
+    development = results / "development"
+    if not (development / ".complete").is_file() or len(list(development.rglob("*.json"))) != 240:
+        raise ValueError("threshold freeze requires the complete 240-record development run")
+    settings = read_json(settings_path)
+    if settings.get("schema_version") != "development-threshold-settings-v3.1.0":
+        raise ValueError("settings are not an explicit v3.1 development-threshold record")
+    if set(settings.get("pipelines", {})) != set(SCORE_CONTRACT):
+        raise ValueError("development settings must contain both frozen pipelines")
+    for pipeline, values in settings["pipelines"].items():
+        validate_settings(pipeline, values, exact_tasks=True)
+    value = {
+        "schema_version": "threshold-freeze-v3.1.0",
+        "status": "frozen_before_validation",
+        "development_manifest_sha256": sha256_file(manifest_path),
+        "development_results_sha256": sha256_tree(development),
+        "frozen_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "pipelines": settings["pipelines"],
+    }
+    validate("threshold_freeze_v3_1.schema.json", value)
+    atomic_write(output, canonical_bytes(value))
+    return {"output": str(output), "sha256": sha256_file(output)}
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Validate and freeze development-fitted P9-v3B thresholds")
+    parser.add_argument("--settings", type=Path, required=True)
+    parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--results", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args(argv)
+    print(json.dumps(freeze_settings(args.settings, args.manifest, args.results, args.output), sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

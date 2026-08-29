@@ -14,6 +14,8 @@ import os
 import shlex
 import subprocess
 import sys
+import threading
+import time
 from pathlib import Path
 from typing import Any
 
@@ -23,6 +25,7 @@ from .dataset import audit_ground_truth_freeze
 from .guard import FormalPaths, verify_formal
 from .io import atomic_write, canonical_bytes, read_json, sha256_file, sha256_tree
 from .schemas import validate
+from .telemetry import Telemetry
 from .thresholds import validate_settings
 
 
@@ -30,6 +33,78 @@ class PipelineFailure(RuntimeError):
     def __init__(self, code: str, detail: str) -> None:
         super().__init__(detail)
         self.code = code
+
+
+class AdapterSession:
+    """One persistent model process per pipeline; requests remain one JSON line."""
+
+    def __init__(self, command: str) -> None:
+        self._stderr: list[bytes] = []
+        self.process = subprocess.Popen(
+            shlex.split(command), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+        assert self.process.stderr is not None
+        self._thread = threading.Thread(target=self._drain_stderr, daemon=True)
+        self._thread.start()
+
+    def _drain_stderr(self) -> None:
+        assert self.process.stderr is not None
+        for block in iter(lambda: self.process.stderr.read1(4096), b""):
+            self._stderr.append(block)
+            if sum(map(len, self._stderr)) > 16000:
+                self._stderr = [b"".join(self._stderr)[-8000:]]
+
+    def request(self, request: dict[str, Any]) -> dict[str, Any]:
+        if self.process.poll() is not None:
+            raise PipelineFailure("COMPONENT_FAILURE", b"".join(self._stderr)[-2000:].decode(errors="replace"))
+        assert self.process.stdin is not None and self.process.stdout is not None
+        self.process.stdin.write(canonical_bytes(request))
+        self.process.stdin.flush()
+        value: list[bytes] = []
+        failure: list[BaseException] = []
+
+        def read() -> None:
+            try:
+                value.append(self.process.stdout.readline())
+            except BaseException as exc:  # pragma: no cover - operating-system pipe failure
+                failure.append(exc)
+
+        reader = threading.Thread(target=read, daemon=True)
+        reader.start()
+        reader.join(request["timeout_seconds"])
+        if reader.is_alive():
+            self.close(kill=True)
+            raise PipelineFailure("COMPONENT_TIMEOUT", "persistent adapter request timed out")
+        if failure or not value or not value[0]:
+            detail = b"".join(self._stderr)[-2000:].decode(errors="replace")
+            code = "COMPONENT_OOM" if self.process.poll() in {9, 137, -9} or "out of memory" in detail.casefold() else "COMPONENT_FAILURE"
+            raise PipelineFailure(code, detail or repr(failure))
+        try:
+            decoded = json.loads(value[0].decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise PipelineFailure("MALFORMED_ADAPTER_OUTPUT", str(exc)) from exc
+        if not isinstance(decoded, dict):
+            raise PipelineFailure("MALFORMED_ADAPTER_OUTPUT", "adapter output is not one JSON object")
+        return decoded
+
+    def close(self, *, kill: bool = False) -> None:
+        if self.process.poll() is not None:
+            return
+        if kill:
+            self.process.kill()
+        else:
+            assert self.process.stdin is not None
+            self.process.stdin.close()
+            try:
+                self.process.wait(timeout=30)
+            except subprocess.TimeoutExpired:
+                self.process.kill()
+
+    def __enter__(self) -> "AdapterSession":
+        return self
+
+    def __exit__(self, *_: object) -> None:
+        self.close()
 
 
 def cache_key(request: dict[str, Any]) -> str:
@@ -102,7 +177,8 @@ def execute(args: argparse.Namespace) -> int:
 
     for pipeline_id in args.pipeline:
         command = args.adapter_command[pipeline_id]
-        for image in images:
+        with AdapterSession(command) as session:
+          for image_index, image in enumerate(images):
             image_path = args.data / image["relative_path"]
             if not image_path.is_file() or sha256_file(image_path) != image["image_sha256"]:
                 raise SystemExit(f"REFUSED: missing or hash-mismatched image {image['image_id']}")
@@ -122,6 +198,7 @@ def execute(args: argparse.Namespace) -> int:
                 "threshold_freeze_sha256": threshold_sha,
                 "thresholds": thresholds["pipelines"][pipeline_id],
                 "timeout_seconds": args.timeout_seconds,
+                "resource_warmup": args.mode == "development" and image_index < int(contract.amend_prereg["compute"]["measurement_protocol"]["warmup_images"]),
             }
             key = cache_key(request)
             destination = output_dir / pipeline_id / f"{image['image_id']}.{key}.json"
@@ -131,12 +208,34 @@ def execute(args: argparse.Namespace) -> int:
                     raise SystemExit(f"REFUSED: cache key mismatch for {destination}")
                 continue
             try:
-                observation = run_adapter(command, request)
-                compiled = json.loads(compiler.compile(observation))
-                record = {"cache_key": key, "compiler_result": compiled, "observation": observation, "pipeline_failure": None, "request": request}
+                with Telemetry() as controller_meter:
+                    started = time.perf_counter()
+                    observation = session.request(request)
+                    compiled = json.loads(compiler.compile(observation))
+                    controller_telemetry = controller_meter.finish()
+                record = {
+                    "cache_key": key, "compiler_result": compiled, "observation": observation,
+                    "pipeline_failure": None, "request": request,
+                    "complete_pipeline_elapsed_seconds": round(time.perf_counter() - started, 6),
+                    "controller_telemetry": controller_telemetry,
+                }
             except PipelineFailure as exc:
-                record = {"cache_key": key, "compiler_result": None, "observation": None, "pipeline_failure": {"code": exc.code, "detail": str(exc)}, "request": request}
+                record = {"cache_key": key, "compiler_result": None, "observation": None, "pipeline_failure": {"code": exc.code, "detail": str(exc)}, "request": request, "complete_pipeline_elapsed_seconds": None, "controller_telemetry": None}
             atomic_write(destination, canonical_bytes(record))
+    expected_records = len(images) * len(args.pipeline)
+    actual_records = len(list(output_dir.rglob("*.json")))
+    if actual_records != expected_records:
+        raise SystemExit(f"REFUSED: {args.mode} produced {actual_records} records, expected {expected_records}")
+    atomic_write(
+        output_dir / ".complete",
+        canonical_bytes({
+            "mode": args.mode,
+            "pipelines": sorted(args.pipeline),
+            "records": actual_records,
+            "manifest_sha256": sha256_file(args.manifest),
+            "thresholds_sha256": threshold_sha,
+        }),
+    )
     return 0
 
 

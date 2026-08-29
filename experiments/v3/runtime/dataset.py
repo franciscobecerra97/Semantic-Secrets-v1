@@ -7,12 +7,13 @@ import csv
 import hashlib
 import json
 from collections import Counter, defaultdict
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
 
 from prototype.semantic_secrets.v3 import load_active_contract
 
-from .io import canonical_bytes, read_json, sha256_file
+from .io import atomic_write, canonical_bytes, read_json, sha256_file
 from .schemas import validate
 
 
@@ -21,7 +22,7 @@ OPPORTUNITY_FIELDS = (
     "opportunity_id", "image_id", "family_id", "stratum", "split",
     "scenario_specification_id", "atom_type", "polarity", "reference_value",
     "source_reference_id", "source_reference_bbox_xyxy", "target_reference_id",
-    "target_reference_bbox_xyxy", "ground_truth_version",
+    "target_reference_bbox_xyxy", "scope_category", "ground_truth_version",
 )
 SINGLE_ENTITY_TYPES = {"entity", "colour", "size", "material", "pattern", "unary_action"}
 PAIR_TYPES = {"binary_interaction", "geometry_relation"}
@@ -114,6 +115,11 @@ def audit_scenario_specification(value: dict[str, Any], manifest_row: Mapping[st
             raise ValueError(f"{atom_id} has invalid ordered-pair scope")
         if atom["atom_type"] in GLOBAL_TYPES and (source is not None or target is not None):
             raise ValueError(f"{atom_id} has invalid global scope")
+        if atom["atom_type"] == "count":
+            if atom.get("scope_category") not in labels["entity"]:
+                raise ValueError(f"{atom_id} count lacks a frozen closed-label scope_category")
+        elif atom.get("scope_category") is not None:
+            raise ValueError(f"{atom_id} has an unexpected scope_category")
         if atom["atom_type"] == "entity" and entities[source][0] != atom["value"]:
             raise ValueError(f"entity atom {atom_id} contradicts its reference category")
     return {"entities": entities, "atoms": value["reference_atoms"]}
@@ -215,6 +221,11 @@ def audit_opportunities(path: Path, manifest: dict[str, Any] | None = None, data
                 raise ValueError(f"invalid pair opportunity scope in {opportunity_id}")
             if row["atom_type"] in GLOBAL_TYPES and (source or target or source_box is not None or target_box is not None):
                 raise ValueError(f"invalid global opportunity scope in {opportunity_id}")
+            if row["atom_type"] == "count":
+                if row["scope_category"] not in labels["entity"]:
+                    raise ValueError(f"count opportunity lacks a closed-label scope_category in {opportunity_id}")
+            elif row["scope_category"]:
+                raise ValueError(f"unexpected scope_category in {opportunity_id}")
             counts[(row["split"], row["stratum"], row["atom_type"], row["polarity"])] += 1
             per_image[(row["image_id"], row["atom_type"], row["polarity"])] += 1
             if manifest is not None:
@@ -237,6 +248,7 @@ def audit_opportunities(path: Path, manifest: dict[str, Any] | None = None, data
                     and str(atom["value"]) == row["reference_value"]
                     and (atom["source_reference_id"] or "") == source
                     and (atom["target_reference_id"] or "") == target
+                    and (atom.get("scope_category") or "") == row["scope_category"]
                     for atom in audited["atoms"]
                 )
                 if matching != (row["polarity"] == "positive"):
@@ -294,6 +306,188 @@ def audit_ground_truth_freeze(
     return {"status": record["status"], **expected, "images": manifest_audit["images"], "opportunities": opportunity_audit["opportunities"]}
 
 
+def build_opportunities(path: Path, manifest_path: Path, data_root: Path) -> dict[str, Any]:
+    """Materialize the frozen opportunity layout from final scenario records."""
+
+    if path.exists():
+        raise ValueError("support-opportunity output already exists")
+    manifest = read_json(manifest_path)
+    audit = audit_manifest(manifest, data_root)
+    labels = {key: sorted(value) for key, value in _closed_labels().items()}
+    plan = load_active_contract().amend_prereg["dataset_support"]["validation_plan_each_stratum"]
+    rows: list[dict[str, str]] = []
+    for image in sorted(manifest["images"], key=lambda item: item["image_id"]):
+        local_family = int(image["family_id"][1:]) - (12 if image["split"] == "validation" else 0)
+        scenario = audit["scenarios"][image["image_id"]]
+        entities = {row["reference_id"]: row for row in scenario["reference_entities"]}
+        atoms = scenario["reference_atoms"]
+        for atom_type, rule in plan.items():
+            start_text, end_text = rule["families"].split("-")
+            if not int(start_text[1:]) <= local_family <= int(end_text[1:]):
+                continue
+            positives = sorted(
+                (row for row in atoms if row["atom_type"] == atom_type),
+                key=lambda row: (row["reference_atom_id"], row["value"]),
+            )
+            required = int(rule["per_contributing_image"]["positive"])
+            if len(positives) < required:
+                raise ValueError(f"{image['image_id']}/{atom_type}: scenario has {len(positives)} positives, needs {required}")
+            for positive in positives[:required]:
+                source = positive["source_reference_id"] or ""
+                target = positive["target_reference_id"] or ""
+                scope_category = positive.get("scope_category") or ""
+                common = {
+                    "opportunity_id": "", "image_id": image["image_id"], "family_id": image["family_id"],
+                    "stratum": image["stratum"], "split": image["split"],
+                    "scenario_specification_id": image["scenario_specification_id"], "atom_type": atom_type,
+                    "source_reference_id": source,
+                    "source_reference_bbox_xyxy": json.dumps(entities[source]["bbox_xyxy"], separators=(",", ":")) if source else "",
+                    "target_reference_id": target,
+                    "target_reference_bbox_xyxy": json.dumps(entities[target]["bbox_xyxy"], separators=(",", ":")) if target else "",
+                    "scope_category": scope_category,
+                    "ground_truth_version": GROUND_TRUTH_VERSION,
+                }
+                positive_row = {**common, "polarity": "positive", "reference_value": str(positive["value"])}
+                positive_row["opportunity_id"] = deterministic_opportunity_id(positive_row)
+                rows.append(positive_row)
+                same_scope = {
+                    str(row["value"]) for row in atoms
+                    if row["atom_type"] == atom_type
+                    and (row["source_reference_id"] or "") == source
+                    and (row["target_reference_id"] or "") == target
+                    and (row.get("scope_category") or "") == scope_category
+                }
+                negative_value = next((value for value in labels[atom_type] if value not in same_scope), None)
+                if negative_value is None:
+                    raise ValueError(f"{image['image_id']}/{atom_type}: no applicable negative label remains")
+                negative_row = {**common, "polarity": "negative", "reference_value": negative_value}
+                negative_row["opportunity_id"] = deterministic_opportunity_id(negative_row)
+                rows.append(negative_row)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("x", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=OPPORTUNITY_FIELDS, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+    return audit_opportunities(path, manifest, data_root)
+
+
+def create_ground_truth_freeze(
+    path: Path, manifest_path: Path, opportunities_path: Path, data_root: Path,
+    results_root: Path, frozen_by: str,
+) -> dict[str, Any]:
+    if path.exists():
+        raise ValueError("ground-truth freeze output already exists")
+    contract = load_active_contract()
+    manifest = read_json(manifest_path)
+    manifest_audit = audit_manifest(manifest, data_root)
+    opportunity_audit = audit_opportunities(opportunities_path, manifest, data_root)
+    if results_root.exists() and any(results_root.rglob("*.json")):
+        raise ValueError("ground truth cannot be frozen after model-output JSON exists")
+    record = {
+        "schema_version": "ground-truth-freeze-v3.2.0",
+        "status": "frozen_before_model_inference",
+        "methodology": "project-authored-scenario-specifications-and-support-opportunities",
+        "dataset_version": "p9-v3-capability-data-v3.0.0",
+        "ground_truth_version": GROUND_TRUTH_VERSION,
+        "config_hashes": dict(contract.config_hashes),
+        "manifest_sha256": sha256_file(manifest_path),
+        "opportunities_sha256": opportunity_audit["sha256"],
+        "scenario_specifications_sha256": manifest_audit["scenario_specifications_sha256"],
+        "project_authored": True, "human_participants": False, "human_annotators": False,
+        "derived_from_model_predictions": False, "model_outputs_accessed_before_freeze": False,
+        "frozen_before_model_inference": True, "frozen_by": frozen_by,
+        "frozen_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+    }
+    atomic_write(path, canonical_bytes(record))
+    audit_ground_truth_freeze(record, manifest_path, opportunities_path, data_root, results_root)
+    return {"path": str(path), "sha256": sha256_file(path)}
+
+
+def build_manifest(path: Path, data_root: Path, prompt_plan_path: Path, generation_receipt_path: Path) -> dict[str, Any]:
+    if path.exists():
+        raise ValueError("capability manifest output already exists")
+    prompt_plan = read_json(prompt_plan_path)
+    prompt_rows = {row["image_id"]: row for row in prompt_plan.get("images", [])}
+    expected_b = {image_id for image_id in expected_image_ids() if "-B-" in image_id}
+    if set(prompt_rows) != expected_b:
+        raise ValueError("prompt plan must contain every B-stratum image exactly once")
+    generator = load_active_contract().base_prereg["dataset"]["strata"]["B_naturalistic_t2i"]["generator"]
+    if prompt_plan.get("model_id") != generator["model_id"] or prompt_plan.get("revision") != generator["revision"] or prompt_plan.get("seed_rule") != generator["seed_rule"]:
+        raise ValueError("prompt plan does not match the frozen generator/revision/seed rule")
+    receipt = read_json(generation_receipt_path)
+    receipt_hashes = {row["image_id"]: row["sha256"] for row in receipt.get("image_files", [])}
+    if any((
+        receipt.get("schema_version") != "sd-turbo-generation-receipt-v3.0.0",
+        receipt.get("status") != "complete", receipt.get("images") != 120,
+        receipt.get("model_id") != generator["model_id"], receipt.get("revision") != generator["revision"],
+        receipt.get("generation_config") != {key: generator[key] for key in ("width", "height", "steps", "guidance_scale")},
+        receipt.get("prompt_plan_sha256") != sha256_file(prompt_plan_path), set(receipt_hashes) != expected_b,
+    )):
+        raise ValueError("naturalistic generation receipt does not match the frozen prompt/model plan")
+    rows = []
+    for image_id in expected_image_ids():
+        family = image_id.split("-")[-2]
+        naturalistic = "-B-" in image_id
+        image_relative = f"images/{image_id}.png"
+        scenario_relative = f"scenarios/{image_id}.json"
+        image_path = _resolved_child(data_root, image_relative, "image")
+        scenario_path = _resolved_child(data_root, scenario_relative, "scenario")
+        if not image_path.is_file() or not scenario_path.is_file():
+            raise ValueError(f"missing final image or scenario for {image_id}")
+        if naturalistic and receipt_hashes[image_id] != sha256_file(image_path):
+            raise ValueError(f"naturalistic generation receipt hash mismatch for {image_id}")
+        scenario = read_json(scenario_path)
+        audit_scenario_specification(scenario)
+        prompt = prompt_rows.get(image_id)
+        if naturalistic and (not isinstance(prompt.get("prompt"), str) or not isinstance(prompt.get("seed"), int)):
+            raise ValueError(f"invalid prompt provenance for {image_id}")
+        rows.append({
+            "image_id": image_id, "family_id": family,
+            "stratum": "B_naturalistic_t2i" if naturalistic else "A_controlled_geometric",
+            "split": "development" if int(family[1:]) <= 12 else "validation",
+            "source_type": "frozen_sd_turbo" if naturalistic else "deterministic_controlled_renderer",
+            "licence": generator["license"] if naturalistic else "project-authored",
+            "generator_or_asset_revision": generator["revision"] if naturalistic else "controlled-renderer-v3.2.0",
+            "prompt_hash_if_applicable": hashlib.sha256(prompt["prompt"].encode("utf-8")).hexdigest() if naturalistic else None,
+            "seed_if_applicable": prompt["seed"] if naturalistic else None,
+            "relative_path": image_relative, "image_sha256": sha256_file(image_path),
+            "scenario_specification_id": f"scenario-{image_id}",
+            "scenario_specification_path": scenario_relative,
+            "scenario_specification_sha256": sha256_file(scenario_path),
+        })
+    value = {
+        "schema_version": "capability-manifest-v3.2.0", "dataset_version": "p9-v3-capability-data-v3.0.0",
+        "ground_truth_version": GROUND_TRUTH_VERSION,
+        "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"), "images": rows,
+    }
+    atomic_write(path, canonical_bytes(value))
+    return audit_manifest(value, data_root)
+
+
+def materialize_scenarios(plan_path: Path, data_root: Path, stratum_code: str) -> dict[str, Any]:
+    """Write one stratum's 120 canonical files from a reviewed authoring plan."""
+
+    plan = read_json(plan_path)
+    scenarios = plan.get("scenarios")
+    if not isinstance(scenarios, list):
+        raise ValueError("scenario authoring plan lacks a scenarios array")
+    ids = [row.get("image_id") for row in scenarios if isinstance(row, dict)]
+    expected = [image_id for image_id in expected_image_ids() if f"-{stratum_code}-" in image_id]
+    if len(scenarios) != 120 or sorted(ids) != sorted(expected):
+        raise ValueError(f"scenario authoring plan must contain all 120 {stratum_code}-stratum image IDs exactly once")
+    output = data_root / "scenarios"
+    output.mkdir(parents=True, exist_ok=True)
+    for scenario in sorted(scenarios, key=lambda row: row["image_id"]):
+        audit_scenario_specification(scenario)
+        if stratum_code == "B" and not (data_root / "images" / f"{scenario['image_id']}.png").is_file():
+            raise ValueError(f"naturalistic final reference precedes its generated image: {scenario['image_id']}")
+        destination = output / f"{scenario['image_id']}.json"
+        if destination.exists():
+            raise ValueError(f"scenario output already exists: {destination}")
+        atomic_write(destination, canonical_bytes(scenario))
+    return {"scenarios": len(scenarios), "plan_sha256": sha256_file(plan_path), "output": str(output)}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="P9-v3B project-authored ground-truth preparation")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -310,6 +504,26 @@ def main(argv: list[str] | None = None) -> int:
     freeze_parser.add_argument("--opportunities", type=Path, required=True)
     freeze_parser.add_argument("--data-root", type=Path, required=True)
     freeze_parser.add_argument("--results", type=Path, required=True)
+    build_parser = sub.add_parser("build-opportunities")
+    build_parser.add_argument("path", type=Path)
+    build_parser.add_argument("--manifest", type=Path, required=True)
+    build_parser.add_argument("--data-root", type=Path, required=True)
+    create_parser = sub.add_parser("create-ground-truth-freeze")
+    create_parser.add_argument("path", type=Path)
+    create_parser.add_argument("--manifest", type=Path, required=True)
+    create_parser.add_argument("--opportunities", type=Path, required=True)
+    create_parser.add_argument("--data-root", type=Path, required=True)
+    create_parser.add_argument("--results", type=Path, required=True)
+    create_parser.add_argument("--frozen-by", required=True)
+    manifest_build_parser = sub.add_parser("build-manifest")
+    manifest_build_parser.add_argument("path", type=Path)
+    manifest_build_parser.add_argument("--data-root", type=Path, required=True)
+    manifest_build_parser.add_argument("--prompt-plan", type=Path, required=True)
+    manifest_build_parser.add_argument("--generation-receipt", type=Path, required=True)
+    scenarios_parser = sub.add_parser("materialize-scenarios")
+    scenarios_parser.add_argument("--plan", type=Path, required=True)
+    scenarios_parser.add_argument("--data-root", type=Path, required=True)
+    scenarios_parser.add_argument("--stratum", choices=["A", "B"], required=True)
     args = parser.parse_args(argv)
     if args.command == "audit-manifest":
         result = audit_manifest(read_json(args.path), args.data_root)
@@ -318,10 +532,20 @@ def main(argv: list[str] | None = None) -> int:
         if (args.manifest is None) != (args.data_root is None):
             raise SystemExit("audit-opportunities requires --manifest and --data-root together")
         result = audit_opportunities(args.path, manifest_value, args.data_root)
-    else:
+    elif args.command == "audit-ground-truth":
         result = audit_ground_truth_freeze(
             read_json(args.record), args.manifest, args.opportunities, args.data_root, args.results
         )
+    elif args.command == "build-opportunities":
+        result = build_opportunities(args.path, args.manifest, args.data_root)
+    elif args.command == "create-ground-truth-freeze":
+        result = create_ground_truth_freeze(
+            args.path, args.manifest, args.opportunities, args.data_root, args.results, args.frozen_by
+        )
+    elif args.command == "build-manifest":
+        result = build_manifest(args.path, args.data_root, args.prompt_plan, args.generation_receipt)
+    else:
+        result = materialize_scenarios(args.plan, args.data_root, args.stratum)
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 0
 

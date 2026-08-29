@@ -21,10 +21,11 @@ from experiments.v3.runtime.dataset import (
     deterministic_opportunity_id,
     expected_image_ids,
 )
-from experiments.v3.runtime.execution import cache_key
+from experiments.v3.runtime.execution import AdapterSession, cache_key
+from experiments.v3.runtime.evaluation import Counts, _metric_record, _reference_mapping, wilson
 from experiments.v3.runtime.guard import FormalPaths, main as guard_main, parser as guard_parser
 from experiments.v3.runtime.io import canonical_bytes, sha256_tree
-from experiments.v3.runtime.results import observation_projection
+from experiments.v3.runtime.results import export, observation_projection
 from experiments.v3.runtime.schemas import SCHEMA_DIR, validate
 from experiments.v3.runtime.telemetry import environment_record
 from experiments.v3.runtime.thresholds import SCORE_CONTRACT, validate_settings
@@ -124,7 +125,7 @@ def test_scenario_schema_checks_reference_scope_and_boxes() -> None:
         "stratum": "A_controlled_geometric", "split": "development",
         "authoring_method": "controlled_scene_specification", "model_output_blind": True,
         "reference_entities": [{"reference_id": "r1", "category": "person", "bbox_xyxy": [0.1, 0.1, 0.4, 0.8]}],
-        "reference_atoms": [{"reference_atom_id": "a1", "atom_type": "entity", "value": "person", "source_reference_id": "r1", "target_reference_id": None}],
+        "reference_atoms": [{"reference_atom_id": "a1", "atom_type": "entity", "value": "person", "source_reference_id": "r1", "target_reference_id": None, "scope_category": None}],
     }
     audit_scenario_specification(value)
     value["reference_entities"][0]["bbox_xyxy"] = [0.4, 0.1, 0.1, 0.8]
@@ -175,6 +176,7 @@ def test_opportunity_counts_match_frozen_plan(tmp_path: Path) -> None:
                                 "source_reference_bbox_xyxy": "[0.1,0.1,0.4,0.8]" if source else "",
                                 "target_reference_id": target,
                                 "target_reference_bbox_xyxy": "[0.5,0.1,0.8,0.8]" if target else "",
+                                "scope_category": "person" if atom_type == "count" else "",
                                 "ground_truth_version": GROUND_TRUTH_VERSION,
                             }
                             row["opportunity_id"] = deterministic_opportunity_id(row)
@@ -195,10 +197,41 @@ def test_cache_key_is_canonical_and_mode_sensitive() -> None:
     assert cache_key({**first, "image_path": "/host/a", "timeout_seconds": 10}) == cache_key({**first, "image_path": "/host/b", "timeout_seconds": 999})
 
 
+def test_adapter_session_reuses_one_process_for_multiple_requests(tmp_path: Path) -> None:
+    worker = tmp_path / "worker.py"
+    worker.write_text(
+        "import json,sys\ncount=0\nfor line in sys.stdin:\n count+=1; value=json.loads(line); print(json.dumps({'count':count,'value':value['value']}),flush=True)\n",
+        encoding="utf-8",
+    )
+    with AdapterSession(f'"{sys.executable}" -u "{worker}"') as session:
+        assert session.request({"value": "first", "timeout_seconds": 5}) == {"count": 1, "value": "first"}
+        assert session.request({"value": "second", "timeout_seconds": 5}) == {"count": 2, "value": "second"}
+
+
 def test_adapter_bundle_hash_is_repeatable() -> None:
     path = Path(__file__).parent / "runtime" / "adapters"
     assert len(sha256_tree(path)) == 64
     assert sha256_tree(path) == sha256_tree(path)
+
+
+def test_result_export_includes_provenance_trees_and_inventory(tmp_path: Path) -> None:
+    results = tmp_path / "results"
+    request = {"pipeline_id": "p", "image_id": "i", "mode": "development"}
+    record = {"cache_key": cache_key(request), "request": request}
+    cache = results / "development" / "record.json"
+    cache.parent.mkdir(parents=True)
+    cache.write_text(json.dumps(record), encoding="utf-8")
+    include = tmp_path / "provenance.json"
+    include.write_text("{}", encoding="utf-8")
+    tree = tmp_path / "scenarios"
+    tree.mkdir()
+    (tree / "one.json").write_text("{}", encoding="utf-8")
+    destination = tmp_path / "export"
+    exported = export(results, destination, [f"provenance.json={include}"], [f"scenarios={tree}"])
+    assert exported["cache_records"] == 1
+    assert (destination / "results" / "development" / "record.json").is_file()
+    assert (destination / "scenarios" / "one.json").is_file()
+    assert (destination / "SHA256_INVENTORY.json").is_file()
 
 
 def test_environment_record_reports_python_runtime() -> None:
@@ -225,7 +258,7 @@ def test_formal_guard_exposes_only_ground_truth_freeze_dependency() -> None:
 
 
 def test_threshold_freeze_requires_both_pipelines() -> None:
-    value = {"schema_version": "threshold-freeze-v3.1.0", "status": "frozen_before_validation", "development_manifest_sha256": "0" * 64, "frozen_at_utc": "2026-08-26T00:00:00Z", "pipelines": {}}
+    value = {"schema_version": "threshold-freeze-v3.1.0", "status": "frozen_before_validation", "development_manifest_sha256": "0" * 64, "development_results_sha256": "1" * 64, "frozen_at_utc": "2026-08-26T00:00:00Z", "pipelines": {}}
     with pytest.raises(jsonschema.ValidationError):
         validate("threshold_freeze_v3_1.schema.json", value)
 
@@ -247,6 +280,33 @@ def test_repeat_projection_excludes_volatile_telemetry() -> None:
     second["component_events"][0]["elapsed_seconds"] = 999
     second["execution_telemetry"][0]["framework_peak_gpu_reserved_bytes"] = 999
     assert observation_projection(first) == observation_projection(second)
+
+
+def test_metric_intervals_and_family_bootstrap_are_deterministic() -> None:
+    counts = Counts(tp=8, fp=2, fn=2, covered=18, opportunities=20)
+    families = {"F13": Counts(tp=4, fp=1, fn=1, covered=9, opportunities=10), "F14": Counts(tp=4, fp=1, fn=1, covered=9, opportunities=10)}
+    first = _metric_record(counts, families, repetitions=100, seed=925032)
+    second = _metric_record(counts, families, repetitions=100, seed=925032)
+    assert first == second
+    assert first["precision"] == pytest.approx(0.8)
+    assert first["recall"] == pytest.approx(0.8)
+    assert first["f1"] == pytest.approx(0.8)
+    assert first["coverage"] == pytest.approx(0.9)
+    assert wilson(8, 10)[0] < 0.8 < wilson(8, 10)[1]
+
+
+def test_entity_correspondence_is_category_equal_and_one_to_one() -> None:
+    scenario = {"reference_entities": [
+        {"reference_id": "r1", "category": "cat", "bbox_xyxy": [0.0, 0.0, 0.5, 0.5]},
+        {"reference_id": "r2", "category": "cat", "bbox_xyxy": [0.1, 0.0, 0.6, 0.5]},
+    ]}
+    result = {
+        "graph": {"nodes": [{"id": "n001", "category": "cat"}]},
+        "audit": {"node_boxes": [{"id": "n001", "bbox": [0.0, 0.0, 0.55, 0.5]}]},
+    }
+    mapping = _reference_mapping(scenario, result)
+    assert len(mapping) == 1
+    assert set(mapping.values()) == {"n001"}
 
 
 @pytest.mark.parametrize("pipeline_id", sorted(SCORE_CONTRACT))

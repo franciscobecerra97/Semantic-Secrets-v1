@@ -3,7 +3,7 @@
 P9-v3B has no human participants or human annotators. This file retains its historical name so existing links remain usable; the active v3.2 procedure is deterministic technical dataset construction. The v3.0/v3.1 two-human clauses are superseded by `preregistration_v3_2.json` and `formal_specification_v3_2.md`.
 
 1. Author the family assignments and planned positive/applicable-negative opportunities without acquiring or consulting either perception model. The v3.1 counts, type roles, strata, splits, and family isolation remain exact.
-2. Create each controlled or naturalistic `cap-v3-*` image and one `capability-scenario-specification-v3.2.0` record. The scenario record uses exact closed labels, project reference IDs, normalized reference boxes, and semantic atoms. It is dataset ground truth, not a model output.
+2. Create each controlled or naturalistic `cap-v3-*` image and one `capability-scenario-specification-v3.2.0` record. The scenario record uses exact closed labels, project reference IDs, normalized reference boxes, and semantic atoms; each count atom also names its entity-category scope. It is dataset ground truth, not a model output.
 3. Build the 240-row `capability_manifest_v3_2.json`. Each row binds its final image and scenario specification by path and SHA-256. Naturalistic rows additionally require the frozen prompt hash, seed, and generator revision.
 4. Populate `support_opportunities_v3_2.csv`. Every row links to one manifest/scenario, uses a content-derived deterministic opportunity ID, identifies the exact entity or ordered-pair scope and normalized boxes where applicable, and declares one positive or applicable-negative closed-label value.
 5. Run the complete audits:

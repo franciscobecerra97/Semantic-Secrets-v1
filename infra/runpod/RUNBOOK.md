@@ -54,17 +54,43 @@ bash infra/runpod/verify_gpu.sh
 
 The first command reruns the config checks and all 320 compiler cases. Any failure blocks execution. The second records CUDA, driver, framework, GPU, package, config, and `nvidia-smi` provenance.
 
-## 6. Model acquisition
+## 6. Dataset inputs and materialization
+
+Do not start a Pod merely to discover missing authoring inputs. Before image work, prepare off-Pod and review:
+
+- 120 final controlled `capability-scenario-specification-v3.2.0` records;
+- the exact 120-row naturalistic prompt/seed plan;
+- after SD-Turbo rendering, 120 model-output-blind naturalistic scenario records with final visible boxes/atoms.
+
+The repository cannot infer the naturalistic reference boxes from a prompt and must never obtain them from a perception model. Once those project-authored inputs exist, the executable materialization/audit sequence is:
+
+```bash
+/opt/envs/modern/bin/python -m experiments.v3.runtime.dataset materialize-scenarios --stratum A --plan /workspace/data/controlled_scenario_plan_v3_2.json --data-root /workspace/data
+/opt/envs/modern/bin/python -m experiments.v3.runtime.images controlled --scenarios /workspace/data/scenarios --render-plan /workspace/data/controlled_render_plan_v3.json --asset-root /workspace/data/controlled_assets --output /workspace/data/images
+/opt/envs/modern/bin/python -m experiments.v3.runtime.images naturalistic --prompt-plan /workspace/data/naturalistic_prompt_plan_v3.json --model /workspace/models/sd-turbo --generator-manifest /workspace/environment/generator_acquisition_v3.json --output /workspace/data/images --receipt /workspace/environment/sd_turbo_generation_receipt_v3.json
+/opt/envs/modern/bin/python -m experiments.v3.runtime.dataset materialize-scenarios --stratum B --plan /workspace/data/naturalistic_final_scenario_plan_v3_2.json --data-root /workspace/data
+/opt/envs/modern/bin/python -m experiments.v3.runtime.dataset build-manifest /workspace/data/capability_manifest_v3_2.json --data-root /workspace/data --prompt-plan /workspace/data/naturalistic_prompt_plan_v3.json --generation-receipt /workspace/environment/sd_turbo_generation_receipt_v3.json
+/opt/envs/modern/bin/python -m experiments.v3.runtime.dataset build-opportunities /workspace/data/support_opportunities_v3_2.csv --manifest /workspace/data/capability_manifest_v3_2.json --data-root /workspace/data
+/opt/envs/modern/bin/python -m experiments.v3.runtime.dataset create-ground-truth-freeze /workspace/environment/ground_truth_freeze_v3_2.json --manifest /workspace/data/capability_manifest_v3_2.json --opportunities /workspace/data/support_opportunities_v3_2.csv --data-root /workspace/data --results /workspace/results --frozen-by '<project-author-identity>'
+```
+
+The naturalistic command is GPU generation and requires separate authorization. These commands create no perception output. Any scenario/prompt authoring decision must be complete before the ground-truth freeze.
+If naturalistic generation is interrupted, rerun that same command with `--resume`; every existing PNG must match the atomic partial receipt or the command refuses to continue.
+
+## 7. Model acquisition
 
 First perform the no-download plan:
 
 ```bash
 bash infra/runpod/acquire_models.sh /workspace/semantic-secrets
+bash infra/runpod/acquire_generator.sh /workspace/semantic-secrets
 ```
 
 Only after acquisition is explicitly permitted, licence/provenance review is recorded, and storage is mounted may `--permit-acquisition` be added. EGTR also requires `--egtr-archive` and `--egtr-approved-provenance`. Its archive is never fetched automatically. Missing checkpoint terms, multiple checkpoints, absent label/config metadata, an unpinned Deformable-DETR base/transform, or any hash mismatch is a frozen typed pipeline failure—not permission to substitute a model or silently download an upstream default.
 
-## 7. Allowed smoke procedure
+`acquire_generator.sh` is also dry-run-only unless both `--permit-acquisition` and `--license-approved` are supplied. It resolves only `stabilityai/sd-turbo@b261bac6fd2cf515557d5d0707481eafa0485ec2` and writes a separate inventory; it is not a perception candidate and does not alter the three-component v3.1 acquisition manifest.
+
+## 8. Allowed smoke procedure
 
 Smoke is forbidden before all final images, scenario specifications, manifest rows, and support opportunities are frozen in a valid `ground_truth_freeze_v3_2.json`. This record must predate every perception output and must assert that no prediction contributed to ground truth. After that prerequisite and an explicit smoke permission:
 
@@ -75,7 +101,25 @@ bash infra/runpod/smoke_run.sh /workspace/semantic-secrets
 
 This runs at most two development images per pipeline. It may expose plumbing, licence, compatibility, or OOM failure. It may not tune labels, prompts, candidates, input resolution, preprocessing, or validation behavior.
 
-## 8. Formal execution
+## 9. Development and threshold freeze
+
+The frozen documents require every component/task threshold and SigLIP top-two margin to be fitted on development and frozen before validation. They do not currently state an optimization objective, candidate grid, or tie rule. Consequently, do not run development merely to choose a rule after seeing scores. A prospective, outcome-independent threshold-fitting rule must first be recorded without changing the frozen validation criteria.
+
+After that rule and its implementation exist, the guarded development command is:
+
+```bash
+export P9_V3B_DEVELOPMENT_ALLOWED=yes
+bash infra/runpod/development_run.sh /workspace/semantic-secrets
+/opt/envs/modern/bin/python -m experiments.v3.runtime.thresholds \
+  --settings /workspace/environment/development_threshold_settings_v3_1.json \
+  --manifest /workspace/data/capability_manifest_v3_2.json \
+  --results /workspace/results \
+  --output /workspace/environment/threshold_freeze_v3_1.json
+```
+
+The second command only validates and provenance-binds settings produced by the future frozen fit; it is intentionally not a substitute for the missing selection rule. It refuses incomplete development output or any existing validation output.
+
+## 10. Formal execution
 
 Formal validation requires all of the following external, schema-valid records:
 
@@ -90,12 +134,21 @@ Formal validation requires all of the following external, schema-valid records:
 The command has no implicit formal mode:
 
 ```bash
+/opt/envs/modern/bin/python -m experiments.v3.runtime.authorization \
+  --authorize-formal --authorized-by '<authorizing-identity>' \
+  --container-image-digest "$P9_V3B_IMAGE_DIGEST" \
+  --manifest /workspace/data/capability_manifest_v3_2.json \
+  --opportunities /workspace/data/support_opportunities_v3_2.csv \
+  --ground-truth /workspace/environment/ground_truth_freeze_v3_2.json \
+  --thresholds /workspace/environment/threshold_freeze_v3_1.json \
+  --model-manifest /workspace/environment/model_acquisition_v3_1.json \
+  --output /workspace/environment/formal_authorization_v3_2.json
 bash infra/runpod/formal_run.sh --formal /workspace/semantic-secrets
 ```
 
 The guard rejects a missing `--formal`, either missing pipeline, any revision/hash mismatch, unfrozen or model-dependent ground truth, unfrozen thresholds, incorrect manifest/opportunity/scenario linkage, absent GPU record, or unexpected existing validation output. It runs validation once and then the one frozen validation repeat. Development output cannot be relabelled as formal output.
 
-## 9. Cache and resume
+## 11. Cache and resume
 
 Each cache key binds mode/repeat, image bytes, pipeline/config revision, model manifest, threshold freeze, and the adapter source bundle. Outputs are atomic and never silently overwritten. Before using `--resume`, run:
 
@@ -105,15 +158,16 @@ bash infra/runpod/verify_resume.sh
 
 A mismatched key or partial/unparseable record blocks resume. After `verify_resume.sh` succeeds, resume with `bash infra/runpod/formal_run.sh --formal --resume /workspace/semantic-secrets`. Every existing record is rechecked against the authorised model/threshold/config/image/adapter provenance before it can be skipped. A validation repeat starts only after exactly 240 first-pass pipeline/image records exist.
 
-## 10. Result verification and export
+## 12. Gate evaluation, result verification, and export
 
 ```bash
 bash infra/runpod/verify_resume.sh
+bash infra/runpod/evaluate_gate.sh /workspace/semantic-secrets
 bash infra/runpod/export_results.sh /workspace/semantic-secrets /workspace/results-export
 ```
 
-Copy the export off the Pod and independently verify `SHA256_INVENTORY.json`. Preserve bounded observations, compiler results, per-component allocated/reserved GPU peaks, RSS, elapsed time, failures, acquisition records, environment records, and logs.
+The evaluator computes every frozen point metric, Wilson interval, 5,000-repeat family bootstrap interval, repeatability check, complete-pipeline latency/RSS/allocated-and-reserved-VRAM summary, independent per-pipeline `L_cred`, and the conjunctive Gate V3-A1 decision. Copy the export off the Pod and independently verify `SHA256_INVENTORY.json`. The package includes raw results plus the manifest, opportunity table, ground-truth/threshold/model/GPU/authorization/compiler records, evaluation, and a SHA-256 inventory.
 
-## 11. Shutdown
+## 13. Shutdown
 
 Follow `infra/runpod/SHUTDOWN_CHECKLIST.md`. Verify the persistent volume and off-Pod export before terminating the Pod. Do not delete the persistent volume in the same action.

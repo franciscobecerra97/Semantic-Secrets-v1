@@ -697,3 +697,37 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Revisit trigger:** Before inference, the project-authored reference schema proves insufficient for a frozen metric or cannot express an intended support opportunity; the official model artifact fails acquisition; or an audit detects ambiguity. Any correction must be prospective and model-output blind. After inference, ground truth may not be changed in place.
 
 **Frozen-material confirmation:** The exact two pipelines, models, revisions, preprocessing, input resolution, labels, threshold semantics, metrics, Gate V3-A1 criteria, hardware/resource limits, 240-image design, family/split structure, support-opportunity counts, compiler, and P9-v3B → V3-A1 → P9-v3C → V3-A2 → P10 dependency remain unchanged. No image was generated, no model was acquired or run, and no later phase or cryptographic implementation started.
+
+## P9-v3B-PREP-02 — Keep execution blocked on absent prospective inputs
+
+**Decision:** Complete every mechanically determined RunPod execution stage, but do not invent project-authored scenario content or a development-threshold optimization/tie rule that the frozen v3.0/v3.1/v3.2 record does not specify.
+
+**Date:** 2026-08-29
+
+**Status:** Selected execution-readiness engineering and fail-closed audit result; no experiment authorised or executed.
+
+**Question:** Is the published preparation commit a complete executable P9-v3B chain, and which missing steps can be implemented without changing frozen scientific choices?
+
+**Candidates:** Declare the existing scripts ready; choose dataset/threshold details during GPU execution; implement deterministic mechanics while preserving unresolved prospective inputs as blockers; or change frozen models/gates to simplify execution.
+
+**Evaluation criteria:** All 13 requested stages must have traceable commands/artifacts; exact pipelines and limits remain unchanged; ground truth precedes perception; development cannot borrow validation outcomes; model processes avoid repeated loading; every Gate metric and provenance record is reproducible; ambiguity fails closed.
+
+**Evidence:** Static execution trace of `experiments/v3/` and `infra/runpod/`; complete local CPU test suite; 320-case compiler suite; Dockerfile build check. No model, weight, capability image, prompt rendering, perception output, threshold, or Gate result was produced.
+
+**Selected option:** Add exact SD-Turbo acquisition/materialization helpers, project-plan scenario materialization, deterministic manifest/opportunity/freeze creation, persistent isolated model processes, warmup-aware complete-pipeline telemetry, development/threshold provenance binding, full validation/repeat metrics with Wilson and family-bootstrap intervals, independent per-pipeline `L_cred`/Gate evaluation, explicit formal authorization creation, and provenance-complete export. Clarify count opportunities with the already-required entity-category scope. Keep inference blocked because the actual project-authored scenario/prompt plans and a prospective threshold-selection objective/candidate/tie rule are absent.
+
+**Rejected alternatives:** Declaring readiness would hide non-executable stages. Selecting threshold rules after development output risks outcome-driven tuning. Deriving naturalistic boxes from evaluated model predictions violates v3.2. Model substitution, changed thresholds/gates, or reduced data are outside this audit.
+
+**Reason:** Most gaps were deterministic software omissions and could be fixed without scientific discretion. Scenario semantics are project-authored data, while threshold fitting requires a selection rule that can materially affect validation; neither may be manufactured from later output under the freeze.
+
+**Security/privacy assumptions:** Unchanged. This work concerns controlled capability execution only and establishes no reconstruction, acceptance-region, privacy, memorability, or deployment result.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ6 execution readiness only. C1–C4 and RQ1–RQ6 remain materially unchanged. Gate V3-A1 remains unevaluated.
+
+**Experiments supporting decision:** None. All validation was local, deterministic, non-GPU engineering validation.
+
+**Remaining uncertainty:** The two project-authored scenario plans, naturalistic prompt/seed plan, exact prospective development-threshold fitting rule and score-capture implementation, EGTR artifact provenance, locked-image GPU smoke, measured resources, semantic metrics, and Gate V3-A1 remain unresolved.
+
+**Revisit trigger:** A prospective pre-output record supplies the missing threshold-fitting rule and authoring inputs are complete; or another readiness audit finds an implementation mismatch. Do not begin perception inference first.
+
+**Frozen-material confirmation:** No pipeline, model, revision, label, input resolution, preprocessing, threshold value, metric, Gate criterion, hardware limit, image/support count, compiler rule, split, or phase dependency changed. No P9-v3B, P9-v3C, P10, or cryptographic execution occurred.

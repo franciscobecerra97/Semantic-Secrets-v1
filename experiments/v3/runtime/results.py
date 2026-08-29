@@ -71,11 +71,29 @@ def verify_repeat(results: Path) -> dict[str, int]:
     return {"pairs": len(first), "canonical_observation_equal": observation_equal, "canonical_graph_equal": graph_equal}
 
 
-def export(results: Path, destination: Path) -> dict[str, int]:
+def export(results: Path, destination: Path, includes: list[str] | None = None, include_trees: list[str] | None = None) -> dict[str, int]:
     verified = verify_cache(results)
     if destination.exists():
         raise ValueError("export destination must not already exist")
-    shutil.copytree(results, destination)
+    shutil.copytree(results, destination / "results")
+    for item in includes or []:
+        if "=" not in item:
+            raise ValueError("export includes must use NAME=PATH")
+        name, raw_path = item.split("=", 1)
+        if not name or "/" in name or "\\" in name:
+            raise ValueError(f"invalid export include name {name!r}")
+        source = Path(raw_path)
+        if not source.is_file():
+            raise ValueError(f"export include is missing: {source}")
+        shutil.copy2(source, destination / name)
+    for item in include_trees or []:
+        if "=" not in item:
+            raise ValueError("export tree includes must use NAME=PATH")
+        name, raw_path = item.split("=", 1)
+        source = Path(raw_path)
+        if not name or "/" in name or "\\" in name or not source.is_dir():
+            raise ValueError(f"invalid or missing export tree include {item!r}")
+        shutil.copytree(source, destination / name)
     inventory = [
         {"relative_path": path.relative_to(destination).as_posix(), "bytes": path.stat().st_size, "sha256": sha256_file(path)}
         for path in sorted(destination.rglob("*")) if path.is_file()
@@ -95,13 +113,15 @@ def main(argv: list[str] | None = None) -> int:
     export_parser = sub.add_parser("export")
     export_parser.add_argument("--results", type=Path, required=True)
     export_parser.add_argument("--destination", type=Path, required=True)
+    export_parser.add_argument("--include", action="append", default=[])
+    export_parser.add_argument("--include-tree", action="append", default=[])
     args = parser.parse_args(argv)
     if args.command == "verify-cache":
         result = verify_cache(args.results)
     elif args.command == "verify-repeat":
         result = verify_repeat(args.results)
     else:
-        result = export(args.results, args.destination)
+        result = export(args.results, args.destination, args.include, args.include_tree)
     print(json.dumps(result, sort_keys=True))
     return 0
 
