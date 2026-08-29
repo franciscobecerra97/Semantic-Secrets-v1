@@ -1,4 +1,4 @@
-"""Read-only composition of the frozen v3.0, v3.1, and v3.2 contracts."""
+"""Read-only composition of the frozen v3.0 through v3.3 contracts."""
 
 from __future__ import annotations
 
@@ -15,6 +15,8 @@ CONFIG_DIR = ROOT / "experiments" / "v3" / "config"
 BASE_PREREG_PATH = CONFIG_DIR / "preregistration_v3.json"
 AMEND_PREREG_PATH = CONFIG_DIR / "preregistration_v3_1.json"
 GROUND_TRUTH_PREREG_PATH = CONFIG_DIR / "preregistration_v3_2.json"
+CALIBRATION_PREREG_PATH = CONFIG_DIR / "preregistration_v3_3.json"
+SMOKE_SETTINGS_PATH = CONFIG_DIR / "engineering_smoke_settings_v3_3.json"
 BASE_OBSERVATION_PATH = CONFIG_DIR / "visual_observation_v3.json"
 AMEND_OBSERVATION_PATH = CONFIG_DIR / "visual_observation_v3_1.json"
 
@@ -47,6 +49,7 @@ class ActiveV3Contract:
     base_prereg: Mapping[str, Any]
     amend_prereg: Mapping[str, Any]
     ground_truth_prereg: Mapping[str, Any]
+    calibration_prereg: Mapping[str, Any]
     base_observation: Mapping[str, Any]
     amend_observation: Mapping[str, Any]
     config_hashes: Mapping[str, str]
@@ -91,6 +94,8 @@ def load_active_contract() -> ActiveV3Contract:
         "preregistration_v3.json": BASE_PREREG_PATH,
         "preregistration_v3_1.json": AMEND_PREREG_PATH,
         "preregistration_v3_2.json": GROUND_TRUTH_PREREG_PATH,
+        "preregistration_v3_3.json": CALIBRATION_PREREG_PATH,
+        "engineering_smoke_settings_v3_3.json": SMOKE_SETTINGS_PATH,
         "visual_observation_v3.json": BASE_OBSERVATION_PATH,
         "visual_observation_v3_1.json": AMEND_OBSERVATION_PATH,
     }
@@ -98,6 +103,7 @@ def load_active_contract() -> ActiveV3Contract:
         base_prereg=_read(BASE_PREREG_PATH),
         amend_prereg=_read(AMEND_PREREG_PATH),
         ground_truth_prereg=_read(GROUND_TRUTH_PREREG_PATH),
+        calibration_prereg=_read(CALIBRATION_PREREG_PATH),
         base_observation=_read(BASE_OBSERVATION_PATH),
         amend_observation=_read(AMEND_OBSERVATION_PATH),
         config_hashes={name: sha256_file(path) for name, path in paths.items()},
@@ -112,6 +118,17 @@ def load_active_contract() -> ActiveV3Contract:
         raise RuntimeError("v3.2 must preserve the v3.1 observation contract")
     if contract.ground_truth_prereg["versions"]["compiler"] != contract.compiler_id:
         raise RuntimeError("v3.2 must preserve the v3.0 compiler")
+    if contract.calibration_prereg["versions"]["calibration"] != "development-threshold-calibration-v3.3.0":
+        raise RuntimeError("v3.3 calibration identity mismatch")
+    if contract.calibration_prereg["candidate_grid"] != {
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "step": 0.01,
+        "decimal_places": 2,
+        "ordered_values": "0.00,0.01,...,1.00",
+        "comparison": "inclusive greater-than-or-equal",
+    }:
+        raise RuntimeError("v3.3 candidate grid mismatch")
     return contract
 
 

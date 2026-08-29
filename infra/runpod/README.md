@@ -1,6 +1,6 @@
 # P9-v3B RunPod preparation
 
-This package prepares—but does not authorise—the frozen P9-v3B capability execution. It contains no weights, capability images, ground-truth records, thresholds, or experimental outputs. The active contract is the composition of immutable v3.0, the v3.1 pipeline/resource/support amendment, and the prospective v3.2 project-authored-ground-truth correction. The final readiness audit found that project-authored scenario/prompt content and an outcome-independent development-threshold selection rule are still required before inference; the runbook fails closed rather than inventing either from model output.
+This package prepares—but does not authorise—the frozen P9-v3B capability execution. It contains no weights, capability images, ground-truth records, thresholds, or experimental outputs. The active contract composes immutable v3.0, v3.1 pipeline/resource/support, v3.2 project-authored ground truth, and the prospective v3.3 development-calibration rule. The remaining pre-inference input is the project-authored scenario/prompt content and resulting ground-truth freeze; the fixed score-capture and threshold workflow then runs without validation access or neural reruns for candidate evaluation.
 
 The container preserves the required scientific boundary:
 

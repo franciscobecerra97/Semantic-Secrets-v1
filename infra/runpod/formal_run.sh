@@ -20,7 +20,12 @@ common=(
   --adapter-command 'v3.1-egtr-siglip2=/opt/envs/modern/bin/python -m experiments.v3.runtime.adapters.egtr_siglip2'
   --manifest /workspace/data/capability_manifest_v3_2.json
   --opportunities /workspace/data/support_opportunities_v3_2.csv
-  --thresholds /workspace/environment/threshold_freeze_v3_1.json
+  --thresholds /workspace/environment/threshold_freeze_v3_3.json
+  --score-manifest /workspace/results/calibration/development_score_manifest_v3_3.json
+  --calibration-inventory /workspace/results/calibration/SHA256_INVENTORY.json
+  --entity-scopes /workspace/environment/development_entity_scopes_v3_3.json
+  --fit-report /workspace/results/calibration/threshold_fit_report_v3_3.json
+  --threshold-settings /workspace/environment/development_threshold_settings_v3_3.json
   --model-manifest /workspace/environment/model_acquisition_v3_1.json
   --adapter-source experiments/v3/runtime/adapters
   --models /workspace/models --data /workspace/data --results /workspace/results

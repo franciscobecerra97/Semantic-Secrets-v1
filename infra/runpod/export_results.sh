@@ -10,7 +10,9 @@ cd "$repo"
   --include naturalistic_prompt_plan_v3.json=/workspace/data/naturalistic_prompt_plan_v3.json \
   --include support_opportunities_v3_2.csv=/workspace/data/support_opportunities_v3_2.csv \
   --include ground_truth_freeze_v3_2.json=/workspace/environment/ground_truth_freeze_v3_2.json \
-  --include threshold_freeze_v3_1.json=/workspace/environment/threshold_freeze_v3_1.json \
+  --include threshold_freeze_v3_3.json=/workspace/environment/threshold_freeze_v3_3.json \
+  --include development_entity_scopes_v3_3.json=/workspace/environment/development_entity_scopes_v3_3.json \
+  --include development_threshold_settings_v3_3.json=/workspace/environment/development_threshold_settings_v3_3.json \
   --include model_acquisition_v3_1.json=/workspace/environment/model_acquisition_v3_1.json \
   --include generator_acquisition_v3.json=/workspace/environment/generator_acquisition_v3.json \
   --include sd_turbo_generation_receipt_v3.json=/workspace/environment/sd_turbo_generation_receipt_v3.json \

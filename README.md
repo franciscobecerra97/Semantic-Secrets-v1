@@ -26,7 +26,7 @@ This controlled technical study does not establish human memorability, recall, u
 
 P8 passed Gate V2-N with narrowed claims. P9-v2 then completed negatively: neither frozen monolithic VLM-to-credential-JSON extractor survived the 98% schema-validity requirement, P9B was not executed, and Gate V2-A failed. That result is immutable and does not establish universal extractor impossibility.
 
-P9-v3A froze the explicit modular reframe as v3.0.0. P9-v3A.1 prospectively froze the v3.1 pipelines, resource semantics, and support design. P9-v3A.2 now corrects one pre-output methodology mismatch: P9-v3B has no human participants or human annotators, so the v3.1 two-human prerequisite is historical and superseded. Ground truth instead consists of project-authored closed-label reference scene specifications and deterministic support opportunities linked to the 240-image manifest. Their hashes must be frozen before any perception inference and may never be derived from predictions. Pre-execution engineering provides a deterministic compiler with 320/320 local preparation cases, exact SD-Turbo/controlled-image materialization from project-authored inputs, persistent isolated pipeline processes, fail-closed provenance/authorization, automatic metrics and Gate V3-A1 evaluation, and a reproducible RunPod/export package. This is not empirical evidence or an experiment start. No v3 weight, capability image, inference, threshold freeze, or validation output exists. The final readiness audit found that the actual scenario/prompt content and a prospective deterministic development-threshold selection objective/tie rule are still absent; P9-v3B inference must not start until both are resolved without model output. P9-v3C is blocked on V3-A1; P10 and cryptography are blocked on V3-A2.
+P9-v3A froze the modular reframe as v3.0.0. P9-v3A.1 froze the v3.1 pipelines, resource semantics, and support design; P9-v3A.2 prospectively replaced the historical two-human prerequisite with model-blind project-authored ground truth; and P9-v3A.3 now freezes the previously missing deterministic development-threshold calibration rule. Pre-execution engineering provides the 320-case compiler, deterministic dataset/freezing tools, threshold-independent score capture, entity-first offline calibration and replay, formal provenance guards, automatic Gate evaluation, and a reproducible RunPod/export package. This is not empirical evidence or an experiment start. No v3 weight, capability image, model score, fitted threshold, or validation output exists. The remaining pre-inference blocker is the actual project-authored 240-scenario/prompt content and resulting ground-truth freeze. P9-v3C is blocked on V3-A1; P10 and cryptography are blocked on V3-A2.
 
 P0–P7 remain frozen evidence for `visual-semantic-pipeline-v1`:
 
@@ -48,9 +48,10 @@ Those findings remain valid and have not been retuned. The v2 image hypothesis i
 9. `docs/p9_v3_reframe.md` and `docs/formal_specification_v3.md` — immutable v3.0.0 architecture freeze.
 10. `docs/p9_v3_preexecution_audit.md` and `docs/formal_specification_v3_1.md` — historical v3.1.0 suitability amendment; its human prerequisite is superseded by v3.2.
 11. `docs/formal_specification_v3_2.md` and `experiments/v3/config/preregistration_v3_2.json` — active project-authored-ground-truth correction; v3.0/v3.1 pipelines, support, gates, and limits remain binding.
-12. `experiments/v3/config/preregistration_v3_1.json` and `visual_observation_v3_1.json` — machine-readable pipeline/resource/support freeze; the un-suffixed configs preserve v3.0.0.
-13. `experiments/v2/config/preregistration_v2.json` — immutable historical v2 freeze and failed path.
-14. `paper/draft.tex` — planning manuscript with the bounded P9-v2 result and no false v3 findings.
+12. `docs/formal_specification_v3_3.md` and `experiments/v3/config/preregistration_v3_3.json` — prospective development-only threshold-calibration rule and provenance boundary.
+13. `experiments/v3/config/preregistration_v3_1.json` and `visual_observation_v3_1.json` — machine-readable pipeline/resource/support freeze; the un-suffixed configs preserve v3.0.0.
+14. `experiments/v2/config/preregistration_v2.json` — immutable historical v2 freeze and failed path.
+15. `paper/draft.tex` — planning manuscript with the bounded P9-v2 result and no false v3 findings.
 
 `docs/security_model.md` remains the frozen v1 model. `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or evidence bibliography.
 

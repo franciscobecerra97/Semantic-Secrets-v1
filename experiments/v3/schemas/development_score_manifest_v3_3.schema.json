@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "development-score-manifest-v3.3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "config_hashes", "manifest_sha256", "opportunities_sha256", "ground_truth_freeze_sha256", "artifacts"],
+  "properties": {
+    "schema_version": {"const": "development-score-manifest-v3.3.0"},
+    "status": {"const": "development_only_threshold_independent_scores"},
+    "config_hashes": {"type": "object", "minProperties": 6, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "opportunities_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "ground_truth_freeze_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["artifact_kind", "pipeline_id", "image_id", "relative_path", "bytes", "sha256"],
+        "properties": {
+          "artifact_kind": {"enum": ["entity", "downstream"]},
+          "pipeline_id": {"type": "string"},
+          "image_id": {"type": "string"},
+          "relative_path": {"type": "string"},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

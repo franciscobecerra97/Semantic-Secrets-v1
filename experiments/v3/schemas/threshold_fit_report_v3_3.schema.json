@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "threshold-fit-report-v3.3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calibration_version", "candidate_grid", "score_manifest_sha256", "entity_scopes_sha256", "candidate_metrics_sha256", "selected", "validation_isolation_confirmed"],
+  "properties": {
+    "schema_version": {"const": "threshold-fit-report-v3.3.0"},
+    "calibration_version": {"const": "development-threshold-calibration-v3.3.0"},
+    "candidate_grid": {"type": "array", "minItems": 101, "maxItems": 101, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+    "score_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "entity_scopes_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidate_metrics_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "selected": {"type": "object"},
+    "validation_isolation_confirmed": {"const": true}
+  }
+}

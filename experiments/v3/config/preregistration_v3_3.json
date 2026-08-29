@@ -1,0 +1,131 @@
+{
+  "$schema_version": "semantic-secrets-preregistration-v3.3.0",
+  "preregistration_id": "p9-v3a3-development-threshold-calibration-2026-08-29",
+  "phase": "P9-v3A.3",
+  "status": "prospective threshold-calibration amendment before any perception output",
+  "publication_result": false,
+  "amends": {
+    "base_files": ["preregistration_v3.json", "preregistration_v3_1.json", "preregistration_v3_2.json"],
+    "rule": "v3.0.0, v3.1.0, and v3.2.0 remain binding; this amendment supplies only the previously missing executable development-threshold calibration rule"
+  },
+  "output_state_at_freeze": {
+    "perception_model_inference": false,
+    "capability_images_created": false,
+    "development_scores_exist": false,
+    "validation_output_exists": false,
+    "p9_v3b_started": false
+  },
+  "versions": {
+    "calibration": "development-threshold-calibration-v3.3.0",
+    "score_artifact": "development-score-artifact-v3.3.0",
+    "score_manifest": "development-score-manifest-v3.3.0",
+    "entity_scopes": "development-entity-scopes-v3.3.0",
+    "threshold_settings": "development-threshold-settings-v3.3.0",
+    "threshold_freeze": "threshold-freeze-v3.3.0",
+    "smoke_settings": "engineering-smoke-settings-v3.3.0"
+  },
+  "candidate_grid": {
+    "minimum": 0.0,
+    "maximum": 1.0,
+    "step": 0.01,
+    "decimal_places": 2,
+    "ordered_values": "0.00,0.01,...,1.00",
+    "comparison": "inclusive greater-than-or-equal"
+  },
+  "data_boundary": {
+    "fit_split": "development",
+    "validation_score_artifacts_forbidden": true,
+    "validation_and_repeat_outputs_must_not_exist": true,
+    "authentication_or_reconstruction_outcomes_forbidden": true,
+    "cross_pipeline_pooling": false
+  },
+  "staging": {
+    "order": [
+      "capture threshold-independent entity-component development scores",
+      "fit one entity threshold independently per pipeline using entity opportunities only",
+      "freeze intermediate entity scopes",
+      "capture complete downstream SigLIP development score vectors on those scopes",
+      "fit downstream component-local settings",
+      "integrate and replay all development observations through the frozen compiler",
+      "freeze settings and calibration provenance before validation"
+    ],
+    "gdino_entity": "one threshold; entity opportunities only; replay the official postprocessor with identical box and text threshold",
+    "egtr_entity": "one threshold; entity opportunities only",
+    "egtr_relation": "predicate and connectivity thresholds fitted jointly after entity scope freeze; binary-interaction opportunities only",
+    "siglip": "score threshold and minimum top-two margin fitted jointly and independently for each task and pipeline using only that task's opportunities",
+    "count_and_geometry": "compiler-derived; receive no fitted threshold and cannot influence entity calibration"
+  },
+  "preferred_development_criterion_each_stratum": {
+    "precision_min": 0.9,
+    "recall_min": 0.7,
+    "f1_min": 0.8,
+    "coverage_min": 0.75
+  },
+  "ranking": {
+    "direction": "descending lexicographic",
+    "fields": [
+      "preferred_criterion_met",
+      "minimum_stratum_f1",
+      "mean_stratum_f1",
+      "minimum_stratum_coverage",
+      "mean_stratum_coverage",
+      "minimum_stratum_precision",
+      "mean_stratum_precision",
+      "minimum_stratum_recall",
+      "mean_stratum_recall",
+      "threshold",
+      "secondary_threshold_or_margin"
+    ],
+    "tie_rule": "higher threshold and then higher secondary threshold or margin win only after every observed development metric ties",
+    "fallback": "if no candidate meets the preferred criterion in both strata, select by the remaining ranking fields and record preferred_development_criterion_met=false",
+    "metric_arithmetic": "integer counts and exact rational comparisons; JSON reports may serialize finite decimal projections"
+  },
+  "abstention_and_failure": {
+    "below_threshold_or_margin": "abstention",
+    "positive_abstention": "false negative and uncovered",
+    "negative_abstention": "no imputed false positive and uncovered",
+    "non_abstained_prediction": "covered even when its value is wrong",
+    "typed_failure": "all positive opportunities on the image are false negatives and all applicable opportunities are uncovered",
+    "compiler_normalisation_precedes_scoring": true,
+    "integrated_failure_does_not_authorize_refitting": true
+  },
+  "calibration_artifacts": {
+    "development_only": true,
+    "content_addressed": true,
+    "hash": "SHA-256",
+    "required": [
+      "threshold-independent component score artifacts",
+      "development-score manifest",
+      "SHA-256 inventory",
+      "complete candidate-metrics tables",
+      "deterministic ranking keys",
+      "selected settings",
+      "intermediate frozen entity scopes",
+      "threshold-fitting report",
+      "complete replayed development result tree",
+      "threshold freeze"
+    ],
+    "score_requirements": {
+      "grounding_dino": "raw logits, boxes, input IDs, query/target-size/processor provenance, and postprocessed candidates for every grid threshold",
+      "egtr": "threshold-independent object boxes/scores and ordered-pair predicate/connectivity scores with exact vocabulary provenance",
+      "siglip2": "complete closed-label sigmoid score vector with label, prompt, crop, and scope provenance"
+    }
+  },
+  "engineering_smoke": {
+    "component_threshold": 0.5,
+    "siglip_minimum_top_two_margin": 0.0,
+    "source": "prospective engineering plumbing constants",
+    "development_fitted": false,
+    "may_enter_threshold_freeze": false,
+    "outcomes_may_change_calibration": false
+  },
+  "inherited_unchanged": [
+    "scientific objective",
+    "pipelines, components, models, and revisions",
+    "preprocessing, input resolution, and labels",
+    "dataset size, families, splits, and support counts",
+    "compiler rules and bounded-observation contract",
+    "Gate V3-A1 metrics, criteria, uncertainty, and resource limits",
+    "phase dependencies"
+  ]
+}

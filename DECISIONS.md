@@ -731,3 +731,37 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Revisit trigger:** A prospective pre-output record supplies the missing threshold-fitting rule and authoring inputs are complete; or another readiness audit finds an implementation mismatch. Do not begin perception inference first.
 
 **Frozen-material confirmation:** No pipeline, model, revision, label, input resolution, preprocessing, threshold value, metric, Gate criterion, hardware limit, image/support count, compiler rule, split, or phase dependency changed. No P9-v3B, P9-v3C, P10, or cryptographic execution occurred.
+
+## P9-v3A.3-00 — Freeze deterministic development-threshold calibration
+
+**Decision:** Prospectively add `semantic-secrets-preregistration-v3.3.0` to supply the executable development-threshold candidate, objective, tie, fallback, score-capture, replay, and smoke rules missing from v3.0–v3.2. Preserve every historical freeze and every Gate V3-A1 criterion.
+
+**Date:** 2026-08-29
+
+**Status:** Selected and implemented before any v3 capability image, perception-model acquisition, development score, fitted threshold, validation output, or experiment start. This is methodology and engineering evidence only.
+
+**Question:** How must the frozen Grounding DINO, EGTR, and SigLIP component-local thresholds be selected reproducibly from development data without validation leakage or post-output discretion?
+
+**Candidates:** Choose a rule after inspecting development scores; optimize pooled or cross-pipeline results; jointly tune the complete graph including derived count/geometry; use a data-dependent unique-score grid; or prospectively freeze a simple fixed-grid, staged, task-local rule.
+
+**Evaluation criteria:** Development only; both strata independently represented; fixed finite candidates; exact objective and ties; deterministic fallback; no authentication/reconstruction outcome; no cross-pipeline pooling; exact adapter/score replay; count/geometry isolation; complete provenance; validation refusal; no model rerun required for candidate evaluation.
+
+**Evidence:** Static audit of the v3.0/v3.1 score semantics, v3.2 ground-truth/scope design, current adapters, compiler, support opportunities, evaluator, formal guard, and RunPod workflow. Local deterministic calibration/schema/guard/compiler/repository tests only. No image, weight, component score, model output, empirical threshold, or Gate result was produced.
+
+**Selected option:** Use the inclusive grid `0.00,0.01,...,1.00`. Capture development-only threshold-independent Grounding DINO raw/postprocessor inputs and candidates, EGTR object/predicate/connectivity candidates, and complete SigLIP closed-label vectors with exact vocabulary/prompt/crop/scope provenance. Fit entity first and separately for each pipeline from entity opportunities; freeze those scopes; jointly fit EGTR predicate/connectivity from binary-interaction opportunities; jointly fit each SigLIP task threshold/top-two margin from that task only. In both strata prefer precision ≥0.90, recall ≥0.70, F1 ≥0.80, coverage ≥0.75; then maximize the preregistered minimum/mean F1, coverage, precision, recall, threshold, and secondary threshold/margin tuple. If no preferred candidate exists, use the remaining tuple and record failure of the preferred development criterion. Replay the integrated development tree, then bind every score, candidate table, setting, scope, report, inventory, and result hash in `threshold-freeze-v3.3.0` before validation.
+
+**Rejected alternatives:** Post-score rule choice is outcome-driven. Pooled fitting could hide a failed stratum. Cross-pipeline or whole-graph optimization would violate component/task independence and permit gate shopping. Derived count/geometry cannot author detector settings. A unique-score grid makes candidate identity sensitive to sample-specific float serialization. Independent EGTR predicate/connectivity fitting is invalid because their conjunction defines one relation decision.
+
+**Reason:** The fixed grid and exact lexicographic objective are simple, bounded, auditable, and fully prospective. Staging respects the real dependency of downstream crops/relations on accepted entities while preventing downstream types from redefining entity scope. Threshold-independent artifacts allow every candidate and the selected integrated development tree to be reproduced without neural reruns.
+
+**Security/privacy assumptions:** Unchanged. These are public capability-extractor settings, not authentication secrets. Capability calibration establishes neither reconstruction viability, acceptance-region security, privacy, memorability, usability, nor deployment practicality.
+
+**Affected RQs/threats/claims:** RQ1/RQ2/RQ6 P9-v3B execution methodology only. C1–C4 and RQ1–RQ6 remain materially unchanged. Gate V3-A1 remains unevaluated.
+
+**Experiments supporting decision:** None. The implementation and tests are CPU-only pre-execution engineering checks.
+
+**Remaining uncertainty:** Project-authored scenario/prompt content, all 240 final images/references, the ground-truth freeze, explicitly permitted acquisition, EGTR artifact provenance, locked-image smoke, actual scores/settings/resources, validation metrics, and Gate V3-A1 remain unresolved or unmeasured.
+
+**Revisit trigger:** Before any score exists, a deterministic implementation defect is found. After development score capture, the frozen rule may only be corrected through a new transparently versioned prospective decision that cannot inspect validation; it may never be silently repaired in place. Validation output forbids threshold-method revision for this experiment.
+
+**Frozen-material confirmation:** No pipeline, model, revision, preprocessing, resolution, label, dataset/image/family/split/support count, compiler rule, metric, Gate V3-A1 point/interval criterion, uncertainty method, hardware/resource limit, or phase dependency changed. No image was generated, no model was acquired or run, and P9-v3B/P9-v3C/P10/cryptographic work did not start.

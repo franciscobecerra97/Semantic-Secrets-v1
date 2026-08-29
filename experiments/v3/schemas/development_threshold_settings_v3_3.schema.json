@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "development-threshold-settings-v3.3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calibration_version", "preferred_development_criterion_met", "pipelines"],
+  "properties": {
+    "schema_version": {"const": "development-threshold-settings-v3.3.0"},
+    "calibration_version": {"const": "development-threshold-calibration-v3.3.0"},
+    "preferred_development_criterion_met": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "pipelines": {"type": "object", "required": ["v3.1-gdino-siglip2", "v3.1-egtr-siglip2"], "additionalProperties": {"type": "object"}}
+  }
+}

@@ -51,17 +51,18 @@ def confidence(score: float, setting: dict[str, Any]) -> dict[str, Any]:
         "score_name": setting["score_name"],
         "score_range": setting["score_range"],
         "threshold": setting["threshold"],
-        "threshold_source": "development",
+        "threshold_source": setting["threshold_source"],
     }
 
 
 def setting(request: dict[str, Any], name: str) -> dict[str, Any]:
-    validate_settings(request["pipeline_id"], request["thresholds"], exact_tasks=False)
+    source = "engineering_smoke" if request.get("mode") == "smoke" else "development"
+    validate_settings(request["pipeline_id"], request["thresholds"], exact_tasks=False, threshold_source=source)
     value = request["thresholds"].get(name)
     if not isinstance(value, dict):
         raise ValueError(f"missing threshold setting {name}")
     required = {"score_name", "score_range", "threshold", "threshold_source"}
-    if not required <= value.keys() or value["threshold_source"] != "development":
+    if not required <= value.keys() or value["threshold_source"] != source:
         raise ValueError(f"invalid threshold setting {name}")
     return value
 
@@ -139,8 +140,30 @@ class SiglipScorer:
             return None
         return labels[best], scores[best]
 
+    def calibration_vector(
+        self, image: Image.Image, prompts: list[str], labels: list[str],
+        scope: dict[str, Any], crop_provenance: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Complete pre-threshold closed-label vector for offline v3.3 replay."""
+
+        if len(prompts) != len(labels) or not labels:
+            raise ValueError("calibration requires one prompt per closed label")
+        return {
+            "scope": scope,
+            "labels": labels,
+            "prompts": prompts,
+            "scores": self.scores(image, prompts),
+            "score_name": "siglip2_sigmoid_logit",
+            "score_range": [0.0, 1.0],
+            "crop_provenance": crop_provenance,
+        }
+
 
 def emit(value: dict[str, Any]) -> None:
-    if sum(len(value[key]) for key in ("detections", "attributes", "unary_actions", "binary_interactions", "scenes")) > 64:
-        raise RuntimeError("bounded observation exceeds the frozen 64-record limit")
+    bounded = ("detections", "attributes", "unary_actions", "binary_interactions", "scenes")
+    if value.get("score_capture_version") is None:
+        if sum(len(value[key]) for key in bounded) > 64:
+            raise RuntimeError("bounded observation exceeds the frozen 64-record limit")
+    elif value.get("score_capture_version") != "development-score-capture-v3.3.0":
+        raise RuntimeError("unsupported calibration score-capture version")
     print(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")), flush=True)

@@ -8,6 +8,7 @@ self-referential tracked commit hash.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -38,6 +39,11 @@ class FormalPaths:
     manifest: Path
     opportunities: Path
     thresholds: Path
+    score_manifest: Path
+    calibration_inventory: Path
+    entity_scopes: Path
+    fit_report: Path
+    threshold_settings: Path
     model_manifest: Path
     gpu_environment: Path
     models: Path
@@ -65,13 +71,22 @@ def verify_formal(paths: FormalPaths, *, pipeline_ids: tuple[str, ...], mode: st
     ground_truth = read_json(paths.ground_truth)
     manifest = read_json(paths.manifest)
     thresholds = read_json(paths.thresholds)
+    score_manifest = read_json(paths.score_manifest)
+    calibration_inventory = read_json(paths.calibration_inventory)
+    entity_scopes = read_json(paths.entity_scopes)
+    fit_report = read_json(paths.fit_report)
+    threshold_settings = read_json(paths.threshold_settings)
     model_manifest = read_json(paths.model_manifest)
     gpu_environment = read_json(paths.gpu_environment)
 
     validate("formal_authorization_v3_2.schema.json", authorization)
     validate("ground_truth_freeze_v3_2.schema.json", ground_truth)
     validate("capability_manifest_v3_2.schema.json", manifest)
-    validate("threshold_freeze_v3_1.schema.json", thresholds)
+    validate("threshold_freeze_v3_3.schema.json", thresholds)
+    validate("development_score_manifest_v3_3.schema.json", score_manifest)
+    validate("development_entity_scopes_v3_3.schema.json", entity_scopes)
+    validate("threshold_fit_report_v3_3.schema.json", fit_report)
+    validate("development_threshold_settings_v3_3.schema.json", threshold_settings)
     validate("model_acquisition_v3_1.schema.json", model_manifest)
     validate("gpu_environment_v3_1.schema.json", gpu_environment)
     audit_ground_truth_freeze(ground_truth, paths.manifest, paths.opportunities, paths.manifest.parent)
@@ -82,6 +97,49 @@ def verify_formal(paths: FormalPaths, *, pipeline_ids: tuple[str, ...], mode: st
     _equal("opportunities SHA-256", sha256_file(paths.opportunities), authorization["expected_opportunities_sha256"])
     _equal("ground-truth freeze SHA-256", sha256_file(paths.ground_truth), authorization["expected_ground_truth_freeze_sha256"])
     _equal("threshold freeze SHA-256", sha256_file(paths.thresholds), authorization["expected_threshold_freeze_sha256"])
+    _equal("development score manifest SHA-256", sha256_file(paths.score_manifest), thresholds["development_score_manifest_sha256"])
+    _equal("calibration inventory SHA-256", sha256_file(paths.calibration_inventory), thresholds["calibration_inventory_sha256"])
+    _equal("entity scopes SHA-256", sha256_file(paths.entity_scopes), thresholds["entity_scopes_sha256"])
+    _equal("threshold fit report SHA-256", sha256_file(paths.fit_report), thresholds["threshold_fit_report_sha256"])
+    _equal("threshold settings SHA-256", sha256_file(paths.threshold_settings), thresholds["settings_sha256"])
+    _equal("threshold settings", threshold_settings["pipelines"], thresholds["pipelines"])
+    _equal("score-manifest configurations", score_manifest["config_hashes"], dict(contract.config_hashes))
+    _equal("fit-report score manifest", fit_report["score_manifest_sha256"], thresholds["development_score_manifest_sha256"])
+    _equal("fit-report entity scopes", fit_report["entity_scopes_sha256"], thresholds["entity_scopes_sha256"])
+    for row in score_manifest["artifacts"]:
+        candidate = paths.score_manifest.parent / "scores" / row["relative_path"]
+        if not candidate.is_file() or candidate.stat().st_size != row["bytes"] or sha256_file(candidate) != row["sha256"]:
+            raise GuardFailure(f"development score artifact mismatch: {row['relative_path']}")
+    if calibration_inventory.get("schema_version") != "sha256-inventory-v1" or not isinstance(calibration_inventory.get("files"), list):
+        raise GuardFailure("calibration inventory is malformed")
+    named_calibration = {
+        "development_score_manifest_v3_3.json": paths.score_manifest,
+        "development_entity_scopes_v3_3.json": paths.entity_scopes,
+        "development_threshold_settings_v3_3.json": paths.threshold_settings,
+        "threshold_fit_report_v3_3.json": paths.fit_report,
+    }
+    for row in calibration_inventory["files"]:
+        logical = row.get("path")
+        if logical in named_calibration:
+            candidate = named_calibration[logical]
+        elif isinstance(logical, str) and logical.startswith("candidate_metrics/"):
+            candidate = paths.calibration_inventory.parent / logical
+        elif isinstance(logical, str) and logical.startswith("development/"):
+            candidate = paths.results / logical
+        else:
+            raise GuardFailure(f"unknown calibration inventory path: {logical!r}")
+        if not candidate.is_file() or candidate.stat().st_size != row.get("bytes") or sha256_file(candidate) != row.get("sha256"):
+            raise GuardFailure(f"calibration inventory mismatch: {logical}")
+    candidate_rows = sorted((
+        {"relative_path": row["path"].removeprefix("candidate_metrics/"), "bytes": row["bytes"], "sha256": row["sha256"]}
+        for row in calibration_inventory["files"]
+        if isinstance(row.get("path"), str) and row["path"].startswith("candidate_metrics/")
+    ), key=lambda row: row["relative_path"])
+    _equal(
+        "candidate-metrics aggregate SHA-256",
+        hashlib.sha256(canonical_bytes(candidate_rows)).hexdigest(),
+        fit_report["candidate_metrics_sha256"],
+    )
     _equal("model manifest SHA-256", sha256_file(paths.model_manifest), authorization["expected_model_manifest_sha256"])
     _equal("pipeline shortlist", list(contract.pipeline_ids), authorization["pipeline_ids"])
     _equal("requested pipelines", tuple(contract.pipeline_ids), pipeline_ids)
@@ -214,6 +272,11 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--manifest", type=Path, required=True)
     result.add_argument("--opportunities", type=Path, required=True)
     result.add_argument("--thresholds", type=Path, required=True)
+    result.add_argument("--score-manifest", type=Path, required=True)
+    result.add_argument("--calibration-inventory", type=Path, required=True)
+    result.add_argument("--entity-scopes", type=Path, required=True)
+    result.add_argument("--fit-report", type=Path, required=True)
+    result.add_argument("--threshold-settings", type=Path, required=True)
     result.add_argument("--model-manifest", type=Path, required=True)
     result.add_argument("--gpu-environment", type=Path, required=True)
     result.add_argument("--models", type=Path, required=True)
@@ -229,7 +292,12 @@ def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(raw)
     try:
         record = verify_formal(
-            FormalPaths(args.authorization, args.ground_truth, args.manifest, args.opportunities, args.thresholds, args.model_manifest, args.gpu_environment, args.models, args.results),
+            FormalPaths(
+                args.authorization, args.ground_truth, args.manifest, args.opportunities,
+                args.thresholds, args.score_manifest, args.calibration_inventory,
+                args.entity_scopes, args.fit_report, args.threshold_settings,
+                args.model_manifest, args.gpu_environment, args.models, args.results,
+            ),
             pipeline_ids=tuple(args.pipeline), mode=None, resume=args.resume,
         )
     except (GuardFailure, FileNotFoundError, ValueError) as exc:

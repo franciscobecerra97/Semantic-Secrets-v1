@@ -6,7 +6,8 @@ cd "$repo"
 /opt/envs/modern/bin/python -m pytest -q \
   experiments/v3/test_preregistration_v3.py \
   experiments/v3/test_preregistration_v3_1.py \
-  experiments/v3/test_preregistration_v3_2.py
+  experiments/v3/test_preregistration_v3_2.py \
+  experiments/v3/test_calibration_v3_3.py
 /opt/envs/modern/bin/python -m experiments.v3.runtime.compiler_report \
   --python /opt/envs/modern/bin/python \
   --output /workspace/environment/compiler_invariant_report_v3.json

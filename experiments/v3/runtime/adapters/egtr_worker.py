@@ -7,6 +7,7 @@ import json
 import os
 import sys
 import time
+import hashlib
 from pathlib import Path
 
 
@@ -52,6 +53,50 @@ class Worker:
         pixel_mask = inputs.get("pixel_mask")
         with self.torch.inference_mode():
             output = self.model(pixel_values=inputs["pixel_values"].cuda(), pixel_mask=pixel_mask.cuda() if pixel_mask is not None else None, output_attentions=False, output_attention_states=True, output_hidden_states=True)
+        if request.get("operation") == "calibration_capture_entity":
+            allowed_entities, allowed_predicates = set(request["allowed_entities"]), set(request["allowed_predicates"])
+            scores, labels = output.logits.softmax(-1)[0].max(-1)
+            objects = []
+            for query, (score, label_index, box) in enumerate(zip(scores, labels, output.pred_boxes[0])):
+                label = str(self.id2label.get(int(label_index), self.id2label.get(str(int(label_index)), ""))).strip().casefold().replace(" ", "_").replace("-", "_")
+                if label not in allowed_entities:
+                    continue
+                cx, cy, width, height = [float(value) for value in box]
+                objects.append({
+                    "local_id": f"egtr-q{query:03d}", "query_index": query,
+                    "category": label, "score": float(score),
+                    "bbox": [max(0.0, cx - width / 2), max(0.0, cy - height / 2), min(1.0, cx + width / 2), min(1.0, cy + height / 2)],
+                })
+            relations = []
+            for source in objects:
+                for target in objects:
+                    if source["query_index"] == target["query_index"]:
+                        continue
+                    source_query, target_query = source["query_index"], target["query_index"]
+                    relation_score, relation_index = output.pred_rel[0, source_query, target_query].max(-1)
+                    relation = self.id2relation[int(relation_index)] if isinstance(self.id2relation, list) else self.id2relation.get(int(relation_index), self.id2relation.get(str(int(relation_index)), ""))
+                    relation = str(relation).strip().casefold().replace(" ", "_").replace("-", "_")
+                    if relation not in allowed_predicates:
+                        continue
+                    relations.append({
+                        "source_detection_id": source["local_id"], "target_detection_id": target["local_id"],
+                        "interaction": relation, "predicate_score": float(relation_score),
+                        "connectivity_score": float(output.pred_connectivity[0, source_query, target_query, 0]),
+                    })
+            self.torch.cuda.synchronize()
+            telemetry = {
+                "elapsed_seconds": round(time.perf_counter() - started, 6),
+                "peak_process_rss_bytes": self.psutil.Process().memory_info().rss,
+                "framework_peak_gpu_allocated_bytes": int(self.torch.cuda.max_memory_allocated()),
+                "framework_peak_gpu_reserved_bytes": int(self.torch.cuda.max_memory_reserved()),
+            }
+            vocabulary = json.dumps({"objects": self.id2label, "relations": self.id2relation}, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+            return {
+                "objects": objects, "relations": relations, "telemetry": telemetry,
+                "vocabulary_sha256": hashlib.sha256(vocabulary).hexdigest(),
+                "object_vocabulary": self.id2label, "predicate_vocabulary": self.id2relation,
+                "score_domains": {"entity": "egtr_object_softmax", "predicate": "egtr_relation_sigmoid", "connectivity": "egtr_connectivity_sigmoid"},
+            }
         entity_setting, predicate_setting = request["thresholds"]["entity"], request["thresholds"]["predicate"]
         connectivity_setting = request["thresholds"]["connectivity"]
         allowed_entities, allowed_predicates = set(request["allowed_entities"]), set(request["allowed_predicates"])

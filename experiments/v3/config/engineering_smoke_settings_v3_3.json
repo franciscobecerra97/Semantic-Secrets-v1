@@ -1,0 +1,28 @@
+{
+  "schema_version": "engineering-smoke-settings-v3.3.0",
+  "purpose": "engineering_plumbing_only",
+  "development_fitted": false,
+  "may_enter_threshold_freeze": false,
+  "pipelines": {
+    "v3.1-gdino-siglip2": {
+      "entity": {"score_name": "grounding_dino_postprocessed_score", "score_range": [0.0, 1.0], "threshold": 0.5, "threshold_source": "engineering_smoke"},
+      "colour": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "size": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "material": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "pattern": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "unary_action": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "binary_interaction": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "scene": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"}
+    },
+    "v3.1-egtr-siglip2": {
+      "entity": {"score_name": "egtr_object_softmax", "score_range": [0.0, 1.0], "threshold": 0.5, "threshold_source": "engineering_smoke"},
+      "predicate": {"score_name": "egtr_relation_sigmoid", "score_range": [0.0, 1.0], "threshold": 0.5, "threshold_source": "engineering_smoke"},
+      "connectivity": {"score_name": "egtr_connectivity_sigmoid", "score_range": [0.0, 1.0], "threshold": 0.5, "threshold_source": "engineering_smoke"},
+      "colour": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "size": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "material": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "pattern": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"},
+      "scene": {"score_name": "siglip2_sigmoid_logit", "score_range": [0.0, 1.0], "threshold": 0.5, "minimum_top_two_margin": 0.0, "threshold_source": "engineering_smoke"}
+    }
+  }
+}

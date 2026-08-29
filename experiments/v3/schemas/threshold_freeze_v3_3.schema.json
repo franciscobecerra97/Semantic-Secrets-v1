@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "threshold-freeze-v3.3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "calibration_version", "development_manifest_sha256", "development_results_sha256", "development_score_manifest_sha256", "calibration_inventory_sha256", "entity_scopes_sha256", "threshold_fit_report_sha256", "settings_sha256", "frozen_at_utc", "pipelines"],
+  "properties": {
+    "schema_version": {"const": "threshold-freeze-v3.3.0"},
+    "status": {"const": "frozen_before_validation"},
+    "calibration_version": {"const": "development-threshold-calibration-v3.3.0"},
+    "development_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "development_results_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "development_score_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "calibration_inventory_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "entity_scopes_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "threshold_fit_report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "settings_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "frozen_at_utc": {"type": "string", "format": "date-time"},
+    "pipelines": {"type": "object", "required": ["v3.1-gdino-siglip2", "v3.1-egtr-siglip2"], "additionalProperties": {"type": "object"}}
+  }
+}

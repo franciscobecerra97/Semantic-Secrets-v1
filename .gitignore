@@ -45,6 +45,8 @@ generated_images/
 results/**/cache/
 results/**/intermediate/
 results/**/scratch/
+results/**/calibration/scores/
+results/**/calibration/candidate_metrics/
 *.tmp
 
 # LaTeX build products; source, final PDFs, figures, and verified BibTeX remain trackable
@@ -59,4 +61,3 @@ paper/*.out
 paper/*.run.xml
 paper/*.synctex.gz
 paper/*.toc
-

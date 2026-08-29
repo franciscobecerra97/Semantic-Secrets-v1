@@ -252,15 +252,24 @@ def test_formal_guard_exposes_only_ground_truth_freeze_dependency() -> None:
     help_text = guard_parser().format_help()
     assert "--ground-truth" in help_text
     assert "--annotation" not in help_text
+    for flag in ("--score-manifest", "--calibration-inventory", "--entity-scopes", "--fit-report", "--threshold-settings"):
+        assert flag in help_text
     schema = json.loads((SCHEMA_DIR / "formal_authorization_v3_2.schema.json").read_text(encoding="utf-8"))
     assert "expected_ground_truth_freeze_sha256" in schema["required"]
     assert "expected_annotation_record_sha256" not in schema["required"]
 
 
 def test_threshold_freeze_requires_both_pipelines() -> None:
-    value = {"schema_version": "threshold-freeze-v3.1.0", "status": "frozen_before_validation", "development_manifest_sha256": "0" * 64, "development_results_sha256": "1" * 64, "frozen_at_utc": "2026-08-26T00:00:00Z", "pipelines": {}}
+    value = {
+        "schema_version": "threshold-freeze-v3.3.0", "status": "frozen_before_validation",
+        "calibration_version": "development-threshold-calibration-v3.3.0",
+        "development_manifest_sha256": "0" * 64, "development_results_sha256": "1" * 64,
+        "development_score_manifest_sha256": "2" * 64, "calibration_inventory_sha256": "3" * 64,
+        "entity_scopes_sha256": "4" * 64, "threshold_fit_report_sha256": "5" * 64,
+        "settings_sha256": "6" * 64, "frozen_at_utc": "2026-08-29T00:00:00Z", "pipelines": {},
+    }
     with pytest.raises(jsonschema.ValidationError):
-        validate("threshold_freeze_v3_1.schema.json", value)
+        validate("threshold_freeze_v3_3.schema.json", value)
 
 
 def test_all_preparation_schemas_are_valid_json() -> None:

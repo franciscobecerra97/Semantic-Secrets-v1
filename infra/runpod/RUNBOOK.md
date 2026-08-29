@@ -99,25 +99,29 @@ export P9_V3B_SMOKE_ALLOWED=yes
 bash infra/runpod/smoke_run.sh /workspace/semantic-secrets
 ```
 
-This runs at most two development images per pipeline. It may expose plumbing, licence, compatibility, or OOM failure. It may not tune labels, prompts, candidates, input resolution, preprocessing, or validation behavior.
+This runs at most two development images per pipeline using the versioned engineering-only constants: every component threshold is 0.50 and every SigLIP top-two margin is 0.00. They are not development-fitted and cannot enter the final freeze. Smoke may expose plumbing, licence, compatibility, or OOM failure; its semantic output may not tune labels, prompts, candidates, thresholds, input resolution, preprocessing, or validation behavior.
 
-## 9. Development and threshold freeze
+## 9. Development score capture, calibration, replay, and threshold freeze
 
-The frozen documents require every component/task threshold and SigLIP top-two margin to be fitted on development and frozen before validation. They do not currently state an optimization objective, candidate grid, or tie rule. Consequently, do not run development merely to choose a rule after seeing scores. A prospective, outcome-independent threshold-fitting rule must first be recorded without changing the frozen validation criteria.
+V3.3 freezes the inclusive `0.00,0.01,...,1.00` grid, both-strata objective, ties, fallback, entity-first staging, EGTR predicate/connectivity joint fit, per-task SigLIP threshold/margin fit, and validation isolation. `development_run.sh` executes exactly:
 
-After that rule and its implementation exist, the guarded development command is:
+```text
+threshold-independent entity score capture
+→ entity-only fit and intermediate scope freeze
+→ complete downstream SigLIP score capture
+→ offline task-local fitting
+→ integrated 240-record development replay
+→ provenance-complete threshold freeze
+```
+
+All score artifacts are development-only and content-addressed under `/workspace/results/calibration`. Candidate evaluation never reruns a neural model. Count and geometry receive no threshold. Neither validation output nor P9-v3C/authentication outcomes can enter calibration. The script refuses existing validation or validation-repeat JSON.
 
 ```bash
 export P9_V3B_DEVELOPMENT_ALLOWED=yes
 bash infra/runpod/development_run.sh /workspace/semantic-secrets
-/opt/envs/modern/bin/python -m experiments.v3.runtime.thresholds \
-  --settings /workspace/environment/development_threshold_settings_v3_1.json \
-  --manifest /workspace/data/capability_manifest_v3_2.json \
-  --results /workspace/results \
-  --output /workspace/environment/threshold_freeze_v3_1.json
 ```
 
-The second command only validates and provenance-binds settings produced by the future frozen fit; it is intentionally not a substitute for the missing selection rule. It refuses incomplete development output or any existing validation output.
+The command produces `development_score_manifest_v3_3.json`, score and final SHA-256 inventories, complete candidate JSONL tables, `development_entity_scopes_v3_3.json`, `development_threshold_settings_v3_3.json`, `threshold_fit_report_v3_3.json`, the 240-record replay tree, and `threshold_freeze_v3_3.json`. Inspect and preserve all of them. A preferred-development-criterion failure is recorded but does not permit dropping or replacing a pipeline; the deterministic fallback still freezes its settings.
 
 ## 10. Formal execution
 
@@ -140,7 +144,7 @@ The command has no implicit formal mode:
   --manifest /workspace/data/capability_manifest_v3_2.json \
   --opportunities /workspace/data/support_opportunities_v3_2.csv \
   --ground-truth /workspace/environment/ground_truth_freeze_v3_2.json \
-  --thresholds /workspace/environment/threshold_freeze_v3_1.json \
+  --thresholds /workspace/environment/threshold_freeze_v3_3.json \
   --model-manifest /workspace/environment/model_acquisition_v3_1.json \
   --output /workspace/environment/formal_authorization_v3_2.json
 bash infra/runpod/formal_run.sh --formal /workspace/semantic-secrets

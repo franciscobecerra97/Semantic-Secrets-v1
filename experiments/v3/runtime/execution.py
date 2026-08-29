@@ -137,14 +137,18 @@ def execute(args: argparse.Namespace) -> int:
     manifest = read_json(args.manifest)
     validate("capability_manifest_v3_2.schema.json", manifest)
     thresholds = read_json(args.thresholds)
-    if args.mode == "development":
-        if thresholds.get("schema_version") != "development-threshold-settings-v3.1.0" or not isinstance(thresholds.get("pipelines"), dict):
-            raise SystemExit("REFUSED: development requires explicitly versioned development threshold settings")
+    if args.mode == "smoke":
+        validate("engineering_smoke_settings_v3_3.schema.json", thresholds)
+        threshold_source = "engineering_smoke"
+    elif args.mode == "development":
+        validate("development_threshold_settings_v3_3.schema.json", thresholds)
+        threshold_source = "development"
     else:
-        validate("threshold_freeze_v3_1.schema.json", thresholds)
+        validate("threshold_freeze_v3_3.schema.json", thresholds)
+        threshold_source = "development"
     for pipeline_id in args.pipeline:
         try:
-            validate_settings(pipeline_id, thresholds["pipelines"][pipeline_id], exact_tasks=True)
+            validate_settings(pipeline_id, thresholds["pipelines"][pipeline_id], exact_tasks=True, threshold_source=threshold_source)
         except (KeyError, ValueError) as exc:
             raise SystemExit(f"REFUSED: {exc}") from exc
     model_manifest_sha = sha256_file(args.model_manifest)
@@ -153,11 +157,16 @@ def execute(args: argparse.Namespace) -> int:
     ground_truth_sha = sha256_file(args.ground_truth)
     opportunities_sha = sha256_file(args.opportunities)
 
-    if args.mode != "development":
+    if args.mode in {"validation", "validation-repeat"}:
         if not args.formal:
             raise SystemExit("REFUSED: validation and repeat require --formal")
         verify_formal(
-            FormalPaths(args.authorization, args.ground_truth, args.manifest, args.opportunities, args.thresholds, args.model_manifest, args.gpu_environment, args.models, args.results),
+            FormalPaths(
+                args.authorization, args.ground_truth, args.manifest, args.opportunities,
+                args.thresholds, args.score_manifest, args.calibration_inventory,
+                args.entity_scopes, args.fit_report, args.threshold_settings,
+                args.model_manifest, args.gpu_environment, args.models, args.results,
+            ),
             pipeline_ids=tuple(args.pipeline), mode=args.mode, resume=args.resume,
         )
     elif args.formal:
@@ -167,11 +176,13 @@ def execute(args: argparse.Namespace) -> int:
             read_json(args.ground_truth), args.manifest, args.opportunities, args.data
         )
 
-    images = [row for row in manifest["images"] if row["split"] == ("development" if args.mode == "development" else "validation")]
+    images = [row for row in manifest["images"] if row["split"] == ("development" if args.mode in {"development", "smoke"} else "validation")]
     if args.limit is not None:
         images = images[: args.limit]
+    if args.mode == "smoke" and (args.limit is None or args.limit > 2):
+        raise SystemExit("REFUSED: engineering smoke requires --limit at most 2")
     compiler = SemanticCompilerV3(contract)
-    output_dir = args.results / args.mode
+    output_dir = args.results / "smoke" / "development" if args.mode == "smoke" else args.results / args.mode
     if output_dir.exists() and any(output_dir.iterdir()) and not args.resume:
         raise SystemExit(f"REFUSED: {output_dir} is not empty; use a verified --resume")
 
@@ -241,7 +252,7 @@ def execute(args: argparse.Namespace) -> int:
 
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description="P9-v3B isolated pipeline controller")
-    result.add_argument("--mode", choices=["development", "validation", "validation-repeat"], required=True)
+    result.add_argument("--mode", choices=["smoke", "development", "validation", "validation-repeat"], required=True)
     result.add_argument("--formal", action="store_true")
     result.add_argument("--resume", action="store_true")
     result.add_argument("--limit", type=int)
@@ -250,7 +261,11 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--adapter-command", action="append", metavar="PIPELINE=COMMAND", required=True)
     for name in ("manifest", "thresholds", "model-manifest", "adapter-source", "models", "data", "results"):
         result.add_argument(f"--{name}", type=Path, required=True)
-    for name in ("authorization", "ground-truth", "opportunities", "gpu-environment"):
+    for name in (
+        "authorization", "ground-truth", "opportunities", "gpu-environment",
+        "score-manifest", "calibration-inventory", "entity-scopes", "fit-report",
+        "threshold-settings",
+    ):
         result.add_argument(f"--{name}", type=Path)
     return result
 
@@ -268,7 +283,12 @@ def main(argv: list[str] | None = None) -> int:
     args.adapter_command = parsed
     if args.ground_truth is None or args.opportunities is None:
         raise SystemExit("all inference modes require a frozen ground-truth record and opportunity table")
-    if args.mode != "development" and any(value is None for value in (args.authorization, args.gpu_environment)):
+    formal_records = (
+        args.authorization, args.gpu_environment, args.score_manifest,
+        args.calibration_inventory, args.entity_scopes, args.fit_report,
+        args.threshold_settings,
+    )
+    if args.mode in {"validation", "validation-repeat"} and any(value is None for value in formal_records):
         raise SystemExit("formal validation requires authorization and GPU environment records")
     return execute(args)
 

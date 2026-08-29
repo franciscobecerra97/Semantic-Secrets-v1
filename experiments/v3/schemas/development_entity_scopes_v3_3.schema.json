@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "development-entity-scopes-v3.3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "score_manifest_sha256", "selected_entity_thresholds", "entity_selection", "scopes"],
+  "properties": {
+    "schema_version": {"const": "development-entity-scopes-v3.3.0"},
+    "score_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "selected_entity_thresholds": {"type": "object", "required": ["v3.1-gdino-siglip2", "v3.1-egtr-siglip2"], "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}},
+    "entity_selection": {"type": "object", "required": ["v3.1-gdino-siglip2", "v3.1-egtr-siglip2"], "additionalProperties": {"type": "object"}},
+    "scopes": {"type": "array", "items": {"type": "object", "required": ["pipeline_id", "image_id", "detections"], "properties": {"pipeline_id": {"type": "string"}, "image_id": {"type": "string"}, "detections": {"type": "array"}}, "additionalProperties": false}}
+  }
+}

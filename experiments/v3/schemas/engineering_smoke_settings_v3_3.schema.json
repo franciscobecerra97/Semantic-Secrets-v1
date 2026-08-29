@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "engineering-smoke-settings-v3.3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "purpose", "development_fitted", "may_enter_threshold_freeze", "pipelines"],
+  "properties": {
+    "schema_version": {"const": "engineering-smoke-settings-v3.3.0"},
+    "purpose": {"const": "engineering_plumbing_only"},
+    "development_fitted": {"const": false},
+    "may_enter_threshold_freeze": {"const": false},
+    "pipelines": {"type": "object", "required": ["v3.1-gdino-siglip2", "v3.1-egtr-siglip2"], "additionalProperties": {"type": "object"}}
+  }
+}

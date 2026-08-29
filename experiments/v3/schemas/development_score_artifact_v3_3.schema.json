@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "development-score-artifact-v3.3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_kind", "split", "pipeline_id", "image_id", "image_sha256", "provenance", "payload"],
+  "properties": {
+    "schema_version": {"const": "development-score-artifact-v3.3.0"},
+    "artifact_kind": {"enum": ["entity", "downstream"]},
+    "split": {"const": "development"},
+    "pipeline_id": {"enum": ["v3.1-gdino-siglip2", "v3.1-egtr-siglip2"]},
+    "image_id": {"type": "string", "minLength": 1},
+    "image_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["git_commit", "config_hashes", "ground_truth_freeze_sha256", "manifest_sha256", "opportunities_sha256", "model_manifest_sha256", "adapter_source_sha256"],
+      "properties": {
+        "git_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "config_hashes": {"type": "object", "minProperties": 6, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+        "ground_truth_freeze_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "opportunities_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "model_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "adapter_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "payload": {"type": "object"}
+  }
+}
