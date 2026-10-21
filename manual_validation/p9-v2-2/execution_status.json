@@ -1,0 +1,23 @@
+{
+  "experiment_version": "p9-v2-2",
+  "date": "2026-10-20",
+  "status": "awaiting_naturalistic_reference_review_and_ground_truth_freeze",
+  "api_calls_performed": 0,
+  "observed_images": 0,
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "measurement_status": "not_measured",
+  "planned_images": 240,
+  "planned_primary_calls_both_models": 480,
+  "focused_standard_library_checks_passed": 9,
+  "restored_p9_v2_cpu_plan": "passed",
+  "full_pytest_suite": "not_run_python313_access_denied_python312_dependencies_unavailable_network_blocked",
+  "live_api_connectivity": "not_tested_for_extraction_backends",
+  "historical_p9_v2_gate": "unchanged_failure",
+  "initial_dataset_absence_confirmed_by_user": true,
+  "shared_dataset_root": "artifacts/downloads/p9_v3",
+  "shared_images_generated": 240,
+  "controlled_reference_records": 120,
+  "naturalistic_reference_records": 0
+}

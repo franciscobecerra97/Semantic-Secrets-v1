@@ -1,5 +1,13 @@
 # Experiments v3
 
+2026-10-20 dataset update: remote SD-Turbo generation and the shared destination
+`artifacts/downloads/p9_v3` were explicitly requested by the project author. See
+[`docs/p9_v3_remote_dataset.md`](../../docs/p9_v3_remote_dataset.md) for the narrow
+v3.4 provenance amendment, generation/resume commands, and model-output-blind
+reference workflow. Earlier no-image/no-data states below describe historical
+preparation freezes. Current counts are in the shared dataset's `STATUS.json`.
+Image generation establishes no extraction precision or formal gate result.
+
 P9-v3A is the immutable v3.0.0 design freeze. P9-v3A.1 is the prospective v3.1.0 pipeline/resource/support amendment. P9-v3A.2 narrowly supplies project-authored model-blind ground truth. P9-v3A.3 narrowly freezes deterministic development-threshold calibration before any output. Historical clauses remain historical and are never silently rewritten.
 
 The authoritative machine-readable files are:

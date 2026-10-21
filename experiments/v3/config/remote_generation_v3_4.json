@@ -1,0 +1,19 @@
+{
+  "schema_version": "remote-capability-generation-v3.4.0",
+  "decision_date": "2026-10-20",
+  "scope": "Researcher-authored public capability fixtures only; no authentication secrets or private image processing",
+  "authorization": "Project author requested remote generation following manual_validation/VLM/SD-Turbo.py on 2026-10-20",
+  "space_id": "Ntdeseb/ntia",
+  "host": "https://ntdeseb-ntia.hf.space",
+  "api_name": "/generate_image",
+  "requested_model_id": "stabilityai/sd-turbo",
+  "requested_parameters": {"width": 512, "height": 512, "num_inference_steps": 1, "guidance_scale": 0.0, "negative_prompt": ""},
+  "seed_rule": "925031 + 100 * family_number + image_number",
+  "model_revision": null,
+  "provenance_limit": "The public API does not attest model weights, actual execution parameters, server fallbacks, or determinism. Space source/commit are provenance, not weight verification. Record requested settings separately from unverified actual settings.",
+  "original_local_generator": "The historical pinned SD-Turbo local-generation path is preserved unchanged.",
+  "ground_truth": "Controlled construction references are deterministic. Naturalistic labels/boxes must be authored from final images by the project author without perception-model output; prompts and intended facts are never ground truth.",
+  "unchanged": ["240 images", "120 images per stratum", "24 families per stratum", "5 images per family", "F01-F12 development; F13-F24 validation", "closed vocabulary", "support-opportunity layout", "compiler", "perception pipelines", "calibration", "metrics", "gates"],
+  "retention": "One returned image per predeclared request; no quality-based retries or selection. Transport failures are recorded; explicit resume only.",
+  "formal_use": "Any execution must bind this amendment and all returned image/receipt hashes. Do not claim reproduction of the historical exact-revision local generator. Ground-truth freeze and all existing formal execution guards remain required."
+}

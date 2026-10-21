@@ -1,0 +1,23 @@
+{
+  "objects": [
+    "man",
+    "book",
+    "wall",
+    "window",
+    "floor"
+  ],
+  "attributes": [
+    "red and white striped shirt",
+    "grey pants",
+    "short brown hair",
+    "open book",
+    "white wall"
+  ],
+  "relations": [
+    "man is holding the book.",
+    "book is open.",
+    "man is standing near a window.",
+    "window is letting in light.",
+    "light is shining on the wall."
+  ]
+}

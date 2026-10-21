@@ -765,3 +765,21 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Revisit trigger:** Before any score exists, a deterministic implementation defect is found. After development score capture, the frozen rule may only be corrected through a new transparently versioned prospective decision that cannot inspect validation; it may never be silently repaired in place. Validation output forbids threshold-method revision for this experiment.
 
 **Frozen-material confirmation:** No pipeline, model, revision, preprocessing, resolution, label, dataset/image/family/split/support count, compiler rule, metric, Gate V3-A1 point/interval criterion, uncertainty method, hardware/resource limit, or phase dependency changed. No image was generated, no model was acquired or run, and P9-v3B/P9-v3C/P10/cryptographic work did not start.
+
+## P9-v3-DATA-00 — Remote public capability-image generation
+
+**Date:** 2026-10-20
+
+**Authorization:** The project author explicitly requested implementation of the remote API in `manual_validation/VLM/SD-Turbo.py`, generation of the shared controlled/naturalistic dataset, and storage in `artifacts/downloads/p9_v3`.
+
+**Selected change:** Request `stabilityai/sd-turbo` through `Ntdeseb/ntia` `/generate_image`, with 512x512, one requested step, guidance 0, and predeclared seeds. The prospective `remote_generation_v3_4.json` and all 120 prompt/seed rows were written before the first remote generation request. Existing frozen local-generation configurations remain unchanged. Active contract hashes additionally bind the new amendment.
+
+**Provenance limit:** The public endpoint does not attest actual model weights or settings and may contain internal fallbacks. Preserve observed Space source/commit, API schema, request settings, exact returned bytes, image hashes, and separate PNG-materialization receipts. Never relabel these as reproduction of the original exact-revision local generator.
+
+**Unchanged:** 240 capability images, two strata, family-separated development/validation splits, closed vocabulary, support counts, perception pipelines, compiler, calibration, metrics, gates, and model-output-blind reference requirement. Public researcher-authored capability prompts are authorized for this API; private authentication processing remains local under the existing security model.
+
+**Ground truth:** Controlled references derive from authored construction. Naturalistic prompts are intended content only. Naturalistic boxes and visible facts must be recorded from final images by the project author without perception-model predictions. Empty drafts are not references. No ground-truth freeze or precision result is created merely by generating images.
+
+**Retention and QA:** Keep one returned image per planned request; no quality-based retries, replacement seeds, or silent overwrite. Explicit resume checks receipt/raw hashes. An umbrella shaft was corrected during pre-inference controlled-drawing QA; initial affected assets/images/render plan are retained in `pre_freeze_revisions/controlled-v1`. No perception output informed that correction.
+
+**Execution boundary:** This work generates data only. Extraction and formal validation remain blocked until actual complete references, support audits, a valid ground-truth freeze, and their existing execution prerequisites exist. Insufficient visible support is reported rather than repaired through fabricated references or favorable image selection.

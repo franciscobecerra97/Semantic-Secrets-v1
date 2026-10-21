@@ -1,7 +1,7 @@
 """Small, inspectable helpers for a supplementary audit of immutable P9-v2.
 
 The original prompt, parser, graph validator, and scorer are reused. The original
-loaders handle the two historical models; Moondream 3 is a separately labelled option.
+loaders handle the two historical models on CPU.
 The original infer/analyze functions are NEVER called: their output locations are
 fixed to the historical evidence directory. This module owns only manual outputs.
 """
@@ -231,29 +231,20 @@ def parse_and_score(answer, reference, module=None):
             "metrics": module.aggregate([scores])}
 
 
-def run_inference(rows, backends, path, repeat_validation=False, resume=False, experimental=None):
+def run_inference(rows, backends, path, repeat_validation=False, resume=False):
     """Step 1 verify -> Step 2 load once -> Step 3 predict -> Step 4 save raw text.
 
     Labels are never passed to the extractor. This deliberately completes the
     selected tasks after invalid responses instead of using the old early stop.
     """
-    if experimental is not None:
-        if tuple(backends) != ("moondream3",):
-            raise ValueError("Moondream 3 is a separate comparison; choose --models moondream3")
-        from moondream3_audit import describe_backend
-        entry, device = describe_backend(experimental)
-        entries = {"moondream3": entry}
-    else:
-        entries, device = model_entries(backends), "cpu"
+    entries, device = model_entries(backends), "cpu"
     for row in rows:
         image_path(row)
     plan = make_plan(rows, backends, repeat_validation)
-    run = receipt(rows, plan, "moondream3_comparison" if experimental else "fresh_model_inference", models=entries,
+    run = receipt(rows, plan, "fresh_model_inference", models=entries,
                   model_weight_bytes_independently_authenticated=False,
                   device=device, early_stop_on_invalid=False,
                   runtime=runtime_versions())
-    if experimental is not None:
-        run["experimental_settings"] = experimental
     path = prepare_run(path, run, resume)
     module = runner()
     from PIL import Image
@@ -274,38 +265,22 @@ def run_inference(rows, backends, path, repeat_validation=False, resume=False, e
         extractor = None
         try:
             started = time.perf_counter()
-            if experimental is not None:
-                from moondream3_audit import load_query
-                extractor = load_query(prompt, experimental)
-            else:
-                extractor = module.load_extractor(backend, prompt)
+            extractor = module.load_extractor(backend, prompt)
             print(f"Loaded in {time.perf_counter() - started:.1f}s. Starting image inference.", flush=True)
             for index, task in enumerate(pending, 1):
                 row = by_id[task["fixture_id"]]
                 source = image_path(row)
                 started = time.perf_counter()
-                answer, error, graph, stage, reasoning, response_metadata = "", None, None, "inference", None, {}
-                if device == "cuda":
-                    module.torch.cuda.reset_peak_memory_stats()
+                answer, error, graph, stage = "", None, None, "inference"
                 with module.PeakRSS() as memory:
                     try:
                         with Image.open(source) as image:
-                            response = extractor(image.convert("RGB"))
-                        if isinstance(response, dict):
-                            answer = response["answer"]
-                            reasoning = response.get("reasoning")
-                            response_metadata = {key: response.get(key) for key in ("server_request_id", "usage")}
-                        else:
-                            answer = response
+                            answer = extractor(image.convert("RGB"))
                         if not isinstance(answer, str):
                             raise ValueError("Extractor did not return a text answer")
                         stage = "output_validation"
                         graph = module.normalise_graph(module.parse_json_answer(answer), read_json(GRAPH))
                     except Exception as exc:
-                        if experimental is not None and experimental["transport"] == "cloud":
-                            from moondream3_audit import CloudRequestError
-                            if isinstance(exc, CloudRequestError):
-                                raise
                         error = f"{type(exc).__name__}: {exc}"
                 observation = {"backend": backend, **task, "split": row["split"],
                                "fixture_style": row["fixture_style"], "answer": answer,
@@ -313,13 +288,10 @@ def run_inference(rows, backends, path, repeat_validation=False, resume=False, e
                                "error": error, "failure_stage": stage if error else None,
                                "elapsed_seconds": time.perf_counter() - started,
                                "peak_rss_bytes": memory.peak,
-                               "peak_gpu_allocated_bytes": int(module.torch.cuda.max_memory_allocated()) if device == "cuda" else 0,
+                               "peak_gpu_allocated_bytes": 0,
                                "model_id": entries[backend]["model_id"], "revision": entries[backend]["revision"],
                                "image_sha256": row["image_sha256"],
                                "audit_key": observation_key(run, backend, task["fixture_id"], task["pass"])}
-                if experimental is not None:
-                    observation.update(reasoning=reasoning, reasoning_requested=experimental["reasoning"],
-                                       transport=experimental["transport"], response_metadata=response_metadata)
                 append_observation(raw_path, observation)
                 print(f"{index}/{len(pending)} {row['fixture_id']} {task['pass']}: "
                       f"valid={graph is not None}, seconds={observation['elapsed_seconds']:.1f}, error={error}", flush=True)

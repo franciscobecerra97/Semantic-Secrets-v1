@@ -53,8 +53,7 @@ $audit = Join-Path $PWD "manual_validation\p9-v2"
 Each script has `--help`. Use this project's existing environment. The historical
 dependency records are `experiments/v2/requirements-p9.txt` and the model-acquisition
 manifest; do not upgrade packages to make a reproduction appear to work. The
-inference script installs no dependencies and downloads no models. The optional
-`06_prepare_moondream3.py --download` explicitly acquires the new model. Historical
+inference script installs no dependencies and downloads no models. Historical
 fresh inference requires the existing local Moondream/SmolVLM2 snapshots. Replay and teaching examples import the
 original evaluator and its Python dependencies, but do not load model weights.
 
@@ -271,98 +270,3 @@ Tests cover scoring, missing observations, separate denominators, corrupt record
 safe output paths, source-bound resume, and fake-loader end-to-end execution.
 Dataset-dependent checks require the existing local capability images. These
 software tests are not new model-performance evidence.
-
-## Optional: Moondream 3 Preview with reasoning
-
-Use `--models moondream3 --reasoning` for this separately labelled comparison.
-`--models both` still means the two original P9-v2 models. The default image is
-still the clean original `cap-v2-064`; the exact P9-v2 prompt is retained. Only the
-final `answer` is parsed/scored; the returned `reasoning` is saved separately in
-`moondream3.jsonl`. `run.json` records model, transport, reasoning and token settings.
-
-Reasoning defaults on for this new option. `--no-reasoning` turns it off. The
-numeric `--max-tokens` default remains 384. You can explicitly try 1024, but that
-is a changed decoding condition, and local reasoning plus answer generation can
-consume more total tokens than one answer-only call. It does not guarantee the
-same output as the playground. Hosted defaults and exact deployed weights can differ.
-
-### Cloud: usable from this computer
-
-The T600 has 4 GiB of VRAM, insufficient for the upstream unquantized 9B local
-configuration. The explicit cloud option uses Moondream's `/v1/query` endpoint,
-the `moondream3-preview` model alias, and `reasoning=true`. It requires your own
-API key and may consume account credits. Only the selected project-authored image
-and prompt are sent; reference labels are not sent. It is a capability-data test,
-not a proposal to send real authentication secrets to a cloud service.
-
-Enter the key privately in your terminal (never put it in a script or chat):
-
-```powershell
-$env:MOONDREAM_API_KEY = [System.Net.NetworkCredential]::new('', (Read-Host 'Moondream API key' -AsSecureString)).Password
-& "$audit\examples\05_moondream3_cloud.ps1" -Execute
-```
-
-This recipe runs one image with reasoning and automatically validates its answer.
-Without `-Execute` it only prints a plan. For an off/on comparison, run a new
-directory with `-NoReasoning -Execute`. `-Scope all` selects all 96 images.
-
-Equivalent direct command:
-
-```powershell
-& $py "$audit\02_run_inference.py" --models moondream3 --transport cloud --reasoning --scope one --execute
-```
-
-The script prints the new run directory; use it with `03_validate_outputs.py`.
-Cloud keys are never saved in receipts, outputs or error messages. An HTTP/auth or
-transport failure stops the backend, leaves uncaptured images missing, and is
-recorded in a separate execution-error file. It is not a model prediction. The hosted
-alias is not an immutable weight revision, and reports say so explicitly.
-
-If a cloud run fails with HTTP 403, it has not produced a model answer. The initial
-wrapper used Python's default HTTP client signature, which was observed receiving
-Cloudflare error 1010 even without credentials or image data. The wrapper now
-identifies itself as `semantic-secrets-manual-audit/1.0`, following the official
-SDK's use of an explicit client header. An unauthenticated empty request with this
-header reached the API and returned an expected HTTP 400 input-validation error;
-this verifies gateway access, not authentication or successful inference.
-
-Rerun the cloud recipe above to create a fresh directory after this fix. The key
-already set in the same terminal can be reused. Keep the failed run as evidence;
-source-bound resume deliberately rejects changed audit code. Further HTTP errors
-include a bounded provider explanation and request identifier when available,
-with the current key redacted. No automatic retry is performed. The final
-PowerShell `Audit command failed` message simply propagates the Python failure;
-the preceding cloud error explains the actual rejection.
-
-### Local: requires a suitable larger CUDA GPU
-
-This path follows the upstream bfloat16/FlexAttention recipe. The selected snapshot
-contains about 18.5 GB of weight tensors before caches. 20 GiB installed is only
-a minimum rejection check; enough free memory and compilation support must still
-be verified (plan on a suitable 24 GiB-or-larger device). No CPU or quantized
-fallback is substituted automatically. Local execution has not been smoke-tested
-on this computer because its GPU cannot hold the weights.
-
-```powershell
-& $py "$audit\06_prepare_moondream3.py"                 # no download
-& $py "$audit\06_prepare_moondream3.py" --download      # explicit ~18.5 GB acquisition
-# Use the printed snapshot path on the suitable GPU machine:
-& "$audit\examples\06_moondream3_local.ps1" -Snapshot '<prepared-snapshot-path>' -Execute
-```
-
-Preparation pins `moondream/moondream3-preview` at
-`5112966d1a723413b1c9a1e8bea272b72e647b35` and the separately required
-`moondream/starmie-v1` tokenizer at `35192e10a54e36eabe0a7cc57a2c1aab371cafc5`.
-It downloads only the indexed weight set, records the upstream licence, scans
-source using the existing review method, and hashes the acquired files. Local
-loading verifies this inventory and redirects tokenizer access to the frozen
-local tokenizer. Inference uses local-only/offline model loading. No historical
-acquisition manifest is edited. A failed/partial preparation is retained for
-inspection; use a new directory for a clean preparation attempt.
-
-Official references checked 2026-10-19:
-
-- https://huggingface.co/moondream/moondream3-preview/blob/5112966d1a723413b1c9a1e8bea272b72e647b35/README.md
-- https://docs.moondream.ai/skills/query/
-- https://docs.moondream.ai/reasoning/
-- https://github.com/m87-labs/moondream-python/blob/3a5a59353ef909c8e9f7b68f8c87275123b80bf0/moondream/cloud_vl.py

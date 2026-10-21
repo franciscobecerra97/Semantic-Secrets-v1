@@ -228,4 +228,15 @@ Those results motivate, but do not validate or invalidate, the active hypothesis
 
 ## 13. Immediate execution boundary
 
+**2026-10-20 dataset update:** The project author explicitly requested remote
+SD-Turbo generation following `manual_validation/VLM/SD-Turbo.py` into
+`artifacts/downloads/p9_v3`. `remote_generation_v3_4.json` narrowly records that
+amendment and is bound in active config hashes. Earlier no-image statements
+describe their historical freeze state. Space commits/requested settings must
+not be represented as attested weights/actual settings. This permission covers
+public capability fixtures, not private authentication processing. Naturalistic
+references still require project-author final-image authoring without perception
+predictions. Generation does not authorize extraction or a false ground-truth
+declaration. See `docs/p9_v3_remote_dataset.md` and dataset `STATUS.json`.
+
 P9-v3A.1 fixed the prospective pipeline/resource/support design, P9-v3A.2 supplied project-authored model-blind ground truth, and P9-v3A.3 now freezes executable development calibration before output. P9-v3B still requires explicit instruction, complete project-authored scenario/prompt inputs, and a hash-bound `ground-truth-freeze-v3.2.0` before inference. After permitted score capture, the only authorised order is entity fit → frozen scopes → downstream scores → offline fit → integrated development replay → `threshold-freeze-v3.3.0` → formal authorization → validation/repeat. See `docs/formal_specification_v3_2.md`, `docs/formal_specification_v3_3.md`, and decisions `P9-v3A.2-00`/`P9-v3A.3-00`.

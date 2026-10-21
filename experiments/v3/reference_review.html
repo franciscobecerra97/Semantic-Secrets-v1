@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>P9-v3 reference authoring</title>
+<style>
+body{font:15px system-ui;margin:24px;background:#f4f6f8;color:#182b3a}h1{font-size:24px}main{display:flex;gap:24px;align-items:flex-start}section{background:white;padding:20px;border-radius:12px;max-width:680px}canvas{border:1px solid #888;cursor:crosshair;max-width:100%;height:auto}select,input,button,textarea{font:inherit;padding:8px;margin:4px}button{cursor:pointer;background:#163d57;color:white;border:0;border-radius:5px}label{display:block;margin:8px 0}small{color:#526574}pre{white-space:pre-wrap;max-height:260px;overflow:auto;font:12px monospace}.warn{color:#96440c}#message{font-weight:600}textarea{width:94%}
+</style>
+<h1>P9-v3 naturalistic reference authoring</h1>
+<p>Inspect each final image and record visible facts. Prompts and extraction-model predictions are deliberately absent.</p>
+<p class="warn">Do not invent missing objects or relationships. Flag unclear or unsupported images. All references must be completed before extraction.</p>
+<main><section>
+<select id="imageSelect"></select><button id="prev">Previous</button><button id="next">Next</button>
+<p id="support"></p><canvas id="canvas" width="512" height="512"></canvas>
+<label>Category for the next box <select id="category"></select></label>
+<small>Drag a tight box around each visible entity. Boxes use normalized coordinates. Include two to four main entities under the frozen naturalistic design.</small>
+<div id="entities"></div><button id="undo">Remove last entity</button>
+</section><section>
+<h2>Visible semantic facts</h2>
+<label>Type <select id="type"></select> Value <select id="value"></select></label>
+<label>Source <select id="source"></select> Target <select id="target"></select></label>
+<button id="addFact">Add visible fact</button><button id="removeFact">Remove last fact</button>
+<p><small>Entity facts, exact category counts and box geometry are derived automatically from your boxes. Add colours, interactions, scenes and applicable exploratory facts yourself. For a scene, source and target are ignored; unary facts use source only.</small></p>
+<pre id="facts"></pre>
+<label>Construction or visibility issue<textarea id="issue" rows="2" placeholder="Describe missing/ambiguous support; do not replace the image to improve results."></textarea></label>
+<label><input type="checkbox" id="checked">I checked these references against this image without perception-model predictions.</label>
+<button id="save">Save checked reference</button><button id="draft">Save draft</button>
+<p id="message"></p><p id="count"></p><button id="export">Export all checked references</button>
+<p><small>Progress is stored in this browser. Export regularly. Import the exported JSON with the repository's <code>import-references</code> command.</small></p>
+</section></main>
+<script>
+const catalog=__CATALOG__;
+const $=id=>document.getElementById(id), key='p9-v3-reference-review-'+catalog.plan_sha256;
+const saved=JSON.parse(localStorage.getItem(key)||'{}');let index=0,current,photo=new Image(),start;
+const ctx=$('canvas').getContext('2d');
+function options(el,values){el.innerHTML='';for(const v of values){const o=document.createElement('option');o.value=v;o.textContent=v;el.appendChild(o)}}
+options($('category'),catalog.entities);options($('type'),Object.keys(catalog.labels));
+for(const [n,r] of catalog.images.entries()){const o=document.createElement('option');o.value=n;o.textContent=r.image_id+' · '+r.split;$('imageSelect').appendChild(o)}
+function values(){options($('value'),catalog.labels[$('type').value])}$('type').onchange=values;values();
+function persist(){localStorage.setItem(key,JSON.stringify(saved));$('count').textContent=Object.values(saved).filter(r=>r.checked).length+' / 120 checked references'}
+function draw(){ctx.clearRect(0,0,512,512);if(photo.complete&&photo.naturalWidth)ctx.drawImage(photo,0,0,512,512);for(const e of current.entities){const b=e.bbox_xyxy;ctx.strokeStyle='#ff244a';ctx.lineWidth=2;ctx.strokeRect(b[0]*512,b[1]*512,(b[2]-b[0])*512,(b[3]-b[1])*512);ctx.fillStyle='#fff';ctx.fillRect(b[0]*512,b[1]*512,120,17);ctx.fillStyle='#111';ctx.font='12px sans-serif';ctx.fillText(e.reference_id+' '+e.category,b[0]*512+2,b[1]*512+13)}}
+function display(){draw();$('entities').textContent=current.entities.map(e=>e.reference_id+': '+e.category+' ['+e.bbox_xyxy.join(', ')+']').join(' | ');$('facts').textContent=JSON.stringify(current.facts,null,2);options($('source'),current.entities.map(e=>e.reference_id));options($('target'),current.entities.map(e=>e.reference_id));$('issue').value=current.issue||'';$('checked').checked=!!current.checked;persist()}
+function load(n){index=Math.max(0,Math.min(119,n));const row=catalog.images[index];current=structuredClone(saved[row.image_id]||{entities:[],facts:[],checked:false,issue:''});$('imageSelect').value=index;$('message').textContent='';photo=new Image();photo.onload=draw;photo.src='images/'+row.image_id+'.png';const f=Number(row.image_id.slice(10,12));const local=(f-1)%12+1;$('support').textContent='Required support: two entities, colour, count, interaction, geometry; '+(local<=6?'size, pattern and scene.':'material and unary action.');display()}
+function changed(){current.checked=false;$('checked').checked=false;display()}
+$('imageSelect').onchange=()=>load(Number($('imageSelect').value));$('prev').onclick=()=>load(index-1);$('next').onclick=()=>load(index+1);
+function pos(e){const r=$('canvas').getBoundingClientRect();return [Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))]}
+$('canvas').onpointerdown=e=>{start=pos(e);$('canvas').setPointerCapture(e.pointerId)};
+$('canvas').onpointerup=e=>{if(!start)return;const end=pos(e),b=[Math.min(start[0],end[0]),Math.min(start[1],end[1]),Math.max(start[0],end[0]),Math.max(start[1],end[1])].map(x=>Number(x.toFixed(6)));start=null;if(b[2]-b[0]<.01||b[3]-b[1]<.01)return;current.entities.push({reference_id:'r'+(current.entities.length+1),category:$('category').value,bbox_xyxy:b});changed()};
+$('undo').onclick=()=>{const last=current.entities.pop();if(last)current.facts=current.facts.filter(f=>f.source_reference_id!==last.reference_id&&f.target_reference_id!==last.reference_id);changed()};
+function fact(kind,value,source=null,target=null,scope=null){return {reference_atom_id:'',atom_type:kind,value:String(value),source_reference_id:source,target_reference_id:target,scope_category:scope}}
+$('addFact').onclick=()=>{const kind=$('type').value,source=$('source').value,target=$('target').value;if(kind!=='scene'&&!source)return;if(kind==='binary_interaction'&&(!target||target===source))return;current.facts.push(fact(kind,$('value').value,kind==='scene'?null:source,kind==='binary_interaction'?target:null));changed()};
+$('removeFact').onclick=()=>{current.facts.pop();changed()};
+function geometry(es){const out=[];const before=(a,b)=>a.category!==b.category?a.category<b.category:JSON.stringify(a.bbox_xyxy)<JSON.stringify(b.bbox_xyxy);for(const a of es)for(const b of es){if(a===b)continue;const x=a.bbox_xyxy,y=b.bbox_xyxy,aw=x[2]-x[0],ah=x[3]-x[1],bw=y[2]-y[0],bh=y[3]-y[1],iw=Math.max(0,Math.min(x[2],y[2])-Math.max(x[0],y[0])),ih=Math.max(0,Math.min(x[3],y[3])-Math.max(x[1],y[1])),inter=iw*ih,ax=(x[0]+x[2])/2,ay=(x[1]+x[3])/2,bx=(y[0]+y[2])/2,by=(y[1]+y[3])/2;const vs=[];if(ax+.05<=bx)vs.push('left_of');if(ay+.05<=by)vs.push('above');if(inter/(aw*ah)>=.9)vs.push('inside');if(Math.abs(x[3]-y[1])<=.08&&iw/aw>=.5)vs.push('on');if(Math.abs(x[1]-y[3])<=.08&&iw/aw>=.5)vs.push('under');if(before(a,b)){if(inter/(aw*ah+bw*bh-inter)>=.2)vs.push('overlap');if(Math.hypot(ax-bx,ay-by)<=.25)vs.push('near')}for(const v of vs)out.push(fact('geometry_relation',v,a.reference_id,b.reference_id))}return out}
+function scenario(id,draft){const row=catalog.images.find(r=>r.image_id===id),atoms=draft.entities.map(e=>fact('entity',e.category,e.reference_id));const counts={};for(const e of draft.entities)counts[e.category]=(counts[e.category]||0)+1;for(const [c,n]of Object.entries(counts))atoms.push(fact('count',n>=5?'5_plus':n,null,null,c));atoms.push(...draft.facts,...geometry(draft.entities));atoms.forEach((a,i)=>a.reference_atom_id='a'+String(i).padStart(3,'0'));return {schema_version:'capability-scenario-specification-v3.2.0',scenario_specification_id:'scenario-'+id,image_id:id,family_id:id.split('-').at(-2),stratum:'B_naturalistic_t2i',split:row.split,authoring_method:'project_authored_naturalistic_reference',model_output_blind:true,reference_entities:draft.entities,reference_atoms:atoms}}
+function save(checked){current.issue=$('issue').value;if(checked&&!$('checked').checked){$('message').textContent='Please make the review declaration first.';return}if(checked&&(current.entities.length<2||current.entities.length>4)){$('message').textContent='Record the two-to-four-entity protocol shortfall as an issue; do not invent entities.';return}current.checked=checked;saved[catalog.images[index].image_id]=structuredClone(current);persist();$('message').textContent=checked?'Checked reference saved.':'Draft saved.'}
+$('save').onclick=()=>save(true);$('draft').onclick=()=>save(false);
+$('export').onclick=()=>{const scenarios=Object.entries(saved).filter(([id,d])=>d.checked).map(([id,d])=>scenario(id,d));const obj={schema_version:'project-author-review-export-v3.4.0',reviewed_without_perception_models:true,image_sha256:Object.fromEntries(catalog.images.map(r=>[r.image_id,r.image_sha256])),scenarios,issues:Object.fromEntries(Object.entries(saved).filter(([id,d])=>d.issue).map(([id,d])=>[id,d.issue]))};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}));a.download='naturalistic_reviewed_scenarios_v3_4.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};load(0);
+</script></html>

@@ -1,0 +1,5 @@
+outputs/
+archive/
+data/
+__pycache__/
+.pytest_cache/

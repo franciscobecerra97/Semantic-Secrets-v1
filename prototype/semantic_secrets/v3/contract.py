@@ -1,4 +1,4 @@
-"""Read-only composition of the frozen v3.0 through v3.3 contracts."""
+"""Read-only composition of v3.0-v3.3 plus v3.4 generation provenance."""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ AMEND_PREREG_PATH = CONFIG_DIR / "preregistration_v3_1.json"
 GROUND_TRUTH_PREREG_PATH = CONFIG_DIR / "preregistration_v3_2.json"
 CALIBRATION_PREREG_PATH = CONFIG_DIR / "preregistration_v3_3.json"
 SMOKE_SETTINGS_PATH = CONFIG_DIR / "engineering_smoke_settings_v3_3.json"
+REMOTE_GENERATION_PATH = CONFIG_DIR / "remote_generation_v3_4.json"
 BASE_OBSERVATION_PATH = CONFIG_DIR / "visual_observation_v3.json"
 AMEND_OBSERVATION_PATH = CONFIG_DIR / "visual_observation_v3_1.json"
 
@@ -96,6 +97,7 @@ def load_active_contract() -> ActiveV3Contract:
         "preregistration_v3_2.json": GROUND_TRUTH_PREREG_PATH,
         "preregistration_v3_3.json": CALIBRATION_PREREG_PATH,
         "engineering_smoke_settings_v3_3.json": SMOKE_SETTINGS_PATH,
+        "remote_generation_v3_4.json": REMOTE_GENERATION_PATH,
         "visual_observation_v3.json": BASE_OBSERVATION_PATH,
         "visual_observation_v3_1.json": AMEND_OBSERVATION_PATH,
     }
