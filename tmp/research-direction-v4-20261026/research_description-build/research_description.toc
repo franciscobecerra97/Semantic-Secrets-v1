@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Research Goal and Direction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Proposed Contributions}{2}{section.2}%
+\contentsline {section}{\numberline {3}Scientific Pipeline}{2}{section.3}%
+\contentsline {section}{\numberline {4}Dataset and Manual References}{3}{section.4}%
+\contentsline {section}{\numberline {5}Normalization and API Strategy}{4}{section.5}%
+\contentsline {section}{\numberline {6}Security and Evaluation}{4}{section.6}%
+\contentsline {section}{\numberline {7}Phase Roadmap}{5}{section.7}%
+\contentsline {section}{\numberline {8}Authorization and Failure Handling}{5}{section.8}%
+\contentsline {section}{\numberline {9}Current Status and Historical Integrity}{6}{section.9}%
+\contentsline {section}{\numberline {10}Deferred Privacy and Claim Boundaries}{6}{section.10}%
+\contentsline {section}{\numberline {11}EuroS\&P 2027 and Evidence Readiness}{7}{section.11}%

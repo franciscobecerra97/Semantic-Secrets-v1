@@ -1,0 +1,55 @@
+{
+  "objects": [
+    {
+      "name": "bicycle",
+      "type": "vehicle",
+      "attributes": [
+        {
+          "name": "color",
+          "value": "black"
+        },
+        {
+          "name": "wheels",
+          "value": "white"
+        }
+      ]
+    },
+    {
+      "name": "person",
+      "type": "human",
+      "attributes": [
+        {
+          "name": "age",
+          "value": "30"
+        },
+        {
+          "name": "gender",
+          "value": "male"
+        },
+        {
+          "name": "hair",
+          "value": "gray"
+        },
+        {
+          "name": "shirt",
+          "value": "white"
+        },
+        {
+          "name": "pants",
+          "value": "blue"
+        },
+        {
+          "name": "shoes",
+          "value": "white"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "subject": "person",
+      "predicate": "is riding",
+      "object": "bicycle"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "objects": [
+    {
+      "name": "person",
+      "position": "center",
+      "size": "medium",
+      "attributes": [
+        {
+          "name": "hair",
+          "value": "blonde"
+        },
+        {
+          "name": "eye color",
+          "value": "blue"
+        },
+        {
+          "name": "skin color",
+          "value": "fair"
+        }
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "name": "hair",
+      "value": "blonde"
+    },
+    {
+      "name": "eye color",
+      "value": "blue"
+    },
+    {
+      "name": "skin color",
+      "value": "fair"
+    }
+  ],
+  "relations": [
+    {
+      "name": "person",
+      "position": "center",
+      "size": "medium",
+      "attributes": [
+        {
+          "name": "hair",
+          "value": "blonde"
+        },
+        {
+          "name": "eye color",
+          "value": "blue"
+        },
+        {
+          "name": "skin color",
+          "value": "fair"
+        }
+      ]
+    }
+  ]
+}

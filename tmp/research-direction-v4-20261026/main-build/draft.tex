@@ -1,0 +1,176 @@
+\documentclass[compsoc,conference,a4paper,10pt,times]{IEEEtran}
+% Exact class/options supplied by EuroS&P 2027; no geometry overrides.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage[colorlinks=true,urlcolor=black]{hyperref}
+\hypersetup{pdfauthor={},pdftitle={Semantic Secrets: Reconstruction and Security-Relevant Semantic Distinctions in Visual Authentication},pdfsubject={IEEE European Symposium on Security and Privacy 2027 planning draft}}
+\title{Semantic Secrets: Reconstruction and Security-Relevant Semantic Distinctions in Visual Authentication}
+\author{}
+\begin{document}
+\maketitle
+\begin{abstract}
+Semantic authentication must tolerate legitimate reconstruction without making related unauthorized alternatives equivalent. Perception and language normalization can remove exactly the distinctions needed for that separation. This planning draft proposes a common evaluation of generative visual-language extraction and specialized perception, with bounded observations, a deterministic graph compiler and explicit error accounting. Generated images test the reconstruction workflow, controlled drawings isolate distinctions, and photographs test external visual generalization. Intended concepts and manually authored final-image references separate generation fidelity from extraction accuracy. The proposed study connects identity, attribute-binding, count, interaction and spatial errors to independent reconstruction and finite-budget attacker outcomes under frozen acceptance rules. Existing experiments provide bounded historical negative evidence and engineering preparation, not results for this new comparison. Hosted API feasibility is separate from local performance and private verification. No v4 experiment, successful authentication system, private protocol or human-memory result is claimed. The final paper must replace this prospective account with evidence-backed findings.
+\end{abstract}
+\begin{IEEEkeywords}
+authentication, semantic reconstruction, canonicalization, acceptance regions, guessing attacks
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:introduction}
+\noindent\textbf{Planning draft, 26 October 2026.} The revised direction is approved; its experimental phases have not begun. This is not a submission-ready paper.
+
+Approximate semantic authentication must separate legitimate variation from changes that should invalidate a credential. A red cup beside a blue book and a blue cup beside a red book have the same object and color vocabulary but different attribute bindings. Losing those bindings can make them equivalent. Mapping \emph{kitty} to \emph{cat} may remove harmless lexical variation; mapping both \emph{cat} and \emph{dog} to \emph{animal} removes an object distinction. These decisions affect which alternatives an attacker can submit.
+
+The central question is whether independent reconstruction preserves sufficient semantic detail for reliable authentication while keeping related unauthorized alternatives distinguishable. We investigate perception, normalization and matching as separate sources of collapse. Model comparison serves this question; extraction F1 alone is not evidence of authentication security.
+
+The proposed workflow reconstructs an intended concept through a prompt and a fresh image, extracts bounded observations, normalizes supported terms and compiles a canonical graph. The prompt is an interface, the image a transient medium and the graph an input to the predicate. Generated pixels add no credential entropy. The security object is the set of all accepted alternatives, rather than the exact enrolled image or prompt.
+
+\paragraph{Proposed contributions.}
+V4-C1 is a methodology connecting perception and normalization errors to authentication outcomes. V4-C2 is empirical evidence about which distinctions survive or collapse across named pipelines and image sources. V4-C3 is a study of independent reconstruction and finite-budget attackers under frozen acceptance rules. These contributions require both a focused novelty review and actual evidence. Historical contribution identifiers retain their original meanings.
+
+The immediate programme uses hosted APIs on non-secret fixtures. It does not establish local feasibility or privacy from providers. Private verification remains a separate deferred goal requiring construction-specific correctness, leakage and compromise evidence. No participant study is planned; researcher-authored concepts cannot establish human recall, memorability, usability, natural credential choices or superiority to passwords/passkeys.
+
+\section{Background and Closest Work}
+\label{sec:related}
+VSA~\cite{Jeong2026VSA} is the closest mandatory baseline. It enrols a reference image, extracts objects, CLIP-derived attributes, quantities, visibility, and 2$\times$2 quadrant location, and lets a user select two or three semantic facts plus quantity operators. Authentication uses an arbitrary satisfying image and an additional password. VSA serialises canonical semantic tokens, evaluates Flexible Range Logic conjunctions, hashes most semantic fields together with the password using SHA-256, and retains quantity/operator metadata separately.
+
+These features remove image-independent visual-semantic authentication, VLM extraction, canonical tokens, object, attribute, count, and quadrant rules, flexible quantity policies, conjunction, and user-selected semantic policy from our novelty space. We require two fair baselines: (i) VSA's semantic-policy component for functional discrimination and (ii) the full semantic-plus-password hash architecture for security comparison. We must not compare a semantic-only system directly with VSA's claimed combined semantic-plus-password space as though the credentials were equivalent.
+
+VSA calls its hash binding server-opaque and explicitly weaker than strict zero knowledge. It acknowledges small semantic inputs and fast SHA-256 offline guessing, recommending Argon2id with a user-specific salt. Its COCO-based positive FRR samples are automatically selected from cached detections rather than independently re-inferred. It reports no human study and leaves Semantic Relationship Logic to future work. It does not target private/unlinkable verification.
+
+SemanticLock uses semantically linked image tokens and story structure for graphical authentication~\cite{Olade2023SemanticLock}. PassStyles~\cite{Matsuzaki2025PassStyles} and Omokage~\cite{Matsuzaki2026Omokage} use StyleGAN-generated changing face candidates and recognition criteria, preventing broad ``first semantic'', ``first generative'', or ``first changing-image'' authentication language. Adaptive score-guided verifier search is likewise established~\cite{MartinezDiaz2011HillClimbing}. The P8 review found no verified source combining free-language independent text-to-image reconstruction and fresh typed extraction with a system-derived policy, finite-budget semantic attacks, and construction-specific private/domain-separated verification. Gate V2-N passed for that scoped question only; this is not an exhaustive absence or first claim.
+
+The historical v3 shortlist was grounded in prior visual-understanding work. Grounding DINO produces open-set, language-conditioned boxes~\cite{Liu2024GroundingDINO}; SigLIP~2 provides contrastive vision-language encoders for closed-label scoring and localization-oriented transfer~\cite{Tschannen2025SigLIP2}; and EGTR exposes object, relation, and connectivity predictions from a DETR-based graph model~\cite{Im2024EGTR}. SGTR~\cite{Li2022SGTR} remains the historical v3.0 graph candidate. The newer autoregressive ROBIN/Synthetic Visual Genome path~\cite{Park2025SyntheticVG} was audited but rejected because generated graph text and semantic label mapping would reintroduce structured-generation risk. Visual Genome illustrates the dense annotation problem and its dataset limitations~\cite{Krishna2017VisualGenome}. These are established perception components, not authentication or privacy contributions. The narrower v4 scope needs its own focused novelty review; the earlier review does not automatically establish it.
+
+
+\section{Model and Security Questions}
+\label{sec:model}
+Let $C$ be an intended concept, $P$ its reconstruction interface, $G$ a versioned generator and $r$ independent randomness. The image $I=G(P,r)$ may differ from $C$. A manually authored reference describes actual visible content; a separate fidelity measure compares that reference with $C$.
+
+A pipeline produces observations $O=\mathsf{Observe}(I)$. Versioned normalization $N$ and deterministic compilation yield
+\begin{equation}
+ S=\mathsf{Compile}(N(O))
+\end{equation}
+or a typed failure. Frozen policy $\theta$ defines
+\begin{equation}
+ \mathcal{A}_{\theta}(S)=\{S':\mathsf{Accept}_{\theta}(S,S')=1\}.
+\end{equation}
+An attacker wins with any accepted alternative. Sampled attacks estimate reachability under specified distributions and budgets; they do not enumerate or prove security over the entire region.
+
+Algorithms, model identities, vocabulary, mappings, compiler rules and thresholds are public. Knowledge ranges from generic public information ($K_0$), through source/frequency information ($K_1$) and partial target facts ($K_2$), to strong near-secret information ($K_3$). Name the candidate interface, oracle, auxiliary data, adaptive feedback, budget and costs. A graph-level attack is a separately named abstraction unless the actual interface accepts graphs.
+
+\paragraph{Research questions.}
+RQ-V4.1 asks which visible distinctions each pipeline preserves, including binding and coverage. RQ-V4.2 asks how normalization changes correct equivalence, false merges and false splits. RQ-V4.3 asks how these effects alter independent technical reconstruction and acceptance of unauthorized alternatives. RQ-V4.4 asks how often specified attackers reach the accepted region within finite budgets. API cost and repeatability support these questions; they do not establish local deployment.
+
+\paragraph{Trust boundary.}
+Providers receive the public or safely authorized non-secret fixtures submitted to their endpoints. Intended per-image labels are withheld from extraction and normalization. A future private architecture would keep secret-bearing prompts, images, observations, graphs and embeddings on a trusted client. The present study provides no protected-database, unlinkability, offline-resistance or private-verification result.
+
+\section{Common Perception and Graph Methodology}
+\label{sec:design}
+Initially compare one feasible generative VLM pipeline and one feasible specialized perception pipeline. Exact services and identities await design review. Grounding DINO and SigLIP~2 are also vision-language components; this is not a VLM-versus-non-VLM dichotomy. Two pipelines cannot establish universal architectural superiority.
+
+Models emit bounded instance facts. Code owns identifiers, validation, duplicate handling, canonical order and serialization. Preserve entity identity, attribute ownership, counts and subject--relation--object roles. Flat object/color arrays cannot distinguish swapped bindings.
+
+Specify grounding explicitly: either every arm provides required normalized boxes, or grounding is a separately declared task with missing support counted. Geometry cannot be derived from absent boxes. All extractors receive the same allowed public task/ontology context and image, never intended prompts or expected per-image labels.
+
+Raw output validity, adapter success, compiler validity and semantic fidelity are distinct. Valid typed failure JSON is not successful perception. Any parsing repair must be predefined, logged and counted, never reference-assisted. The v3 compiler is reusable only after interface/correctness review; changed semantics require a new version, preserving its old goldens.
+
+\subsection{Normalization}
+Use deterministic formatting and reviewed frozen mappings in the primary arm. Development-time LLM suggestions require review of aliases versus abstraction and context-dependent senses. Unknowns follow a fixed unsupported/abstention rule. Semantic normalization is established practice, including in Visual Genome~\cite{Krishna2017VisualGenome}; the question is its authentication consequence.
+
+An optional live-LLM arm changes normalization only on the same cached observations. It cannot access intended labels or add facts. Measure mapping correctness, false merges/splits, unsupported outputs and repeatability, followed by acceptance effects. Freeze exposed identifiers, prompts and settings; temperature zero does not prove deterministic hosted behavior.
+
+\section{Dataset and Evaluation Design}
+\label{sec:evaluation}
+Generated naturalistic images are primary reconstruction-workflow evidence. Controlled drawings isolate distinctions; photographs test external visual generalization. Report strata separately and freeze primary/secondary roles and weights before results.
+
+A photograph may motivate a manually specified concept. Generate its naturalistic variant from the text specification and draw its controlled variant from the intended facts. Image-to-image copying is not the primary reconstruction experiment. Label each actual image. If a requested cup becomes a bottle, correct bottle extraction receives credit while generation fails the intended fact.
+
+Families cover identity, attribute binding, counts, interactions and spatial arrangement; the actual inventory remains a design decision. Keep originals, derivatives, perceptual duplicates and close alternatives in one family partition. Separate capability development/evaluation and reconstruction development/evaluation prospectively. Inspected v3 images default to development/diagnostic use, not fresh held-out v4 evidence.
+
+The author manually creates references without perception predictions. Define ambiguity, unsupported facts, instance correspondence and applicable negatives. Delayed self-review is useful but is not independent annotation agreement. Photograph permission, redistribution and known/unknown training overlap limit claims; no participant authentication behavior is collected.
+
+\subsection{Measures and Error Accounting}
+Separate generation fidelity from entity/attribute/relation precision, recall, F1, coverage, hallucination and binding errors. Enforce one-to-one instance matching. Report schema, adapter, typed compiler and semantic failures separately. Timeouts, abstentions and unsupported tasks remain in the frozen accounting, not favorable-case-only denominators.
+
+Use paired comparisons and family-cluster uncertainty: related images are not independent replicates. Sample size, support, qualification criteria, uncertainty, multiplicity, repeats, exclusions, retries and practical-effect criteria require approval before formal output. No v4 numeric gate is fabricated here.
+
+Same-image repeats measure service stability; fresh generations measure reconstruction; cache replay measures downstream determinism. Cached positives selected because they already match cannot establish reconstruction. A claim that the image stage adds value requires a prospectively matched direct-text control.
+
+\subsection{API Provenance and Cost}
+Approve endpoints, input disclosure, task schema, model identity, call/cost limits and bounded retries before calls. Preserve requested versus attested settings, timestamps, exposed request identifiers, raw responses, hashes, parse events and failures. Report observed latency and known costs without inventing provider hardware telemetry.
+
+A model name or demo does not establish stable access or checkpoint parity. If an endpoint is unavailable, explain a newly identified compatible hosted pipeline, an explicitly narrower task, or deferral. No silent substitution is permitted. Local execution is a later authorized semantic-parity and performance milestone.
+
+\section{Reconstruction and Attacker Evaluation}
+\label{sec:security}
+After capability interpretation, separately design and freeze reconstruction trials and acceptance. A system-derived mandatory/tolerant policy remains a candidate, not an assumed winner. Compare a bounded, justified set of strict semantic, fuzzy-overlap and reproducible VSA-style baselines. Fit policies/thresholds only on permitted development data. Unsupported types cannot be promoted because authentication results look favorable.
+
+Report enrollment rejection, conditional technical FRR, unconditional reconstruction success and explicit failure strata. Random negatives and close unauthorized contrasts need separate distributions and denominators; neither establishes human usability.
+
+For strategy $Q$, knowledge $K$, view $V$ and budget $B$,
+\begin{equation}
+ \mathsf{Succ}(Q,B,K,V)=
+ \Pr[\exists j\leq B:S'_j\in\mathcal{A}_{\theta}(S)].
+\end{equation}
+Report success at 1, 5, 10 and the approved maximum budget, accounts reached, guesses to success with censored failures, duplicates and generation/extraction/verification costs. Specify whether an attempt begins with a prompt, image or graph. Keep attacker auxiliary data separate from targets. Adaptive strategies see only declared feedback; internal scores are not silently available to an Accept/Reject-only attacker.
+
+K0--K3 and simple versus justified AI-assisted strategies test knowledge and proposal effects. Conditional near-neighbor FAR is not total attack success. Rate limits constrain online queries, not a stolen offline verifier. Plaintext laboratory tests do not establish compromise resistance of a private construction.
+
+\subsection{Deferred Private Verification}
+Semantic discrimination and cryptographic privacy are independent. A future construction must preserve the frozen predicate and define protected records, service/key roles, compromise views, template/policy/transcript leakage, linkage and replay binding. Hashing/salting alone does not establish these properties; secure computation does not strengthen an easily guessed region.
+
+Historical private-verification goals remain intact but outside the immediate v4 contribution claim. A constructive private branch requires a separately approved design and adequate semantic evidence. API results do not discharge its trusted-client or resource assumptions.
+
+\section{Available Evidence and Unresolved Validation}
+\label{sec:evidence}
+\subsection{Historical Monolithic Extractor Result}
+The P9 capability manifest contains 64 development and 32 validation fixtures, equally divided between procedural/composite and researcher-authored synthetic-raster scenes. It accesses no participant or sealed-v1 data. Moondream2 at revision prefix \texttt{9a7d40240508} emitted no JSON on formal validation fixture \texttt{cap-v2-064} in 157.57 seconds with 4.58~GiB peak process RSS. SmolVLM2-2.2B-Instruct at revision prefix \texttt{c0a7af506d0f} emitted malformed, truncated JSON in 392.10 seconds with 5.62~GiB peak RSS. The artifact records both complete immutable revisions.
+
+The preregistration did not specify an early-stop rule. After separate plumbing smoke and before formal validation output, we implemented exact logical futility: because all checks are conjunctive, one invalid result makes the 98\% schema-validity check impossible even if all remaining fixtures pass. This procedural deviation cannot create a pass, but it limits the negative evidence. We did not estimate full atom F1, bootstrap intervals, determinism, structured error strata, or full-set latency medians. We made no candidate replacement, prompt/output repair, fine-tuning, or authentication-outcome selection.
+
+\subsection{Historical Modular Preparation and Current Blockers}
+The 26 October local audit passed 421 core software tests, including the 320 compiler invariant cases. Six remote-generation transport tests passed with mocked service behavior. These establish tested engineering properties, not perception accuracy, reconstruction success or authentication security. The audit also reproduced an entity-scoring defect: one predicted object can receive credit for multiple overlapping reference objects even when one-to-one correspondence assigns only one. Calibration and validation share this function. Moved manual walkthroughs retain incorrect repository-root paths. Both defects remain unresolved evaluation blockers; passing existing tests does not establish evaluator correctness.
+
+All 240 images decode at $512\times512$, have distinct file hashes and match the saved inventory. Retained remote-response and PNG-conversion hashes agree. The 120 controlled reference records pass existing structural/count/geometry/support audits. No completed naturalistic reference record, final capability manifest, support-opportunity table or ground-truth freeze is available. File integrity and construction audits do not establish semantic correctness. No formal v3 perception metric, fitted threshold, eligible credential language or gate result is reported.
+
+\subsection{Formative v1 Results}
+The completed P0--P7 programme evaluated a different system, \texttt{visual-semantic-pipeline-v1}. P6's training-selected weighted matcher had validation FRR 20.8\%, targeted-neighbour FAR 75.0\%, and random FAR 3.0\%; all tested representations failed the original gate. Twelve v1 test families remain sealed. P7 then found no uncertainty-supported material benefit from the tested SD-Turbo/Florence/SigLIP image pathways and removed that image stage from the v1 authentication core.
+
+These are immutable formative negative results, not v4 measurements. They motivate the new questions but cannot tune held-out v4 decisions. V4 requires new identifiers, preregistration and evidence. P9-v3 is paused; no P9-v4 phase has executed.
+
+
+\section{Limitations and Interpretation}
+\label{sec:limitations}
+The proposed English-language, explicit-vocabulary study measures authored scenarios. Photograph generalization depends on coverage, rights and training overlap. Generated data does not sample natural human secret choices. Two pipelines support pipeline-specific conclusions. Hosted identity and drift can limit reproduction despite exact cached analysis.
+
+Compiler determinism does not imply perception stability. Lost bindings, false normalization merges and generator omissions may affect the same authentication outcome through different mechanisms. Distinguish these mechanisms rather than attribute every error to extraction.
+
+Measurement validity, constructive viability and publication readiness are separate. An API/evaluator error does not reject the hypothesis. A valid negative experiment establishes a limitation under its conditions. Preserve evidence, diagnose causes, offer alternatives and obtain an author decision before substantive continuation. Changes after formal output require a new version and appropriately independent data, not lower thresholds or repaired held-out answers.
+
+Every phase requires detailed explanation and explicit authorization. Direction approval does not start implementation, generation or model runs. Deadline pressure cannot make this plan a completed study.
+
+\section{Proactive Prevention of Harm}
+\label{sec:harm}
+A permissive semantic region could enable unauthorized access. Records, provider requests or transcripts could expose concepts or link accounts. Use simulated/local targets and public or safely authorized non-secret fixtures, not real services. Review photograph permission, identifiable content, retention and redistribution. Avoid participant authentication behavior and sensitive private scenes.
+
+Attack tools and misleading security claims have publication risks. Describe tested distributions and limitations, audit release contents for credentials/personal data, and prevent a research prototype from being presented as production-ready. No external ethics approval or human-subject finding is claimed. Private authentication inputs are outside the hosted-fixture study.
+
+\section{Data Availability}
+\label{sec:availability}
+The planned artifact includes permitted code, frozen configurations and normalization, the manual-reference rubric, family manifests, hashes, processing and deterministic figure scripts. Separate cached/mock reproduction from optional live API runs, with cost, availability and drift limits. Release images, model material and responses only where rights permit; explain restrictions and unresolved licensing. Reviewer access requires anonymous hosting. No release or artifact URL is claimed.
+
+\section{Conclusion}
+\label{sec:conclusion}
+The immediate question is which perception and normalization choices preserve the distinctions needed for reconstruction while limiting accepted unauthorized alternatives. A common graph methodology connects capability errors to independent reconstruction and finite-budget attacks. The v4 direction changes the prospective study and paper scope, not historical findings. No v4 experiment has executed; private verification remains a separate goal. Evidence must determine the final contribution.
+\label{sec:body-end}
+
+\section*{Acknowledgments: AI Use}
+OpenAI ChatGPT/Codex assisted substantive drafting and restructuring throughout Sections~\ref{sec:introduction}--\ref{sec:conclusion}, and research-code/documentation preparation. Stability AI SD-Turbo was requested through a public endpoint for the historical naturalistic capability images in Section~\ref{sec:evidence}; actual hosted weights/settings are unattested. Future model use must be added to the final provenance inventory. Models do not supply reference truth. Authors remain responsible for text, code, citations, labels and results; this anonymous disclosure requires a final tool/use audit.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}

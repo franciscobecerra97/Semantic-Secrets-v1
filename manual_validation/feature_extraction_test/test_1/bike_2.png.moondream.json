@@ -1,0 +1,23 @@
+{
+  "objects": [
+    "person",
+    "bicycle",
+    "road",
+    "trees",
+    "sun"
+  ],
+  "attributes": [
+    "silhouette",
+    "motion blur",
+    "outdoors",
+    "daytime",
+    "sunlight"
+  ],
+  "relations": [
+    "riding",
+    "bicycle in motion",
+    "road",
+    "trees",
+    "sun"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "paper/main.pdf": {
+    "pages": 5,
+    "a4": true,
+    "author": "",
+    "out_of_page_text": [],
+    "sha256": "8b6a275eaa99f7cde4a8f49d394356f839374c45cb5bf8fa28f28c51ad109639"
+  },
+  "paper/draft.pdf": {
+    "pages": 5,
+    "a4": true,
+    "author": "",
+    "out_of_page_text": [],
+    "sha256": "34b3f403c24dd58a038a23df3e0dcb3f05e49f47ac7bf7b2abd89f33f208f84f"
+  },
+  "research_description/research_description.pdf": {
+    "pages": 8,
+    "a4": true,
+    "author": "",
+    "out_of_page_text": [],
+    "sha256": "268083c5758994b83ca86f6abbe009496087a87c7cf21a7ad445a583fc294957"
+  },
+  "paper_entry_text_equal": true,
+  "paper_has_identity": false,
+  "stale_privacy_bibliography_absent": true,
+  "broken_links": [],
+  "new_docs_trailing_whitespace": []
+}

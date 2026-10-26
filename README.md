@@ -1,68 +1,56 @@
 # Semantic Secrets
 
-Research project for a prospective PoPETs/PETS 2027 paper on reconstructable semantic authentication, acceptance-region security, and private verification.
+Research toward EuroS&P 2027 on **reconstruction and security-relevant semantic distinctions in visual authentication**.
 
-## Active research goal
+## Active question
 
-Most authentication relies on exact secret reproduction or exact cryptographic possession. Semantic Secrets studies a different primitive: independently reconstructing an intended concept into different prompts and images that may nevertheless produce compatible canonical semantics.
+Can an intended semantic credential be reconstructed reliably while related unauthorized alternatives remain distinguishable, and how do perception and normalization affect that balance?
 
-```text
-exact reproduction
-        ↓
-approximate semantic reconstruction
-        ↓
-fuzzy semantic acceptance region
-        ↓
-guessing and privacy questions
-```
+The immediate study connects perception and normalization errors to authentication outcomes. It compares one feasible generative VLM pipeline and one feasible specialized perception pipeline through a common deterministic graph compiler and evaluation method. Generated naturalistic images test the reconstruction workflow; controlled drawings isolate errors; photographs test external visual generalization. Exact models, data and metrics still require a detailed protocol.
 
-The central question is whether independently reconstructed visual concepts can yield stable and discriminative canonical semantic credentials, whether their complete acceptance region withstands realistic and AI-assisted guessing under finite budgets, and whether the frozen predicate can be privately verified without exposing a reusable semantic template, practical offline guess-testing oracle, or cross-domain linkage.
+The author manually labels actual image content. Intended concepts are recorded separately to distinguish generation errors from extraction errors. Deterministic reviewed normalization is primary; live LLM normalization is an optional ablation. Initial experiments use approved APIs on non-secret fixtures. Local model execution and private verification are later, separate goals.
 
-The generator is an experimental semantic reconstruction and normalisation boundary, not a memorability mechanism. The natural-language prompt is the reconstruction interface; the generated image is a transient reconstruction medium; bounded observations are probabilistic evidence; the deterministic canonical graph is the security-sensitive representation; and the complete acceptance region is the operational secret surface. Neither prompts nor generated pixels supply credential entropy. The strongest target keeps prompts, images, observations, plaintext graphs, and raw embeddings on the trusted client.
+## Approval and failure handling
 
-This controlled technical study does not establish human memorability, recall, usability, preference, accessibility, natural secret-selection entropy, real-world authentication time, proof that images are easier to remember, or superiority to passwords, passkeys, biometrics, or hardware authenticators. It does not assume universal password replacement. Evidence may support standalone, second-factor, policy-constrained, restricted-use, negative/measurement, or stop outcomes.
+**Before every phase:** explain what will be done, how, why, dependencies, costs, success/failure interpretation and alternatives; then wait for the author's explicit authorization. Direction approval does not authorize execution.
 
-## Current status
+**If something fails:** preserve the result, diagnose the issue, explain what it establishes, offer alternatives and recommend the next step. Do not automatically reject the hypothesis or terminate the project. Frozen results are never repaired by post-hoc tuning.
 
-P8 passed Gate V2-N with narrowed claims. P9-v2 then completed negatively: neither frozen monolithic VLM-to-credential-JSON extractor survived the 98% schema-validity requirement, P9B was not executed, and Gate V2-A failed. That result is immutable and does not establish universal extractor impossibility.
+See [phase workflow](docs/phase_workflow.md). The present authorization covers this documentation amendment only.
 
-P9-v3A froze the modular reframe as v3.0.0. P9-v3A.1 froze the v3.1 pipelines, resource semantics, and support design; P9-v3A.2 prospectively replaced the historical two-human prerequisite with model-blind project-authored ground truth; and P9-v3A.3 now freezes the previously missing deterministic development-threshold calibration rule. Pre-execution engineering provides the 320-case compiler, deterministic dataset/freezing tools, threshold-independent score capture, entity-first offline calibration and replay, formal provenance guards, automatic Gate evaluation, and a reproducible RunPod/export package. This is not empirical evidence or an experiment start. No v3 weight, capability image, model score, fitted threshold, or validation output exists. The remaining pre-inference blocker is the actual project-authored 240-scenario/prompt content and resulting ground-truth freeze. P9-v3C is blocked on V3-A1; P10 and cryptography are blocked on V3-A2.
+## Current status - 26 October 2026
 
-P0–P7 remain frozen evidence for `visual-semantic-pipeline-v1`:
-
-- P6 failed its original Gate A: the primary weighted matcher accepted 75% of targeted validation neighbours at its training-selected threshold; the twelve v1 test families remain sealed.
-- P7 found no material benefit from its tested image pathways over paired text pathways and removed that image stage from the v1 authentication core.
-
-Those findings remain valid and have not been retuned. The v2 image hypothesis is scientifically distinct and requires new representation, data, preregistration, pilot, and gates.
+- The v4 direction is approved. **No P9-v4 phase has started.** The next step is a detailed P9-v4A design proposal.
+- P0-P7 remain historical v1 evidence. P6's targeted-neighbor failure and P7's image-stage finding remain unchanged; the twelve sealed v1 families stay sealed.
+- P8 passed its earlier scoped novelty gate; v4 requires a focused novelty review.
+- P9-v2 failed its direct complete-JSON schema requirement. This is bounded negative evidence, not a fair completed comparison against v3/v4 or proof that VLM extraction is impossible.
+- P9-v3's methodology and compiler/runtime preparation remain available; its empirical branch is paused. The prior audit reported 421 passing core tests including 320 compiler cases, not model accuracy.
+- The v3 dataset contains 240 images and 120 controlled references. Naturalistic final references, manifest/support audit and ground-truth freeze remain incomplete. Actual remote generator weights/settings are unattested.
+- The audited one-to-one entity-scoring bug and moved manual-script root-path errors remain unresolved. Repairs belong to a separately authorized implementation phase.
+- No v4 capability, independent reconstruction, attacker-resistance, local-performance or private-verification result is established.
 
 ## Read first
 
-1. `AGENT.md` — authoritative scientific and engineering contract, including the v3 extraction boundary.
-2. `PLAN.md` — preserved P0–P7 history and gated P8–P20 execution plan.
-3. `DECISIONS.md` — immutable decisions, including P7-R2 direction amendment.
-4. `docs/research_direction_v2.md` — concise v2 thesis and evidence boundary.
-5. `docs/vsa_2026_comparison.md` — complete closest-work comparison.
-6. `docs/security_model_v2.md` and `docs/threat_claim_matrix_v2.csv` — active v2 security contract.
-7. `docs/p8_novelty_review_v2.md` and `docs/formal_specification_v2.md` — Gate V2-N outcome and P9–P11 freeze.
-8. `docs/p9_capability_screen_v2.md` — P9A negative evidence, logical-futility boundary, and failed Gate V2-A decision.
-9. `docs/p9_v3_reframe.md` and `docs/formal_specification_v3.md` — immutable v3.0.0 architecture freeze.
-10. `docs/p9_v3_preexecution_audit.md` and `docs/formal_specification_v3_1.md` — historical v3.1.0 suitability amendment; its human prerequisite is superseded by v3.2.
-11. `docs/formal_specification_v3_2.md` and `experiments/v3/config/preregistration_v3_2.json` — active project-authored-ground-truth correction; v3.0/v3.1 pipelines, support, gates, and limits remain binding.
-12. `docs/formal_specification_v3_3.md` and `experiments/v3/config/preregistration_v3_3.json` — prospective development-only threshold-calibration rule and provenance boundary.
-13. `experiments/v3/config/preregistration_v3_1.json` and `visual_observation_v3_1.json` — machine-readable pipeline/resource/support freeze; the un-suffixed configs preserve v3.0.0.
-14. `experiments/v2/config/preregistration_v2.json` — immutable historical v2 freeze and failed path.
-15. `paper/draft.tex` — planning manuscript with the bounded P9-v2 result and no false v3 findings.
+1. [AGENT.md](AGENT.md): active contract and claim boundaries.
+2. [PLAN.md](PLAN.md): active phases, deadline targets and historical programme reference.
+3. [Research direction v4](docs/research_direction_v4.md): question, proposed contributions and scope.
+4. [P9-v4 study design](docs/p9_v4_study_design.md): shared comparison and open protocol decisions.
+5. [Phase workflow](docs/phase_workflow.md): approval, diagnosis and continuation rules.
+6. [Security model v4](docs/security_model_v4.md) and [claim matrix](docs/threat_claim_matrix_v4.csv): current threat/evidence boundary.
+7. [DECISIONS.md](DECISIONS.md): append-only decision history, including DIRECTION-V4-01.
+8. [VSA comparison](docs/vsa_2026_comparison.md): mandatory closest-work boundary.
+9. [Paper plan](docs/eurosp2027_paper_plan.md) and [build guide](paper/README.md): anonymous planning manuscript.
 
-`docs/security_model.md` remains the frozen v1 model. `paper/main.tex` and `paper/sample-base.bib` are venue/template examples, not the research manuscript or evidence bibliography.
+The v2/v3 specifications, experiment configurations and results retain their original meanings. Their old execution sequences do not authorize v4. The prior direction is preserved in docs/research_direction_v2.md.
+
+## Target venue
+
+**12th IEEE European Symposium on Security and Privacy, Madrid, 5-9 July 2027.** Mandatory registration: **25 November 2026 AoE**. Full paper: **2 December 2026 AoE**. Supplied IEEE template, A4, 13 body pages. See [requirements](docs/eurosp2027_requirements.md) and [submission metadata](docs/eurosp2027_submission.json).
+
+The source builds an anonymous planning draft, not a finished submission. Submission requires separate authorization and completed evidence.
 
 ## Scientific boundaries
 
-- No participant study is authorised. Do not claim memorability, recall, usability, preference, or learning effort.
-- Reconstructable semantic authentication is the object of study; C1/C2 enable the central C3 acceptance-region and C4 private-verification questions.
-- Algorithms, model identities, canonicalisation, policies, and thresholds are public. An attacker succeeds with any accepted semantic alternative, not only the enrolled prompt, image, or graph.
-- VSA already covers image-independent visual-semantic authentication, VLM extraction, canonical tokens, object/attribute/count/quadrant facts, Flexible Range Logic, and user-selected policies. These are not v2 novelty.
-- Semantic correctness and cryptographic privacy are separate gates. Hashing, salting, or encryption alone does not establish template privacy, offline resistance, or unlinkability.
-- Client-side feasibility is measured under RQ6 rather than assumed. Research-GPU availability is not a deployment result, and secret-bearing prompt/image/semantic processing must not be moved to an untrusted cloud to rescue an impractical client design.
-- Execute one numbered phase at a time. P9-v2's V2-A failure remains historical evidence; the explicit v3 reframe must pass V3-A1 and V3-A2 before P10. Never bypass later V2-B–V2-F gates.
+No human-subject study or memorability/usability/password-superiority claim. Pixels supply no credential entropy. Algorithms and thresholds are public; an attacker wins with any accepted alternative. Random FAR does not establish guessing resistance. API feasibility does not establish provider privacy or local performance. Private verification needs independent construction-specific evidence. Negative results remain evidence; continuation decisions require diagnosis and author involvement.
 
-Large models, raw datasets, generated images, secrets, caches, and recomputable intermediates must not be committed. Version compact manifests, configs, tests, aggregate evidence, and exact provenance required for claims.
+Large models, raw images/data, credentials, secrets and caches stay out of Git. Version compact configurations, manifests, tests and provenance. Preserve unrelated work and historical evidence.

@@ -1,0 +1,51 @@
+{
+  "schema_version": "remote-generation-receipt-v3.4.0",
+  "status": "partial",
+  "requested_model_id": "stabilityai/sd-turbo",
+  "requested_parameters": {
+    "width": 512,
+    "height": 512,
+    "num_inference_steps": 1,
+    "guidance_scale": 0,
+    "negative_prompt": ""
+  },
+  "actual_model_revision": null,
+  "actual_parameters_verified": false,
+  "prompt_plan_sha256": "3b199e8f1374c350538b1341796a4bd1010b5b28b716431574e816eac1a4c0b5",
+  "generation_amendment_sha256": "602466617e9cc40a2b47d78f5b9d83593bcbde82f16828aba83623cf836dfa79",
+  "source_limitations": "The public API does not attest model weights, actual execution parameters, server fallbacks, or determinism. Space source/commit are provenance, not weight verification. Record requested settings separately from unverified actual settings.",
+  "created_at_utc": "2026-10-26T12:24:42.831Z",
+  "sessions": [
+    {
+      "space_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "space_source_path": "provenance/space_app_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.py",
+      "space_source_sha256": "e732d77f259bc220ea7c2bf5009501b6478d2cb26a0ead74ce1a7ef827e75d28",
+      "api_schema_path": "provenance/api_schema_908cc459fe2e4bb94f6e06e214c7f43b04c4c6c59c97a044e9440a732543b2ab.json",
+      "api_schema_sha256": "908cc459fe2e4bb94f6e06e214c7f43b04c4c6c59c97a044e9440a732543b2ab",
+      "captured_at_utc": "2026-10-26T12:24:42.849Z",
+      "model_revision_verified": false
+    }
+  ],
+  "records": [
+    {
+      "image_id": "cap-v3-B-F01-01",
+      "prompt_sha256": "840aca874cd489e3ddf945ec97c3dfda9009b319fa35b5037287d6cf75715ddb",
+      "seed": 925132,
+      "raw_image_sha256": "254b952041ef8f317d97aaa26188de0e0edb8bba4819cd3467d4bfcd3d61a411",
+      "bytes": 24,
+      "event_id": "abc",
+      "space_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "requested_model_id": "stabilityai/sd-turbo",
+      "requested_parameters": {
+        "width": 512,
+        "height": 512,
+        "num_inference_steps": 1,
+        "guidance_scale": 0,
+        "negative_prompt": ""
+      },
+      "completed_at_utc": "2026-10-26T12:24:42.851Z",
+      "elapsed_seconds": 0,
+      "record_sha256": "c994ff2541392360f0ca6ff5a5497c5905a933b370e3b13898f657d248d88683"
+    }
+  ]
+}

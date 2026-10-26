@@ -1,0 +1,20 @@
+Inspect the image. Extract visible objects, attributes, and actions.
+
+Return ONLY one JSON object with exactly these keys:
+objects, attributes, actions.
+
+FORMAT EXAMPLE ONLY:
+{"objects":["dog","ball"],"attributes":["brown","round"],"actions":["running"]}
+
+Rules:
+- Every array item must be a quoted string containing one lowercase English word.
+- Arrays must contain strings ONLY. Nested JSON objects are forbidden.
+- Objects: singular nouns naming visible physical entities.
+- Attributes: visible colors or basic shapes.
+- Actions: visible activity verbs ending in -ing.
+- Omit scene labels, locations, emotions, age, and gender.
+- Include only clearly visible information.
+- Remove duplicates.
+- Use [] when nothing applies.
+- Follow the example's structure, but determine the values from the actual image.
+- Return no explanations or Markdown.

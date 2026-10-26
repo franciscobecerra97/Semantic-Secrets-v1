@@ -1,5 +1,7 @@
 # Controlled semantic dataset methodology v1
 
+> **Historical v1 dataset design.** V4 uses a new approved protocol and family/exposure accounting; this file does not authorize acquisition or reuse of held-out data. Read [v4 design](../../docs/p9_v4_study_design.md).
+
 Status: P3 methodology and smoke assets were approved on 2026-08-24. P6 froze and audited the 60-family pilot catalog and compact manifests on 2026-08-24. Pilot image/model execution remains unapproved outside a later explicit phase; full acquisition and full-scale generation are not approved.
 
 This directory defines inputs for technical experiments on semantic representations. It does not contain authentication credentials, participant data, or evidence about human memory, usability, or natural secret selection.

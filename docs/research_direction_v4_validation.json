@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-26",
+  "decision": "DIRECTION-V4-01",
+  "scope": "Documentation and PDF amendment; no project phase or experiment executed",
+  "official_cfp_rechecked": "https://eurosp2027.ieee-security.org/cfp.html",
+  "protected_files_checked": 349,
+  "protected_files_changed": [],
+  "prior_plan_phase_archive_byte_equivalent": true,
+  "decision_history_preserved": true,
+  "pdf_checks": {
+    "paper/main.pdf": {
+      "pages": 5,
+      "a4": true,
+      "author": "",
+      "out_of_page_text": [],
+      "sha256": "8b6a275eaa99f7cde4a8f49d394356f839374c45cb5bf8fa28f28c51ad109639"
+    },
+    "paper/draft.pdf": {
+      "pages": 5,
+      "a4": true,
+      "author": "",
+      "out_of_page_text": [],
+      "sha256": "34b3f403c24dd58a038a23df3e0dcb3f05e49f47ac7bf7b2abd89f33f208f84f"
+    },
+    "research_description/research_description.pdf": {
+      "pages": 8,
+      "a4": true,
+      "author": "",
+      "out_of_page_text": [],
+      "sha256": "268083c5758994b83ca86f6abbe009496087a87c7cf21a7ad445a583fc294957"
+    },
+    "paper_entry_text_equal": true,
+    "paper_has_identity": false,
+    "stale_privacy_bibliography_absent": true,
+    "broken_links": [],
+    "new_docs_trailing_whitespace": []
+  },
+  "build_checks": [
+    {
+      "job": "main",
+      "overfull": [],
+      "unresolved": [],
+      "body_end_page": "5"
+    },
+    {
+      "job": "draft",
+      "overfull": [],
+      "unresolved": [],
+      "body_end_page": "5"
+    },
+    {
+      "job": "research_description",
+      "overfull": [],
+      "unresolved": [],
+      "body_end_page": null
+    }
+  ],
+  "cited_bibliography_entries": 11,
+  "visual_review": "IEEE first/middle/final-body pages and research cover/contents/body/end inspected; no clipping",
+  "known_warnings": [
+    "Supplied IEEE times option is unused by the class; exact supplied options retained",
+    "Research-description epstopdf shell-escape warning; shell escape intentionally disabled"
+  ],
+  "resolved_documentation_issues": [
+    "Console Unicode decoding corrected during reads",
+    "JavaScript/LaTeX quoting corrected before manuscript write",
+    "Build wrapper uses inherited child-process environment",
+    "Isolated build folders exclude stale bibliography and contents files"
+  ],
+  "research_issues_unmodified": [
+    "One-to-one v3 entity-scoring defect",
+    "Moved manual-script repository-root defects",
+    "Incomplete v3 naturalistic references and ground-truth freeze"
+  ],
+  "next_phase": {
+    "id": "P9-v4A",
+    "status": "awaiting detailed proposal and explicit authorization"
+  },
+  "files": [
+    {
+      "path": "AGENT.md",
+      "sha256": "47e758009490a9201aaeedc3aab0cdcf3d815b81450fd850574e9d314e41dd60",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "PLAN.md",
+      "sha256": "faec8261cfa4664e90b0b5fa6f0789c461a6d676d706de762ce9c2360d3ae9a3",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "README.md",
+      "sha256": "6009850a46259adf6c1b26bfc0128e2c5deea01268b84ad12b46a5ff4b30051d",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "DECISIONS.md",
+      "sha256": "69df54bc02e86bd49f68b5873a7f1af535d16946c43369ec8a8fa0ac47d817d3",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "docs/research_direction_v2.md",
+      "sha256": "3ffe0c67b32f96d294f81165bb513c9d4ef8a21d62a6cd83752be409365f9653",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "docs/eurosp2027_paper_plan.md",
+      "sha256": "5072f4959d7e7b371af84454fa08ffac37b1c4538afc9c44298edb7a7f662c17",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "docs/eurosp2027_submission.json",
+      "sha256": "98dc164cde2c7743c91e901874147d972c33a92e3632b5ab8ad2abe690cd669c",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "paper/draft.tex",
+      "sha256": "21ed6aa52cb61e01cce24109c922fac725ae62d97823b33337897b4a92326fc7",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "paper/draft.pdf",
+      "sha256": "34b3f403c24dd58a038a23df3e0dcb3f05e49f47ac7bf7b2abd89f33f208f84f",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "paper/main.pdf",
+      "sha256": "8b6a275eaa99f7cde4a8f49d394356f839374c45cb5bf8fa28f28c51ad109639",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "paper/README.md",
+      "sha256": "3d9034a8561932054643500a48950f0c86fee008b2608a6552a7236f81720a24",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "research_description/research_description.tex",
+      "sha256": "f9a5f820b904c903fc08d51e17f2ea259c4cdb88e929767597844dc594b101f7",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "research_description/research_description.pdf",
+      "sha256": "268083c5758994b83ca86f6abbe009496087a87c7cf21a7ad445a583fc294957",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "artifacts/README.md",
+      "sha256": "e1a76ab896e90bb67f6aa0518c988b68e1b965fe9105be8650c72c1601537762",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "experiments/v2/README.md",
+      "sha256": "9f4708905b19374b5996fe1b7e8a9c2990b8d29432046bec0b01ae307e339ebf",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "experiments/v3/README.md",
+      "sha256": "b0b65cf2cc83baf01437dfd5a527ee4494a407324b2e6f55793dc9d50d836288",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "experiments/datasets/README.md",
+      "sha256": "1ad23e76207fb351a3f358fb77c16d9e47ae2279acb6a99c4b958ac31a7d733a",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "manual_validation/README.md",
+      "sha256": "a4938d9c4d4af9161a91e905a3602d11dc9fdaef4f3cbd59dfcf3f1710fb2b70",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "infra/runpod/README.md",
+      "sha256": "91b0ce0601a27a383335eb152f1318ee50e2fedd49b183838b02ef189f68b68d",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "f24f3cf90772b1e4f87ea56e3afc1a5e62d957fe11ab5e9b9c276133fb3d00b1",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "docs/phase_workflow.md",
+      "sha256": "44d522d56a68f7a85ed6beedfb023a24c22f650892bdb4b7e7868d42e930ea3c",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "docs/research_direction_v4.md",
+      "sha256": "e002758359eb165ac22976aabb274747307ebc705c1d4ca2d44235cd64c23066",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "docs/p9_v4_study_design.md",
+      "sha256": "beefe8405e8d750276e80295216e046cfa3690240f12c8bcd2234f66c8025662",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "docs/security_model_v4.md",
+      "sha256": "11f53897adda93ea1246a220f2e819ad2941a51af764059a14c3801af4089efd",
+      "changed_since_amendment": true
+    },
+    {
+      "path": "docs/threat_claim_matrix_v4.csv",
+      "sha256": "85f31c0eba6c64b6a205971b444b606a799d5ffb65b2413ad497b5866d8f92e4",
+      "changed_since_amendment": true
+    }
+  ],
+  "git_diff_check": {
+    "exit_code": 0,
+    "issues": []
+  }
+}

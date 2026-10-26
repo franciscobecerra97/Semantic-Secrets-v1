@@ -1,0 +1,13 @@
+{
+  "objects": [
+    {"id": "cat1", "label": "cat", "color": "red"},
+    {"id": "sofa1", "label": "sofa", "color": "blue"},
+    {"id": "book1", "label": "book", "color": "yellow"}
+  ],
+  "facts": [
+    {"subject": "cat1", "predicate": "sleeping", "object": null},
+    {"subject": "cat1", "predicate": "on", "object": "sofa1"},
+    {"subject": "book1", "predicate": "on", "object": "sofa1"}
+  ],
+  "scene": "bedroom"
+}

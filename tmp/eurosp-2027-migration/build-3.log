@@ -1,0 +1,319 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+entering extended mode
+(draft.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1p
+tm.fd)
+-- Using IEEE Computer Society mode.
+-- Using 210mm x 297mm (a4) paper.
+-- Using PDF output.
+-- This is a 10 point document.
+)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/cite\cite.s
+ty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+math.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+text.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+gen.sty))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+bsy.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+opn.sty))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\am
+ssymb.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\am
+sfonts.sty))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\bo
+oktabs.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\en
+umitem.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hy
+perref.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ift
+ex.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics\ke
+yval.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\k
+vsetkeys.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinek
+eys\kvdefinekeys.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape
+\pdfescape.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\l
+txcmds.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmd
+s\pdftexcmds.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr
+\infwarerr.sty)))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hyc
+olor.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\na
+meref.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/refcount\re
+fcount.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/gettitles
+tring\gettitlestring.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\k
+voptions.sty)))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\et
+oolbox.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/stringenc
+\stringenc.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd
+1enc.def)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\i
+ntcalc.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pu
+enc.def)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bi
+tset.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/bigintcal
+c\bigintcalc.sty)))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hp
+dftex.def
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilech
+eck\rerunfilecheck.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/uniquecou
+nter\uniquecounter.sty)))
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `alignment tab' on input line 9.
+
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l
+3backend-pdftex.def)
+
+LaTeX Warning: Unused global option(s):
+    [times].
+
+(draft.aux)
+-- Lines per column: 63 (exact).
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics\co
+lor.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cf
+g\color.cfg)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics-de
+f\pdftex.def
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/context/base/mkii
+\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics\ma
+thcolor.ltx)) (draft.out) (draft.out)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1p
+hv.fd)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\um
+sa.fd)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\um
+sb.fd)
+Underfull \hbox (badness 2096) in paragraph at lines 40--41
+[]\OT1/ptm/m/n/10.03749 These fea-tures re-move image-independent visual-
+[1{C:/Users/francisco.becerra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
+{C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/
+8r.enc}]
+Underfull \hbox (badness 4779) in paragraph at lines 44--45
+\OT1/ptm/m/n/10.03749 kens and story struc-ture for graph-i-cal au-then-ti-ca-
+
+Underfull \hbox (badness 1881) in paragraph at lines 44--45
+\OT1/ptm/m/n/10.03749 et al[][][]] and Omok-age [[][]192026Mat-suzaki et al[][]
+[]] use
+
+Underfull \hbox (badness 4913) in paragraph at lines 46--47
+[]\OT1/ptm/m/n/10.03749 The v3 short-list is grounded in prior visual-
+
+Underfull \hbox (badness 3039) in paragraph at lines 46--47
+\OT1/ptm/m/n/10.03749 set, language-conditioned boxes [[][]152024Liu et al[][][
+]];
+
+Underfull \hbox (badness 1694) in paragraph at lines 80--82
+\OT1/ptm/m/n/10.03749 and a de-ter-min-is-tic se-man-tic com-piler pro-duces th
+e
+[2]
+Overfull \hbox (4.25327pt too wide) detected at line 104
+[][][][][] \OT1/cmr/m/n/10 = [](\OML/cmm/m/it/10 M; M[]\OT1/cmr/m/n/10 ) \OMS/c
+msy/m/n/10 ^ \OT1/cmr/m/n/10 [[](\OML/cmm/m/it/10 T; T[]\OT1/cmr/m/n/10 ) \OMS/
+cmsy/m/n/10 ^^U \OML/cmm/m/it/10 ^^\\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 ;
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1p
+cr.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+ []\OT1/ptm/m/n/10.03749 Representation be-fore au-then-ti-ca-tion.. [][] P9-
+
+Underfull \hbox (badness 2726) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 v2 screened two pre-reg-is-tered mono-lithic ex-trac-tors
+
+
+Underfull \hbox (badness 2591) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 on 96 con-trolled im-ages. Both failed the schema-
+
+Underfull \hbox (badness 1389) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 validity pre-req-ui-site un-der ex-act log-i-cal fu-til-i
+ty, and
+
+Underfull \hbox (badness 1960) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 re-con-struc-tion was not ex-e-cuted. P9-v3A is a new
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 ar-chi-tec-ture/preregistration phase, not a re-pair. It
+[3]
+Underfull \hbox (badness 1997) in paragraph at lines 140--141
+\OT1/ptm/m/n/10.03749 and 32 val-i-da-tion fix-tures, equally di-vided be-tween
+
+
+Underfull \hbox (badness 6559) in paragraph at lines 140--141
+\OT1/ptm/m/n/10.03749 in 157.57 sec-onds with 4.58 GiB peak pro-cess
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
+\OT1/ptm/m/n/10.03749 RSS. SmolVLM2-2.2B-Instruct at re-vi-sion pre-fix
+
+Underfull \vbox (badness 1038) has occurred while \output is active [4]
+Underfull \hbox (badness 1769) in paragraph at lines 193--194
+[]\OT1/ptm/m/n/10.03749 Established fuzzy ex-trac-tors [[][]42008Dodis et al[][
+][]],
+
+Underfull \hbox (badness 1383) in paragraph at lines 193--194
+\OT1/ptm/m/n/10.03749 son et al[][][]], OPAQUE [[][]22025Bour-drez et al[][][]]
+, ex-act
+
+Underfull \hbox (badness 1708) in paragraph at lines 193--194
+\OT1/ptm/m/n/10.03749 PSI/private bio-met-ric match-ing [[][]262021Uzun et al[]
+[][]],
+
+Underfull \hbox (badness 2197) in paragraph at lines 193--194
+\OT1/ptm/m/n/10.03749 et al[][][]], pri-vate fuzzy-record com-pu-ta-tion [[][]9
+2025Han
+[5]
+
+LaTeX Warning: Reference `sec:introduction' on page 6 undefined on input line 2
+21.
+
+
+LaTeX Warning: Reference `sec:conclusion' on page 6 undefined on input line 221
+.
+
+
+LaTeX Warning: Reference `sec:evaluation' on page 6 undefined on input line 221
+.
+
+
+LaTeX Warning: Reference `sec:evidence' on page 6 undefined on input line 221.
+
+
+Underfull \hbox (badness 2951) in paragraph at lines 221--222
+\OT1/ptm/m/n/10.03749 research-code/documentation prepa-ra-tion. Sta-bil-ity AI
+
+(draft.bbl
+Underfull \hbox (badness 3758) in paragraph at lines 108--117
+\OT1/ptm/m/n/8.03 and Siavash Ri-ahi. 2020.  Fuzzy Asym-met-ric Password-
+
+Underfull \hbox (badness 2103) in paragraph at lines 122--134
+[]\OT1/ptm/m/n/8.03 Michael J. Freed-man, Kobbi Nis-sim, and
+
+Underfull \hbox (badness 1721) in paragraph at lines 140--150
+[]\OT1/ptm/m/n/8.03 Aarushi Goel, Pei-han Miao, Phuoc Van Long
+
+Underfull \hbox (badness 10000) in paragraph at lines 156--164
+[]\OT1/ptm/m/n/8.03 Marta Gomez-Barrero, Chris-tian
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--192
+[]\OT1/ptm/m/n/8.03 Jinbae Im, JeongYeon Nam, Nokyung Park,
+
+Underfull \hbox (badness 4036) in paragraph at lines 182--192
+\OT1/ptm/m/n/8.03 Graph from Trans-former for Scene Graph Gen-er-a-tion. In
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--192
+\OT1/ptm/m/it/8.03 Pro-ceed-ings of the IEEE/CVF Con-fer-ence on Com-puter
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--192
+\OT1/ptm/m/it/8.03 Vi-sion and Pat-tern Recog-ni-tion\OT1/ptm/m/n/8.03 . IEEE, 
+24229--24238.
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--192
+[][]$\OT1/ptm/m/n/8.03 https : / / openaccess . thecvf . com / content / CVPR20
+24 / html / Im[]
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--192
+\OT1/ptm/m/n/8.03 EGTR[]Extracting[]Graph[]from[]Transformer[]for[]Scene[]Graph
+[]
+
+Underfull \hbox (badness 4060) in paragraph at lines 290--298
+[]\OT1/ptm/m/n/8.03 Marcos Martinez-Diaz, Ju-lian Fier-rez,
+[6]
+Underfull \hbox (badness 1622) in paragraph at lines 329--338
+[]\OT1/ptm/m/n/8.03 Ilesanmi Olade, Hai-Ning Liang, and Charles
+
+Underfull \hbox (badness 10000) in paragraph at lines 428--439
+[]\OT1/ptm/m/n/8.03 Erkam Uzun, Si-mon P. Chung, Vladimir
+)
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+[7] (draft.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `draft.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{section*.10} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.14} has been referenced but does not exist,
+ replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.13} has been referenced but does not exist,
+ replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.12} has been referenced but does not exist,
+ replaced by a fixed one
+
+<C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb><C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/francisco.becerra/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/francisc
+o.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb
+><C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmss10.pfb><C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/francisco.becerra/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/franci
+sco.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.
+pfb><C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/c
+ourier/ucrr8a.pfb><C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fon
+ts/type1/urw/times/utmb8a.pfb><C:/Users/francisco.becerra/AppData/Local/Program
+s/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/francisco.becerra/AppData/
+Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/francisco.bece
+rra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on draft.pdf (7 pages, 237252 bytes).
+Transcript written on draft.log.
+

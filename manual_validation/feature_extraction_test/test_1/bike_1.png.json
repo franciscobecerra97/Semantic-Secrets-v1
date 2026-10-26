@@ -1,0 +1,23 @@
+{
+  "objects": [
+    "man",
+    "bicycle",
+    "park",
+    "grass",
+    "bench"
+  ],
+  "attributes": [
+    "gray hair",
+    "white shirt",
+    "blue jeans",
+    "white shoes",
+    "white tires"
+  ],
+  "relations": [
+    "riding",
+    "bicycle",
+    "park",
+    "outdoors",
+    "relaxed"
+  ]
+}

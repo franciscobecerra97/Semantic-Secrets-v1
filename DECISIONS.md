@@ -783,3 +783,51 @@ This is a provisional boundary, not a novelty or security claim. P2 must formali
 **Retention and QA:** Keep one returned image per planned request; no quality-based retries, replacement seeds, or silent overwrite. Explicit resume checks receipt/raw hashes. An umbrella shaft was corrected during pre-inference controlled-drawing QA; initial affected assets/images/render plan are retained in `pre_freeze_revisions/controlled-v1`. No perception output informed that correction.
 
 **Execution boundary:** This work generates data only. Extraction and formal validation remain blocked until actual complete references, support audits, a valid ground-truth freeze, and their existing execution prerequisites exist. Insufficient visible support is reported rather than repaired through fabricated references or favorable image selection.
+
+
+## VENUE-2027-01 — Target EuroS&P 2027 and migrate manuscript preparation
+
+**Date:** 2026-10-26.
+
+**Status:** Selected by explicit project-author instruction. Venue/narrative/format/schedule migration only; no phase or empirical gate is completed by it.
+
+**Question:** How should the project target the 12th IEEE European Symposium on Security and Privacy while preserving scientific integrity and accounting for its earlier deadlines?
+
+**Evidence:** Official 2027 CFP, https://eurosp2027.ieee-security.org/cfp.html, accessed 2026-10-26; supplied template and SHA-256 provenance in `docs/eurosp2027_submission.json`; current implementation/document audit and dataset inventory. The downloadable example's legacy 2025 links are not 2027 policy.
+
+**Selected option:** Replace active PoPETs targeting with an original EuroS&P security/privacy research-paper target. Use the supplied IEEEtran A4 options and 13-body-page limit. Lead with fuzzy acceptance-region security and finite-budget attacks; retain C1/C2 as enabling hypotheses and C4 as a separate, conditional privacy contribution. Register title/abstract/authors/conflicts/topics by 2026-11-25 AoE and submit the full paper by 2026-12-02 AoE only if evidence is ready. Confirm clock cutoffs in HotCRP. Readiness review: 2026-11-13; metadata: 2026-11-24; final audit: 2026-11-30; internal upload: 2026-12-01.
+
+**Reason:** The author selected a venue covering applied security as well as privacy. Its format, registration, harm, availability, AI disclosure and anonymity rules differ from PoPETs. A name-only replacement would leave incorrect policy and manuscript formatting. The remaining research makes the full constructive paper a high-risk deadline target, not a commitment to manufacture completion.
+
+**Rejected alternatives:** Keep the old PoPETs issue schedule; use a generic IEEE template; imply that a planning draft or compiler tests establish authentication security; weaken scientific gates to fit the date; silently discard the private-verification question. A narrower security measurement paper remains a separate scientific decision requiring adequate evidence and prospective evaluation.
+
+**Changes:** Active contract/README/plan, verified venue guide and dates/provenance, manuscript outline/page budget, IEEE draft and build entry, build guide, research description, artifact guidance. Preserve the old venue record and pre-migration draft/sample; retain the original verified bibliography and all frozen scientific configurations and results.
+
+**Unchanged:** RQ1–RQ6, C1–C4 meanings, no-human-study boundary, local-secret trust boundary, v1/v2 negative results, v3.0–v3.4 freezes, two pipelines, data/support counts, thresholds, uncertainty, metrics, gates and blocked phase dependencies. Known entity-scoring/manual-path defects and missing naturalistic references remain unresolved technical work.
+
+**Remaining uncertainty:** Formal capability, reconstruction, policy value, attack resistance, private functionality/protocol and full evidence are not yet available. No registration, upload, external publication, license assignment or experiment is authorized merely by this migration. CFP/HotCRP changes must be checked before actual submission.
+
+**Revisit trigger:** Evidence-readiness review, new empirical results, missing publication rights/anonymity, changed CFP or inability to meet the deadline. Append a new scope/venue decision rather than rewriting historical records.
+
+## DIRECTION-V4-01 - Approve security-relevant semantic comparison and phase control
+
+Date: 2026-10-26.
+Status: selected; direction/documentation approved, experimental execution not authorized.
+
+**Author instruction:** The author approved the proposed research-direction changes and requested all necessary project-file updates. Before every phase, explain what will be done, how and why, and wait for authorization. On errors or failed experiments, explain causes and alternatives rather than automatically reject the hypothesis, abandon the approach or terminate the project.
+
+**Selected direction:** Keep semantic authentication as the goal; focus the immediate paper on preserved/lost semantic distinctions and their effects on reconstruction and accepted attacker alternatives. Introduce prospective P9-v4 with a common observation/compiler/evaluator comparison of one feasible generative VLM pipeline and one feasible specialized perception pipeline. Generated naturalistic images are primary workflow evidence; drawings are diagnostic; photographs test external generalization. The author labels actual image content separately from intended concepts.
+
+**Normalization and execution:** Deterministic reviewed mappings are primary; development-time LLM suggestions and an optional live-LLM ablation are separately controlled. Use APIs on non-secret research fixtures first; defer local GPU execution and require later semantic-parity/performance checks. No exact hosted candidates, call budgets, samples, thresholds or v4 executable freeze are established by this amendment.
+
+**Contribution mapping:** New V4-C1 methodology, V4-C2 distinction evidence and V4-C3 reconstruction/budgeted attacks replace the immediate paper's complete C1-C4 delivery expectation. Historical C1-C4 meanings remain unchanged. C4 private verification is deferred and unclaimed, with its independent standards preserved. V4 needs its own focused novelty review.
+
+**Historical integrity:** Preserve v1/P8/P9-v2 results, all v3.0-v3.4 configs/specifications and original gate meanings. Pause the v3 empirical branch; neither pass nor reject it. Existing v3 data defaults to v4 development/diagnostic use pending exposure review. The known evaluator/path defects remain unfixed by this documentation-only amendment.
+
+**Authorization boundary:** This decision authorizes documentation/source/PDF updates and their checks, not any P9-v4 phase, implementation repair, API call, data/model acquisition or generation, GPU rental, experiment, commit/push, external release or submission. Each phase/subphase must be explained and explicitly approved.
+
+**Failure policy:** Preserve evidence and failed gates; diagnose infrastructure, code, data, schema, semantic, statistical and hypothesis-level failures separately. Provide alternatives and a recommended next step; obtain authorization for substantive continuation. Do not retune held-out results or force positive conclusions. Author decisions govern abandonment or project termination.
+
+**Affected documents:** AGENT.md/AGENTS.md, PLAN.md, README.md, new direction/study/workflow/security documents, paper plan/source/PDF, research description/source/PDF and entry-point status notices. Old formal specs, model configs, code, tests and raw/aggregate results remain unchanged.
+
+**Next action:** Present a detailed P9-v4A design proposal and wait. Venue remains EuroS&P 2027 with registration 25 November and paper 2 December 2026 AoE. The evidence-readiness review remains 13 November; deadlines waive no approval or scientific standard.

@@ -1,0 +1,15 @@
+{
+  "objects": [
+    "bicycle",
+    "person"
+  ],
+  "attributes": [
+    "brown",
+    "black",
+    "silhouette"
+  ],
+  "actions": [
+    "riding",
+    "bicycling"
+  ]
+}

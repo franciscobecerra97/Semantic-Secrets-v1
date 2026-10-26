@@ -1,0 +1,19 @@
+Analyze the image and extract visible information.
+
+Return ONLY a valid JSON object with:
+
+{
+  "objects": [],
+  "attributes": [],
+  "relations": []
+}
+
+Rules:
+1. Identify at most 5 important objects.
+2. Extract at most 3 visual attributes per object.
+3. Include only clearly visible attributes.
+4. Describe relations using short expressions.
+5. Do not estimate age, weight, or height.
+6. Do not repeat attributes.
+7. Do not include explanations or markdown.
+8. Always close the JSON structure.

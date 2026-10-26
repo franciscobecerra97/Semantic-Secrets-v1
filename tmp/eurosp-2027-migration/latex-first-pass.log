@@ -1,0 +1,340 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+entering extended mode
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(draft.tex (IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1p
+tm.fd)
+-- Using IEEE Computer Society mode.
+-- Using 210mm x 297mm (a4) paper.
+-- Using PDF output.
+-- This is a 10 point document.
+)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/cite\cite.s
+ty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+math.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+text.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+gen.sty))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+bsy.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\ams
+opn.sty))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\am
+ssymb.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\am
+sfonts.sty))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\bo
+oktabs.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\en
+umitem.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hy
+perref.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ift
+ex.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics\ke
+yval.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\k
+vsetkeys.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinek
+eys\kvdefinekeys.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape
+\pdfescape.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\l
+txcmds.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmd
+s\pdftexcmds.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr
+\infwarerr.sty)))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hyc
+olor.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\na
+meref.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/refcount\re
+fcount.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/gettitles
+tring\gettitlestring.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\k
+voptions.sty)))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\et
+oolbox.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/stringenc
+\stringenc.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd
+1enc.def)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\i
+ntcalc.sty)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pu
+enc.def)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bi
+tset.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/bigintcal
+c\bigintcalc.sty)))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hp
+dftex.def
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilech
+eck\rerunfilecheck.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/generic/uniquecou
+nter\uniquecounter.sty)))
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `alignment tab' on input line 9.
+
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l
+3backend-pdftex.def)
+
+LaTeX Warning: Unused global option(s):
+    [times].
+
+No file main.aux.
+-- Lines per column: 63 (exact).
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics\co
+lor.sty
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cf
+g\color.cfg)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics-de
+f\pdftex.def
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/context/base/mkii
+\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/graphics\ma
+thcolor.ltx))
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1p
+hv.fd)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\um
+sa.fd)
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\um
+sb.fd)
+
+LaTeX Warning: Citation `Jeong2026VSA' on page 1 undefined on input line 38.
+
+
+Underfull \hbox (badness 2096) in paragraph at lines 40--41
+[]\OT1/ptm/m/n/10.03749 These fea-tures re-move image-independent visual-
+[1{C:/Users/francisco.becerra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
+{C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/
+8r.enc}]
+
+LaTeX Warning: Citation `Olade2023SemanticLock' on page 2 undefined on input li
+ne 44.
+
+
+LaTeX Warning: Citation `Matsuzaki2025PassStyles' on page 2 undefined on input 
+line 44.
+
+
+LaTeX Warning: Citation `Matsuzaki2026Omokage' on page 2 undefined on input lin
+e 44.
+
+
+LaTeX Warning: Citation `MartinezDiaz2011HillClimbing' on page 2 undefined on i
+nput line 44.
+
+
+LaTeX Warning: Citation `Liu2024GroundingDINO' on page 2 undefined on input lin
+e 46.
+
+
+LaTeX Warning: Citation `Tschannen2025SigLIP2' on page 2 undefined on input lin
+e 46.
+
+
+LaTeX Warning: Citation `Im2024EGTR' on page 2 undefined on input line 46.
+
+
+LaTeX Warning: Citation `Li2022SGTR' on page 2 undefined on input line 46.
+
+
+LaTeX Warning: Citation `Park2025SyntheticVG' on page 2 undefined on input line
+ 46.
+
+
+LaTeX Warning: Citation `Krishna2017VisualGenome' on page 2 undefined on input 
+line 46.
+
+
+Underfull \hbox (badness 4913) in paragraph at lines 46--47
+[]\OT1/ptm/m/n/10.03749 The v3 short-list is grounded in prior visual-
+
+Underfull \hbox (badness 1694) in paragraph at lines 80--82
+\OT1/ptm/m/n/10.03749 and a de-ter-min-is-tic se-man-tic com-piler pro-duces th
+e
+[2]
+Overfull \hbox (4.25327pt too wide) detected at line 104
+[][][][][] \OT1/cmr/m/n/10 = [](\OML/cmm/m/it/10 M; M[]\OT1/cmr/m/n/10 ) \OMS/c
+msy/m/n/10 ^ \OT1/cmr/m/n/10 [[](\OML/cmm/m/it/10 T; T[]\OT1/cmr/m/n/10 ) \OMS/
+cmsy/m/n/10 ^^U \OML/cmm/m/it/10 ^^\\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 ;
+
+(C:\Users\francisco.becerra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1p
+cr.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+ []\OT1/ptm/m/n/10.03749 Representation be-fore au-then-ti-ca-tion.. [][] P9-
+
+Underfull \hbox (badness 2726) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 v2 screened two pre-reg-is-tered mono-lithic ex-trac-tors
+
+
+Underfull \hbox (badness 2591) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 on 96 con-trolled im-ages. Both failed the schema-
+
+Underfull \hbox (badness 1389) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 validity pre-req-ui-site un-der ex-act log-i-cal fu-til-i
+ty, and
+
+Underfull \hbox (badness 1960) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 re-con-struc-tion was not ex-e-cuted. P9-v3A is a new
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+\OT1/ptm/m/n/10.03749 ar-chi-tec-ture/preregistration phase, not a re-pair. It
+[3]
+Underfull \hbox (badness 1997) in paragraph at lines 140--141
+\OT1/ptm/m/n/10.03749 and 32 val-i-da-tion fix-tures, equally di-vided be-tween
+
+
+Underfull \hbox (badness 6559) in paragraph at lines 140--141
+\OT1/ptm/m/n/10.03749 in 157.57 sec-onds with 4.58 GiB peak pro-cess
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
+\OT1/ptm/m/n/10.03749 RSS. SmolVLM2-2.2B-Instruct at re-vi-sion pre-fix
+
+Underfull \vbox (badness 1038) has occurred while \output is active [4]
+
+LaTeX Warning: Citation `Rando2023PassGPT' on page 5 undefined on input line 17
+5.
+
+
+LaTeX Warning: Citation `Dodis2008FuzzyExtractors' on page 5 undefined on input
+ line 193.
+
+
+LaTeX Warning: Citation `Erwig2020FuzzyAPAKE' on page 5 undefined on input line
+ 193.
+
+
+LaTeX Warning: Citation `Davidson2023OPRF' on page 5 undefined on input line 19
+3.
+
+
+LaTeX Warning: Citation `Bourdrez2025OPAQUE' on page 5 undefined on input line 
+193.
+
+
+LaTeX Warning: Citation `Freedman2004PrivateMatching' on page 5 undefined on in
+put line 193.
+
+
+LaTeX Warning: Citation `Pinkas2015Phasing' on page 5 undefined on input line 1
+93.
+
+
+LaTeX Warning: Citation `Uzun2021FLPSI' on page 5 undefined on input line 193.
+
+
+LaTeX Warning: Citation `Blass2026FuzzyPSI' on page 5 undefined on input line 1
+93.
+
+
+LaTeX Warning: Citation `Goel2026PICS' on page 5 undefined on input line 193.
+
+
+LaTeX Warning: Citation `Han2025FuzzyRecords' on page 5 undefined on input line
+ 193.
+
+
+LaTeX Warning: Citation `Li2020PrivateGraph' on page 5 undefined on input line 
+193.
+
+
+LaTeX Warning: Citation `Martin2025HyDia' on page 5 undefined on input line 193
+.
+
+
+LaTeX Warning: Citation `Song2020EmbeddingLeakage' on page 5 undefined on input
+ line 193.
+
+
+LaTeX Warning: Citation `GomezBarrero2016Unlinkable' on page 5 undefined on inp
+ut line 193.
+
+
+Underfull \hbox (badness 4156) in paragraph at lines 193--194
+\OT1/ptm/m/n/10.03749 PSI/private bio-met-ric match-ing [\OT1/ptm/b/n/10.03749 
+?\OT1/ptm/m/n/10.03749 ], [\OT1/ptm/b/n/10.03749 ?\OT1/ptm/m/n/10.03749 ], com-
+mit-ted
+[5]
+
+LaTeX Warning: Reference `sec:introduction' on page 6 undefined on input line 2
+21.
+
+
+LaTeX Warning: Reference `sec:conclusion' on page 6 undefined on input line 221
+.
+
+
+LaTeX Warning: Reference `sec:evaluation' on page 6 undefined on input line 221
+.
+
+
+LaTeX Warning: Reference `sec:evidence' on page 6 undefined on input line 221.
+
+
+Underfull \hbox (badness 2951) in paragraph at lines 221--222
+\OT1/ptm/m/n/10.03749 research-code/documentation prepa-ra-tion. Sta-bil-ity AI
+
+No file main.bbl.
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+[6] (main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ ) )
+(see the transcript file for additional information)<C:/Users/francisco.becerra
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Us
+ers/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmmi7.pfb><C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb><C:/Users/francisco.becerra/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/francisco.becerr
+a/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/U
+sers/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmsy10.pfb><C:/Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/francisco.becerra/AppData/Local/P
+rograms/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/francisco.becerra/A
+ppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/francis
+co.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/
+Users/francisco.becerra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utm
+r8a.pfb>
+Output written on main.pdf (6 pages, 177361 bytes).
+Transcript written on main.log.
+

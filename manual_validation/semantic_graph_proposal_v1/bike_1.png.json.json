@@ -1,0 +1,5 @@
+{
+  "status": "failure",
+  "code": "UNKNOWN_LABEL",
+  "detail": "unsupported objects label: 'sleep'"
+}

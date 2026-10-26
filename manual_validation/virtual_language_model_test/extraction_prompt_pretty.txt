@@ -1,0 +1,133 @@
+# Image Scene Graph Extraction
+
+## Task
+
+Inspect the provided image carefully and extract structured information based **only on what is directly visible**.
+
+Identify every visible entity belonging to the allowed categories, its attributes, actions, spatial relationships, category counts, and overall scene type.
+
+Do not infer hidden objects, unseen details, or unsupported relationships.
+
+## Output Requirements
+
+- Return **exactly one valid, minified JSON object**.
+- Do not include Markdown, code fences, explanations, or additional text.
+- Use exactly the specified JSON keys and structure.
+- Use only the permitted vocabulary listed below.
+- Use empty arrays (`[]`) when no applicable facts exist.
+- Ensure all node references point to existing node IDs.
+
+## Required JSON Structure
+
+```json
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "category": "cat",
+      "bbox": [0.1, 0.1, 0.4, 0.5],
+      "attributes": {
+        "colour": "red",
+        "size": "small"
+      }
+    }
+  ],
+  "unary": [
+    {
+      "node": "n1",
+      "action": "sleeping"
+    }
+  ],
+  "binary": [],
+  "counts": [
+    {
+      "category": "cat",
+      "bucket": "1"
+    }
+  ],
+  "scene": "indoor"
+}
+```
+
+This example illustrates the required structure. **The actual response must be minified onto a single line.**
+
+## Extraction Rules
+
+### 1. Nodes
+
+- Include every visible entity from the allowed categories.
+- Assign each entity a unique ID (`n1`, `n2`, `n3`, etc.).
+- Provide a bounding box in normalized coordinates:
+
+  `[x_min, y_min, x_max, y_max]`
+
+- All bounding-box coordinates must be between `0` and `1`.
+- Record the entity's colour and relative size using only the allowed values.
+- Do not create nodes for hidden or inferred entities.
+
+### 2. Unary Relationships
+
+- Record visible actions or states for individual nodes.
+- Include only actions supported by visual evidence.
+- Use an empty array if no valid unary actions are visible.
+
+### 3. Binary Relationships
+
+- Record observable relationships between two detected nodes.
+- Use `source`, `type`, and `target`.
+- Both referenced nodes must exist in `nodes`.
+- Do not invent relationships that cannot be established from the image.
+
+### 4. Category Counts
+
+- Include **exactly one count entry per category present in `nodes`**.
+- Count all detected visible instances of that category.
+- Map each count to the permitted count bucket.
+- Do not include categories with zero detected instances.
+
+### 5. Scene Classification
+
+- Select exactly one scene label from the allowed vocabulary.
+- Choose the label best supported by the visible environment.
+
+## Allowed Vocabulary
+
+**Categories**
+
+`person`, `cat`, `dog`, `bird`, `horse`, `bicycle`, `motorcycle`, `car`, `bus`, `train`, `boat`, `airplane`, `chair`, `bench`, `table`, `sofa`, `bottle`, `cup`, `book`, `laptop`, `backpack`, `umbrella`, `tree`, `flower`
+
+**Colours**
+
+`red`, `orange`, `yellow`, `green`, `blue`, `purple`, `black`, `white`, `brown`, `gray`
+
+**Sizes**
+
+`small`, `medium`, `large`
+
+**Unary Actions**
+
+`standing`, `sitting`, `running`, `flying`, `sleeping`
+
+**Binary Relationships**
+
+`holding`, `riding`, `eating`, `left_of`, `right_of`, `above`, `below`, `in_front_of`, `behind`, `next_to`, `on`, `under`, `inside`
+
+**Count Buckets**
+
+`1`, `2`, `3`, `4`, `5_plus`
+
+**Scene Types**
+
+`indoor`, `outdoor`, `road`, `park`, `beach`, `kitchen`, `office`, `bedroom`
+
+## Final Validation
+
+Before returning the result, ensure that:
+
+- Every detected entity belongs to an allowed category.
+- Every bounding box is normalized and correctly ordered.
+- Every attribute, action, relationship, count bucket, and scene label uses the exact permitted tokens.
+- Every node reference is valid.
+- Every included category has exactly one count entry.
+- No unsupported or inferred facts are included.
+- The output is a single, valid, **minified JSON object with no surrounding text**.

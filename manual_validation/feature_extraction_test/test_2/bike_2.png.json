@@ -1,0 +1,25 @@
+{
+  "objects": [
+    {
+      "id": "person",
+      "color": "black",
+      "predicate": "sleeping"
+    },
+    {
+      "id": "bicycle",
+      "color": "black",
+      "predicate": "riding"
+    }
+  ],
+  "facts": [
+    {
+      "subject": "person",
+      "predicate": "sleeping"
+    },
+    {
+      "subject": "bicycle",
+      "predicate": "riding"
+    }
+  ],
+  "scene": "outdoor"
+}

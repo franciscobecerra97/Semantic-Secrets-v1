@@ -1,5 +1,7 @@
 # v2 preregistered experiment boundary
 
+> **Historical branch.** The active direction is [v4](../../docs/research_direction_v4.md). The failed v2 result and its configs remain immutable; this README does not authorize execution or describe v4 gates.
+
 P8 created the design record and machine-readable preregistration. P9 subsequently executed the frozen capability screen and ended with a negative Gate V2-A result. It did not access sealed v1 families or implement cryptography.
 
 The authoritative files are:

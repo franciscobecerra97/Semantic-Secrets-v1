@@ -66,482 +66,190 @@
 \newcommand{\Aset}{\mathcal{A}}
 
 \begin{document}
-
 \hypersetup{pageanchor=false}
 \begin{titlepage}
 \centering
-\vspace*{2.0cm}
+\vspace*{1.5cm}
 {\Huge\bfseries\color{SSBlue} Semantic Secrets\par}
-\vspace{0.4cm}
+\vspace{0.5cm}
 {\LARGE Research Description and Technical Direction\par}
-  \vspace{0.25cm}
-  {\large Updated through the P9-v3A.3 preparation freeze\par}
-\vspace{1.0cm}
-\rule{0.82\textwidth}{0.7pt}
-\vspace{1.0cm}
-
-\begin{minipage}{0.84\textwidth}
+\vspace{0.4cm}
+{\large Approved v4 direction --- 26 October 2026\par}
+\vspace{1cm}
+\begin{minipage}{0.88\textwidth}
 \begin{keybox}
-\centering
-\textbf{Research in one sentence.}\par\medskip
-Semantic Secrets studies whether independently reconstructed visual concepts can yield stable and discriminative canonical semantic credentials, whether the fuzzy acceptance region induced by approximate matching remains resistant to realistic and AI-assisted guessing, and whether that predicate can be privately verified without exposing a reusable semantic template, a practical offline guess-testing oracle, or cross-domain linkage.
+\textbf{Central question.}\par\medskip
+Can an intended semantic credential be reconstructed reliably while related unauthorized alternatives remain distinguishable, and how do perception and normalization affect that balance?
 \end{keybox}
+\medskip
+\begin{statusbox}
+The research direction and documentation update are approved. No P9-v4 phase has started. Before each phase, explain what will be done, how and why, then wait for the author's authorization.
+\end{statusbox}
 \end{minipage}
-
 \vfill
-  {\large Working Draft -- status reviewed 15 October 2026\par}
-\vspace{0.2cm}
-{\small Internal research-direction document; not a publication manuscript\par}
-\vspace{0.3cm}
-  {\small Repository basis: \code{franciscobecerra97/Semantic-Secrets-v1}, technical direction through commit \code{90fe344}\par}
+{\large Target: 12th IEEE European Symposium on Security and Privacy, 2027\par}
+\medskip
+{\small Internal research-direction synthesis; not a completed experimental paper\par}
 \end{titlepage}
 \hypersetup{pageanchor=true}
-
 \setcounter{tocdepth}{1}
 \tableofcontents
 \newpage
 
-\section{Abstract}
+\section{Research Goal and Direction}
+Semantic Secrets retains the long-term goal of reconstructable semantic authentication. The immediate research studies the semantic differences that authentication needs to preserve: object identity, attribute ownership, counts, interactions and spatial relations.
 
-Most authentication systems rely on exact reproduction of a secret value or proof of exact cryptographic possession. Semantic Secrets studies a different primitive: \emph{approximate semantic reconstruction}. An intended concept may be expressed through different natural-language prompts and independently generated into different images, yet those realizations may preserve enough canonical visual semantics to authenticate as equivalent. The project therefore does not treat the prompt or the generated image as the credential. The prompt is a reconstruction interface, the image is a transient reconstruction medium, probabilistic perception produces bounded evidence, and deterministic compilation converts that evidence into a canonical semantic graph.
+Legitimate reconstruction may change wording, image style or incidental details. However, tolerance can also make an unauthorized alternative acceptable. The study therefore connects perception and normalization errors to a frozen authentication decision. Better extraction F1 alone is insufficient evidence of better authentication.
 
-Approximate semantic authentication changes the security object. Instead of one exact accepted value, the verifier induces a fuzzy acceptance region containing multiple semantic alternatives. This creates a central trade-off: a predicate that is too strict rejects legitimate independent reconstructions, while a predicate that is too tolerant enlarges the set of alternatives an attacker can submit. The project therefore measures the complete accepted region under increasingly informed and AI-assisted attackers rather than treating random false-acceptance rate as sufficient security evidence.
+The present work uses researcher-authored concepts and independently generated visual realizations. It does not involve users reconstructing remembered credentials and cannot establish human recall, memorability, usability, preference, accessibility, natural secret choices or superiority to passwords/passkeys.
 
-A second, independent problem is privacy. A semantic graph, policy, protected record, or authentication transcript can potentially reveal the underlying concept, support database-only candidate validation, leak the structure of the acceptance policy, enable adaptive probing, or permit cross-service linkage. Semantic correctness and cryptographic privacy are therefore evaluated through separate gates. Only if the semantic primitive remains viable does the project compare and implement mature private-verification constructions.
+The working paper title is \emph{Semantic Secrets: Reconstruction and Security-Relevant Semantic Distinctions in Visual Authentication}. This is a prospective study, not a validated authentication product.
 
-The research proceeds sequentially: modular visual extraction, independent generative reconstruction, system-derived mandatory/tolerant policy evaluation, acceptance-region attacks, private verification, and finally an end-to-end prototype and held-out evaluation. The active extraction contract composes the immutable v3.0 architecture, the v3.1 pipeline/resource/support amendment, the v3.2 project-authored-ground-truth correction, and the v3.3 development-calibration rule. Human memorability, usability, natural secret choice, and superiority to passwords or passkeys are explicit non-goals. Client-side computational practicality is measured rather than assumed; impractical local requirements are a legitimate limitation or negative result rather than a reason to move secret-bearing processing to an untrusted cloud.
-
-\section{Motivation and Research Justification}
-
-\subsection{The motivation is no longer password memorability}
-
-The project originally grew from an intuitive password-oriented idea: people may be able to recall a visual idea more flexibly than an exact high-entropy string. That intuition helped motivate early exploration, but it is not the claim that the current technical research can support. The present programme contains no human-subject study and therefore cannot establish that visual concepts are easier to remember, that users can reconstruct them over long time periods, or that the resulting system is more usable than passwords or passkeys.
-
-The stronger and more accurate motivation is a security question about the transition from \emph{exact reproduction} to \emph{approximate semantic reconstruction}.
-
-Traditional authentication can be idealised as accepting one enrolled value:
-\begin{equation}
-  \Aset(s)=\{s\}.
-\end{equation}
-
-Semantic Secrets instead asks whether one intended concept can be independently reconstructed into different textual and visual realizations that still produce sufficiently compatible canonical semantics. For a controlled intended concept $C$:
-\begin{align}
-  C &\rightarrow P_1 \rightarrow I_1 \rightarrow O_1 \rightarrow S_1,\\
-  C &\rightarrow P_2 \rightarrow I_2 \rightarrow O_2 \rightarrow S_2,
-\end{align}
-where normally $P_1\neq P_2$ and $I_1\neq I_2$, but the technical hypothesis is that $S_1$ and $S_2$ remain compatible under a frozen authentication predicate while targeted semantic alternatives remain distinguishable.
-
-\begin{keybox}
-\textbf{Primary motivation.} The project investigates what happens when authentication accepts semantic equivalence rather than one exact representation: whether the resulting credential can be reconstructed reliably, whether its full acceptance region remains difficult to enter, and whether the fuzzy predicate can be verified privately.
-\end{keybox}
-
-\subsection{Why generative AI and images remain in the design}
-
-The image generator is not justified as a memorability mechanism and generated pixels are not treated as entropy. Instead, the generator acts as an experimental \emph{semantic reconstruction and normalisation boundary}. Different natural-language descriptions of the same intended concept may produce visibly different images. The project asks whether those independently generated visual realizations preserve enough underlying structure for canonical semantic comparison.
-
-The roles are therefore deliberately separated:
-
-\begin{center}
-\begin{tabularx}{0.92\textwidth}{>{\bfseries}l X}
-Prompt $P$ & reconstruction interface; not the credential \\
-Generated image $I$ & transient reconstruction medium; not the credential \\
-Observations $O$ & bounded probabilistic visual evidence with provenance/confidence \\
-Canonical graph $S$ & deterministic security-sensitive semantic representation \\
-Acceptance region $\Aset(S)$ & operational secret surface: all semantics that the verifier accepts \\
-\end{tabularx}
-\end{center}
-
-Thus the current scientific hypothesis is not that images are better passwords. It is that independent generative reconstruction may preserve a sufficiently stable visual-semantic core to support a new fuzzy authentication primitive.
-
-\subsection{The acceptance region is the central security problem}
-
-Let the frozen semantic decision be $\mathsf{Accept}(S,S')$. The accepted semantic region is
-\begin{equation}
-  \Aset(S)=\{S' : \mathsf{Accept}(S,S')=1\}.
-\end{equation}
-
-An attacker does not need the original prompt, the original image, or the exact enrolled graph. Any $S'\in\Aset(S)$ is sufficient. Consequently, the main matching problem is inseparable from the main security problem:
-
-\begin{center}
-\begin{tabular}{rcl}
-\textbf{too strict} & $\longrightarrow$ & legitimate independent reconstructions fail,\\[0.3em]
-\textbf{too tolerant} & $\longrightarrow$ & attackers gain more accepted semantic alternatives.
-\end{tabular}
-\end{center}
-
-This is why the project treats the complete acceptance region, rather than a nominal atom count or random false-acceptance rate, as the relevant security object.
-
-\subsection{Why privacy is a separate contribution}
-
-Even a stable and discriminative semantic credential may be unsafe to store or verify naively. A plaintext graph can directly expose semantic content. A deterministic record may allow a database attacker to test semantic guesses offline. Policy metadata can reveal which attributes are mandatory, and deterministic records or transcripts may permit cross-service linkage.
-
-Therefore the project separates two questions:
-
-\begin{enumerate}
-  \item \textbf{Semantic correctness:} does the extraction/reconstruction/policy pipeline accept legitimate independent reconstructions and reject important alternatives?
-  \item \textbf{Cryptographic privacy:} can the same frozen decision be evaluated while limiting template, policy, record, transcript, compromise, and linkage leakage?
-\end{enumerate}
-
-Passing one does not imply the other. Private computation cannot make an easily reachable semantic region strong, while good semantic discrimination does not automatically make stored state private.
-
-\section{Central Research Question and Goals}
-
-\subsection{Central research question}
-
-\begin{keybox}
-\centering
-\textbf{Can independently reconstructed visual concepts yield stable and discriminative canonical semantic credentials whose complete acceptance region remains sufficiently resistant to realistic and AI-assisted guessing, and whose authentication predicate can be privately verified without exposing a reusable semantic template, practical offline guess-testing oracle, or cross-domain linkage?}
-\end{keybox}
-
-\subsection{Operational goals}
-
-The project has six operational goals:
-
-\begin{enumerate}
-  \item \textbf{Visual-semantic extraction.} Determine which semantic fact types can be recovered reliably enough from generated images to become credential material.
-  \item \textbf{Independent reconstruction.} Determine whether different prompts and generation randomness for the same controlled concept produce compatible canonical semantics while targeted alternatives remain distinguishable.
-  \item \textbf{Policy-aware matching.} Determine whether a system-derived split between mandatory anchors $M$ and tolerant semantics $T$ improves the reconstruction/security trade-off over simpler and VSA-style baselines.
-  \item \textbf{Acceptance-region security.} Measure how easily random, frequency-informed, partial-information, near-secret, AI-assisted, and adaptive attackers can enter the accepted region under explicit finite budgets.
-  \item \textbf{Private verification.} Identify and evaluate a construction that reproduces the frozen semantic decision while limiting semantic disclosure, database-only validation, policy leakage, adaptive leakage, and cross-domain linkability under explicit compromise assumptions.
-  \item \textbf{Practicality.} Quantify computation, memory, storage, bandwidth, latency, deployment assumptions, and failure modes without silently moving secret-bearing processing to an untrusted cloud provider.
-\end{enumerate}
-
-\subsection{Contribution hypotheses}
-
-These are prospective hypotheses, not present claims.
-
-\begin{description}[style=nextline,leftmargin=1.5em,labelindent=0pt]
-  \item[\textbf{C1 -- Technical reconstructability of visual-semantic credentials.}]
-  Independently generated images of the same controlled concept may yield compatible canonical semantics while remaining separable from targeted semantic alternatives.
-
-  \item[\textbf{C2 -- System-derived policy-aware semantics.}]
-  A deterministic policy $\Pi(S)=(M,T)$ may preserve benign reconstruction variation while rejecting security-critical semantic differences better than dense, global-overlap, or closest feasible VSA-style baselines.
-
-  \item[\textbf{C3 -- Acceptance-region security.}]
-  The reachability of the fuzzy semantic region can be characterised using K0--K3 knowledge classes, finite budgets, frequency information, semantic neighbours, AI assistance, and adaptive one-bit feedback.
-
-  \item[\textbf{C4 -- Private and unlinkable verification.}]
-  A construction-specific protocol may evaluate the frozen semantic predicate while limiting template leakage, database-only offline validation, policy/transcript leakage, and cross-domain linkage under explicit assumptions.
+\section{Proposed Contributions}
+New v4 identifiers avoid rewriting historical C1--C4.
+\begin{description}[style=nextline]
+\item[V4-C1: Error-to-authentication methodology]
+A common pipeline and evaluation framework connecting generation, extraction, normalization and graph errors to reconstruction and unauthorized acceptance.
+\item[V4-C2: Semantic distinction evidence]
+A paired study of which differences survive or collapse across named pipelines and image sources, with binding, coverage, failures and family-level uncertainty.
+\item[V4-C3: Reconstruction and attacker outcomes]
+Independent technical reconstruction and finite-budget attacker success under frozen acceptance rules, explicit knowledge and costs.
 \end{description}
+These are hypotheses requiring evidence and a focused novelty review. P8's earlier novelty pass concerns its earlier composition; it does not automatically establish novelty for v4. A model leaderboard, graph representation, dictionary, LLM substitution or dataset alone is not the proposed security contribution.
 
-C1 and C2 are enabling contributions. If the constructive path survives, C3 and C4 are expected to carry the strongest security/privacy contribution.
+Historical C1 reconstruction and C3 acceptance-region analysis inform the study. Historical C2 mandatory/tolerant policy remains a candidate mechanism, not an assumed winner. Historical C4 private verification remains a separate deferred goal, with its original correctness, leakage and compromise questions intact.
 
-\section{Target System and Credential Model}
+VSA remains the closest-work comparison. Distinguish its semantic-policy component from its complete semantic-plus-password architecture. Image-independent semantic authentication, canonical tokens, quantity rules, conjunction and user-selected policies are not new contributions.
 
-The invariant technical path is
+\section{Scientific Pipeline}
+For intended concept $C$, reconstruction interface $P$, generator $G$ and randomness $r$:
+\[
+ I=G(P,r),\qquad O=\mathsf{Observe}(I),\qquad
+ S=\mathsf{Compile}(N(O)).
+\]
+Here $N$ is the versioned normalization rule. Compilation yields a graph or typed failure. The prompt is an interface, the image a transient medium, observations probabilistic evidence and the graph the representation used by the predicate. Generated pixels add no credential entropy.
 
-\begin{center}
-\begin{tikzpicture}[scale=0.92,transform shape,node distance=5mm and 6mm, every node/.style={font=\small},
-  box/.style={draw=SSBlue, rounded corners=1.5mm, fill=SSLight, align=center, minimum height=9mm, inner xsep=3mm},
-  arr/.style={-{Latex[length=2mm]}, thick, draw=SSBlue}]
-\node[box] (c) {$C$\\intended concept};
-\node[box, right=of c] (p) {$P$\\prompt/interface};
-\node[box, right=of p] (i) {$I$\\generated image};
-\node[box, right=of i] (o) {$O$\\observations};
-\node[box, right=of o] (s) {$S$\\canonical graph};
-\node[box, below=9mm of s] (mt) {$(M,T)$\\system policy};
-\node[box, left=of mt] (r) {$R$\\protected record};
-\node[box, left=of r] (v) {private\\verification};
-\draw[arr] (c)--(p);
-\draw[arr] (p)--(i);
-\draw[arr] (i)--(o);
-\draw[arr] (o)--(s);
-\draw[arr] (s)--(mt);
-\draw[arr] (mt)--(r);
-\draw[arr] (r)--(v);
-\end{tikzpicture}
-\end{center}
+The graph preserves instances, attribute ownership, subject--relation--object roles and counts. Flat arrays lose binding: a red cup with a blue book differs from a blue cup with a red book despite identical word sets.
 
-The strongest target architecture keeps $P$, $I$, $O$, plaintext $S$, and raw learned representations inside a trusted client. Public algorithms, models, schemas, thresholds, and policies are not treated as secrets. The authentication infrastructure should receive only construction-specific protected material and the explicitly allowed protocol output/metadata.
+Initially compare one feasible generative VLM pipeline with one feasible specialized perception pipeline. Grounding DINO and SigLIP2 are also vision-language components; the contrast concerns extraction architecture, not whether language is used. Exact model/API choices remain prospective.
 
-The current extraction architecture explicitly separates probabilistic perception from deterministic credential mechanics:
-\begin{equation}
-  I \xrightarrow{\mathsf{Observe}} O \xrightarrow{\mathcal{C}_s} S.
-\end{equation}
+The shared compiler owns schema validation, identifiers, canonical order, duplicate handling and serialization. Reusing v3 code requires interface and correctness review. Changes receive new versions; historical schemas and compiler goldens are preserved.
 
-$\mathsf{Observe}$ may produce detections, attributes, unary actions, binary interactions/spatial relations, scenes, bounding boxes, confidence values, provenance, abstentions, and typed component failures. The deterministic compiler owns schema validation, canonical IDs, deduplication, sorting, count derivation, geometry-derived facts, inverse-relation normalisation, versioning, typed failures, and canonical serialization.
+Define grounding explicitly before implementation. Required boxes must be supplied by all arms or grounding must be reported as a separate task with unsupported cases counted. Never infer geometry from missing boxes. The same public ontology/task context is allowed for every pipeline; intended per-image answers are withheld.
 
-The candidate language $L_{\mathrm{visual}}$ is intentionally broad. Only semantic atom types that independently satisfy the frozen capability criteria in both controlled and naturalistic strata may enter the credential language $L_{\mathrm{cred}}\subseteq L_{\mathrm{visual}}$.
-
-\section{Experimental Programme}
-
-The research is deliberately sequential. Later phases cannot compensate for a failed earlier gate.
-
-\subsection{P9-v3B -- modular component capability and $L_{\mathrm{cred}}$ eligibility}
-
-This is the next empirical phase. It does \emph{not} yet test authentication or independent reconstruction. It asks whether the semantic evidence required by the future credential can be extracted reliably and compiled deterministically.
-
-The executable v3.1 shortlist is exactly:
-\begin{enumerate}
-  \item \textbf{Grounding DINO Tiny + SigLIP2 Base}: open-set object localisation plus closed-label semantic scoring;
-  \item \textbf{EGTR + SigLIP2 Base}: graph-native object/relation extraction plus independent attribute/scene scoring.
-\end{enumerate}
-
-The future capability data has two strata, with 120 final images in each:
+\section{Dataset and Manual References}
+The three image sources answer different questions:
 \begin{itemize}
-  \item \textbf{Controlled}: project-authored geometric/composited fixtures with project-authored closed-label entities, normalized boxes, and semantic atoms for exact objects, counts, geometry, and compiler edge cases.
-  \item \textbf{Naturalistic}: project-authored prompt/seed plans rendered by the frozen local generator, followed by project-authored closed-label reference specifications for the final visible images without consulting any perception-model output.
+\item \textbf{Generated naturalistic images} provide primary evidence for the concept-to-image reconstruction workflow.
+\item \textbf{Controlled drawings} isolate individual semantic differences and diagnose failures.
+\item \textbf{Photographs} test external visual generalization, subject to provenance, permission and training-overlap limitations.
 \end{itemize}
 
-P9-v3B has no human participants or annotators. Before perception inference, all 240 final image hashes, scenario specifications, manifest rows, and deterministic positive/applicable-negative support opportunities must pass their audits and be bound into \code{ground-truth-freeze-v3.2.0}. The reference data may never be derived from Grounding DINO, SigLIP2, EGTR, or later validation output.
+A photograph may inspire a manually authored intended concept. Produce its generated variant from the text specification and its drawing from the same intended facts. Direct image-to-image copying is not the primary free-language reconstruction experiment.
 
-The phase measures type-level precision, recall, F1, coverage, abstention/failure, repeatability, uncertainty, latency, RAM/VRAM, and exact compiler correctness through at least 320 deterministic cases. Development thresholds are selected only after threshold-independent score capture, using the fixed inclusive $0.00,0.01,\ldots,1.00$ grid and the frozen v3.3 entity-first, task-local, both-strata ranking rule. Entity scopes are frozen before downstream scoring; EGTR predicate/connectivity thresholds are fitted jointly; each SigLIP2 task is fitted independently; count and geometry receive no fitted threshold; and neither validation data nor cross-pipeline pooling may influence calibration. Integrated development replay and \code{threshold-freeze-v3.3.0} precede formal authorisation and validation.
+Organize families around identity, attribute binding, cardinality, interactions and spatial relations. Examples include dog versus cat beside a car, swapped cup/book colors, one versus two dogs, holding a cup versus standing beside it, and a cat on versus under a chair. These examples are not a frozen corpus.
 
-Gate V3-A1 requires one complete pipeline to yield a non-trivial eligible $L_{\mathrm{cred}}$ containing entities plus at least two additional semantic types, including a structural type, while satisfying the frozen reliability, repeatability, failure, and resource criteria. Eligible types cannot be unioned across pipelines.
+The project author manually labels the actual visible content of every evaluated image, without perception predictions. Keep intended concepts and observed references separate. If generation produces a bottle instead of the requested cup, correct bottle extraction should receive credit while generation fidelity records the mismatch.
 
-\subsection{P9-v3C -- independent visual reconstruction}
+The annotation rubric must define ambiguity, unsupported facts, instance correspondence and negative opportunities. Delayed author self-review is useful but is not independent inter-annotator agreement. No model-generated labels are passed off as author truth.
 
-Only after V3-A1 passes does the project test the central reconstruction hypothesis on separate preregistered data:
-\begin{equation}
-  P_1\rightarrow I_1\rightarrow S_1
-  \qquad \text{versus} \qquad
-  P_2\rightarrow I_2\rightarrow S_2,
-\end{equation}
-where $P_1$ and $P_2$ are semantically equivalent controlled descriptions and generation randomness is independent.
+Keep originals, derivatives, near-duplicates and related unauthorized alternatives in one family partition. Separate development and formal evaluation, and separate capability tuning from final reconstruction/attack targets. Existing inspected v3 images default to development/diagnostic material pending an exposure audit. The twelve sealed v1 families remain sealed.
 
-Gate V3-A2 evaluates enrolment eligibility, false rejection, targeted-neighbour false acceptance, random false acceptance, same-vs-near discrimination, failure, uncertainty, and the frozen policy interface. This phase may establish technical reconstruction viability, but not memorability, entropy, privacy, or real-world usability.
+\section{Normalization and API Strategy}
+The primary normalization arm uses deterministic formatting and reviewed, frozen mappings. An LLM may suggest mappings during development, but review must distinguish aliases from abstractions and senses. In context, cat/kitty may be equivalent; cat/dog to animal deliberately removes a credential distinction.
 
-\subsection{P10 -- system-derived mandatory/tolerant policy}
+An optional live LLM arm changes normalization only on the same cached observations. It cannot see intended answers, supply reference truth or add image facts. Measure correct mappings, false merges/splits, abstention, unsupported output and repeatability, followed by acceptance effects. Temperature zero is not proof of hosted determinism.
 
-After a constructive V3-A2, the project evaluates the policy
-\begin{equation}
-  \Pi(S)=(M,T),
-\end{equation}
-where $M$ contains mandatory/discriminative anchors and $T$ contains bounded-tolerance secondary semantics. The policy is system-derived, deterministic, versioned, and fitted only on authorised development evidence; users do not manually nominate the primary anchors in the technical study.
+Use approved APIs first on public or safely authorized non-secret fixtures. Do not rent GPUs or run local models in the immediate programme. A model name or public demo does not prove stable API availability, exact checkpoint identity, required output support or license compatibility.
 
-The proposed design is compared against dense similarity, global fuzzy overlap, and the closest feasible VSA-style semantic-policy baseline. Gate V2-B asks whether the policy materially improves the reconstruction/security trade-off without post-hoc held-out tuning.
+Before calls, approve endpoints, disclosed inputs, request schema, model identity, cost/call limits and bounded retries. Preserve raw requests/responses and hashes, timestamps, requested versus attested settings, failures, parse events, costs and observed latency. Repeating a hosted request tests service stability; replaying cached output tests downstream determinism.
 
-\subsection{P11 -- acceptance-region and budgeted attackers}
+If a required API is unavailable, explain compatible hosted alternatives with new identities, an explicitly narrower task, or deferral. No silent substitutions. Later local execution requires a separately authorized semantic-parity and performance study. API latency does not establish model-only latency, VRAM or privacy from providers.
 
-P11 evaluates C3 over the complete accepted region. It freezes K0--K3 strategies and explicit budgets for random, frequency-informed, semantic-neighbour, partial-information, LLM-assisted, generator/VLM-assisted, and adaptive attackers where justified.
+\section{Security and Evaluation}
+For frozen policy $\theta$, the acceptance region is
+\[
+ \Aset_\theta(S)=\{S':\mathsf{Accept}_\theta(S,S')=1\}.
+\]
+The attacker wins by finding any member, not recovering exact pixels, wording or graph. Algorithms, model identities, vocabulary, canonicalization and thresholds are public.
 
-For strategy $Q$, budget $B$, knowledge class $K_i$, and observable view $V$:
-\begin{equation}
-  \mathsf{Succ}(Q,B,K_i,V)=
-  \Pr[\exists j\le B: S'_j\in\Aset(S)].
-\end{equation}
+Separate generation fidelity; extraction precision/recall/F1 and binding; graph validity and typed failure; normalization errors; independent reconstruction; negative acceptance; and finite-budget attacker success. Enforce one-to-one object matching and retain all attempted cases in the defined accounting. API failures, timeouts, abstentions and unsupported tasks cannot disappear from denominators.
 
-The evaluation reports success@budget, guesses-to-success, duplicates, uncertainty, cost, and online/offline access separately. Gate V2-C determines the surviving positioning: standalone, second factor, policy-constrained/restricted, measurement/negative, or stop.
+Use paired comparisons and family/account uncertainty. Freeze support, sample-size rationale, repeats, exclusions, retries, thresholds and meaningful-effect criteria before formal outputs. Same-image repetition differs from independent reconstruction; selecting cached positive samples because they already match is not a reconstruction trial.
 
-\subsection{P12--P14 -- private verification}
+After capability interpretation, separately design the policy and reconstruction evaluation. Compare a justified bounded set of strict semantic, fuzzy overlap and reproducible VSA-style baselines with a system-derived mandatory/tolerant candidate where useful. Fit all choices on permitted development data; unsupported types cannot be promoted by favorable authentication outcomes. A claim about image-stage added value needs a matched direct-text control.
 
-Only if the semantic region remains viable does the project define the ideal private functionality and compare mature construction families such as OPRF/VOPRF, PSI and circuit-PSI variants, secure computation, fuzzy extractor/PAKE alternatives, and encrypted similarity methods.
+Report enrollment failure, conditional technical FRR and unconditional reconstruction success separately. Random negatives, deliberately close alternatives and adaptive attacks are different distributions.
 
-The objective is not to invent a new cryptographic primitive. The objective is to identify a construction-specific privacy property that improves meaningfully over plaintext/hash-style baselines while reproducing the frozen semantic decision. A small surviving set is implemented as proof of concept, one direction is selected, and the selected verifier is hardened with domain separation, session binding, replay/downgrade handling, explicit compromise analysis, transcript minimisation, adaptive-query analysis, and unlinkability tests.
+Knowledge levels range from K0 generic/public information, through K1 source-frequency and K2 partial-target facts, to K3 near-secret information. Freeze the candidate interface, auxiliary data, oracle feedback, budgets, duplicates and generation/extraction/verification costs. Report success at 1, 5, 10 and the approved maximum budget, accounts reached and guesses to success with censored failures. Sampled attacks do not exhaust the accepted region or prove universal security.
 
-\subsection{P15--P20 -- integration, held-out evidence, manuscript, and artifact}
-
-A constructive path culminates in an end-to-end prototype, one frozen held-out evaluation, deterministic figures/statistics, the evidence-backed PETS manuscript, a reproducible research artifact, and a final submission audit. The gate order remains:
-
-\begin{center}
-\small
-V2-N $\rightarrow$ historical V2-A failure $\rightarrow$ V3-A1 $\rightarrow$ V3-A2 $\rightarrow$ V2-B $\rightarrow$ V2-C $\rightarrow$ V2-D $\rightarrow$ V2-E $\rightarrow$ V2-F.
-\end{center}
-
-No later phase may bypass a failed earlier gate.
-
-\section{Expected Results and Valid Outcomes}
-
-The project is designed so that scientifically useful evidence does not require the constructive hypothesis to succeed fully.
-
-\subsection{Constructive outcome}
-
-A strong positive result would establish a defensible subset of the following:
+\section{Phase Roadmap}
+Every listed phase requires a detailed explanation and separate authorization.
 \begin{enumerate}
-  \item at least one modular extractor supports a non-trivial, reliable $L_{\mathrm{cred}}$ within the declared measured resource envelope;
-  \item independent generated realizations of the same controlled concept preserve enough canonical semantics to support technical reconstruction;
-  \item the system-derived $M/T$ policy improves the reconstruction/security trade-off over simpler and VSA-style baselines;
-  \item budgeted K0--K3 and AI/adaptive attackers do not make the accepted region trivially reachable under the claimed use setting;
-  \item a private construction materially reduces template leakage, database-only candidate validation, or linkability relative to plaintext/hash baselines;
-  \item the complete pipeline is practical enough for an interactive or explicitly qualified deployment setting.
+\item \textbf{P9-v4A --- Design:} resolve exact novelty, API candidates, common tasks, data/reference rules, normalization, metrics and pilot budget. No model calls.
+\item \textbf{P9-v4B --- Engineering:} repair evaluator/path defects and implement the approved common runner, adapters and reference validation with deterministic/mocked checks.
+\item \textbf{P9-v4C --- API pilot:} use author-labeled development fixtures and bounded approved calls to assess support, errors, repeatability and cost.
+\item \textbf{P9-v4D --- Formal freeze:} complete author references, provenance/support/split audits and the capability protocol before formal calls.
+\item \textbf{P9-v4E --- Common comparison:} execute the frozen capability/graph study; report valid positive and negative findings with qualified language.
+\item \textbf{P10-v4A/B --- Reconstruction:} separately design/develop/freeze policies and fresh trials, then authorize and execute held-out evaluation.
+\item \textbf{P11-v4A/B --- Attacks:} separately design/freeze attackers and budgets, then authorize and execute their evaluation.
+\item \textbf{P17-v4 --- Analysis:} consolidate evidence, uncertainty, novelty and claim support; obtain the author's final scope decision.
+\item \textbf{P18-v4/P19-v4/P20-v4:} complete the evidence-backed manuscript, artifact and submission audit under their own approvals.
 \end{enumerate}
+Local parity/performance, extra models, live LLM normalization and private-verification construction are separate optional/deferred branches. The full details are in PLAN.md; legacy phase text is archived reference, not current execution permission.
 
-\subsection{Restricted positive outcome}
+\section{Authorization and Failure Handling}
+Before a phase, explain:
+\begin{enumerate}
+\item what question it answers, why it is needed and what outputs it produces;
+\item current evidence, prerequisites, unresolved defects and affected files;
+\item ordered methods, models/services, inputs/splits, references and metrics;
+\item scope, calls/cost/time estimates, disclosure and retry limits;
+\item success/failure criteria and what each outcome can establish;
+\item alternatives and the recommended choice.
+\end{enumerate}
+Then wait for explicit authorization. Direction approval, elapsed time or completion of another phase is not approval. Read-only preparation for an explanation is permitted if it does not execute models, acquire data, expose held-out inputs or incur charges.
 
-The primitive may be technically defensible but unsuitable for universal primary authentication. Evidence may instead support a second factor, policy-constrained credential, restricted/high-value setting, or another bounded deployment. For example, K0/K1 resistance could be acceptable while strong K3 knowledge remains a documented limitation, or the client-side computation could be too heavy for ubiquitous use but acceptable in a narrower setting.
+If something fails, preserve inputs, logs, responses and configurations. Explain known versus suspected causes and whether the issue is infrastructure/API, code/evaluation, labels/data, output format, semantic capability, statistical support or the research hypothesis.
 
-\subsection{Negative or measurement outcome}
+Offer repairs or alternative strategies, their costs and scientific consequences, and recommend a next step. Obtain authorization before substantive continuation or scope changes. Pause only affected actions when continued execution would corrupt evidence, violate a freeze or exceed approval; a pause is not project termination.
 
-A failed gate is evidence, not permission to retune. Scientifically useful negative outcomes include:
+Do not automatically reject the hypothesis, abandon an approach or terminate the project. This does not require endless retries or force positive results. Preserve failed gates, never tune held-out answers, and create a new version and independent evaluation when methodology changes after output.
+
+Measurement validity, constructive viability and publication readiness are different decisions. A valid negative experiment may complete a useful measurement phase while failing a constructive hypothesis. The author decides among explained continuation, narrowing or abandonment options.
+
+\section{Current Status and Historical Integrity}
+As of the 26 October audit:
 \begin{itemize}
-  \item current modular extractors cannot recover a sufficiently rich and reliable credential language;
-  \item independent generative reconstruction is too unstable;
-  \item the tolerance required for reconstruction makes the acceptance region too easy to enter;
-  \item the $M/T$ policy offers no meaningful improvement over simpler baselines;
-  \item private matching is possible but does not materially improve the relevant compromise/privacy property;
-  \item the selected verifier is too slow or leaks too much policy/transcript metadata;
-  \item local secret-bearing extraction or generation requires impractical hardware under the intended trust model.
+\item P0--P7 remain historical v1 evidence. P6 found poor targeted-neighbor separation; P7 found no material benefit from its tested image pathways.
+\item P8 passed the earlier scoped novelty review. P9-v2 failed the direct complete-JSON schema requirement by logical futility, not a full semantic accuracy comparison or universal VLM impossibility result.
+\item P9-v3 methodology, compiler/runtime and v3.0--v3.4 freezes remain intact. The empirical branch is paused.
+\item The earlier audit reported 421 passing core tests, including 320 compiler cases. These are engineering observations, not model results.
+\item The v3 dataset contains 240 images and 120 controlled references. Naturalistic references and the final manifest/support/ground-truth freeze remain incomplete. Hosted generator weights/settings are unattested.
+\item The evaluator's one-to-one matching defect and moved manual root-path defects remain unresolved. This documentation update does not fix or run them.
+\item No P9-v4 phase, formal accuracy, independent reconstruction, budgeted attack, local resource or private-verification result is established.
 \end{itemize}
+Historical code/configurations/results are not retuned or relabeled. The next action is to present the detailed P9-v4A proposal and wait for authorization.
 
-A negative result may support a measurement/limitations paper or stop the constructive path entirely.
+\section{Deferred Privacy and Claim Boundaries}
+The strongest future private design keeps secret-bearing prompts, images, observations, graphs and embeddings on a trusted client. API experiments on public fixtures do not establish that boundary in a deployed system.
 
-\section{Prototype Design}
+A private branch must define exact functionality and stored records, service/key assumptions, reference-predicate equivalence, template/policy/transcript leakage, database-only candidate testing, linkage, replay and compromise outcomes. Cryptography cannot repair semantic guessability. Hashing, salting or encryption alone proves none of these privacy properties.
 
-The final prototype should demonstrate the scientific pipeline without making a user interface part of the contribution. A CLI/API is sufficient.
+No human-subject study, natural-choice entropy estimate, memorability claim, password/passkey superiority or production-ready authentication claim is authorized. Findings must name their tested pipeline, dataset, attack knowledge, budget and limitations.
 
-\begin{center}
-\begin{tabularx}{\textwidth}{>{\bfseries}p{0.28\textwidth} X}
-\toprule
-Module & Responsibility \\
-\midrule
-Local generator & Produce independent images from natural-language reconstruction inputs under frozen/versioned generation settings. \\
-Observation pipeline & Produce bounded detections, attributes, actions/interactions, relations, scenes, confidence/provenance, abstentions, and typed failures. \\
-Semantic compiler & Deterministically build a canonical graph or typed failure; own schema, IDs, deduplication, counts, geometry, inverse normalisation, ordering, and serialization. \\
-Policy engine & Derive $M/T$, thresholds, eligibility, and version metadata using only authorised development evidence. \\
-Plaintext reference matcher & Implement the exact frozen predicate against which every private construction is checked. \\
-Privacy protocol layer & Protect enrolment state and privately reproduce the reference decision under an explicit leakage/compromise model. \\
-Authentication service & Manage account/session context, protocol messages, rate limits, replay/version controls, and final decisions. \\
-Optional privacy/key service & Hold independent key/share material only if the selected construction requires explicit non-collusion or threshold assumptions. \\
-Attack framework & Generate K0--K3, AI-assisted, semantic-neighbour, inversion, linkage, compromise, and adaptive-query evaluations. \\
-Experiment runner & Execute frozen manifests, hashes, caches, resource telemetry, statistical analyses, and reproducibility checks. \\
-CLI/API demonstrator & Show end-to-end enrolment and authentication without becoming the scientific core. \\
-\bottomrule
-\end{tabularx}
-\end{center}
+\section{EuroS\&P 2027 and Evidence Readiness}
+The target remains the 12th IEEE European Symposium on Security and Privacy in Madrid, 5--9 July 2027. Mandatory registration is \textbf{25 November 2026 AoE}; full-paper submission is \textbf{2 December 2026 AoE}. These are separate deadlines. The date-only CFP gives no exact clock time; verify HotCRP before submission.
 
-The prototype should enforce the trusted-client boundary for secret-bearing prompt/image/semantic processing and should fail closed on malformed graphs, unsupported operators, missing mandatory anchors, version mismatch, replay/downgrade ambiguity, and protocol errors.
+Use the supplied IEEE A4 template and 13-body-page limit. Keep essential evidence and proactive harm analysis in the body; provide Data Availability and anonymous AI-use acknowledgments. References, appendices and submission acknowledgments are additional. The paper remains an anonymous planning draft.
 
-\section{Scope}
+Internal targets are evidence review on 13 November, registration metadata on 24 November, final audit on 30 November and upload buffer on 1 December. These dates do not authorize phases or waive evidence requirements.
 
-The current research includes:
-\begin{itemize}
-  \item reconstructable semantic authentication from independently generated visual realizations;
-  \item modular visual perception and deterministic canonical semantic compilation;
-  \item technical reconstruction stability under controlled paraphrase, seed, style, and layout variation;
-  \item derivation and evaluation of a system-derived mandatory/tolerant policy;
-  \item random and targeted false-acceptance/false-rejection behaviour;
-  \item acceptance-region reachability and finite-budget K0--K3 attackers;
-  \item AI-assisted semantic guessing and adaptive one-bit probing;
-  \item template inversion, database-only candidate validation, and cross-domain/account linkage;
-  \item private-verification constructions with explicit stored-state, transcript, policy, and compromise leakage;
-  \item performance, memory, storage, bandwidth, latency, and deployment assumptions;
-  \item reproducible project-authored/safely licensed experimental artifacts;
-  \item evidence-backed positioning that may ultimately be standalone, second-factor, constrained or restricted, negative or measurement, or stop.
-\end{itemize}
-
-\section{Non-Goals and Claim Boundaries}
-
-The project must not use technical experiments as a substitute for evidence about human behaviour. The present work does \emph{not} aim to establish:
-
-\begin{itemize}
-  \item that visual concepts are easier to remember than passwords;
-  \item long- or short-term human recall, memorability, usability, preference, accessibility, or real-world authentication time;
-  \item that users naturally select high-entropy semantic concepts;
-  \item that generated pixels add credential entropy;
-  \item that Semantic Secrets is necessarily a universal password replacement;
-  \item superiority to passwords, passkeys, biometrics, hardware authenticators, or other mature authentication systems;
-  \item firstness for semantic, image-independent, VLM-based, policy-based, or generative graphical authentication;
-  \item novelty merely from object/attribute/count/spatial rules, $M/T$ notation, or standard primitives such as OPRF, PSI, PAKE, MPC, FHE, or fuzzy extraction;
-  \item privacy, unlinkability, irreversibility, or offline resistance merely because semantic values are hashed, salted, encoded, or encrypted;
-  \item protection after total compromise unless the selected construction explicitly supports such a claim;
-  \item that a third-party cloud GPU is a normal trusted participant in the deployed architecture.
-\end{itemize}
-
-Human memorability and natural secret-choice behaviour remain possible future human-subject questions only if the technical primitive first proves worth studying with people.
-
-\section{The Research Narrative}
-
-The project should be explained in the following order.
-
-\begin{enumerate}
-  \item \textbf{Exact authentication has one representation problem; semantic authentication creates a region problem.} Most authentication expects an exact value or exact possession. Semantic reconstruction intentionally allows multiple representations of one intended concept.
-  \item \textbf{Generative reconstruction is the experimental bridge.} Different natural-language descriptions are independently rendered into different images. The image generator acts as a reconstruction/normalisation boundary, not a source of memorability or entropy.
-  \item \textbf{Canonical semantics make the idea testable.} Probabilistic visual evidence is compiled deterministically into a typed graph so that representation errors, semantic errors, and serialization errors can be measured separately.
-  \item \textbf{Tolerance creates the central security tension.} The verifier must tolerate benign reconstruction variation, but every tolerated alternative can enlarge the attacker's winning set.
-  \item \textbf{The full acceptance region must therefore be attacked.} Security is measured under explicit budgets and increasingly informed K0--K3/AI/adaptive strategies, not inferred from random FAR alone.
-  \item \textbf{Privacy remains independent.} Even a good predicate may reveal a semantic template or enable offline candidate testing/linkage. The project therefore evaluates private verification separately and only after semantic viability.
-  \item \textbf{Practicality determines positioning rather than being assumed.} The evidence decides whether the primitive belongs in standalone authentication, a factor/constrained setting, a restricted deployment, a measurement paper, or nowhere.
-\end{enumerate}
-
-\begin{keybox}
-\textbf{The story is therefore not:} ``AI-generated images are easier-to-remember passwords.''\par\medskip
-\textbf{The story is:} ``What security and privacy properties emerge when authentication moves from exact secret reproduction to reconstructable semantic equivalence?''
-\end{keybox}
-
-\section{Current Status}
-
-As of the repository state reviewed on 15 October 2026, the latest project work remains the prospective preparation completed in August 2026:
-
-\begin{enumerate}
-  \item \textbf{Historical v1 (P0--P7):} earlier text/image representations and matching assumptions were tested. P6 found poor targeted-neighbour separation in the frozen v1 matcher, and P7 found no material benefit from the tested v1 image pathways over paired text pathways. These results remain immutable formative evidence.
-  \item \textbf{P8:} novelty was refreshed against VSA and broader prior work. Gate V2-N passed only with narrowed claims around the complete composition of independent generative reconstruction, typed canonical semantics, system-derived policy, acceptance-region analysis, and private verification.
-  \item \textbf{P9-v2:} the frozen monolithic ``image $\rightarrow$ general VLM $\rightarrow$ exact complete credential JSON'' architecture failed its schema-validity gate. This rejects that architecture only; it is not evidence that visual semantics are universally infeasible.
-  \item \textbf{P9-v3A:} a new v3.0 architecture separated learned observations from deterministic compilation and preregistered new capability/reconstruction gates without running a v3 experiment.
-  \item \textbf{P9-v3A.1:} the prospective v3.1 audit selected EGTR as the graph-native comparator, preserved Grounding DINO + SigLIP2 as the other pipeline, clarified measured-resource rules, and froze support opportunities. Its historical two-human annotation prerequisite was later superseded before any v3 output.
-  \item \textbf{Narrative and execution preparation (26 August 2026):} active documentation was aligned around reconstructable semantic authentication, acceptance-region security, and private verification. The deterministic v3 compiler, isolated two-environment RunPod design, provenance guards, and guarded execution/export workflow were prepared. The compiler matrix passes 320/320 locally, but this is engineering evidence only and must be rerun in the locked image.
-  \item \textbf{P9-v3A.2 (28 August 2026):} the mismatched human-annotation dependency was prospectively replaced with project-authored, closed-label, model-blind reference specifications and a hash-bound ground-truth freeze. P9-v3B now has no human participants or annotators.
-  \item \textbf{Execution-readiness audit (29 August 2026):} deterministic data materialisation, persistent model sessions, telemetry, evaluation, Gate computation, formal authorisation, resume checks, and provenance-complete export were implemented. The audit correctly left project-authored scenario/prompt content as an unresolved input rather than inventing it.
-  \item \textbf{P9-v3A.3 (29 August 2026):} the missing prospective threshold method was frozen and implemented: fixed-grid, development-only, entity-first, task-local calibration; deterministic fallback; offline replay; validation isolation; and a provenance-bound threshold freeze. This amendment did not select any empirical threshold or start an experiment.
-\end{enumerate}
-
-\begin{statusbox}
-\textbf{P9-v3B is prepared but not started.} No v3 model weight has been acquired, no capability image or scenario set has been created, no perception score or fitted threshold exists, and no validation, authentication, acceptance-region, or cryptographic experiment has been executed. The obsolete human-resource blocker and the threshold-method blocker are resolved. The remaining pre-inference blocker is the actual project-authored 240-scenario/prompt content and the resulting audited \code{ground-truth-freeze-v3.2.0}; execution also requires explicit authorisation. Model acquisition may be authorised separately before that freeze, but no smoke or other inference may run before it.
-\end{statusbox}
-
-\section{Immediate Direction}
-
-The immediate objective is \textbf{not} to implement the final authentication system or cryptography. It is to determine whether the representation layer is viable at all.
-
-The next permitted empirical sequence, once explicitly authorised, is:
-
-\begin{enumerate}
-  \item explicitly authorise the relevant P9-v3B preparation/execution scope; model acquisition and naturalistic image generation remain separately guarded actions;
-  \item finish the project-authored inputs off the GPU: 120 controlled scenario specifications and render inputs, plus the exact 120-row naturalistic prompt/seed plan;
-  \item create the 120 controlled fixtures and 120 frozen-generator naturalistic images, then author the final naturalistic reference entities, boxes, and atoms without consulting perception outputs;
-  \item build and audit the 240-row manifest and deterministic support-opportunity table, then create \code{ground-truth-freeze-v3.2.0};
-  \item acquire only the frozen Grounding DINO Tiny, SigLIP2 Base, and EGTR artifacts after licence, revision, hash, checkpoint-layout, and provenance checks;
-  \item build/use the immutable container, rerun all 320 compiler cases, record the GPU environment, and run only the bounded engineering smoke permitted after the ground-truth freeze;
-  \item capture development entity scores, fit and freeze entity scopes, capture downstream scores, perform the frozen offline component calibration, replay the integrated development tree, and create \code{threshold-freeze-v3.3.0};
-  \item create the provenance-bound formal authorisation, run validation and its single frozen repeat, evaluate Gate V3-A1, and derive $L_{\mathrm{cred}}$ separately for each complete pipeline;
-  \item if V3-A1 fails, stop the visual constructive path or preregister a genuinely new reframe; if it passes, separately preregister P9-v3C and test independent reconstruction under Gate V3-A2;
-  \item only a constructive V3-A2 unlocks P10; policy value, acceptance-region attacks, private functionality/protocol work, integration, held-out evaluation, manuscript, and artifact phases remain gated in that order.
-\end{enumerate}
-
-The most important near-term question is therefore:
-
-\begin{keybox}
-\centering
-\textbf{Can the project obtain a non-trivial, reproducible visual-semantic credential language from independently validated modular observations within the declared local-compute envelope?}
-\end{keybox}
-
-Until that question is answered, the final security/privacy architecture remains a hypothesis rather than an implementation target.
-
-\section{What the Final Paper Should Ultimately Say}
-
-If the constructive path survives all gates, the paper should ultimately tell the following story:
-
-\begin{keybox}
-Authentication normally relies on exact reproduction or exact cryptographic possession. Semantic Secrets studies a different primitive in which one intended concept may be independently reconstructed into different prompts and visual realizations that compile into compatible canonical semantics. Because approximate matching induces a non-singleton acceptance region, the verifier must balance legitimate reconstruction tolerance against the attacker's ability to find any accepted semantic alternative. We therefore measure the complete acceptance region under finite-budget knowledgeable and AI-assisted attackers rather than relying on random false-acceptance rate alone. We then evaluate whether the same frozen fuzzy predicate can be privately verified without exposing a reusable semantic template, practical database-only guess-testing oracle, policy structure, or cross-domain linkage. The resulting system is evaluated end to end under explicit compromise and practicality assumptions.
-\end{keybox}
-
-The strongest paper positioning should lead with C3 and C4 if the evidence supports them: acceptance-region security and construction-specific private verification. C1 and C2 should be presented as the enabling system mechanisms that make those questions possible.
-
-The final paper should not claim that AI images are better passwords, that people remember semantic concepts better than strings, or that the system must replace passkeys/passwords. Instead, it should make a narrower and stronger contribution: a disciplined empirical and systems study of a reconstructable semantic authentication primitive, the security consequences of its induced acceptance region, the privacy consequences of storing/verifying a structured fuzzy credential, and the practical conditions under which such a primitive is or is not viable.
-
-If the evidence instead supports only a restricted or negative result, the paper should say that clearly. A coherent final paper may conclude that the primitive works only in a constrained factor setting, that knowledgeable attackers make the region too weak for standalone use, that private verification fails to provide meaningful compromise resistance, or that local computation is impractical. The paper story must follow the strongest surviving evidence, not the original product intuition.
-
-\section{Research Compass}
-
-For day-to-day project decisions, the following compact mental model should remain stable:
-
-\begin{center}
-\begin{tabularx}{0.95\textwidth}{>{\bfseries}p{0.32\textwidth} X}
-What is being studied? & A reconstructable semantic authentication primitive, not an easier-to-remember password. \\
-What is reconstructed? & An intended semantic concept through different prompts and independently generated images. \\
-What is the credential? & The canonical semantic representation under a frozen policy; operationally, the complete accepted region. \\
-Why is matching hard? & Legitimate variation requires tolerance, but tolerance expands attacker alternatives. \\
-Why is privacy hard? & Structured semantic state can reveal meaning, enable offline candidate validation, leak policy, or create linkage. \\
-What must happen before cryptography? & Extraction, independent reconstruction, policy value, and acceptance-region security must pass their gates. \\
-Where should secret-bearing AI run? & Inside the trusted client for the strongest claim; research GPUs are laboratory infrastructure, not automatically deployment components. \\
-What happens next? & Author and freeze the 240-image capability data, then execute the fixed P9-v3B score/calibration/validation sequence; only a V3-A1 pass unlocks P9-v3C. \\
-What is not claimed? & Human memorability/usability, semantic entropy in pixels, password/passkey superiority, firstness, or privacy from hashing/encryption alone. \\
-\end{tabularx}
-\end{center}
+The immediate paper focuses on V4-C1--C3. A valid restricted or negative result can be useful if it is novel, complete and supported. If the cycle is infeasible, explain missing evidence and continuation options. Non-submission does not terminate the research.
 
 \vfill
 \begin{center}
 \small\color{SSGray}
-This document is an internal research-direction synthesis intended to keep the project goal, evidence sequence, architecture, scope, and claim boundaries visible while implementation evolves.
+Authority: AGENT.md; direction: docs/research\_direction\_v4.md; workflow: docs/phase\_workflow.md; execution sequence: PLAN.md. This synthesis records the approved direction, not completed scientific results.
 \end{center}
-
 \end{document}

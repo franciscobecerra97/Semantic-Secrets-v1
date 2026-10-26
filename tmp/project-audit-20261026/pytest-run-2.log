@@ -1,0 +1,404 @@
+........................................................................ [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 45%]
+........................................................................ [ 61%]
+........................................................................ [ 76%]
+.............................................................FFFFF.FFFFF [ 91%]
+FFFFFFEEE...............................                                 [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_mocked_capture_invalid_continues_reports_and_resume_skips_completed _
+manual_validation\walkthrough_test\p9-v2-2\test_api_experiment.py:95: in fake_run
+    config = api.graph_config()
+             ^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:55: in graph_config
+    source = read(ROOT / "experiments/v3/config/visual_observation_v3.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:28: in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v3\\config\\visual_observation_v3.json'
+__ ERROR at setup of test_transport_error_stays_missing_and_key_is_redacted ___
+manual_validation\walkthrough_test\p9-v2-2\test_api_experiment.py:95: in fake_run
+    config = api.graph_config()
+             ^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:55: in graph_config
+    source = read(ROOT / "experiments/v3/config/visual_observation_v3.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:28: in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v3\\config\\visual_observation_v3.json'
+____________ ERROR at setup of test_raw_capture_detects_tampering _____________
+manual_validation\walkthrough_test\p9-v2-2\test_api_experiment.py:95: in fake_run
+    config = api.graph_config()
+             ^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:55: in graph_config
+    source = read(ROOT / "experiments/v3/config/visual_observation_v3.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:28: in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v3\\config\\visual_observation_v3.json'
+================================== FAILURES ===================================
+______________________ test_selections_and_repeat_counts ______________________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:31: in test_selections_and_repeat_counts
+    assert len(audit.select_records("all")) == 96
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+______________ test_format_and_semantic_correctness_are_separate ______________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:42: in test_format_and_semantic_correctness_are_separate
+    row = audit.select_records()[0]
+          ^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+_____________ test_malformed_answer_counts_missed_reference_facts _____________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:55: in test_malformed_answer_counts_missed_reference_facts
+    row = audit.select_records()[0]
+          ^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+_____ test_fences_and_missing_counts_expose_original_validator_behaviour ______
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:63: in test_fences_and_missing_counts_expose_original_validator_behaviour
+    row = audit.select_records()[0]
+          ^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+____________ test_missing_images_do_not_become_observed_successes _____________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:74: in test_missing_images_do_not_become_observed_successes
+    rows = audit.select_records("validation")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+____________ test_raw_duplicates_and_contents_changes_fail_closed _____________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:94: in test_raw_duplicates_and_contents_changes_fail_closed
+    row = audit.select_records()[0]
+          ^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+___________________ test_resume_requires_identical_receipt ____________________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:113: in test_resume_requires_identical_receipt
+    row = audit.select_records()[0]
+          ^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+_________ test_revalidation_detects_disagreement_and_invalid_repeats __________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:125: in test_revalidation_detects_disagreement_and_invalid_repeats
+    row = audit.select_records()[0]
+          ^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+___________ test_fake_inference_both_models_resume_without_loading ____________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:139: in test_fake_inference_both_models_resume_without_loading
+    row = audit.select_records()[0]
+          ^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+_________ test_loader_failure_stays_missing_not_invalid_model_answer __________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:171: in test_loader_failure_stays_missing_not_invalid_model_answer
+    path, success = audit.run_inference(audit.select_records(), ["moondream"], sandbox / "load-failure")
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:90: in select_records
+    rows = read_jsonl(MANIFEST)
+           ^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:48: in read_jsonl
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+_______ test_inspection_recreation_and_history_do_not_change_originals ________
+manual_validation\walkthrough_test\p9-v2\test_manual_audit.py:180: in test_inspection_recreation_and_history_do_not_change_originals
+    before = {path: audit.sha256(path) for path in protected}
+                    ^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2\audit_common.py:53: in sha256
+    with Path(path).open("rb") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v2\\manifests\\capability_v2.jsonl'
+_____________ test_conversion_and_scoring_preserve_new_v3_labels ______________
+manual_validation\walkthrough_test\p9-v2-2\test_api_experiment.py:33: in test_conversion_and_scoring_preserve_new_v3_labels
+    config = api.graph_config()
+             ^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:55: in graph_config
+    source = read(ROOT / "experiments/v3/config/visual_observation_v3.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:28: in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v3\\config\\visual_observation_v3.json'
+________________ test_prompt_vocabulary_matches_scoring_config ________________
+manual_validation\walkthrough_test\p9-v2-2\test_api_experiment.py:43: in test_prompt_vocabulary_matches_scoring_config
+    config = api.graph_config()
+             ^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:55: in graph_config
+    source = read(ROOT / "experiments/v3/config/visual_observation_v3.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:28: in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v3\\config\\visual_observation_v3.json'
+______ test_reference_incompatibility_blocks_instead_of_excluding_facts _______
+manual_validation\walkthrough_test\p9-v2-2\test_api_experiment.py:61: in test_reference_incompatibility_blocks_instead_of_excluding_facts
+    config = api.graph_config()
+             ^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:55: in graph_config
+    source = read(ROOT / "experiments/v3/config/visual_observation_v3.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:28: in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v3\\config\\visual_observation_v3.json'
+__ test_invalid_and_wrong_graphs_are_not_schema_successes_or_perfect_scores ___
+manual_validation\walkthrough_test\p9-v2-2\test_api_experiment.py:73: in test_invalid_and_wrong_graphs_are_not_schema_successes_or_perfect_scores
+    config = api.graph_config()
+             ^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:55: in graph_config
+    source = read(ROOT / "experiments/v3/config/visual_observation_v3.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:28: in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v3\\config\\visual_observation_v3.json'
+__________ test_missing_dataset_blocks_before_any_client_is_created ___________
+manual_validation\walkthrough_test\p9-v2-2\test_api_experiment.py:86: in test_missing_dataset_blocks_before_any_client_is_created
+    code = api.main(["--manifest", str(tmp_path / "missing.json"), "--execute"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:300: in main
+    config = graph_config()
+             ^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:55: in graph_config
+    source = read(ROOT / "experiments/v3/config/visual_observation_v3.json")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+manual_validation\walkthrough_test\p9-v2-2\api_experiment.py:28: in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\francisco.becerra\\Desktop\\Semantic Secrets-v1\\manual_validation\\experiments\\v3\\config\\visual_observation_v3.json'
+=========================== short test summary info ===========================
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_selections_and_repeat_counts
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_format_and_semantic_correctness_are_separate
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_malformed_answer_counts_missed_reference_facts
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_fences_and_missing_counts_expose_original_validator_behaviour
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_missing_images_do_not_become_observed_successes
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_raw_duplicates_and_contents_changes_fail_closed
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_resume_requires_identical_receipt
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_revalidation_detects_disagreement_and_invalid_repeats
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_fake_inference_both_models_resume_without_loading
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_loader_failure_stays_missing_not_invalid_model_answer
+FAILED manual_validation/walkthrough_test/p9-v2/test_manual_audit.py::test_inspection_recreation_and_history_do_not_change_originals
+FAILED manual_validation/walkthrough_test/p9-v2-2/test_api_experiment.py::test_conversion_and_scoring_preserve_new_v3_labels
+FAILED manual_validation/walkthrough_test/p9-v2-2/test_api_experiment.py::test_prompt_vocabulary_matches_scoring_config
+FAILED manual_validation/walkthrough_test/p9-v2-2/test_api_experiment.py::test_reference_incompatibility_blocks_instead_of_excluding_facts
+FAILED manual_validation/walkthrough_test/p9-v2-2/test_api_experiment.py::test_invalid_and_wrong_graphs_are_not_schema_successes_or_perfect_scores
+FAILED manual_validation/walkthrough_test/p9-v2-2/test_api_experiment.py::test_missing_dataset_blocks_before_any_client_is_created
+ERROR manual_validation/walkthrough_test/p9-v2-2/test_api_experiment.py::test_mocked_capture_invalid_continues_reports_and_resume_skips_completed
+ERROR manual_validation/walkthrough_test/p9-v2-2/test_api_experiment.py::test_transport_error_stays_missing_and_key_is_redacted
+ERROR manual_validation/walkthrough_test/p9-v2-2/test_api_experiment.py::test_raw_capture_detects_tampering
+16 failed, 453 passed, 3 errors in 20.74s

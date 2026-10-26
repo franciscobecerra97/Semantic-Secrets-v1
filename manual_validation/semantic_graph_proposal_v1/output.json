@@ -1,0 +1,45 @@
+{
+  "status": "ok",
+  "graph": {
+    "facts": [
+      {
+        "object": "n1",
+        "predicate": "on",
+        "subject": "n2"
+      },
+      {
+        "object": "n1",
+        "predicate": "on",
+        "subject": "n3"
+      },
+      {
+        "object": null,
+        "predicate": "sleeping",
+        "subject": "n2"
+      }
+    ],
+    "objects": [
+      {
+        "color": "blue",
+        "id": "n1",
+        "label": "sofa"
+      },
+      {
+        "color": "red",
+        "id": "n2",
+        "label": "cat"
+      },
+      {
+        "color": "yellow",
+        "id": "n3",
+        "label": "book"
+      }
+    ],
+    "scene": "bedroom",
+    "scheme_version": "semantic-graph-proposal-v1",
+    "vocabulary_sha256": "1b825688c18a596f8ef8d2be4a82dee2a5577f0e74d43c73ea6d235bb6118c2b",
+    "vocabulary_version": "semantic-graph-lexicon-v1"
+  },
+  "canonical_json": "{\"facts\":[{\"object\":\"n1\",\"predicate\":\"on\",\"subject\":\"n2\"},{\"object\":\"n1\",\"predicate\":\"on\",\"subject\":\"n3\"},{\"object\":null,\"predicate\":\"sleeping\",\"subject\":\"n2\"}],\"objects\":[{\"color\":\"blue\",\"id\":\"n1\",\"label\":\"sofa\"},{\"color\":\"red\",\"id\":\"n2\",\"label\":\"cat\"},{\"color\":\"yellow\",\"id\":\"n3\",\"label\":\"book\"}],\"scene\":\"bedroom\",\"scheme_version\":\"semantic-graph-proposal-v1\",\"vocabulary_sha256\":\"1b825688c18a596f8ef8d2be4a82dee2a5577f0e74d43c73ea6d235bb6118c2b\",\"vocabulary_version\":\"semantic-graph-lexicon-v1\"}",
+  "fingerprint_sha256": "8c8ce80b308dbf4bb2db3d8d6dec5cf6c1814653c3b99fe784eb8599dfd3767a"
+}

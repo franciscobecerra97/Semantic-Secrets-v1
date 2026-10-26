@@ -1,0 +1,13 @@
+Describe only clearly visible facts. Return one JSON object, without explanations or Markdown, using this shape (example only):
+
+{"objects":[{"id":"o1","label":"cat","color":"red"},{"id":"o2","label":"sofa","color":"blue"}],"facts":[{"subject":"o1","predicate":"sleeping","object":null},{"subject":"o1","predicate":"on","object":"o2"}],"scene":null}
+
+Include at most 5 important object instances and 5 facts TOTAL. Give each instance a unique ID. Reuse IDs in facts. One dominant color per object; use null if unclear or multicolored, and always for person. No other attributes. Use only these labels:
+
+Objects: person, cat, dog, bird, bicycle, car, sofa, chair, table, bed, book, notebook, cup, bottle, umbrella, hat, bag, laptop, phone, ball, tree.
+Colors: red, orange, yellow, green, blue, purple, pink, black, white, brown, gray.
+Predicates with object=null: sleeping, sitting, standing, walking, running, flying.
+Predicates requiring another object ID: holding, reading, wearing, riding, touching, on, inside.
+Scene: bedroom, living_room, kitchen, office, park, beach, street, indoor, outdoor; or null if unclear. Choose one label, the most specific clearly supported.
+
+Only report facts about listed objects. Sleeping does not itself specify what an object is on; report on separately when visible. Ignore minor background details, text, texture, lighting, size, age, gender, coordinates, and left/right positions. Omit uncertain facts and unsupported objects. Empty lists and null are allowed. Never copy example values unless visible.

@@ -1,0 +1,13 @@
+{
+  "scene": " BEDROOM ",
+  "facts": [
+    {"subject": "b", "predicate": "on top of", "object": "s"},
+    {"subject": "c", "predicate": "napping", "object": null},
+    {"subject": "c", "predicate": "on", "object": "s"}
+  ],
+  "objects": [
+    {"id": "b", "label": "book", "color": "Yellow"},
+    {"id": "s", "label": "couch", "color": "blue"},
+    {"id": "c", "label": "DOMESTIC CAT", "color": "red"}
+  ]
+}

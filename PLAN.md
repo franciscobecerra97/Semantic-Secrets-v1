@@ -1,106 +1,192 @@
 # Semantic Secrets execution plan
 
-Status: P0–P7 are historical v1 evidence; P8 passed Gate V2-N; P9-v2 failed immutably; and P9-v3A froze v3.0.0. P9-v3A.1 froze the prospective v3.1.0 pipeline/resource/support audit; P9-v3A.2 prospectively replaced the mismatched human prerequisite with deterministic project-authored ground truth; and P9-v3A.3 now freezes and implements the previously missing development-threshold methodology before any output. P9-v3B remains not started. Model acquisition still requires explicit authorization, and inference still requires the actual project-authored 240-scenario/prompt inputs and completed model-blind ground-truth freeze. Once authorized, the fixed sequence is score capture → staged offline calibration → integrated development replay → threshold freeze → formal validation/repeat. P9-v3C is blocked on Gate V3-A1, and P10–P20 remain blocked on Gate V3-A2.
-Authority: `AGENT.md` is the active scientific and engineering contract. This plan operationalises it and may not silently weaken it.
-Scope: prospective PoPETs/PETS 2027 study of reconstructable semantic authentication, the security of its induced acceptance region, and private verification of the frozen fuzzy predicate; no human-subject study. The primary motivation is approximate semantic reconstruction rather than password memorability or password replacement. P7's image-stage rejection remains valid for `visual-semantic-pipeline-v1`; v2 is a new generative-reconstruction hypothesis requiring new evidence.
+Status: **v4 direction approved, 26 October 2026; execution not started.** Authority: AGENT.md and decision DIRECTION-V4-01. The current work updates documentation and manuscript framing only.
 
-## How to execute this plan
+## Active objective and approval rule
 
-When asked to “Execute Pn” or “Continue with Pn”:
+Study whether perception and normalization preserve the semantic distinctions needed for technical reconstruction and resistance to accepted attacker alternatives. Proposed contributions V4-C1-C3 are defined in docs/research_direction_v4.md; privacy is a separate deferred goal.
 
-1. Read `AGENT.md`, this plan, the relevant decision records, and the phase inputs.
-2. Confirm earlier dependencies and gates. Do not spend full-scale compute before the required gate passes.
-3. State the RQ, threat, claim, or decision the work supports.
-4. Perform only the numbered phase tasks, using the smallest useful dataset/configuration first.
-5. Save configurations, provenance, raw observations, and negative results. Never substitute invented values or citations.
-6. Run the listed validation and evaluate the acceptance criteria.
-7. Update the phase status and persistent decision record; record a stop/reframe outcome as faithfully as a positive result.
-8. Report changes, evidence, failed checks, unresolved uncertainty, and the next permitted phase. Per the user's standing instruction of 2026-08-24, commit and push each completed `Px` phase as its own checkpoint; never commit a partial/failed phase or force-push.
+Before **every phase/subphase**, explain what, how and why; inputs/dependencies; exact scope and outputs; models/services/data; cost/call/retry limits; checks; interpretation and alternatives. **Wait for explicit authorization.** Overall direction approval and successful completion of a prior phase are not execution authorization. Follow docs/phase_workflow.md.
 
-Phase status values are `not started`, `in progress`, `blocked by gate`, `complete`, or `stopped/reframed`. A phase is complete only when its outputs, validation, and acceptance criteria are satisfied.
+On failure, preserve evidence, explain known/suspected causes, distinguish implementation/API/data failures from scientific findings, offer alternatives and obtain a decision for substantive continuation. Never automatically abandon the hypothesis or project. Do not retune frozen criteria or erase negative evidence. A pause in an affected run is not project termination.
 
-## Non-negotiable research controls
+## Current evidence and blockers
 
-- Treat all current model, representation, matching, protocol, and architecture preferences as hypotheses.
-- Do not claim memorability, usability, human preference, recall, accessibility, natural secret-selection entropy, human authentication speed, superiority to passwords/passkeys, or that images are easier to remember.
-- Treat the prompt as a reconstruction interface, the generated image as a transient reconstruction medium, bounded observations as probabilistic evidence, the canonical graph as the security-sensitive representation, and the whole acceptance region as the operational secret surface. Neither prompts nor pixels provide credential entropy.
-- Model security over the whole acceptance region, not image pixels, the enrolled prompt/graph, or exact semantic equality. An attacker wins with any accepted semantic alternative.
-- Keep the strictness/tolerance tension explicit: strict predicates reject benign independent reconstructions, while tolerant predicates expand the attacker's accepted alternatives.
-- Use `docs/threat_claim_matrix_v2.csv`; state which data, keys, services, records, policies, and transcripts each attacker obtains.
-- Keep prompts, images, plaintext atoms, raw embeddings, and exact scores client-side in the strongest target architecture; document every deviation.
-- Measure client-side practicality under RQ6 rather than assume it. A research GPU is experimental infrastructure, not automatically a deployment requirement; impractical trusted-client execution is a valid limitation, restricted-use result, failed practicality gate, or negative outcome. Do not move secret-bearing reconstruction/semantic processing to an untrusted cloud to rescue feasibility.
-- Use mature maintained cryptographic libraries. Never invent or reimplement a standard primitive merely for convenience.
-- Verify references against primary papers, standards, official specifications, publisher records, or trusted bibliographic indexes before adding them to `paper/references.bib`.
-- Label preprints and peer-reviewed work distinctly. Preserve negative/null results and distinguish hypotheses, measured observations, inferences, and cited facts.
-- Every paper number must trace to an immutable run and every paper figure/table to a deterministic generation script.
-- Do not pass a gate by selecting a favourable subset, tuning on the test set, or defining the criterion after viewing full results.
+Historical P0-P7 and failed P9-v2 remain unchanged. P8's novelty pass concerns the previous composition. P9-v3.0-v3.4 freezes and preparation remain intact; its empirical branch is **paused**, not failed, passed or completed.
 
-## Evidence and budget policy
+The prior audit found 240 v3 images, 120 controlled references, no finished naturalistic reference set or final freeze, and no formal perception result. It reported 421 passing core tests including 320 compiler cases, but reproduced a one-to-one entity-scoring defect and moved manual-script root-path errors. These defects remain unfixed. No v4 implementation, reference set, capability result, authentication policy, attacker result or private verifier exists.
 
-Use this escalation order for every unresolved choice:
+Do not access the twelve sealed v1 families. Existing v3 material defaults to development/diagnostic use in v4 pending an exposure/provenance review. V4 formal data needs its own identifiers, splits and pre-output rules.
 
-```text
-verified literature/standard/licence and analytical feasibility
-→ tiny deterministic test
-→ small paired pilot
-→ eliminate weak candidates
-→ minimal proof-of-concept for remaining uncertainty
-→ full experiment only after its gate
-```
+## Active phases
 
-Dataset scales are deliberately progressive:
+The following is the approved direction-level roadmap, **not approval to execute any phase**. Detailed parameters and budgets remain decisions for the corresponding explained proposal. No numerical v4 gate is invented here.
 
-- **Smoke:** 8–12 controlled concepts and a few fixed seeds; detects schema, runtime, and gross viability failures.
-- **Pilot:** approximately 50–100 concepts with stratified near-neighbours; fixes methodology, preregisters metrics/gates, and supports candidate elimination. Exact size follows variance/power assessment.
-- **Full:** sized from pilot uncertainty and planned comparisons, not an arbitrary round number. Frozen before final evaluation.
+### P9-v4A - Common study contract and feasibility design
 
-Expensive images and model outputs are content-addressed and generated once per frozen manifest. Downstream extractors, representations, similarity matrices, thresholds, attacks, and plots reuse them where scientifically valid. Smoke/pilot/full outputs must be separated. A change to model, prompt, seed, canonicalisation, or preprocessing creates a new version rather than overwriting evidence.
+**Status:** Awaiting detailed proposal and author authorization; next phase.
 
-## Persistent decision records
+**Why:** Establish a fair, security-relevant comparison before implementation or paid calls.
 
-Create `DECISIONS.md` in P1 and append one record per consequential decision. Revisit a closed decision only when new evidence invalidates a recorded assumption.
+**Planned work:** Review exact novelty and API documentation; identify one generative VLM and one specialized perception candidate; specify common instance/attribute/relation observations, compiler interface and grounding policy; define semantic families, source strata, reference rubric, split/exposure rules, normalization arms and metric/uncertainty design. Determine support/sample-size rationale, API budget and reproducibility limits. Explain unavailable-model alternatives rather than silently substitute.
 
-```text
-Decision:
-Date:
-Status: proposed | selected | rejected | superseded
-Question:
-Candidates:
-Evaluation criteria:
-Evidence (citations, analysis, run IDs):
-Selected option:
-Rejected alternatives:
-Reason:
-Security/privacy assumptions:
-Affected RQs/threats/claims:
-Experiments supporting decision:
-Remaining uncertainty:
-Revisit trigger:
-```
+**Outputs:** Reviewable study protocol, candidate/interface table, draft schemas, author annotation instructions, task/claim map and costed pilot proposal. Exact choices require author review; no model calls, acquisition, generation or labels are produced by this design phase.
 
-Experiment manifests and decision records are concise sources of truth; do not duplicate long summaries across files.
+**Validation:** No answer leakage; distinct generation/extraction/reconstruction outcomes; same-image and independent-generation roles separated; exact unresolved decisions recorded. Gate V4-DESIGN means an approved design, not empirical viability.
 
-## Decision investigations
+### P9-v4B - Evaluator repair and common pipeline implementation
 
-The former D1–D5 generator/extractor/representation/matcher/image investigations belong to the completed v1 history recorded in P4–P7 and `DECISIONS.md`. The former unexecuted D6–D9 path is superseded by P7-R2 and must not control v2.
+**Status:** Awaiting P9-v4A decisions, detailed proposal and authorization.
 
-Active v2 decisions are phase-gated:
+**Why:** Ensure the common comparison is measured correctly.
 
-| Decision | Phase | Cheapest valid evidence | Required outcome |
-|---|---|---|---|
-| V2-DN combined novelty and scope | P8 | Verified primary literature and formal comparison | C1–C4 remain jointly defensible or are narrowed before implementation |
-| V2-D1 failed monolithic capability | P9-v2 | Immutable formal capability fixture | Gate V2-A failed; no reinterpretation or rerun |
-| V3-D1 modular extraction architecture | P9-v3A | Primary literature plus formal/preregistered design | Freeze model-evidence/compiler separation, two candidates, data, metrics, and gates |
-| V3-D1.1 pre-execution suitability | P9-v3A.1/P9-v3A.2 | Bounded primary-artifact, support, and ground-truth audit | Freeze v3.1 hardware/EGTR/support rules, then prospectively replace the mismatched human prerequisite with project-authored model-blind ground truth before output |
-| V3-D2 modular component capability | P9-v3B | New controlled/naturalistic capability data | One whole pipeline passes V3-A1; no cross-pipeline type union |
-| V3-D3 independent reconstruction | P9-v3C | Separate preregistered reconstruction data | Frozen eligible language and M/T interface pass V3-A2 |
-| V2-D2 policy and baselines | P10 | Training-only derivation and new pilot against B0/B1/B2 | Proposed policy passes V2-B without held-out tuning after V3-A2 |
-| V2-D3 attack distributions/positioning | P11 | Frozen K0–K3 strategies and budget curves | V2-C selects standalone, factor, constrained, negative, or stop |
-| V2-D4 private functionality | P12 | Primary-source/security/leakage comparison | V2-D identifies a property beyond VSA/hash/plaintext baselines |
-| V2-D5 protocol and architecture | P13 | Minimal mature-library POCs under common fixtures | V2-E selects one primary and meaningful baselines or stops |
-| V2-D6 paper positioning | P16–P20 | Frozen end-to-end evidence and claim matrix | V2-F supports only the strongest evidence-backed story |
+**Planned work:** Fix the one-to-one evaluator bug and moved manual roots with focused regressions; implement approved API adapters, normalization contract, compiler compatibility/versioning, provenance/cost/error records, author reference validation and shared evaluator. Use deterministic fixtures and mocked API outputs. Keep frozen historical configs/results unchanged.
 
-The eventual paper should lead with the transition from exact reproduction to approximate semantic reconstruction, then the induced acceptance-region security problem and the separate privacy problem. C1/C2 remain enabling contributions; C3/C4 remain the strongest eventual security/privacy contributions if the constructive path survives. Evidence may support standalone, second-factor, policy-constrained, restricted-use, another bounded setting, negative/measurement, or stop positioning; universal password replacement is not presumed.
+**Outputs:** Reviewed code, tests, reference-authoring tools and a smoke-ready runner.
+
+**Validation:** One prediction cannot match two reference instances; attributes/relations retain ownership; malformed/missing/API-failure cases remain counted; cached compilation is deterministic; no live API/model run. Engineering pass is not extraction success.
+
+### P9-v4C - Small API pilot
+
+**Status:** Awaiting implementation checks, author-completed pilot references and explicit call/data/budget authorization.
+
+**Why:** Check hosted interface feasibility and estimate errors, support and cost before formal scale.
+
+**Planned work:** Run a few development families with exactly approved endpoints/prompts/settings; retain all raw responses, failures and bounded retries; compare output support, repeatability, binding and cost. Use public or safely authorized non-secret fixtures. Review limited photograph/generated/drawing examples only within the approved acquisition/generation scope.
+
+**Outputs:** Pilot report, failure diagnosis, revised protocol recommendations, exact projected formal cost and author decision. Pilot data is development-only.
+
+**Validation:** Label blindness, provenance, complete denominators, paired task coverage, service identity limits and separation of intended versus observed image content. No renting GPUs or local model inference by default.
+
+### P9-v4D - Formal capability data and preregistration freeze
+
+**Status:** Awaiting pilot review, detailed proposal and authorization.
+
+**Why:** Prevent formal results from choosing their own task, labels, criteria or favorable strata.
+
+**Planned work:** Prepare the approved new families and three source strata; the author manually labels actual visible facts. Validate references, ambiguity rules, support, rights, duplicates and family splits. Freeze endpoints/prompts, compiler/schema, aliases, normalization arms, repeats/retries, metrics, minimum support, numeric qualification rules, uncertainty, exclusions, cost limits and raw-to-derived provenance before formal calls.
+
+**Outputs:** Author-completed references, exposure/provenance inventory, formal manifest and hash-bound capability preregistration. No final labels are invented to complete this phase.
+
+**Validation:** Generated naturalistic primary/controlled diagnostic/photographic external roles fixed; no cross-split family derivatives; no model-derived truth. Gate V4-FREEZE establishes readiness for authorized measurement, not a positive result.
+
+### P9-v4E - Shared capability and graph comparison
+
+**Status:** Awaiting V4-FREEZE and execution authorization.
+
+**Why:** Measure which semantic distinctions survive each complete named pipeline.
+
+**Planned work:** Run the approved formal comparison and repeat protocol; evaluate generation fidelity separately, then extraction, instance binding, counts/relations, coverage, hallucination, raw-schema failures, compiler behavior, normalization and family uncertainty. Optional live LLM arm changes normalization only on identical cached observations if approved.
+
+**Outputs:** Immutable run records, per-stratum/per-task comparisons, eligible versus unsupported task inventory, failure analyses and claim-limited report.
+
+**Validation:** Frozen methods and budgets, failure accounting, paired comparisons, no cross-pipeline union or favorable-case-only metrics. Review measurement validity separately from constructive semantic viability. A valid negative result is retained and explained; it does not pass old V3 gates or authorize automatic abandonment.
+
+### P10-v4A - Reconstruction and policy design/development
+
+**Status:** Awaiting interpreted P9-v4E evidence and a separately authorized scope.
+
+**Why:** Connect semantic observations to acceptance rather than infer authentication from extraction F1.
+
+**Planned work:** Propose separate fresh reconstruction families and enrolment/authentication roles; define technical enrollment failure, FRR, random and targeted contrasts. Compare a frozen exact/strict semantic reference, global overlap and the closest reproducible VSA-style policy with a system-derived mandatory/tolerant candidate where justified. Select a bounded baseline set and development-only policy/threshold rules. Add a matched direct-text control if claiming the image stage adds value.
+
+**Outputs:** New reconstruction manifest/reference protocol, exact reference predicate and policy freeze, supported-language rules and analysis plan. Private verification remains deferred.
+
+**Validation:** No favorable cached-positive selection, no task promotion from authentication outcomes, fixed correspondence/malformed/missing-anchor behavior, independent development/evaluation families. A diagnosed weak pipeline can be studied only under an explicitly approved bounded diagnostic scope, without a constructive viability claim.
+
+### P10-v4B - Frozen independent reconstruction evaluation
+
+**Status:** Awaiting P10-v4A freeze, final references and execution authorization.
+
+**Planned work:** Evaluate fresh independent enrolment/reconstruction generations and unauthorized contrasts under the fixed predicate; distinguish generator, extractor, normalization and matcher failures. Report enrolment rejection separately from conditional FRR and unconditional success, plus targeted/random acceptance and family/account uncertainty.
+
+**Outputs:** Reconstruction-security trade-off report with immutable pipeline/policy versions. No human memorability or sampled-attacker security conclusion follows from this stage alone.
+
+### P11-v4A - Budgeted attacker design and freeze
+
+**Status:** Awaiting P10-v4B interpretation, detailed proposal and authorization.
+
+**Why:** Random or selected-neighbor FAR is not end-to-end guessing success.
+
+**Planned work:** Define K0-K3 knowledge, source/auxiliary data, candidate interface, simple/frequency/near and justified AI-assisted/adaptive strategies, Accept/Reject feedback, duplicates, generation/extraction/verification budgets and costs. Bind target data independently of attacker development.
+
+**Outputs:** Frozen attacker protocol, cost limits, success@1/5/10/B and censored guesses-to-success analysis. Graph-level and prompt/image attacks must be distinguished.
+
+### P11-v4B - Finite-budget attack evaluation
+
+**Status:** Awaiting attacker freeze and execution authorization.
+
+**Planned work:** Evaluate only approved simulated/local targets, preserve all outcomes, report baseline-relative success/cost curves and uncertainty. Explain exactly which knowledge/distributions were tested.
+
+**Outputs:** Bounded acceptance-region evidence and scope recommendations. Sampled attacks do not exhaust the region or establish privacy/offline resistance.
+
+**Validation:** No target leakage or budget changes after outcomes; fixed policy, controlled oracle, complete accounting. A negative security finding triggers diagnosis and alternatives, not automatic termination or cryptographic rescue.
+
+### P17-v4 - Evidence consolidation and scope decision
+
+**Status:** Awaiting relevant frozen capability, reconstruction and attack evidence, plus authorization.
+
+**Planned work:** Recompute paired/family uncertainty, failure strata, costs, figures and claim-to-run mappings; refresh novelty for the actual findings. Distinguish valid measurement, constructive viability and publication readiness.
+
+**Outputs:** Reproducible analysis and a recommendation for a constructive, restricted or negative/measurement paper. The author approves the final scope. A narrower story must stand on complete suitable evidence, not an unfinished experiment.
+
+### P18-v4 - Evidence-backed manuscript
+
+**Status:** Awaiting P17-v4 scope/evidence and phase authorization. Planning-source editing is permitted under the present documentation amendment; this phase is not complete.
+
+**Planned work:** Follow docs/eurosp2027_paper_plan.md, lead with authentication consequences of lost distinctions, report actual contributions and limitations, distinguish historical evidence, and keep privacy deferred unless independently established.
+
+**Outputs/checks:** Anonymous IEEE manuscript, verified citations, figures tied to immutable runs, harm/availability/AI disclosures and no unsupported findings.
+
+### P19-v4 - Research artifact
+
+**Status:** Awaiting stable manuscript evidence and authorization.
+
+**Planned work:** Package reproducible mocked/cached and optional API modes, versions/hashes, licensed data or acquisition instructions, raw-to-derived processing, costs and endpoint-drift limits. Separate cached reproducibility from unavailable live service reproduction.
+
+**Outputs/checks:** Reviewed anonymous artifact, clean reproduction, secrets/rights audit. No public release or license grant without the corresponding explained authorization.
+
+### P20-v4 - Submission audit and author decision
+
+**Status:** Awaiting P18-v4/P19-v4 and authorization.
+
+**Planned work:** Check every claim, reference, run, limitation, anonymity/rights/AI disclosure, final CFP/HotCRP rules, registration metadata and 13-body-page A4 PDF. Report readiness and alternatives if incomplete.
+
+**Outputs:** Reviewable submission package or documented non-readiness. Actual registration/upload needs explicit instruction. Non-submission does not terminate the project.
+
+## Deferred branches
+
+- **Local parity/performance:** only after convincing API evidence and a separately explained, costed authorization. Check semantic behavior as well as resources.
+- **Private verification (historical C4/P12-P16):** separate future v4-compatible plan mapping a frozen predicate to exact functionality, construction, leakage/compromise claims and evidence. No cryptography shortcut around a weak acceptance region.
+- **Additional models/live LLM normalization:** optional experiments justified by a specific open question, not required to keep the main path moving.
+- **Legacy P9-v3B/C:** paused; resuming requires a detailed proposal and author decision. Its original resource and semantic gates retain their old meanings.
+
+## EuroS&P 2027 calendar
+
+Official requirements: docs/eurosp2027_requirements.md and docs/eurosp2027_submission.json. Dates rechecked against the official CFP on 26 October. AoE is UTC-12; the date-only CFP gives no exact clock time. Internal dates below use Luxembourg calendar dates.
+
+| Date / interval | Planning target | Required evidence / decision |
+|---|---|---|
+| 26 October | Document approved direction and phase-control rules | Documentation/build validation only; no experimental phase complete |
+| 27 October-12 November, conditional | Propose and, only after approval, progress through bounded design/engineering/pilot/formal work | Pace determined by author approvals, labels, API feasibility and valid evidence; no promised full completion |
+| **13 November** | Evidence-readiness review | Explain achieved evidence, remaining cost/dependencies and viable paper scope; author decides how to proceed |
+| **24 November** | Internal registration-metadata target | Accurate title/abstract, authors, conflicts and topics |
+| **25 November AoE** | Mandatory registration deadline | Actual registration only if explicitly instructed |
+| **30 November** | Internal final evidence/PDF/artifact audit | Complete claim support, anonymous artifact, formatting and disclosures |
+| **1 December** | Internal upload buffer | Reviewed package and explicit submission instruction |
+| **2 December AoE** | Full-paper deadline | Submit only evidence-complete work; otherwise explain non-readiness and continuation options |
+
+Thirty days to registration and thirty-seven to submission from this amendment is a high-risk schedule. Approval waits, label work and diagnosis are real dependencies; do not compress them into assumed completion. Missing this cycle is not a decision to abandon the research.
+
+## Evidence controls and phase records
+
+Use docs/phase_workflow.md. Each record identifies the explanation and approving instruction, phase/version, scope, limits, inputs, outputs, validation, deviations, failures and next decision. Preserve raw-to-derived hashes, APIs/model settings, labels, splits, policies and prompts. No phase approval is invented from a plan entry.
+
+The standing checkpoint instruction recorded in the previous plan was to commit and push each completed authorized Px phase as its own checkpoint, never a partial/failed phase or force-push. Include checkpoint scope in the phase explanation; preserve unrelated user changes. This documentation amendment does not declare a phase complete or perform a commit/push.
+
+## Archived programme reference - not active execution instructions
+
+The following P0-P20 material is retained verbatim from the plan immediately before DIRECTION-V4-01. Completed phases, historical gates and numerical results keep their meaning. Unexecuted v3 and old downstream tasks are paused/deferred reference; wording such as "next", "active", "stop" or "execute" below applies to that prior programme only. It cannot override the v4 roadmap or the author's explain-and-authorize/failure-diagnosis rules above. No archived gate is relabelled as passed.
 
 ## Phase plan
 
@@ -517,7 +603,7 @@ The eventual paper should lead with the transition from exact reproduction to ap
 
 ### P9-v3B — Modular component capability and `L_cred` eligibility
 
-**Status:** Not started; requires explicit user authorisation. The human-resource blocker is superseded by P9-v3A.2 and the threshold-method blocker is resolved prospectively by P9-v3A.3. The remaining pre-inference data blocker is the actual project-authored scenario/prompt content from which all 240 final references, images, manifest rows, support opportunities, and `ground-truth-freeze-v3.2.0` can be produced. No inference is permitted before that freeze.
+**Status (2026-10-26):** Data preparation in progress; formal perception evaluation not started. All 240 final images, prompt/render plans and 120 controlled references exist under `artifacts/downloads/p9_v3`. Author the remaining 120 naturalistic references without perception predictions, audit final manifest/support opportunities and create `ground-truth-freeze-v3.2.0`. Correct the entity-scoring and moved manual-path defects identified in the current audit before calibration/evaluation. The human-resource and threshold-method blockers are resolved by v3.2/v3.3. Model acquisition and inference retain their explicit authorization requirements; no inference precedes the ground-truth freeze. The remote-generation v3.4 amendment records unattested actual weights/settings.
 
 **Prepared execution boundary (updated 2026-08-29):** `prototype/semantic_secrets/v3/` implements the frozen compiler. `experiments/v3/runtime/` supplies deterministic dataset/freezing tools, persistent isolated adapters, threshold-independent development score capture, exact staged v3.3 fitting and offline replay, content/provenance inventories, complete validation metrics/uncertainty/independent-pipeline `L_cred`, Gate evaluation, and formal guards. `infra/runpod/` supplies the pinned dual-environment image and executable order. The compiler matrix passes 320/320 locally and must pass again in the locked image. This preparation created no image, acquired no weight, ran no model, selected no empirical threshold, started no P9-v3B experiment, and passed no gate. EGTR artifact terms/layout/base-transform provenance remain acquisition-time fail-closed checks.
 
@@ -716,7 +802,7 @@ The eventual paper should lead with the transition from exact reproduction to ap
 
 **Validation:** Sealed-test access log; frozen configs/hashes; independent reproduction checks; no result-dependent exclusions or retuning.
 
-**Decision / gate:** **Gate V2-F — End-to-end evidence/paper story.** Decide whether the evidence supports a PETS privacy paper, a narrowed/negative paper, or stop.
+**Decision / gate:** **Gate V2-F — End-to-end evidence/paper story.** Decide whether the evidence supports an original EuroS&P security/privacy paper under the selected scope, a separately justified narrowed/negative paper, or stop.
 
 **Dependencies:** Constructive V2-N through V2-E and completed P15.
 
@@ -740,13 +826,13 @@ The eventual paper should lead with the transition from exact reproduction to ap
 
 **Cost:** AI-token Medium; compute Low–Medium; storage Low.
 
-### P18 — PETS manuscript
+### P18 — EuroS&P manuscript
 
 **Status:** Not started; blocked on Gate V2-F and P17.
 
 **Objective:** Build the evidence-backed manuscript.
 
-**Tasks:** Lead with exact reproduction versus approximate semantic reconstruction, then the induced acceptance-region and private-verification problems. Position C3/C4 as expected primary PETS contributions and C1/C2 as enabling application/mechanism contributions; differentiate VSA prominently and fairly; describe both VSA baselines; report all gates and negative results; align every claim/citation/number with evidence; include practicality, limitations, ethics, and future human study without human claims or password-replacement superiority claims.
+**Tasks:** Follow `docs/eurosp2027_paper_plan.md` and the supplied IEEE template. Lead with acceptance-region security under approximate reconstruction, state the attacker and finite-budget success event early, then analyze private verification separately. Position C3/C4 as expected principal security/privacy contributions and C1/C2 as enabling application/mechanism contributions; differentiate VSA prominently and fairly; describe both VSA baselines; report all gates and negative results; align every claim/citation/number with evidence; include practicality, limitations, ethics, and future human study without human claims or password-replacement superiority claims.
 
 **Outputs:** submission manuscript; appendix/supplement; rebuttal-risk audit.
 
@@ -772,13 +858,13 @@ The eventual paper should lead with the transition from exact reproduction to ap
 
 **Cost:** AI-token Medium; compute Medium; storage Medium.
 
-### P20 — PETS submission audit
+### P20 — EuroS&P submission audit
 
 **Status:** Not started; blocked on P18/P19.
 
 **Objective:** Perform the final novelty, privacy, threat-model, evidence, citation, artifact, ethics, open-science, AI-use, anonymisation, and page-budget audit.
 
-**Tasks:** Re-run consistency/reproducibility checks; verify every gate and limitation; check venue requirements; freeze submission and artifact identifiers; record the final decision.
+**Tasks:** Re-run consistency/reproducibility checks; verify every gate and limitation; recheck the EuroS&P 2027 CFP/HotCRP and official dates; verify mandatory registration, complete author/COI/topic metadata, anonymous artifact hosting, no concurrent overlap, A4 venue-template layout, 13 body pages, body harm analysis, Data Availability and anonymous AI-use acknowledgments; freeze submission/artifact identifiers and record the final submit-or-stop decision. A passed formatting check does not satisfy missing research evidence.
 
 **Outputs:** submission-readiness report; final manuscript/artifact checkpoint or explicit stop.
 

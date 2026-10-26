@@ -1,5 +1,7 @@
 # Experiments v3
 
+> **Branch paused under DIRECTION-V4-01 (26 October 2026).** The active next action is a P9-v4A proposal, followed by author authorization. Preserve all v3 configs/results. The original workflow below applies only if separately approved for resumption; it is not the current API-first v4 plan. Read [v4 design](../../docs/p9_v4_study_design.md) and [phase workflow](../../docs/phase_workflow.md).
+
 2026-10-20 dataset update: remote SD-Turbo generation and the shared destination
 `artifacts/downloads/p9_v3` were explicitly requested by the project author. See
 [`docs/p9_v3_remote_dataset.md`](../../docs/p9_v3_remote_dataset.md) for the narrow

@@ -1,5 +1,9 @@
 # Research direction v2
 
+> **Superseded as the active direction on 26 October 2026.** Read [research direction v4](research_direction_v4.md), [study design](p9_v4_study_design.md) and [phase workflow](phase_workflow.md). The text below preserves the prior direction; its execution/stop language does not override the author's current phase-approval and failure-diagnosis rules. Historical claims and freezes keep their original meaning.
+
+**Venue update, 2026-10-26:** Target EuroS&P 2027. Lead the manuscript with acceptance-region security and retain private verification as its separate C4 question. See `eurosp2027_paper_plan.md` and `eurosp2027_requirements.md`; no scientific gate or contribution meaning changes. The October capability dataset has 240 images and 120 controlled references; naturalistic references/freeze and formal evaluation are pending.
+
 Status: Gate V2-N passed with narrowing; P9-v2 failed its monolithic extractor gate; P9-v3A completed an architecture/preregistration reframe on 2026-08-25 without running a v3 experiment.
 
 ## Exact reproduction versus semantic reconstruction

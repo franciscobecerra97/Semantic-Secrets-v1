@@ -1,0 +1,5 @@
+{
+  "status": "failure",
+  "code": "INVALID_SCHEMA",
+  "detail": "object requires exactly ['color', 'id', 'label']"
+}

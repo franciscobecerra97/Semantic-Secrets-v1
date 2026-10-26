@@ -1,0 +1,32 @@
+{
+  "named_endpoints": {
+    "/generate_image": {
+      "parameters": [
+        {
+          "parameter_name": "prompt"
+        },
+        {
+          "parameter_name": "model_name"
+        },
+        {
+          "parameter_name": "negative_prompt"
+        },
+        {
+          "parameter_name": "seed"
+        },
+        {
+          "parameter_name": "width"
+        },
+        {
+          "parameter_name": "height"
+        },
+        {
+          "parameter_name": "guidance_scale"
+        },
+        {
+          "parameter_name": "num_inference_steps"
+        }
+      ]
+    }
+  }
+}

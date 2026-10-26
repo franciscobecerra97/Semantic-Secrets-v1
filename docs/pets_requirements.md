@@ -1,3 +1,5 @@
+> **Historical venue record:** Superseded for active submission planning on 26 October 2026 by `eurosp2027_requirements.md`. Preserve the verified August record below; its PoPETs deadlines, template and page exemptions are not current project instructions.
+
 # PoPETs/PETS 2027 verified requirements
 
 Verified: 2026-08-24. Recheck immediately before submission because venue rules can change.

@@ -1,242 +1,109 @@
-# AGENT.md — Semantic Secrets research contract (v3.3 calibration amendment)
+# AGENT.md - Semantic Secrets research contract (v4 direction)
 
-## 1. Authority and status
+## 1. Authority and active status
 
-This file is the authoritative scientific and engineering contract for **Semantic Secrets**, a prospective PoPETs/PETS 2027 project about **reconstructable semantic authentication, acceptance-region security, and private verification**. P9-v3A replaces only the failed extraction architecture and its gates; the narrowed v2 C1–C4 contribution boundary and security model remain active. Read this file before changing the research design, prototype, experiments, manuscript, or artifact.
+The project author approved the v4 direction and this documentation amendment on **26 October 2026**, recorded as **DIRECTION-V4-01** in DECISIONS.md. This contract supersedes conflicting active-direction, sequencing and automatic-stop instructions in older documents. It does not rewrite historical results, machine-readable freezes or their gate meanings.
 
-The project changed direction after the completed `visual-semantic-pipeline-v1` P0–P7 programme and a complete review of Jeong's 2026 Visual Semantic Authentication (VSA) paper. P0–P7 remain immutable historical evidence. Their negative and formative findings are not v2 results, must not be retuned into v2, and must not be erased.
+Read this file, PLAN.md, docs/research_direction_v4.md, docs/p9_v4_study_design.md and docs/phase_workflow.md before project work. The active security scope is docs/security_model_v4.md and docs/threat_claim_matrix_v4.csv. The v2/v3 specifications remain authoritative for interpreting their own records, not for silently executing v4.
 
-The primary motivation is the security transition from exact secret reproduction to approximate semantic reconstruction. Traditional authentication usually requires an exact value or exact cryptographic possession. This project instead asks whether independent reconstructions of one intended concept can yield compatible canonical semantics, what complete fuzzy acceptance region that creates, and whether the predicate can be evaluated without exposing a reusable semantic template, practical offline guess-testing oracle, or cross-domain linkage. It does not assume that the primitive will replace passwords or passkeys; standalone, second-factor, policy-constrained, restricted-use, negative/measurement, and stop outcomes remain possible.
+**Current permission:** update the project documentation, paper framing, research-description sources/PDFs and validate those edits. No experimental phase is started or completed by this amendment. No API calls, model execution/acquisition, GPU rental, dataset generation/acquisition, final reference authoring, evaluator repair or submission is authorized by it.
 
-No human-subject study is authorised. The project may measure technical reconstruction stability under researcher-controlled inputs, not human recall, memorability, usability, preference, accessibility, natural secret choice, or real-world authentication time. It cannot establish that visual concepts are easier to remember than passwords or that this primitive is superior to passwords, passkeys, biometrics, or hardware authenticators.
+## 2. Mandatory author control
 
-## 2. Working title and central question
+Before every phase or subphase, explain in detail **what will be done, how, why, inputs/dependencies, changed files, data and model/service choices, costs/call limits, evaluation criteria, possible outcomes and alternatives**. Then wait for the author's explicit authorization. Approval of the direction or a preceding phase is not execution approval. Once a fully explained phase is approved, work within that approved scope without repetitive permission requests.
 
-**Working title:**
+Read-only inspection to prepare a proposal is permitted if it does not execute models, acquire data, expose held-out material or incur charges. Substantive changes after approval need a revised proposal and authorization. Full procedure: docs/phase_workflow.md.
 
-> Semantic Secrets: Private Authentication from Reconstructable Visual Semantics
+If an error or experiment failure occurs, preserve evidence, diagnose known versus suspected causes, explain the scope of the finding, provide credible alternatives and recommend a next step. Do not automatically reject the hypothesis, abandon the approach, or terminate the project. Pause affected work when evidence integrity, approval limits or unresolved faults require it; explain the pause and obtain a decision for substantive continuation.
 
-**Central research question:**
+Failure handling does not authorize endless retries, favorable-case selection or post-hoc threshold changes. Respect an explicitly approved bounded retry policy; preserve valid negative results. New outcome-affecting methods require a new version and appropriately independent evaluation. Project termination or abandonment is the author's decision after explanation, not an automatic gate side effect.
 
-> Can independently reconstructed visual concepts yield stable and discriminative canonical semantic credentials whose complete acceptance region remains sufficiently resistant to realistic and AI-assisted guessing, and whose authentication predicate can be privately verified without exposing a reusable semantic template, practical offline guess-testing oracle, or cross-domain linkage?
+## 3. Research question and contribution boundary
 
-The intended semantic concept is reconstructed rather than reproduced exactly. The natural-language prompt is a reconstruction interface, not the credential. A generated image is a transient reconstruction medium, not the credential, and generated pixels provide no credential entropy. Probabilistic observations are evidence; the deterministic canonical graph is the security-sensitive semantic representation; operationally, the secret surface is the complete acceptance region.
+Working title:
 
-## 3. Active v3 extraction path and notation
+> Semantic Secrets: Reconstruction and Security-Relevant Semantic Distinctions in Visual Authentication
 
-```text
-intended reconstructable semantic concept C
-        ↓ natural-language reconstruction interface
-prompt P (interface, not secret)
-        ↓ local generation with randomness r
-independently generated image I = G(P, r) (transient, not secret)
-        ↓ modular local observation
-typed evidence O = Observe(I)
-        ↓ deterministic semantic compiler C_s
-typed visual-semantic graph or typed failure S = C_s(O)
-        ↓ frozen system policy Π
-(M, T) = Π(S)
-        ↓ construction-specific protection
-protected record R
-```
+Central question:
 
-At authentication, the client independently obtains `I'`, extracts `S'`, derives `(M',T')`, and privately evaluates the frozen acceptance predicate against `R`.
+> Can users reconstruct a semantic credential reliably while keeping related but unauthorized alternatives distinguishable, and how do perception and normalization affect that balance?
 
-Notation:
+The experiments use researcher-authored concepts and independent image generations, not human participants. They can measure technical reconstructability, not human recall, memorability, usability, preference, accessibility, natural secret choices or real authentication time.
 
-- `C`: intended semantic concept represented by a controlled technical specification; this is researcher-controlled ground truth, not evidence of human memory;
-- `P`: natural-language reconstruction interface supplied to the local generator;
-- `G`: versioned local image generator;
-- `r`: generation randomness;
-- `I = G(P,r)`: transient generated image;
-- `Observe`: one of at most two versioned modular perception pipelines; it emits bounded evidence and provenance, never credential JSON;
-- `O = Observe(I)`: detections, attributes, actions/interactions, scene hypotheses, component-local confidence, provenance, abstentions, and typed component failures;
-- `C_s`: deterministic semantic compiler that emits a schema-valid canonical graph or a schema-valid typed failure, never malformed JSON;
-- `S = C_s(O)`: typed semantic graph on compiler success;
-- `S = (V,E_S,A,C_S)`: nodes, typed edges, attributes, and count/cardinality facts;
-- `Π`: frozen, system-derived credential policy;
-- `Π(S) = (M,T)`: mandatory security anchors and tolerant secondary semantics;
-- `R = Protect(S,M,T,context)`: construction-specific protected enrolment record;
-- `B`: attacker attempt or computation budget;
-- `K0`–`K3`: attacker-knowledge levels.
+Immediate proposed contributions:
+- **V4-C1:** a methodology connecting perception/normalization errors to authentication outcomes.
+- **V4-C2:** evidence about which semantic distinctions survive or collapse across named pipelines and image sources.
+- **V4-C3:** independent reconstruction and finite-budget attacker outcomes under frozen acceptance rules.
 
-`L_visual` is the broad candidate observation language. `L_cred` is the subset of atom types independently qualifying in P9-v3B in both controlled and naturalistic strata. Reconstruction or authentication outcomes may not promote a type. Actions and interactions receive their own gates: neither is automatically discarded nor required for extraction viability.
+All are hypotheses. Extraction accuracy alone, a model leaderboard, synonyms, graph notation, model assembly or a dataset is not assumed to be a novel security contribution. Refresh the exact v4 novelty claim; P8's prior gate does not automatically validate it.
 
-## 4. Intended contributions
+Historical C1-C4 retain their original meanings. Reconstruction and acceptance-region security inform v4; the system-derived mandatory/tolerant policy is a candidate mechanism, not an assumed winner. C4 private verification is a distinct deferred goal and is not claimed by an API-based semantic study. A complete private system still needs its own functionality, construction, correctness, leakage, compromise and attack evidence.
 
-These are hypotheses to be validated, not present claims.
+## 4. Pipeline and data roles
 
-### C1 — Technical reconstructability of visual-semantic credentials
+Intended concept C -> reconstruction prompt P -> independent image I = G(P,r) -> bounded observations O -> versioned normalization N -> deterministic compiler -> graph S or typed failure -> frozen acceptance predicate.
 
-Establish whether independent generated images produced from controlled reconstructions of the same concept yield sufficiently stable canonical semantics while remaining distinguishable from targeted alternatives. This is a technical reconstruction question only. It does not establish that people can remember or reproduce concepts.
+The prompt is an interface, the image a transient medium, observations probabilistic evidence, and the canonical graph the predicate's representation. Generated pixels add no credential entropy. The attacker's winning surface is the full acceptance region A(S) = {S': Accept(S,S') = 1}, not the exact prompt, pixels or graph.
 
-### C2 — System-derived policy-aware typed semantic graphs
+Initially compare one feasible generative VLM pipeline and one feasible specialized perception pipeline. Grounding DINO/SigLIP2 are also vision-language components. Exact APIs/models and their shared task contract are pending design and approval. Models emit bounded instance facts; code owns identifiers, validation, canonical ordering, deduplication and serialization. Preserve attribute ownership and relationship roles; flat word arrays cannot establish graph binding.
 
-Represent a visual secret as `S=(V,E_S,A,C_S)` and derive `Π(S)=(M,T)`:
+- Generated naturalistic images: primary reconstruction workflow evidence.
+- Controlled drawings: isolated diagnostic contrasts.
+- Photographs: external visual generalization, subject to provenance/rights and training-overlap limits.
 
-- `M`: mandatory, discriminative security anchors whose absence rejects;
-- `T`: secondary semantics with explicitly bounded tolerance.
+Families center on identity, attribute binding, cardinality, interaction and spatial distinctions. Originals, derivatives and close alternatives stay in the same partition. The author manually labels actual visible image content without model predictions. Intended concepts and final-image references remain separate so generation errors are not scored as extraction errors. Author self-review is not independent annotation agreement.
 
-The primary policy must be system-derived, deterministic, versioned, and frozen before held-out evaluation. Users do not manually nominate the primary anchors. Policy design alone is not novel: VSA already provides user-selected semantic facts, quantity operators, conjunction, canonical tokens, and spatial rules. The candidate novelty is the evaluated combination of generative reconstruction, typed canonical graphs, system-derived `M/T`, acceptance-region analysis, and private verification.
+Deterministic formatting and reviewed, frozen aliases are the primary normalization arm. Development-time LLM suggestions require review. Optional live LLM normalization uses the same cached observations, cannot add facts or access references, and must measure false merges/splits, coverage and stability as well as acceptance effects. Abstraction is not automatically synonymy; unknowns follow a frozen unsupported/abstention rule.
 
-### C3 — Acceptance-region and budgeted guessing analysis
+## 5. API-first execution and later deployment
 
-Exact authentication can be idealised as a singleton acceptance set, `A(s)={s}`. Semantic authentication instead induces a fuzzy region. The secret surface is the full acceptance region, not one prompt, image, or graph. For enrolment state `S`, define
+Use approved APIs only on public or safely authorized non-secret research fixtures. Defer GPU rental and local model inference. A public model name does not establish API availability, pinned checkpoint identity, license compatibility or required output support.
 
-```text
-A(S) = { S' : Accept(S,S',Π) = 1 }.
-```
+Record service/model IDs, exposed revisions, requested versus attested settings, raw requests/responses and hashes, timestamps, failures/retries, calls, cost and observed latency. Do not silently substitute hosted models or infer GPU/model-only performance from API latency. Repeated hosted calls test service stability; replaying caches tests downstream determinism.
 
-An attacker succeeds with any `S' ∈ A(S)` and need not recover the enrolment prompt, image, or exact graph. This creates the central security trade-off: a predicate that is too strict rejects legitimate independent reconstructions, while one that is too tolerant gives attackers more accepted alternatives. Evaluate success within budget for random, frequency-informed, near, partial-information, LLM-assisted, VLM/generator-assisted, and adaptive attackers. Report `success@1`, `success@5`, `success@10`, `success@B`, guesses-to-success, uncertainty, duplicate handling, and online/offline access separately.
+Local execution is a later separately authorized semantic-parity and performance milestone. For the strongest future private architecture, secret-bearing prompts, images, observations, graphs and embeddings remain within a trusted client. Providers used on public fixtures are not thereby trusted recipients of real authentication secrets.
 
-Knowledge levels are:
+## 6. Security and novelty discipline
 
-- `K0`: public system information and generic/random candidates;
-- `K1`: population or frequency knowledge, without target-specific facts;
-- `K2`: partial target-specific semantic information;
-- `K3`: strong near-secret knowledge sufficient to form close candidates.
+Algorithms, model identities, canonicalization, vocabularies, policies and thresholds are public. An attacker succeeds with any accepted alternative. Specify candidate interface, K0 generic / K1 source-frequency / K2 partial-target / K3 near-secret information, auxiliary data, budget, duplicates, oracle and costs. Separate random FAR, conditional targeted-neighbor acceptance, adaptive success and offline tests. Do not claim to exhaust the acceptance region from sampled attacks.
 
-P6 remains valid evidence that the v1 matcher accepted many already-near candidates under a conditional K3-like stress. It did not measure end-to-end success within a guessing budget and does not decide v2.
+VSA is the mandatory closest-work comparison. Separate its semantic-policy component from its full semantic-plus-password architecture. Image-independent semantic authentication, canonical tokens, object/attribute/count/quadrant rules, flexible quantities, conjunction and user-selected policy are prior art. See docs/vsa_2026_comparison.md and docs/p8_novelty_review_v2.md.
 
-### C4 — Private and unlinkable verification
+Never claim first semantic/image-independent/VLM/policy/generative authentication without a new scoped verified review. No novelty from M/T notation, dictionary/LLM normalization alone, or standard cryptographic primitives. Do not claim password/passkey superiority, human benefits, entropy from generated pixels, or private/offline-resistant/unlinkable verification from hashing, salting or encryption alone.
 
-Keep `P`, `I`, plaintext `S`, and raw embeddings local. For each candidate construction, define and evaluate:
+Private verification remains independent: define records, services/keys, transcripts, leakage, replay/context binding, collusion and total-compromise outcomes before any such claim. Rate limits are online assumptions, not an offline defense. Cryptography cannot repair an easily reached semantic acceptance region.
 
-- template confidentiality and inversion resistance;
-- database-only offline validation resistance;
-- policy privacy, including whether `M/T`, graph size, operators, weights, or thresholds leak;
-- cross-service and cross-account unlinkability through domain separation;
-- transcript privacy and adaptive verification-oracle leakage;
-- exact compromise views and residual guarantees.
+## 7. Evidence integrity and historical boundary
 
-Cryptography can hide a comparison without making a small or easily reached semantic region strong. Conversely, good semantic discrimination does not provide template, policy, transcript, or linkage privacy. Semantic correctness and cryptographic privacy are separate gates.
+- Preserve P0-P7, P8, failed P9-v2 and v3.0-v3.4 freezes/results under their original identifiers.
+- P9-v2 failed its direct complete-JSON schema gate by logical futility; it did not measure full semantic capability or establish universal VLM impossibility.
+- P9-v3 methodology and engineering are reusable preparation, not empirical validation. Its branch is paused, not passed or rejected.
+- The 26 October audit reported 240 v3 images, 120 controlled references and no completed naturalistic references/final freeze; formal v3 inference has not started. It also found one-to-one entity-scoring and moved-manual-path defects. They remain unfixed by this documentation update.
+- The 421 passing core tests include 320 compiler cases; these are historical engineering evidence, not new validation or model results.
+- The twelve sealed v1 families remain sealed. Existing inspected v3 images default to development/diagnostic use in v4; audit exposure before any approved reuse.
+- Fresh v4 identifiers, splits, data roles, methods and criteria must be authorized/frozen before their formal outputs. No favorable post-hoc support, threshold, policy, pipeline or stratum selection.
+- Same-image repeats, independent generations and fresh attack trials answer different questions. Do not select cached positive samples because they already match.
+- Enforce one-to-one object correspondence, failure denominators, family-level uncertainty and raw-to-derived provenance.
+- API engineering or measurement results do not pass the old V3 resource/capability gates. No cross-version relabeling.
 
-C1 and C2 are enabling contributions. If the constructive path survives, C3 and C4 are the strongest eventual security/privacy contributions and should lead the paper positioning. Their scientific meanings may not be redesigned by narrative edits.
+## 8. Milestones and completion
 
-### C5 — Adaptive verification-oracle leakage (folded into C3/C4)
+PLAN.md defines the active path: P9-v4A design -> P9-v4B implementation/repair -> P9-v4C API pilot -> P9-v4D formal references/freeze -> P9-v4E capability comparison -> P10-v4A/B reconstruction/policy design and evaluation -> P11-v4A/B attack design and evaluation -> P17-v4 analysis -> P18-v4 manuscript -> P19-v4 artifact -> P20-v4 submission audit.
 
-P8 found established adaptive verifier/hill-climbing and active-security prior art and no separately defensible mechanism claim. C5 is therefore folded into C3/C4. Adaptive one-bit query attacks remain mandatory evidence, but are not a standalone contribution. Reopening C5 requires a new distinct estimand and novelty review.
+Every arrow requires dependency review and a separate phase explanation/authorization. Measurement validity, constructive viability and publication readiness are different decisions. A valid negative finding may support a completed measurement study after authorized diagnosis; it does not pass a constructive gate or unlock protocol engineering. Numeric v4 criteria are not yet fixed. The next action is to propose P9-v4A, not execute it.
 
-## 5. Relationship to 2026 VSA
+Old P9-v3B/C and P10-P20 instructions in PLAN.md are archived/deferred reference, not active permission. A private-verification branch needs its own explained and approved v4-compatible plan; the old constructive security/privacy standards are not waived.
 
-VSA is the closest mandatory baseline. It enrols a reference image, lets the user choose two or three semantic facts with quantity operators, and accepts an arbitrary image satisfying those rules together with a password. It extracts objects, CLIP-derived attributes, quantities, and 2×2 quadrant location; canonicalises tokens; evaluates Flexible Range Logic; and binds most semantic fields plus the password with SHA-256 while storing quantity/operator metadata separately.
+## 9. Engineering and delivery
 
-Therefore the following are prior art, not project novelty: visual-semantic authentication, image independence, VLM-based extraction, canonical semantic tokens, objects/attributes/counts/quadrants, flexible quantity operators, conjunctions, semantic-policy matching, user-chosen two/three-fact policies, and hash-based semantic binding.
+Keep observation, normalization, compiler, policy, matcher, attacks and optional protocol modules separate. Version substantive changes; preserve raw evidence and failures. Use mature cryptographic libraries if future work is approved.
 
-VSA calls its construction server-opaque and explicitly distinguishes it from strict zero knowledge. It acknowledges that its small semantic space permits fast offline guessing with general-purpose SHA-256 and recommends Argon2id plus a user-specific salt. Its COCO evaluation reports FAR/FRR, but positive FRR samples are automatically selected from cached detections rather than independently re-inferred; it reports no human study and leaves semantic relationships to future work. It does not target private/unlinkable verification.
+Keep secrets, credentials, models, raw datasets and recomputable large intermediates out of Git. Commit compact manifests, configurations, tests, aggregate evidence and provenance. Preserve unrelated user edits, especially the manual-validation reorganization. A completed authorized phase may follow the existing checkpoint instruction only for its own work; this direction amendment does not complete an experimental phase or authorize a new push.
 
-Generative graphical authentication is also prior art: PassStyles and Omokage use StyleGAN-generated changing face candidates and visual recognition criteria. They differ from free-language reconstruction into independent text-to-image scenes, but block broad generative/changing-image authentication claims.
+## 10. EuroS&P 2027
 
-The maintained comparison is `docs/vsa_2026_comparison.md`; the broader P8 closure is `docs/p8_novelty_review_v2.md`.
+Target: 12th IEEE European Symposium on Security and Privacy. Mandatory registration **25 November 2026 AoE**; paper **2 December 2026 AoE**. Official venue policies and provenance remain in docs/eurosp2027_requirements.md and docs/eurosp2027_submission.json. The date-only CFP does not specify an exact cutoff clock; verify HotCRP before submission.
 
-## 6. Required novelty discipline
+Use the supplied IEEE A4 template and 13-body-page limit, anonymous authorship/artifacts, body harm analysis, Data Availability and anonymous AI-use acknowledgments. Internal targets remain evidence review 13 November, metadata 24 November, final audit 30 November, upload buffer 1 December. Dates authorize no action.
 
-Never claim or imply any of the following without a new, verified, scoped prior-art review that supports the exact wording:
-
-- first semantic authentication;
-- first image-independent or image-agnostic visual authentication;
-- first policy-based visual or graphical authentication;
-- first VLM-based authentication;
-- first use of canonical semantic tokens;
-- first flexible semantic or quantity matching;
-- novelty from object, count, attribute, quadrant, spatial, or conjunction rules;
-- novelty from the notation `S=(M,T)` or mandatory/tolerant policy alone;
-- novelty of PSI, OPRF, PAKE, fuzzy extraction, secure computation, FHE, or other standard primitives;
-- entropy or unpredictability from AI-generated pixels;
-- human memorability, reproducibility, preference, or usability;
-- accessibility, natural secret-selection entropy, or real-world authentication time;
-- superiority to passwords, passkeys, biometrics, or hardware authenticators;
-- proof that generated images or visual concepts are easier to remember than passwords;
-- privacy, zero knowledge, offline resistance, unlinkability, or irreversibility merely because values are hashed, salted, encoded, or encrypted.
-
-Every novelty statement must identify the combined system property, closest prior work, exact difference, evidence, and limitation. If P8 finds prior work that subsumes C1–C4 in combination, narrow the contribution before implementation.
-
-## 7. Two VSA baselines
-
-Do not collapse VSA into one comparator:
-
-1. **VSA semantic-policy component:** its canonical extraction, user-selected rules, quantities/operators, conjunction, and global/quadrant matching. This is the mandatory functional policy baseline.
-2. **Full VSA semantic-plus-password architecture:** semantic policy combined with a password and SHA-256 binding, including its stated server-opaque boundary and offline-guessing limitation. This is an architectural security comparator, not a private-verification gold standard.
-
-## 8. Security and privacy boundary
-
-`docs/security_model_v2.md` and `docs/threat_claim_matrix_v2.csv` are authoritative for v2. At minimum, analyse:
-
-- online guesser and adaptive authenticating client;
-- database snapshot attacker;
-- honest-but-curious and malicious authentication infrastructure;
-- key/service compromise and declared collusion thresholds;
-- AI-assisted and partial-information attackers;
-- inversion/reconstruction and candidate validation;
-- record and transcript linking across accounts/services;
-- replay, malformed inputs, version mismatch, downgrade, and selective failure.
-
-No design may claim protection after total compromise unless its exact construction and proof justify that scope. If stolen state enables candidate validation, report the throughput and budgeted success. Rate limiting is an online assumption, not an offline defence.
-
-Normal verification should reveal no more than an authorised, context-bound `Accept/Reject` bit plus explicitly enumerated metadata. Scores, intersection cardinality, matched anchors, failure reasons, policy shape, timing, and message length are leakage unless hidden or justified.
-
-## 9. Data and evaluation rules
-
-- P8 is novelty refresh, formalisation, and preregistration only. It may not execute the expensive v2 experiment.
-- P8 completed on 2026-08-25. `docs/formal_specification_v2.md` and `experiments/v2/config/preregistration_v2.json` remain the binding historical freeze for the failed P9-v2 path; they may not be edited after its output.
-- P9-v2 completed negatively and is immutable. Its monolithic VLM-to-credential-JSON path failed schema validity; it did not measure full semantic capability and is not a universal extractor-impossibility result.
-- P9-v3A completed on 2026-08-25 as architecture and preregistration only. Its v3.0.0 files remain the immutable initial freeze. P9-v3A.1 completed the prospective pipeline/support audit; P9-v3A.2 prospectively superseded only the historical human-ground-truth method; and P9-v3A.3 prospectively freezes the previously missing development-threshold calibration rule. The active P9-v3B contract composes v3.0 through v3.3; no v3 model, weight, capability image, inference, fitted threshold, policy, authentication, or cryptographic experiment has run.
-- P9-v3B requires explicit authorisation and new `cap-v3-*` data. It has no human participants or annotators. Each final image must have a project-authored closed-label reference specification; manifest, scenarios, image hashes, and deterministic opportunities must be audited and frozen before perception. V3.3 resolves the threshold-method blocker prospectively: fixed 0.01-grid, development-only, staged entity-first component calibration with exact per-stratum ranking, fallback, score provenance, offline replay, and validation isolation. Count/geometry never fit thresholds; no task or pipeline pooling is allowed. The remaining data blocker is the actual project-authored scenario/prompt content and resulting ground-truth freeze. Preparation code and local tests are engineering evidence only; they did not start P9-v3B or pass V3-A1. The locked image must rerun every compiler case. P9-v3C requires constructive V3-A1 and separate preregistration/data; P10 requires constructive V3-A2.
-- New v2 evidence requires new version identifiers, data, splits, configs, and gates. Do not reuse v1 thresholds as v2 evidence.
-- Keep a sealed held-out test partition. Fit vocabulary, policy rules, weights, thresholds, attacker orderings, and all selection decisions on permitted development data only.
-- Use independent generations for enrolment and authentication trials. A cached sample selected because it already satisfies a policy is not a positive reconstruction trial.
-- Report extraction failure, non-empty rate, semantic graph fidelity, same-concept stability, targeted separation, FAR/FRR with uncertainty, and subgroup/failure analyses.
-- Distinguish benign same-concept reconstruction, independent negative concepts, targeted near alternatives, and adaptive attacks.
-- Preserve raw-to-derived provenance, hashes, model IDs/revisions, prompts/specifications, seeds, environment, and exclusions.
-- Never access the twelve sealed v1 P6 test families for v2 planning or development.
-
-## 10. Gates and stop rules
-
-- **V2-N — Novelty/formalisation:** C1–C4 remain jointly distinguishable from verified prior work; definitions, baselines, and preregistration are frozen.
-- **V2-A — Failed historical extractor gate:** the frozen P9-v2 monolithic representation path failed and can never be relabelled as a pass.
-- **V3-A1 — Modular extraction viability:** compiler invariants pass exactly and at least one frozen observation pipeline yields an independently evidenced, support-complete `L_cred` containing entity plus at least two additional types, including a structural type. Installed GPU capacity is not a gate; measured complete-pipeline consumption remains capped at 24 GiB VRAM and 32 GiB RSS.
-- **V3-A2 — Independent reconstruction viability:** using only V3-A1-eligible types on separate data, independent-image reconstruction meets preregistered enrolment, FRR/FAR, separation, and policy-improvement bounds.
-- **V2-B — Policy value:** system-derived `M/T` materially improves the security–reconstruction trade-off over VSA-style and non-policy baselines without post-hoc tuning.
-- **V2-C — Acceptance-region viability:** budgeted K0–K3 and AI/adaptive success supports the selected positioning.
-- **V2-D — Cryptographic feasibility:** at least one construction preserves the frozen plaintext predicate with acceptable leakage, correctness, and cost.
-- **V2-E — Privacy/security evidence:** database, transcript, inversion, linking, compromise, and oracle claims survive their preregistered evaluations.
-- **V2-F — End-to-end/publication readiness:** integrated evidence, reproducibility, limitations, and claim audit are complete.
-
-An expensive later phase cannot bypass an earlier failed gate. Valid outcomes include standalone authentication, second factor, policy-constrained or restricted/high-value authentication, another bounded deployment setting, negative/measurement contribution, or stop. A failed gate is evidence, not permission to retune.
-
-## 11. Engineering and reproducibility contract
-
-- Follow the budget sequence: primary literature/analysis → deterministic smoke test → small preregistered pilot → eliminate weak candidates → full experiment only after its gate.
-- Do not benchmark many generators or VLMs. The executable v3.1 shortlist is exactly the two pipelines frozen in `visual_observation_v3_1.json`; v3.0.0 remains historical. Models emit evidence, not final credential JSON. Never search until a favourable result appears.
-- Treat client-side computational feasibility as an empirical RQ6 outcome, not an assumption. P9-v3B has established no actual resource requirement. A powerful research GPU is experimental infrastructure, not automatically part of a deployment architecture; impractical trusted-client requirements are a valid limitation, restricted-use result, failed practicality gate, or negative outcome.
-- Do not move prompt, image, observation, graph, or other secret-bearing processing to an untrusted cloud to repair a practicality failure, and do not replace the visual path with direct prompt/text authentication without a new authorised research decision.
-- Cache generated images and canonical graphs, reuse valid version-matched outputs, and create new-version manifests instead of overwriting evidence.
-- Prefer mature cryptographic libraries and implement only the small set of candidates surviving theoretical elimination; do not build every possible protocol.
-- Keep observation, deterministic compilation, policy derivation, plaintext decision, protocol, attack, and analysis modules separable.
-- Implement a deterministic plaintext reference predicate before private evaluation.
-- Fail closed on malformed graphs, unsupported operators, version mismatch, missing mandatory anchors, and migration ambiguity.
-- Pin dependencies and model revisions; record licences and acquisition provenance.
-- Keep models, raw datasets, generated images, credentials, secrets, caches, and recomputable large intermediates out of Git.
-- Commit compact configs, manifests, tests, aggregate tables, figures, decision records, and evidence required to reproduce claims.
-- Never commit credentials, tokens, private keys, personal data, or identifiable user examples.
-
-## 12. Historical v1 boundary
-
-P0–P7 tested `visual-semantic-pipeline-v1`. P6 failed Gate A because all tested matchers poorly separated same-concept from targeted-neighbour pairs; the primary weighted matcher accepted 75% of targeted validation neighbours at its training-selected threshold. P7 then found no material technical benefit from its tested image pathways over paired text pathways and selected removal of that image stage from the v1 authentication core.
-
-Those results motivate, but do not validate or invalidate, the active hypothesis. The image path is an independently tested reconstruction medium. No v1 result may be relabelled as evidence that the v3 modular mechanism works.
-
-## 13. Immediate execution boundary
-
-**2026-10-20 dataset update:** The project author explicitly requested remote
-SD-Turbo generation following `manual_validation/VLM/SD-Turbo.py` into
-`artifacts/downloads/p9_v3`. `remote_generation_v3_4.json` narrowly records that
-amendment and is bound in active config hashes. Earlier no-image statements
-describe their historical freeze state. Space commits/requested settings must
-not be represented as attested weights/actual settings. This permission covers
-public capability fixtures, not private authentication processing. Naturalistic
-references still require project-author final-image authoring without perception
-predictions. Generation does not authorize extraction or a false ground-truth
-declaration. See `docs/p9_v3_remote_dataset.md` and dataset `STATUS.json`.
-
-P9-v3A.1 fixed the prospective pipeline/resource/support design, P9-v3A.2 supplied project-authored model-blind ground truth, and P9-v3A.3 now freezes executable development calibration before output. P9-v3B still requires explicit instruction, complete project-authored scenario/prompt inputs, and a hash-bound `ground-truth-freeze-v3.2.0` before inference. After permitted score capture, the only authorised order is entity fit → frozen scopes → downstream scores → offline fit → integrated development replay → `threshold-freeze-v3.3.0` → formal authorization → validation/repeat. See `docs/formal_specification_v3_2.md`, `docs/formal_specification_v3_3.md`, and decisions `P9-v3A.2-00`/`P9-v3A.3-00`.
+The active paper focuses on V4-C1-C3 with privacy as an explicitly deferred boundary. No submission-ready system or positive result is claimed. Missing a venue cycle is preferable to unsupported findings; non-submission does not terminate the research.

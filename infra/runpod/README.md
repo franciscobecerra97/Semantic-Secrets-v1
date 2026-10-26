@@ -1,5 +1,7 @@
 # P9-v3B RunPod preparation
 
+> **Deferred infrastructure.** The approved v4 direction uses hosted APIs for initial viability; no GPU rental/build/model acquisition or inference is authorized. The original v3 instructions below remain historical preparation for separately approved work. Read [phase workflow](../../docs/phase_workflow.md).
+
 This package prepares—but does not authorise—the frozen P9-v3B capability execution. It contains no weights, capability images, ground-truth records, thresholds, or experimental outputs. The active contract composes immutable v3.0, v3.1 pipeline/resource/support, v3.2 project-authored ground truth, and the prospective v3.3 development-calibration rule. The remaining pre-inference input is the project-authored scenario/prompt content and resulting ground-truth freeze; the fixed score-capture and threshold workflow then runs without validation access or neural reruns for candidate evaluation.
 
 The container preserves the required scientific boundary:

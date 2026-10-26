@@ -1,0 +1,30 @@
+{
+  "verified_on": "2026-10-26",
+  "scope": "Venue migration and document validation only; no experiment or empirical gate executed",
+  "official_class_and_template_hashes": "pass",
+  "pre_migration_archives_hashes": "pass",
+  "protected_scientific_paths_unchanged": true,
+  "builds": {
+    "paper/main.tex": "pass",
+    "paper/draft.tex": "pass",
+    "research_description/research_description.tex": "pass"
+  },
+  "main_and_draft_text_identical": true,
+  "manuscript_total_pages": 7,
+  "last_body_page": 6,
+  "body_page_limit": 13,
+  "page_format": "A4",
+  "pdf_author_empty": true,
+  "citation_keys_resolved": 26,
+  "undefined_citations_or_references": false,
+  "overfull_boxes": false,
+  "expected_template_warning": "The supplied class/options produce an unused times option warning. Exact venue-supplied options were preserved.",
+  "visual_review": "First page, all four middle body pages and body/reference transition inspected; no layout overflow found.",
+  "remaining_research_blockers": [
+    "One-to-one entity scoring defect",
+    "Moved manual walkthrough root paths",
+    "120 naturalistic reference records and full ground-truth freeze",
+    "Formal pipeline acquisition/environment/model evaluation and all later scientific gates"
+  ],
+  "submission_status": "Not registered or submitted; planning draft only"
+}

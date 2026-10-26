@@ -1,0 +1,15 @@
+{
+  "objects": [
+    {
+      "type": "bicycle",
+      "color": "black",
+      "location": "pedestrian path"
+    }
+  ],
+  "actions": [
+    "riding"
+  ],
+  "attributes": [
+    "black"
+  ]
+}

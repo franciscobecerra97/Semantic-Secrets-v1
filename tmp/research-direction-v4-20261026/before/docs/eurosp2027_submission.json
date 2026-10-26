@@ -1,0 +1,77 @@
+{
+  "venue": "12th IEEE European Symposium on Security and Privacy (EuroS&P 2027)",
+  "verified_on": "2026-10-26",
+  "cfp_url": "https://eurosp2027.ieee-security.org/cfp.html",
+  "cfp_html_sha256": "94b5d501db860c8a390299e71ff2400faaff0b372c7abbbb26680f3ec177adb1",
+  "template_url": "https://eurosp2027.ieee-security.org/eurosp2027-template.zip",
+  "template_archive_sha256": "5f07428502371be3475a959c49d1ca588706aa9723d317add7ada994f52d725d",
+  "template_files": {
+    "eurosp-template.pdf": "eb7b2ed18c19f4b71dbb2da034ee056abd0cc72313da5e8ff0ea90ddad1b3f94",
+    "eurosp-template.tex": "94f14347514d58980ae35df781e0a9609b66dfd999d2da6afed4427ea2407214",
+    "fig1.png": "938e24b5747800544cd89b240f4376a2277cd03a095e5fd79aaf3aa77431ab3d",
+    "IEEEtran.cls": "c972aca108fda004c3514d63658e02816da2e54d9a1451e870b9bd970e003f55",
+    "IEEEtran_HOWTO.pdf": "462b4d99a973a5433ffa42de4d96e25c90e87fc44c2ebe598270af8cfd932922"
+  },
+  "documentclass": {
+    "class": "IEEEtran",
+    "options": [
+      "compsoc",
+      "conference",
+      "a4paper",
+      "10pt",
+      "times"
+    ]
+  },
+  "body_page_limit": 13,
+  "excluded_from_body_limit": [
+    "references",
+    "appendices",
+    "acknowledgments at submission"
+  ],
+  "cfp_clock_time": null,
+  "clock_time_note": "CFP gives AoE calendar dates without an explicit cutoff clock time; confirm in HotCRP. Do not advertise an assumed local cutoff as official.",
+  "deadlines": {
+    "abstract_registration": {
+      "date": "2026-11-25",
+      "timezone": "AoE (UTC-12)"
+    },
+    "paper_submission": {
+      "date": "2026-12-02",
+      "timezone": "AoE (UTC-12)"
+    },
+    "early_reject_notification": {
+      "date": "2027-01-28"
+    },
+    "rebuttal_start": {
+      "date": "2027-02-24"
+    },
+    "rebuttal_end": {
+      "date": "2027-03-01"
+    },
+    "author_notification": {
+      "date": "2027-03-18"
+    },
+    "camera_ready": {
+      "date": "2027-04-15",
+      "tentative": true
+    }
+  },
+  "conference": {
+    "location": "Madrid",
+    "start": "2027-07-05",
+    "end": "2027-07-09"
+  },
+  "submission_url": "https://hotcrp.eurosp2027.ieee-security.org",
+  "internal_targets": {
+    "evidence_readiness_review": "2026-11-13",
+    "abstract_metadata_ready": "2026-11-24",
+    "final_pdf_and_artifact_audit": "2026-11-30",
+    "upload_buffer": "2026-12-01"
+  },
+  "historical_archive": {
+    "draft-before-eurosp.pdf": "f0cd611151698c1e7414d38c038813320232dcef8a9bedf0012caab38512547f",
+    "draft-before-eurosp.tex": "163e9b08284a83433c5f029327454af3007e98f95702e2c8682f693f29777e01",
+    "main.tex": "587b5c1a962c6be4a6689f477e063245a5602f862b5e1b9777b59fda739c160a"
+  },
+  "status": "venue_migration_only_no_submission_or_gate_pass"
+}
